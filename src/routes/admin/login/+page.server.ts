@@ -1,17 +1,17 @@
 import { auth } from '$lib/server/lucia';
 import { fail, redirect } from '@sveltejs/kit';
-import { z, ZodError } from 'zod';
+import { z } from 'zod';
 import type { Actions, PageServerLoad } from './$types';
 
 // Protect logged in user from accessing login page
-export const load: PageServerLoad = async({ locals }) => {
+export const load: PageServerLoad = async ({ locals }) => {
 	const session = await locals.validate();
 	console.log(session);
-	if(session) {
+	if (session) {
 		// Redirect to admin home page
 		throw redirect(302, '/admin');
 	}
-}
+};
 
 // Schema for validating login form data
 const loginSchema = z.object({
@@ -32,32 +32,40 @@ export const actions: Actions = {
 	// POST /admin/login
 	default: async ({ request, locals }) => {
 		const formData = Object.fromEntries(await request.formData());
+		const admin_email = (formData.admin_email as string) || '';
 
 		try {
 			// Validate form data
 			const result = loginSchema.safeParse(formData);
-			if(!result.success) {
-				const admin_email = formData.admin_email as string || '';
-				console.log(admin_email)
+			if (!result.success) {
+				console.log(admin_email);
 				console.log(result.error.flatten().fieldErrors);
-				return {
-					data: { admin_email },
+				return fail(400, {
+					data: {
+						admin_email
+					},
 					errors: result.error.flatten().fieldErrors
-				}
+				});
 			}
 			console.log(result);
 
 			// Authenticate user
 			const { admin_email: email, admin_password: password } = result.data;
 			console.log(`Authentication: ${email} - ${password}`);
-			const key = await auth.validateKeyPassword('username', email, password);
+			const key = await auth.validateKeyPassword('email', email, password);
 			console.log(`Key: ${key}`);
 			const session = await auth.createSession(key.userId);
 			console.log(`Session: ${session}`);
 			locals.setSession(session);
 		} catch (err) {
 			console.error(err);
-			return fail(400, { message: 'Could not log in user.'});
+			console.log(admin_email);
+			return fail(400, {
+				data: {
+					admin_email
+				},
+				message: 'Could not log in user.'
+			});
 		}
 
 		// Redirect to admin home page

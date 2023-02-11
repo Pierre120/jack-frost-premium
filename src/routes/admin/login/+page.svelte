@@ -1,11 +1,20 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 
+	const clearPassword = (pwd: string) => {
+		if (pwd) {
+			pwd = '';
+		}
+		pwd = '';
+	};
+
 	export let form;
+	$: password = clearPassword(form?.data?.admin_password);
 </script>
 
 <h1>Admin Login Page</h1>
 <p><code>// TODO: Create login form</code></p>
+<p>{form?.message}</p>
 
 <form method="POST" use:enhance>
 	<label for="admin_email">
@@ -27,13 +36,12 @@
 	<label for="admin_password">
 		<span>Password</span>
 	</label>
-	<input type="password" name="admin_password" id="admin_passwrd" required />
+	<input type="password" name="admin_password" id="admin_password" bind:value={password} required />
 	<label for="admin_password">
 		{#if form?.errors?.admin_password}
 			<span class="error">{form?.errors?.admin_password[0]}</span>
 		{/if}
 	</label>
 	<br />
-	<button>Login</button>
+	<button type="submit">Login</button>
 </form>
-<!-- <h2>{@html admin_cred}</h2> -->

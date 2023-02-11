@@ -21,7 +21,7 @@ declare global {
 		type Auth = import('$lib/server/lucia').Auth;
 		type UserAttributes = {
 			email: string;
-			role: string;
+			role: string | enum;
 		};
 	}
 }
