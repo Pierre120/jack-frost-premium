@@ -1,0 +1,69 @@
+Arguments: 
+  C:\Program Files\nodejs\node.exe C:\Users\Airooon\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add lucia-auth @lucia-auth/sveltekit
+
+PATH: 
+  C:\windows\system32;C:\windows;C:\windows\System32\Wbem;C:\windows\System32\WindowsPowerShell\v1.0\;C:\windows\System32\OpenSSH\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Dev-Cpp\MinGW64\bin;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\Common Files\Oracle\Java\javapath;C:\Program Files\Java\jdk-16.0.1;C:\Program Files\Git\cmd;C:\Program Files\swipl\bin;C:\Program Files\PuTTY\;C:\Program Files\MATLAB\R2021b\bin;C:\iverilog\bin;C:\Program Files\nodejs\;C:\iverilog\gtkwave\bin;C:\Program Files (x86)\SASM\NASM;C:\Program Files (x86)\Dev-Cpp\MinGW64\bin;C:\Users\Airooon\anaconda3\Scripts;C:\Users\Airooon\AppData\Local\Programs\Python\Python310\Scripts\;C:\Users\Airooon\AppData\Local\Programs\Python\Python310\;C:\Users\Airooon\AppData\Local\Microsoft\WindowsApps;C:\Users\Airooon\AppData\Local\Programs\Microsoft VS Code\bin;C:\iverilog\bin;C:\iverilog\gtkwave\bin;C:\Users\Airooon\AppData\Local\GitHubDesktop\bin;C:\Users\Airooon\AppData\Roaming\npm;C:\Program Files\heroku\bin;C:\Users\Airooon\anaconda3\condabin;C:\Users\Airooon\anaconda3\Library;C:\Users\Airooon\anaconda3\Scripts;
+
+Yarn version: 
+  1.22.19
+
+Node version: 
+  16.14.2
+
+Platform: 
+  win32 x64
+
+Trace: 
+  Error: ENOENT: no such file or directory, copyfile 'C:\Users\Airooon\AppData\Local\Yarn\Cache\v6\npm-estraverse-4.3.0-398ad3f3c5a24948be7725e83d11a7de28cdbd1d-integrity\node_modules\estraverse\.jshintrc' -> 'C:\Users\Airooon\Downloads\CSSWENG\JACKFROST\jack-frost-premium\node_modules\@typescript-eslint\utils\node_modules\estraverse\.jshintrc'
+
+npm manifest: 
+  {
+  	"name": "jack-frost-premium",
+  	"version": "0.0.1",
+  	"private": true,
+  	"scripts": {
+  		"dev": "vite dev",
+  		"build": "vite build",
+  		"preview": "vite preview",
+  		"test:e2e": "playwright test",
+  		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+  		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+  		"test:unit": "vitest run --reporter verbose",
+  		"test:unit:watch": "vitest --reporter verbose",
+  		"lint": "prettier --plugin-search-dir . --check . && eslint .",
+  		"format": "prettier --plugin-search-dir . --write ."
+  	},
+  	"devDependencies": {
+  		"@playwright/test": "^1.28.1",
+  		"@sveltejs/adapter-auto": "^2.0.0",
+  		"@sveltejs/kit": "^1.5.0",
+  		"@typescript-eslint/eslint-plugin": "^5.45.0",
+  		"@typescript-eslint/parser": "^5.45.0",
+  		"eslint": "^8.28.0",
+  		"eslint-config-prettier": "^8.5.0",
+  		"eslint-plugin-svelte3": "^4.0.0",
+  		"prettier": "^2.8.0",
+  		"prettier-plugin-svelte": "^2.8.1",
+  		"prisma": "^4.10.0",
+  		"svelte": "^3.54.0",
+  		"svelte-check": "^3.0.1",
+  		"tslib": "^2.4.1",
+  		"typescript": "^4.9.3",
+  		"vite": "^4.0.0",
+  		"vitest": "^0.25.3"
+  	},
+  	"type": "module",
+  	"dependencies": {
+  		"@lucia-auth/adapter-prisma": "^0.4.0",
+  		"@lucia-auth/sveltekit": "^0.6.3",
+  		"@prisma/client": "^4.10.0",
+  		"lucia-auth": "^0.6.0",
+  		"zod": "^3.20.3"
+  	}
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
