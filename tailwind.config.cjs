@@ -2,7 +2,12 @@
 module.exports = {
   content: ['./src/**/*.{html,js,svelte,ts}'],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        IstokWeb: ["Istok Web", "sans-serif"],
+        Itim : ["Itim", "cursive"],
+      }
+    },
   },
   plugins: [require("daisyui")],
 }
