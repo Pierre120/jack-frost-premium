@@ -2,6 +2,9 @@
   import SearchButton from "$lib/components/NavBar/SearchButton.svelte";
   import Logo from "$lib/components/Logo.svelte";
   import NavLinks from "$lib/components/NavBar/NavLinks.svelte";
+  import type { LayoutData } from "../../../routes/$types";
+
+  export let data: LayoutData;
 </script>
 
 <nav class="w-screen bg-white px-4 pt-4 pb-2">
@@ -14,7 +17,7 @@
     </div>
     <div class="col-span-1"></div>
     <div class="col-span-3">
-      <NavLinks />
+      <NavLinks data={data}/>
     </div>
   </div>
 </nav>
