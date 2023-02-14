@@ -10,5 +10,5 @@
 	<label for="password">Password</label>
 	<input type="password" id="password" name="password" required />
 
-	<button type="submit">Register</button>
+	<button type="submit">Register</button><button class="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg" type="submit">Register</button>
 </form>
