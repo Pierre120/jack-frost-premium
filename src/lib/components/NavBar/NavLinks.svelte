@@ -10,11 +10,6 @@
     {#each data.pages as nav}
       <li><a href={nav.href} class:active={$page.url.pathname === nav.href}>{nav.title}</a></li>
     {/each}
-    <!-- <li><a href="/" class:active={$page.url.pathname === "/"}>HOME</a></li>
-    <li><a href="/menu" class:active={$page.url.pathname === "/menu"}>MENU</a></li>
-    <li><a href="/order" class:active={$page.url.pathname === "/order"}>ORDER</a></li>
-    <li><a href="/contact" class:active={$page.url.pathname === "/contact"}>CONTACT</a></li>
-    <li><a href="/about" class:active={$page.url.pathname === "/about"}>ABOUT US</a></li> -->
   </ul>
 </div>
 
