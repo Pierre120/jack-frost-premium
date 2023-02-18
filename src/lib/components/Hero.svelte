@@ -25,10 +25,18 @@
   ];
 </script>
 
-<!-- <Carousel /> -->
-<svelte:component this={Carousel} dots={false} arrows={false} autoplay>
+<svelte:component this={Carousel} let:loaded dots={false} arrows={false} autoplay>
   {#each imageSlides as img}
-    <img src={img.src} alt={img.alt} class="m-0 p-0 max-w-full" />
+    <img src={img.src} alt={img.alt} class="m-0 p-0 min-w-full max-w-full" />
   {/each}
 </svelte:component>
+
+<style lang="postcss">
+  .hero {
+    width: 100vw;
+    max-width: 100%;
+    max-height: 100%;
+    overflow: hidden;
+  }
+</style>
 
