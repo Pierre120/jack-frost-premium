@@ -4,5 +4,7 @@
 </script>
 
 <div class="flex justify-center min-h-min {width}">
-  <img src={jfpLogo} alt="JackFrostPremiumLogo" class="w-full">
+  <a href="/" title="Jack Frost Premium Ice Cream" class="min-w-min min-h-min">
+    <img src={jfpLogo} alt="Jack Frost Premium Ice Cream Logo" class="w-full">
+  </a>
 </div>
