@@ -1,10 +1,10 @@
-import type { LayoutLoad } from './$types';
+import type { LayoutLoad } from '../$types';
  
 export const load = (() => {
   return {
     // Navigation links
     pages: [
-      {title: 'HOME', href: '/app'},
+      {title: 'HOME', href: '/'},
       {title: 'MENU', href: '/menu'},
       {title: 'ORDER', href: '/order'},
       {title: 'CONTACT', href: '/contact'},
