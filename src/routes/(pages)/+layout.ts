@@ -1,4 +1,4 @@
-import type { LayoutLoad } from './$types';
+import type { LayoutLoad } from '../$types';
 import facebookIcon from '$lib/assets/icons/facebook.svg';
 import instagramIcon from '$lib/assets/icons/instagram.svg';
 import phoneIcon from '$lib/assets/icons/phone.svg';
