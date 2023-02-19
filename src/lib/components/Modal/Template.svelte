@@ -8,7 +8,6 @@
   };
 
   export let width: string;
-  export let title: string;
   export let hasCloseIcon = true;
 </script>
 
