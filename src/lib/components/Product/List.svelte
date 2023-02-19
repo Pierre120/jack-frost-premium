@@ -7,10 +7,11 @@
     dispatch("showItem", event.detail);
   };
 
+  export let width: string;
   export let products: any[];
 </script>
 
-<div class="product-list-container">
+<div class="product-list-container {width}">
   <!-- HEADER HERE  -->
   <div class="product-list">
     {#each products as product}
@@ -26,7 +27,7 @@
 
 <style lang="postcss">
   .product-list-container {
-    @apply flex flex-col min-w-min w-full py-6;
+    @apply flex flex-col min-w-min py-6;
   }
 
   .product-list {

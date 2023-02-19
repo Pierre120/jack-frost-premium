@@ -38,13 +38,12 @@
     return width;
   };
 
-  export let maxWidth: string;
   export let amount: string;
   export let other_amt: string;
   export let price: number;
 </script>
 
-<div class="offering-container {genMaxWidth(maxWidth)}">
+<div class="offering-container {genMaxWidth(amount)}">
   <img src={iceCream} alt={interpretAmt(amount)} class="offering-visual"/>
   <div class="offering-info">
     <div class="product-info-amount">
@@ -70,6 +69,6 @@
   }
 
   .product-info-amount, .product-info-price {
-    @apply font-bold py-2;
+    @apply font-bold py-2 uppercase;
   }
 </style>

@@ -14,25 +14,25 @@
 <!-- svelte-ignore a11y-click-events-have-key-events -->
 <div class="modal-backdrop" on:click={closeModal}>
   <div class="modal-component {width}">
+    {#if hasCloseIcon}
+      <button class="modal-close" on:click={closeModal}>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M6 18L18 6M6 6l12 12"
+          />
+        </svg>
+      </button>
+    {/if}
     <div class="modal-header">
       <slot name="header" />
-      {#if hasCloseIcon}
-        <button class="modal-close" on:click={closeModal}>
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
-      {/if}
     </div>
     <div class="modal-body">
       <div class="product-info">
@@ -53,7 +53,7 @@
   }
 
   .modal-component {
-    @apply flex flex-col bg-white rounded-3xl shadow-xl p-8;
+    @apply flex flex-col bg-white rounded-3xl shadow-xl p-8 relative;
   }
 
 
@@ -62,7 +62,7 @@
   }
 
   .modal-close {
-    @apply absolute -top-2 -right-2 cursor-pointer;
+    @apply absolute top-5 right-5 cursor-pointer;
   }
 
   .modal-close > svg {
