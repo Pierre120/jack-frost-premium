@@ -1,2 +1,8 @@
-<h1>Admin Portal Page</h1>
-<p><code>// TODO: Create admin portal</code></p>
+<script lang="ts">
+  import Hero from '$lib/components/Hero.svelte';
+</script>
+
+<Hero />
+<h1 class="text-teal-600">Jack Frost Premium Ice Cream Landing Page</h1>
+<p><code>// TODO: Implement Landing page</code></p>
+
