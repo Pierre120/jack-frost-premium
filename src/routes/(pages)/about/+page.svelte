@@ -1,6 +1,6 @@
 <script lang='ts'>
   import jfpic from '$lib/assets/images/jack.jpg';
-  import carlogo from '$lib/assets/images/Car Logo.png'
+  import carlogo from '$lib/assets/images/delivery-svgrepo-com.svg'
   import jflogo from '$lib/assets/logos/jack-frost-premium.png'
 </script>
 
