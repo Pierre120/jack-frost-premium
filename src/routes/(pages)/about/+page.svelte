@@ -1,10 +1,10 @@
 <script lang='ts'>
   import jfpic from '$lib/assets/images/jack.jpg';
-  import carlogo from '$lib/assets/images/Car Logo.png'
+  import carlogo from '$lib/assets/images/delivery-svgrepo-com.svg'
   import jflogo from '$lib/assets/logos/jack-frost-premium.png'
 </script>
 
-<div class="min-h-screen max-w-screen flex flex-col">
+<div class="min-h-screen max-w-screen flex flex-col font-IstokWeb">
   <div class="flex-1">
     <div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">
       <h1 class="text-white font-bold text-5xl">ABOUT US</h1>
@@ -70,9 +70,9 @@
       </div>
     </div>
     
-    <div class="flex flex-col md:flex-row px-20 py-8 bg-blue-200">
+    <div class="flex flex-col md:flex-row px-20 py-5 bg-blue-200">
       <div class="md:w-1/4">
-        <img src={carlogo} alt="car" class="max-w-xs">
+        <img src={carlogo} alt="car" class="p-0 w-56">
       </div>
       <div class="flex flex-col md:w-3/4 px-6">
         <h1 class="text-4xl font-bold text-indigo-900 pt-4 mb-10">ORDERING</h1>
