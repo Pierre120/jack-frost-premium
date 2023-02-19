@@ -23,10 +23,11 @@
   }
 
   .navlinks > li > a {
-    @apply uppercase font-bold font-IstokWeb align-text-bottom text-xl text-navy-blue hover:text-primary-red;
+    @apply uppercase font-bold font-IstokWeb align-text-bottom text-xl text-navy-blue hover:text-primary-red hover:border-b-2 hover:border-primary-red;
   }
 
   .active {
     @apply text-primary-red !important;
+    @apply border-b-2 border-primary-red !important;
   }
 </style>
