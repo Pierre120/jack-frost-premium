@@ -11,7 +11,7 @@
     <div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">
       <h1 class="text-white font-bold text-5xl">CONTACT US</h1>
     </div>
-    <div class="flex flex-col md:flex-row pt-5 px-14">
+    <div class="flex flex-col md:flex-row pt-12 px-14">
       <div class="flex items-center flex-col md:w-1/3">
         <img src={fb} alt="fblogo" class="p-0 w-32">
         <a href="https://www.facebook.com/jackfrostpremium" class="pt-2 font-semibold text-indigo-900 text-2xl">Jack Frost Premium Ice Cream</a>
