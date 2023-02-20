@@ -14,13 +14,13 @@
 			<h1 class="text-white font-bold text-5xl">ABOUT US</h1>
 		</div>
 
-		<div class="flex flex-col md:flex-row">
+		<div class="flex flex-col md:flex-row bg-white">
 			<div class="md:w-1/2">
 				<img src={jfpic} alt="jfpicture" class="max-w-2xl" />
 			</div>
 			<div class="flex items-center flex-col md:w-1/2">
-				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5">THE STORY</h1>
-				<p class="text-xl text-center text-justify-not mr-6">
+				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-10">THE STORY</h1>
+				<p class="text-xl text-center text-justify-not mr-12 text-black">
 					The idea of making homemade ice cream came about only when a new Kitchen Aid mixer was
 					bought and a free ice cream bowl attachment was given. This was back around 2008. <br />
 					<br /><span
@@ -34,9 +34,9 @@
 			</div>
 		</div>
 
-		<div class="items-center bg-gray-200 py-4">
+		<div class="items-center bg-gray-200 py-4 bg-white">
 			<h1 class="text-4xl font-bold text-indigo-900 pb-5 text-center">THE FLAVORS</h1>
-			<p class="text-xl text-center text-justify-not px-40 pb-6">
+			<p class="text-xl text-center text-justify-not px-40 pb-6 text-black">
 				The search was on for unique flavors that are not found locally. The first of the flavors we
 				worked on was <span class="font-semibold text-blue-800">Basil</span>. Other flavors came
 				into play after reading about it, experimenting with them, or even seeing other products
@@ -47,7 +47,7 @@
 		</div>
 
 		<div class="flex flex-col md:flex-row">
-			<div class="md:w-1/2 bg-blue-200 py-6 px-20 text-xl ">
+			<div class="md:w-1/2 bg-blue-200 py-6 px-20 text-xl text-black">
 				<ul class="list-disc space-y-4">
 					<li><h3>Almond Spice (Almond w/ ginger)</h3></li>
 					<li><h3>Basil</h3></li>
@@ -79,10 +79,10 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col md:flex-row px-20 py-8">
+		<div class="flex flex-col md:flex-row px-20 py-8 bg-white">
 			<div class="md:w-2/3">
 				<h1 class="text-4xl font-bold text-indigo-900 pb-2 text-center mb-10">THE NAME</h1>
-				<p class="text-center text-justify-not text-2xl">
+				<p class="text-center text-justify-not text-2xl text-black">
 					<span class="text-red-600 font-semibold">Why the name Jack Frost? </span>Jack Frost was
 					the first character that was thought of when related to something cold.
 				</p>
@@ -98,7 +98,7 @@
 			</div>
 			<div class="flex flex-col md:w-3/4 px-6">
 				<h1 class="text-4xl font-bold text-indigo-900 pt-4 mb-10">ORDERING</h1>
-				<p class="text-xl text-center text-justify">
+				<p class="text-xl text-center text-justify text-black">
 					The ice cream is on <span class="text-indigo-900 font-semibold">made to order basis</span>
 					with a required lead time of at least 2 days depending on the size of the order. We are
 					also willing to deliver to selected areas of the Metro Manila for a minimum amount.
