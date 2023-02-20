@@ -1,5 +1,5 @@
 <script lang="ts">
-  import iceCream from '$lib/assets/assets/icons/gallon.png';
+  import iceCream from '$lib/assets/icons/gallon.png';
   const interpretAmt = (amt: string):string => {
     let amtStr: string;
     switch(amt) {
@@ -23,19 +23,38 @@
     let width: string;
     switch(amt) {
       case 'PNT':
-        width = 'max-w-[8rem]';
-        break;
-      case 'HGAL':
-        width = 'max-width-[7rem]';
-        break;
-      case 'GAL':
         width = 'max-w-[6rem]';
         break;
+      case 'HGAL':
+        width = 'max-w-[7rem]';
+        break;
+      case 'GAL':
+        width = 'max-w-[8rem]';
+        break;
       default:
-        width = other_amt;
+        width = 'max-w-[8rem]';
         break;
     }
     return width;
+  };
+
+  const genPadding = (amt: string): string => {
+    let pad: string;
+    switch(amt) {
+      case 'PNT':
+        pad = 'pb-4';
+        break;
+      case 'HGAL':
+        pad = 'pb-1';
+        break;
+      case 'GAL':
+        pad = 'pb-6';
+        break;
+      default:
+        pad = 'pb-5';
+        break;
+    }
+    return pad;
   };
 
   export let amount: string;
@@ -47,17 +66,17 @@
   <img src={iceCream} alt={interpretAmt(amount)} class="offering-visual"/>
   <div class="offering-info">
     <div class="product-info-amount">
-      {amount}
+      {interpretAmt(amount)}
     </div>
-    <div class="product-info-price">
-      {price}
+    <div class="product-info-price {genPadding(amount)}">
+      &#8369{price}
     </div>
   </div>
 </div>
 
 <style lang="postcss">
   .offering-container {
-    @apply relative h-auto;
+    @apply relative h-auto flex items-end;
   }
 
   .offering-visual {
@@ -65,10 +84,10 @@
   }
 
   .offering-info {
-    @apply absolute top-0 left-0 w-full h-full flex flex-col items-center justify-center font-IstokWeb text-xl text-[#303A6F] text-center;
+    @apply absolute bottom-0 left-0 w-full h-full flex flex-col items-center justify-end font-IstokWeb text-xl text-[#303A6F] text-center;
   }
 
   .product-info-amount, .product-info-price {
-    @apply font-bold py-2 uppercase;
+    @apply font-bold uppercase leading-tight;
   }
 </style>

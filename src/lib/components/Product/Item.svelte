@@ -4,7 +4,7 @@
   const dispatch = createEventDispatcher();
 
   const showItem = () => {
-    dispatch("showItem", { productId });
+    dispatch("click", { productId });
   };
 
   export let name: string;
@@ -13,11 +13,11 @@
 </script>
 
 <div class="item-container">
-  <div class="item-image" on:click={showItem}>
+  <button class="item-image" on:click={showItem}>
     <img src={image} alt={name} />
-  </div>
+  </button>
   <div class="item-name">
-    <h3 on:click={showItem}>{name}</h3>
+    <button on:click={showItem}>{name}</button>
   </div>
 </div>
 
@@ -27,18 +27,18 @@
   }
 
   .item-image {
-    @apply w-full rounded-3xl shadow-md hover:shadow-xl;
+    @apply w-full rounded-3xl shadow-md hover:shadow-xl cursor-pointer;
   }
 
   .item-image > img {
-    @apply w-full object-cover;
+    @apply w-full object-cover rounded-3xl;
   }
 
   .item-name {
-    @apply w-full min-w-min font-Itim text-4xl;
+    @apply w-full min-w-min font-Itim text-4xl flex justify-center;
   }
 
-  .item-name > h3 {
-    @apply p-4 text-center text-navy-blue hover:text-dark-navy-blue;
+  .item-name > button {
+    @apply p-4 text-center text-navy-blue hover:text-dark-navy-blue cursor-pointer;
   }
 </style>

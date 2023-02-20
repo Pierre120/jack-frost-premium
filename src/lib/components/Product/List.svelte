@@ -1,14 +1,15 @@
 <script lang="ts">
   import ProductItem from "$lib/components/Product/Item.svelte";
   import { createEventDispatcher } from "svelte";
+  import type { Product } from "$lib/types/product";
 
   const dispatch = createEventDispatcher();
-  const showItem = (event: CustomEvent) => {
+  const showItem = (event) => {
     dispatch("showItem", event.detail);
   };
 
   export let width: string;
-  export let products: any[];
+  export let products: Product[];
 </script>
 
 <div class="product-list-container {width}">
@@ -17,9 +18,9 @@
     {#each products as product}
       <ProductItem
         name={product.name}
-        image={product.image}
+        image={product.img_src}
         productId={product.id}
-        on:showItem={showItem}
+        on:click={showItem}
       />
     {/each}
   </div>
@@ -31,6 +32,6 @@
   }
 
   .product-list {
-    @apply w-full grid-cols-5 gap-x-8 gap-y-10;
+    @apply w-full grid grid-cols-5 gap-x-8 gap-y-10;
   }
 </style>
