@@ -2,6 +2,7 @@
   import TemplateModal from "$lib/components/Modal/Template.svelte";
   import Offering from "$lib/components/Product/Offering.svelte";
   import { createEventDispatcher } from "svelte";
+  import type { Product } from "$lib/types/product";
 
   const dispatch = createEventDispatcher();
 
@@ -9,12 +10,10 @@
     dispatch("closeProductInfo");
   };
 
-  export let product: any[];
+  export let product: Product;
 </script>
 
-<TemplateModal width="max-w-7xl" on:closeModal={closeProductInfo}>
-  <img slot="productImage" src={product.img_src} alt={product.name} class="product-info-img" />
-
+<TemplateModal width="max-w-7xl" on:closeModal={closeProductInfo} productImgSrc={product.img_src} bgColor="bg-sky-blue">
   <div slot="productDetails" class="product-info-details">
     <div class="product-info-name">
       <h3>{product.name}</h3>
@@ -36,7 +35,7 @@
   }
 
   .product-info-img {
-    @apply w-full object-cover;
+    @apply w-full object-fill rounded-3xl;
   }
 
   .product-info-details {
@@ -48,6 +47,6 @@
   }
 
   .product-info-offerings {
-    @apply py-4 flex items-end justify-center;
+    @apply grid grid-cols-3 justify-items-center pt-4;
   }
 </style>
