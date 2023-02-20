@@ -8,17 +8,18 @@
   };
 
   export let width: string;
+  export let bgColor: string;
   export let hasCloseIcon = true;
+  export let productImgSrc = '';
 </script>
 
-<!-- svelte-ignore a11y-click-events-have-key-events -->
-<div class="modal-backdrop" on:click={closeModal}>
-  <div class="modal-component {width}">
+<div class="modal-backdrop" on:click={closeModal} on:keypress={closeModal}>
+  <div class="modal-component {width} {bgColor}">
     {#if hasCloseIcon}
       <button class="modal-close" on:click={closeModal}>
         <svg
           xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6"
+          class="h-9 w-9"
           fill="none"
           viewBox="0 0 24 24"
         >
@@ -36,9 +37,7 @@
     </div>
     <div class="modal-body">
       <div class="product-info">
-        <div class="product-info-image">
-          <slot name="productImage" />
-        </div>
+        <div style="background-image:url('{productImgSrc}');" class="product-info-image"></div>
         <slot name="productDetails" />
       </div>
       <!-- Additional slots for other modal types -->
@@ -53,7 +52,7 @@
   }
 
   .modal-component {
-    @apply flex flex-col bg-white rounded-3xl shadow-xl p-8 relative;
+    @apply flex flex-col rounded-3xl shadow-xl p-8 relative;
   }
 
 
@@ -66,7 +65,7 @@
   }
 
   .modal-close > svg {
-    @apply stroke-close-icon /* hover:stroke-primary-red */;
+    @apply stroke-close-icon;
   }
 
   .modal-close:hover > svg {
@@ -74,7 +73,7 @@
   }
 
   .modal-body {
-    @apply flex flex-col justify-center w-full min-w-max;
+    @apply flex flex-col justify-center w-full min-w-min;
   }
 
   .product-info {
@@ -82,6 +81,6 @@
   }
 
   .product-info-image {
-    @apply w-full rounded-3xl shadow-sm;
+    @apply w-full h-full bg-no-repeat bg-cover rounded-3xl shadow-xl;
   }
 </style>
