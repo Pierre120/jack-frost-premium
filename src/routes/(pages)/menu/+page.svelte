@@ -22,6 +22,10 @@
   export let data: PageData;
 </script>
 
+<svelte:head>
+  <title>Menu | Jack Frost Premium Ice Cream</title>
+</svelte:head>
+
 <div class="product-list-container">
   <ProductList
     width="max-w-[90%]"

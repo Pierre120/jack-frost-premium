@@ -4,6 +4,10 @@
   import jflogo from '$lib/assets/logos/jack-frost-premium.png'
 </script>
 
+<svelte:head>
+  <title>About Us | Jack Frost Premium Ice Cream</title>
+</svelte:head>
+
 <div class="min-h-screen max-w-screen flex flex-col font-IstokWeb">
   <div class="flex-1">
     <div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">

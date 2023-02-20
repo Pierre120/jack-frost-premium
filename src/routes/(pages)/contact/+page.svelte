@@ -5,6 +5,9 @@
   import car from '$lib/assets/images/delivery-svgrepo-com.svg'
 </script>
 
+<svelte:head>
+  <title>Contact Us | Jack Frost Premium Ice Cream</title>
+</svelte:head>
 
 <div class="max-w-screen flex flex-col min-h-min">
   <div class="flex-auto">

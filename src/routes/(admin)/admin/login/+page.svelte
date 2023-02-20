@@ -15,6 +15,10 @@
 	import jfpLogo from '$lib/assets/logos/jack-frost-premium.png';
 </script>
 
+<svelte:head>
+  <title>Admin Login | Jack Frost Ice Cream Premium</title>
+</svelte:head>
+
 <div class="md:container mx-auto">
 	<div class="flex flex-col items-center justify-center lg:justify-start md:pt-4 lg:pt-20 lg:pb-0 px-6 py-8 mx-auto md:h-screen sm:max-w-md xl:max-w-xl">
 		<Logo width="w-full" />

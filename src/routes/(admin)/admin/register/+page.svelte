@@ -3,6 +3,10 @@
 	export let width: string;
 </script>
 
+<svelte:head>
+  <title>Admin Register | Jack Frost Ice Cream Premium</title>
+</svelte:head>
+
 <div class="md:container mx-auto">
 	<div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
 		<a href="/" class="flex items-center mb-6">
