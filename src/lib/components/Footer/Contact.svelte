@@ -1,16 +1,17 @@
 <script lang="ts">
-  import Icon from '$lib/components/Icon.svelte';
+	import Icon from '$lib/components/Icon.svelte';
 
-  export let href: string;
-  export let iconSrc: string;
-  export let alt: string;
-  export let label: string;
+	export let href: string;
+	export let iconSrc: string;
+	export let alt: string;
+	export let label: string;
 </script>
 
-
 <div class="flex items-center text-start align-middle min-w-max min-h-min w-full p-2">
-  <Icon {href} style='p-0 w-9 inline-block' src={iconSrc} {alt} clickable={true} />
-  <span class="pl-6 min-w-max max-w-max w-full font-IstokWeb text-2xl text-dark-navy-blue align-middle inline">
-    <a {href} class="cursor-pointer" rel="noreferrer" target="_blank">{label}</a>
-  </span>
+	<Icon {href} style="p-0 w-9 inline-block" src={iconSrc} {alt} clickable={true} />
+	<span
+		class="pl-6 min-w-max max-w-max w-full font-IstokWeb text-2xl text-dark-navy-blue align-middle inline"
+	>
+		<a {href} class="cursor-pointer" rel="noreferrer" target="_blank">{label}</a>
+	</span>
 </div>
