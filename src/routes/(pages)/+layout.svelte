@@ -1,5 +1,5 @@
 <script lang="ts">
-  import type { LayoutData } from '../$types';
+  import type { LayoutData } from './$types';
   import NavBar from "$lib/components/NavBar/index.svelte";
   import Footer from "$lib/components/Footer/index.svelte";
 
