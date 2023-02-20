@@ -11,8 +11,9 @@ module.exports = {
         'navy-blue': '#383D55',
         'dark-navy-blue': '#36305E',
         'primary-red': '#F6162E',
-        'close-icon': '#DADADA',
-        'modal-backdrop': '#939393'
+        'close-icon': '#A2BCDD',
+        'modal-backdrop': '#939393',
+        'sky-blue': '#DDECFF',
       },
     },
   },
