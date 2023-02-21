@@ -9,7 +9,7 @@
 	<title>Contact Us | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
-<div class="max-w-screen flex flex-col min-h-min">
+<div class="max-w-screen flex flex-col min-h-min bg-white">
 	<div class="flex-auto">
 		<div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">
 			<h1 class="text-white font-bold text-5xl">CONTACT US</h1>
