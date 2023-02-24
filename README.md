@@ -1,14 +1,26 @@
-# create-svelte
+# Jack Frost Premium Ice Cream
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+A fullstack web application for Jack Frost Premium Ice Cream. This will be used for providing more information to their csutomers
+what products they offer, and a platform for ordering. This also has an admin portal where the orders can be tracked. 
 
 ## Setting up project
+
+### Installing dependencies
 
 Install needed dependencies to make this project work.
 
 ```bash
 # install dependencies
 pnpm install
+```
+
+### Generating Prisma Client
+
+Generate Prisma Client that is catered to the defined database models.
+
+```bash
+# generate prisma client
+npx prisma generate
 ```
 
 ## Developing
