@@ -9,6 +9,44 @@ what products they offer, and a platform for ordering. This also has an admin po
 
 ## Setting up project
 
+### Cloning the project
+
+Clone the repository into your local machine.
+
+```bash
+# clone the repository
+git clone https://github.com/Pierre120/jack-frost-premium.git
+```
+
+### Pulling a local copy of the `dev` branch
+
+Pull a local copy of the `dev` branch to keep your local copy of the developemnt phase of the project 
+and feature branches updated.
+
+```bash
+# create a local `dev` branch
+git checkout -b dev
+
+# pull from repository's `dev` branch
+git pull origin dev
+```
+
+#### Updating feature branch
+
+After pulling the recent changes from the repository's `dev` branch into your local `dev` branch,
+update all the feature branches that you're currently working on.
+
+```bash
+# go to feature branch
+git checkout <your-feature-branch>
+
+# merge changes from `dev` branch into feature branch
+git merge dev
+```
+
+> ***IMPORTANT NOTE:*** *Always make sure that your local `dev` branch is up to date by pulling 
+changes from it*
+
 ### Installing dependencies
 
 Install needed dependencies to make this project work.
