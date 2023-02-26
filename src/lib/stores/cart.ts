@@ -3,7 +3,7 @@ import type { Product } from '$lib/types/product';
 import { writable } from 'svelte/store';
 
 // This is a store that holds the cart state
-const CartStore = writable({ items: [] } as Cart);
+const CartStore = writable<Cart>({ items: [] });
 
 // This is a function that adds a product to the cart
 export const addProductToCart = (product: Product, qty: number) => {
