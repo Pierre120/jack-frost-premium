@@ -21,8 +21,8 @@ export const addProductToCart = (product: Product, qty: number) => {
   });
 };
 
-// This is a function that removes a product from the cart
-export const removeProductFromCart = (productId: string) => {
+// This is a function that removes a product cart item from the cart
+export const removeCartItemFromCart = (productId: string) => {
   CartStore.update((cartState) => {
     // Check if the product is already in the cart
     const existingItem = cartState.items.find((item) => item.product.id === productId);
