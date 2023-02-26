@@ -21,4 +21,18 @@ export const addProductToCart = (product: Product, qty: number) => {
   });
 };
 
+// This is a function that removes a product from the cart
+export const removeProductFromCart = (productId: string) => {
+  CartStore.update((cartState) => {
+    // Check if the product is already in the cart
+    const existingItem = cartState.items.find((item) => item.product.id === productId);
+    if (existingItem) {
+      // If product is already in the cart, remove it from the cart
+      cartState.items.splice(cartState.items.indexOf(existingItem), 1);
+      // cartState.items = cartState.items.filter((item) => item.product.id !== productId);
+    }
+    return cartState;
+  });
+};
+
 export default CartStore;
