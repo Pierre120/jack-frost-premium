@@ -21,6 +21,19 @@ export const addProductToCart = (product: Product, qty: number) => {
   });
 };
 
+// This is a function that increments the quantity of a product cart item
+export const incrementCartItemQuantity = (productId: string) => {
+  CartStore.update((cartState) => {
+    // Check if the product is already in the cart
+    const existingItem = cartState.items.find((item) => item.product.id === productId);
+    if (existingItem) {
+      // If product is already in the cart, just update the quantity
+      existingItem.quantity += 1;
+    }
+    return cartState;
+  });
+};
+
 // This is a function that removes a product cart item from the cart
 export const removeCartItemFromCart = (productId: string) => {
   CartStore.update((cartState) => {
