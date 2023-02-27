@@ -55,9 +55,9 @@ export const removeCartItemFromCart = (productId: string) => {
     const existingItem = cartState.items.find((item) => item.product.id === productId);
     if (existingItem) {
       // If product is already in the cart, remove it from the cart
-      cartState.items.splice(cartState.items.indexOf(existingItem), 1); 
+      cartState.items.splice(cartState.items.indexOf(existingItem), 1);
       // cartState.items = cartState.items.filter((item) => item.product.id !== productId);
-      --cartState.count;
+      --cartState.count; // decrement number of unique items in cart
     }
     return cartState;
   });
