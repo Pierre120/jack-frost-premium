@@ -3,7 +3,7 @@ import type { Product } from '$lib/types/product';
 import { writable } from 'svelte/store';
 
 // This is a store that holds the cart state
-const CartStore = writable<Cart>({ items: [] });
+const CartStore = writable<Cart>({ items: [], count: 0});
 
 // This is a function that adds a product to the cart
 export const addProductToCart = (product: Product, qty: number) => {
@@ -16,6 +16,7 @@ export const addProductToCart = (product: Product, qty: number) => {
     } else {
       // If product is not in the cart, add it to cart
       cartState.items.push({ product, quantity: qty });
+      ++cartState.count; // increment number of unique items in cart
     }
     return cartState;
   });
@@ -56,6 +57,7 @@ export const removeCartItemFromCart = (productId: string) => {
       // If product is already in the cart, remove it from the cart
       cartState.items.splice(cartState.items.indexOf(existingItem), 1);
       // cartState.items = cartState.items.filter((item) => item.product.id !== productId);
+      --cartState.count; // decrement number of unique items in cart
     }
     return cartState;
   });

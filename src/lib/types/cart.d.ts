@@ -7,4 +7,5 @@ export interface CartItem {
 
 export interface Cart {
   items: CartItem[];
+  count: number;
 }
