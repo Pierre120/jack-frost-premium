@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { enhance } from '$app/forms';
 	import Logo from '$lib/components/Logo.svelte';
-  import type { ActionData } from './$types';
+	import type { ActionData } from './$types';
 
 	const isLoginError = (errMsg: string | undefined) => {
 		if (errMsg) {
@@ -11,18 +11,18 @@
 	};
 
 	const removeLoginError = () => {
-		if(loginError) {
+		if (loginError) {
 			loginError = false;
 		}
 	};
 
 	const clearPassword = (errMsg: string | undefined) => {
-		if(errMsg) {
+		if (errMsg) {
 			return '';
 		}
 		return '';
 	};
-	
+
 	export let form: ActionData;
 	$: loginError = isLoginError(form?.message);
 	$: adminEmail = form?.data?.admin_email;
@@ -51,12 +51,23 @@
 						</h2>
 					</hgroup>
 					<!-- Alert for failed login -->
-					{#if form?.message && loginError }
+					{#if form?.message && loginError}
 						<div class="pb-4">
 							<div class="alert alert-error shadow-lg text-sm text-gray-900">
 								<div>
-									<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current flex-shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-									<span>{ form?.message }</span>
+									<svg
+										xmlns="http://www.w3.org/2000/svg"
+										class="stroke-current flex-shrink-0 h-6 w-6"
+										fill="none"
+										viewBox="0 0 24 24"
+										><path
+											stroke-linecap="round"
+											stroke-linejoin="round"
+											stroke-width="2"
+											d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+										/></svg
+									>
+									<span>{form?.message}</span>
 								</div>
 							</div>
 						</div>
