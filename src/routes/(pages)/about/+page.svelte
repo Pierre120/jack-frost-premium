@@ -100,8 +100,8 @@
 				<h1 class="text-4xl font-bold text-indigo-900 pt-4 mb-10">ORDERING</h1>
 				<p class="text-xl text-center text-justify text-black">
 					The ice cream is on <span class="text-indigo-900 font-semibold">made to order basis</span>
-					with a required lead time of at least 2 days depending on the size of the order. We are
-					also willing to deliver to selected areas of the Metro Manila for a minimum amount.
+					with a required lead time of at least 2 days depending on the size of the order. We are also
+					willing to deliver to selected areas of the Metro Manila for a minimum amount.
 					<span
 						>Customer orders are also deliverable via Grab, Lalamove and other similar services</span
 					>

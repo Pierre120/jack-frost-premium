@@ -1,9 +1,10 @@
 # Jack Frost Premium Ice Cream
 
 A fullstack web application for Jack Frost Premium Ice Cream. This will be used for providing more information to their csutomers
-what products they offer, and a platform for ordering. This also has an admin portal where the orders can be tracked. 
+what products they offer, and a platform for ordering. This also has an admin portal where the orders can be tracked.
 
 ## Project Setup Prerequisites
+
 - **pnpm** [[Installation][pnpm]]
 - **.env** [**Important:** Ask the developers for a copy!]
 
@@ -20,7 +21,7 @@ git clone https://github.com/Pierre120/jack-frost-premium.git
 
 ### Pulling a local copy of the `dev` branch
 
-Pull a local copy of the `dev` branch to keep your local copy of the developemnt phase of the project 
+Pull a local copy of the `dev` branch to keep your local copy of the developemnt phase of the project
 and feature branches updated.
 
 ```bash
@@ -44,8 +45,8 @@ git checkout <your-feature-branch>
 git merge dev
 ```
 
-> ***IMPORTANT NOTE:*** *Always make sure that your local `dev` branch is up to date by pulling 
-changes from it*
+> **_IMPORTANT NOTE:_** _Always make sure that your local `dev` branch is up to date by pulling
+> changes from it_
 
 ### Installing dependencies
 
@@ -122,6 +123,6 @@ You can preview the production build with `pnpm preview`.
 
 > To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
 
-
 <!-- Links: -->
+
 [pnpm]: https://pnpm.io/installation

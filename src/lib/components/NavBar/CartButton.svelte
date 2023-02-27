@@ -1,5 +1,5 @@
 <script lang="ts">
-	import cartIcon from '$lib/assets/icons/shopping-cart.svg';
+	// import cartIcon from '$lib/assets/icons/shopping-cart.svg';
 
 	export let placement: string;
 	export let width: string;

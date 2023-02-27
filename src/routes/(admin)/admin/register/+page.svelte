@@ -1,6 +1,5 @@
 <script lang="ts">
 	import jfpLogo from '$lib/assets/logos/jack-frost-premium.png';
-	export let width: string;
 </script>
 
 <svelte:head>
