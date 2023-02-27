@@ -11,8 +11,6 @@
 
 	export let form;
 	$: password = clearPassword(form?.data?.admin_password);
-
-	import jfpLogo from '$lib/assets/logos/jack-frost-premium.png';
 </script>
 
 <svelte:head>

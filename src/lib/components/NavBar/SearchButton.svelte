@@ -1,5 +1,5 @@
 <script lang="ts">
-	import searchIcon from '$lib/assets/icons/magnifying-glass.svg';
+	// import searchIcon from '$lib/assets/icons/magnifying-glass.svg';
 
 	export let placement: string;
 	export let width: string;
