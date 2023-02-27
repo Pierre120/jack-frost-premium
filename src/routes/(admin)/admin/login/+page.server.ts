@@ -64,7 +64,7 @@ export const actions: Actions = {
 				data: {
 					admin_email
 				},
-				message: 'Could not log in user.'
+				message: 'Incorrect email or password'
 			});
 		}
 
