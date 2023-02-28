@@ -4,13 +4,28 @@
 	import Logo from '$lib/components/Logo.svelte';
 	import AlertSuccess from '$lib/components/Alert/Success.svelte';
 	import AlertLoading from '$lib/components/Alert/Loading.svelte';
+	import AlertWarning from '$lib/components/Alert/Warning.svelte';
 	import AlertError from '$lib/components/Alert/Error.svelte';
+	import LoginAttemptsStore from '$lib/stores/login-attempts';
+	import CountdownStore from '$lib/stores/cooldown';
+	import { startCountdown } from '$lib/stores/cooldown';
+  import { invalidateAll } from '$app/navigation';
 	
 	export let form: ActionData;
 
 	let isAuthenticating = false;
 	let isSuccess = false;
 	let isLoginError = false;
+	let isTimout = false;
+	// let loginAttempts = 0;
+	$: loginAttempts = $LoginAttemptsStore;
+	$: {
+		if($CountdownStore.count === 0) {
+			isTimout = false;
+			$LoginAttemptsStore = 0;
+		}
+	}
+	$: console.log('loginAttempts: ', loginAttempts);
 
 	const removeLoginError = () => {
 		if (isLoginError) {
@@ -18,7 +33,7 @@
 		}
 	};
 
-	const submitLogin: SubmitFunction = ({ form }) => {
+	const submitLogin: SubmitFunction = ({ form, data }) => {
 		// Validation in server-side
 		isAuthenticating = true;
 		return async ({ result, update }) => {
@@ -34,6 +49,12 @@
 				case 'failure':
 					// Update form message
 					isLoginError = true;
+					$LoginAttemptsStore += 1;
+					if($LoginAttemptsStore > 2) {
+						isTimout = true;
+						result.data = undefined;
+						startCountdown(30, 1000);
+					}
 					break;
 			}
 			await update();
@@ -69,6 +90,8 @@
 						<AlertLoading padding="pb-4" message="Authenticating..." />
 					{:else if isSuccess}
 						<AlertSuccess padding="pb-4" message="Success! Redirecting..." />
+					{:else if isTimout}
+						<AlertWarning padding="pb-4" message="You have been timed out. Please try again in {$CountdownStore.count} seconds." />
 					{/if}
 					<!-- <AlertLoading padding="pb-4" message="Authenticating..." /> -->
 					<div class="mb-5">
@@ -86,6 +109,7 @@
 							id="admin_email"
 							value={form?.data?.admin_email ?? ''}
 							on:click={removeLoginError}
+							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
 						<label for="admin_email" class="block pt-1">
 							{#if form?.errors?.admin_email}
@@ -109,6 +133,7 @@
 							placeholder="Enter your password"
 							value={form?.data?.admin_password ?? ''}
 							on:click={removeLoginError}
+							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
 						<label for="admin_password" class="block pt-1">
 							{#if form?.errors?.admin_password}
@@ -118,7 +143,8 @@
 					</div>
 					<button
 						class="w-full btn btn-button text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-						type="submit">Submit</button
+						type="submit"
+						disabled={isTimout || isAuthenticating || isSuccess}>Submit</button
 					>
 				</form>
 			</div>
