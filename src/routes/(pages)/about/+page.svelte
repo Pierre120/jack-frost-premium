@@ -16,7 +16,7 @@
 
 		<div class="flex flex-col md:flex-row bg-white">
 			<div class="md:w-1/2">
-				<img src={jfpic} alt="jfpicture" class="max-w-2xl" />
+				<img src={jfpic} alt="jfpicture" class="max-w-full" />
 			</div>
 			<div class="flex items-center flex-col md:w-1/2">
 				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-10">THE STORY</h1>
@@ -88,13 +88,13 @@
 				</p>
 			</div>
 			<div class="1/3">
-				<img src={jflogo} alt="jfrost" class="max-w-lg shadow-2xl" />
+				<img src={jflogo} alt="jfrost" class="max-w-full shadow-2xl" />
 			</div>
 		</div>
 
 		<div class="flex flex-col md:flex-row px-20 py-5 bg-blue-200">
 			<div class="md:w-1/4">
-				<img src={carlogo} alt="car" class="p-0 w-56" />
+				<img src={carlogo} alt="car" class="max-w-full" />
 			</div>
 			<div class="flex flex-col md:w-3/4 px-6">
 				<h1 class="text-4xl font-bold text-indigo-900 pt-4 mb-10">ORDERING</h1>

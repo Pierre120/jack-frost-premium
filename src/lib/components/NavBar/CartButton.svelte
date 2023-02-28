@@ -21,7 +21,7 @@
 		<svg
 			version="1.0"
 			xmlns="http://www.w3.org/2000/svg"
-			class="stroke-black hover:stroke-primary-red fill-black hover:fill-primary-red opacity-[.6] hover:opacity-100"
+			class="w-auto h-8 stroke-black hover:stroke-primary-red fill-black hover:fill-primary-red opacity-[.6] hover:opacity-100"
 			width="45.000000pt"
 			height="45.000000pt"
 			viewBox="0 0 45.000000 45.000000"
