@@ -11,7 +11,7 @@
 <div class="min-h-screen max-w-screen flex flex-col font-IstokWeb">
 	<div class="flex-1">
 		<div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">
-			<h1 class="text-white font-bold text-5xl">ABOUT US</h1>
+			<h1 class=" text-white font-bold text-5xl">ABOUT US</h1>
 		</div>
 
 		<div class="flex flex-col md:flex-row bg-white">
@@ -19,8 +19,8 @@
 				<img src={jfpic} alt="jfpicture" class="max-w-full" />
 			</div>
 			<div class="flex items-center flex-col md:w-1/2">
-				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-10">THE STORY</h1>
-				<p class="text-xl text-center text-justify-not mr-12 text-black">
+				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-0">THE STORY</h1>
+				<p class="text-xl text-center text-justify-not mr-0 text-black">
 					The idea of making homemade ice cream came about only when a new Kitchen Aid mixer was
 					bought and a free ice cream bowl attachment was given. This was back around 2008. <br />
 					<br /><span
@@ -36,7 +36,7 @@
 
 		<div class="items-center bg-gray-200 py-4 bg-white">
 			<h1 class="text-4xl font-bold text-indigo-900 pb-5 text-center">THE FLAVORS</h1>
-			<p class="text-xl text-center text-justify-not px-40 pb-6 text-black" style="text-align: center; margin: 0 auto;">
+			<p class="text-adjust text-xl text-center text-justify-not px-40 pb-6 text-black" style="text-align: center; margin: 0 auto;">
 				The search was on for unique flavors that are not found locally. The first of the flavors we
 				worked on was <span class="font-semibold text-blue-800">Basil</span>. Other flavors came
 				into play after reading about it, experimenting with them, or even seeing other products
@@ -92,13 +92,13 @@
 			</div>
 		</div>
 
-		<div class="flex flex-col md:flex-row px-20 py-5 bg-blue-200">
-			<div class="md:w-1/4">
-				<img src={carlogo} alt="car" class="max-w-full" />
+		<div class="flex flex-col md:flex-row px-4 md:px-20 py-2 md:py-5 bg-blue-200">
+			<div class="w-full md:w-1/4">
+				<img src={carlogo} alt="car" class="w-full h-auto" />
 			</div>
-			<div class="flex flex-col md:w-3/4 px-6">
-				<h1 class="text-4xl font-bold text-indigo-900 pt-4 mb-10">ORDERING</h1>
-				<p class="text-xl text-center text-justify text-black">
+			<div class="flex flex-col w-full md:w-3/4 px-6">
+				<h1 class="text-2xl md:text-4xl font-bold text-indigo-900 pt-4 mb-4 md:mb-10">ORDERING</h1>
+				<p class=" text-adjust text-xl text-center md:text-justify text-black">
 					The ice cream is on <span class="text-indigo-900 font-semibold">made to order basis</span>
 					with a required lead time of at least 2 days depending on the size of the order. We are also
 					willing to deliver to selected areas of the Metro Manila for a minimum amount.
@@ -116,3 +116,12 @@
 		</div>
 	</div>
 </div>
+
+<style lang="postcss">
+
+	@media(max-width: 845px){
+		 .text-adjust{
+            @apply text-justify mr-0 px-0;
+        }
+	}
+</style>
