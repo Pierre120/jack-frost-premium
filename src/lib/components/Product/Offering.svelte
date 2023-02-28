@@ -91,5 +91,4 @@
 	.product-info-price {
 		@apply font-bold uppercase leading-tight;
 	}
-
 </style>

@@ -17,10 +17,9 @@
 </div>
 
 <style lang="postcss">
-
-	@media(max-width: 845px){
-		 .text-adjust{
-            @apply text-sm;
-        }
+	@media (max-width: 845px) {
+		.text-adjust {
+			@apply text-sm;
+		}
 	}
 </style>

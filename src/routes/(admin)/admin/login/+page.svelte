@@ -9,8 +9,7 @@
 	import LoginAttemptsStore from '$lib/stores/login-attempts';
 	import CountdownStore from '$lib/stores/cooldown';
 	import { startCountdown } from '$lib/stores/cooldown';
-  import { invalidateAll } from '$app/navigation';
-	
+
 	export let form: ActionData;
 
 	let isAuthenticating = false;
@@ -20,7 +19,7 @@
 	// let loginAttempts = 0;
 	$: loginAttempts = $LoginAttemptsStore;
 	$: {
-		if($CountdownStore.count === 0) {
+		if ($CountdownStore.count === 0) {
 			isTimout = false;
 			$LoginAttemptsStore = 0;
 		}
@@ -33,14 +32,14 @@
 		}
 	};
 
-	const submitLogin: SubmitFunction = ({ form, data }) => {
+	const submitLogin: SubmitFunction = ({ form }) => {
 		// Validation in server-side
 		isAuthenticating = true;
 		return async ({ result, update }) => {
-			form.reset() // Force reset form
+			form.reset(); // Force reset form
 			console.log('checking result...');
 			isAuthenticating = false;
-			switch(result.type) {
+			switch (result.type) {
 				case 'redirect':
 					isSuccess = true;
 					// Reset form
@@ -50,7 +49,7 @@
 					// Update form message
 					isLoginError = true;
 					$LoginAttemptsStore += 1;
-					if($LoginAttemptsStore > 2) {
+					if ($LoginAttemptsStore > 2) {
 						isTimout = true;
 						result.data = undefined;
 						startCountdown(30, 1000);
@@ -91,7 +90,10 @@
 					{:else if isSuccess}
 						<AlertSuccess padding="pb-4" message="Success! Redirecting..." />
 					{:else if isTimout}
-						<AlertWarning padding="pb-4" message="You have been timed out. Please try again in {$CountdownStore.count} seconds." />
+						<AlertWarning
+							padding="pb-4"
+							message="You have been timed out. Please try again in {$CountdownStore.count} seconds."
+						/>
 					{/if}
 					<!-- <AlertLoading padding="pb-4" message="Authenticating..." /> -->
 					<div class="mb-5">
