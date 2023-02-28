@@ -2,38 +2,15 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
 	import Logo from '$lib/components/Logo.svelte';
+	import AlertSuccess from '$lib/components/Alert/Success.svelte';
 	import AlertLoading from '$lib/components/Alert/Loading.svelte';
 	import AlertError from '$lib/components/Alert/Error.svelte';
-
-	// const isLoginError = (errMsg: string | undefined) => {
-	// 	if (errMsg) {
-	// 		return true;
-	// 	}
-	// 	return false;
-	// };
-
-	// const removeLoginError = () => {
-	// 	if (isLoginError) {
-	// 		isLoginError = false;
-	// 	}
-	// };
-
-	// const clearPassword = (errMsg: string | undefined) => {
-	// 	if (errMsg) {
-	// 		return '';
-	// 	}
-	// 	return '';
-	// };
 	
+	export let form: ActionData;
+
 	let isAuthenticating = false;
 	let isSuccess = false;
 	let isLoginError = false;
-
-	export let form: ActionData;
-	// $: loginError = isLoginError(form?.message);
-	$: adminEmail = form?.data?.admin_email;
-	// $: console.log(form?.data?.admin_email);
-	// $: defaultPassVal = clearPassword(form?.message);
 
 	const removeLoginError = () => {
 		if (isLoginError) {
@@ -50,6 +27,7 @@
 			isAuthenticating = false;
 			switch(result.type) {
 				case 'redirect':
+					isSuccess = true;
 					// Reset form
 					form.reset();
 					break;
@@ -89,6 +67,8 @@
 						<AlertError padding="pb-4" message={form?.message} />
 					{:else if isAuthenticating}
 						<AlertLoading padding="pb-4" message="Authenticating..." />
+					{:else if isSuccess}
+						<AlertSuccess padding="pb-4" message="Success! Redirecting..." />
 					{/if}
 					<!-- <AlertLoading padding="pb-4" message="Authenticating..." /> -->
 					<div class="mb-5">
