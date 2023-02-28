@@ -26,7 +26,11 @@
 </svelte:head>
 
 <div class="product-list-container">
-	<ProductList width="w-full md:max-w-[90%]" products={data.products} on:showItem={showProductInfo} />
+	<ProductList
+		width="w-full md:max-w-[90%]"
+		products={data.products}
+		on:showItem={showProductInfo}
+	/>
 </div>
 
 {#if productInfoModal}
@@ -38,7 +42,7 @@
 		@apply w-full bg-white flex flex-col justify-center items-center;
 	}
 
-	@media sceen and (min-width:768px){
+	@media sceen and (min-width: 768px) {
 		.product-list-container {
 			@apply flex-row;
 		}
