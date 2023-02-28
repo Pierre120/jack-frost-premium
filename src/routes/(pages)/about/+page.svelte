@@ -36,7 +36,7 @@
 
 		<div class="items-center bg-gray-200 py-4 bg-white">
 			<h1 class="text-4xl font-bold text-indigo-900 pb-5 text-center">THE FLAVORS</h1>
-			<p class="text-xl text-center text-justify-not px-40 pb-6 text-black">
+			<p class="text-xl text-center text-justify-not px-40 pb-6 text-black" style="text-align: center; margin: 0 auto;">
 				The search was on for unique flavors that are not found locally. The first of the flavors we
 				worked on was <span class="font-semibold text-blue-800">Basil</span>. Other flavors came
 				into play after reading about it, experimenting with them, or even seeing other products
