@@ -1,32 +1,62 @@
 <script lang="ts">
-	import { enhance } from '$app/forms';
-	import Logo from '$lib/components/Logo.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
+	import Logo from '$lib/components/Logo.svelte';
+	import AlertError from '$lib/components/Alert/Error.svelte';
 
-	const isLoginError = (errMsg: string | undefined) => {
-		if (errMsg) {
-			return true;
-		}
-		return false;
-	};
+	// const isLoginError = (errMsg: string | undefined) => {
+	// 	if (errMsg) {
+	// 		return true;
+	// 	}
+	// 	return false;
+	// };
 
-	const removeLoginError = () => {
-		if (loginError) {
-			loginError = false;
-		}
-	};
+	// const removeLoginError = () => {
+	// 	if (isLoginError) {
+	// 		isLoginError = false;
+	// 	}
+	// };
 
-	const clearPassword = (errMsg: string | undefined) => {
-		if (errMsg) {
-			return '';
-		}
-		return '';
-	};
+	// const clearPassword = (errMsg: string | undefined) => {
+	// 	if (errMsg) {
+	// 		return '';
+	// 	}
+	// 	return '';
+	// };
+	
+	let isLoginError = false;
 
 	export let form: ActionData;
-	$: loginError = isLoginError(form?.message);
+	// $: loginError = isLoginError(form?.message);
 	$: adminEmail = form?.data?.admin_email;
-	$: defaultPassVal = clearPassword(form?.message);
+	// $: console.log(form?.data?.admin_email);
+	// $: defaultPassVal = clearPassword(form?.message);
+
+	const removeLoginError = () => {
+		if (isLoginError) {
+			isLoginError = false;
+		}
+	};
+
+	const submitLogin: SubmitFunction = ({ form }) => {
+		// Validation in server-side
+		return async ({ result, update }) => {
+			form.reset() // Force reset form
+			// invalidateAll();
+			switch(result.type) {
+				case 'success':
+					// Reset form
+					form.reset();
+					break;
+				case 'failure':
+					// Update form message
+					isLoginError = true;
+					// await applyAction(result);
+					break;
+			}
+			await update();
+		};
+	};
 </script>
 
 <svelte:head>
@@ -42,7 +72,7 @@
 			class="w-full bg-white rounded-lg shadow dark:border sm:max-w-md p-0 mt-8 dark:bg-gray-800 dark:border-gray-700"
 		>
 			<div class="p-6 space-y-4 md:space-y-6 sm:p-8">
-				<form method="POST" use:enhance>
+				<form method="POST" use:enhance={submitLogin}>
 					<hgroup class="mb-5">
 						<h2
 							class="text-xl font-bold leading-tight tracking-tight text-gray-900 md:text-3xl dark:text-white"
@@ -51,7 +81,7 @@
 						</h2>
 					</hgroup>
 					<!-- Alert for failed login -->
-					{#if form?.message && loginError}
+					{#if form?.message && isLoginError}
 						<div class="pb-4">
 							<div class="alert alert-error shadow-lg text-sm text-gray-900">
 								<div>
@@ -85,11 +115,10 @@
 							name="admin_email"
 							placeholder="adminaccount@email.com"
 							id="admin_email"
-							value={adminEmail ?? ''}
+							value={form?.data?.admin_email ?? ''}
 							on:click={removeLoginError}
-							required
 						/>
-						<label for="admin_email">
+						<label for="admin_email" class="block pt-1">
 							{#if form?.errors?.admin_email}
 								<span class="error">{form?.errors?.admin_email[0]}</span>
 							{/if}
@@ -109,11 +138,10 @@
 							name="admin_password"
 							id="admin_password"
 							placeholder="Enter your password"
-							value={defaultPassVal}
+							value={form?.data?.admin_password ?? ''}
 							on:click={removeLoginError}
-							required
 						/>
-						<label for="admin_password">
+						<label for="admin_password" class="block pt-1">
 							{#if form?.errors?.admin_password}
 								<span class="error">{form?.errors?.admin_password[0]}</span>
 							{/if}
