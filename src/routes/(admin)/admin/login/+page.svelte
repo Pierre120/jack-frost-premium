@@ -2,6 +2,7 @@
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
 	import Logo from '$lib/components/Logo.svelte';
+	import AlertLoading from '$lib/components/Alert/Loading.svelte';
 	import AlertError from '$lib/components/Alert/Error.svelte';
 
 	// const isLoginError = (errMsg: string | undefined) => {
@@ -24,6 +25,8 @@
 	// 	return '';
 	// };
 	
+	let isAuthenticating = false;
+	let isSuccess = false;
 	let isLoginError = false;
 
 	export let form: ActionData;
@@ -40,18 +43,19 @@
 
 	const submitLogin: SubmitFunction = ({ form }) => {
 		// Validation in server-side
+		isAuthenticating = true;
 		return async ({ result, update }) => {
 			form.reset() // Force reset form
-			// invalidateAll();
+			console.log('checking result...');
+			isAuthenticating = false;
 			switch(result.type) {
-				case 'success':
+				case 'redirect':
 					// Reset form
 					form.reset();
 					break;
 				case 'failure':
 					// Update form message
 					isLoginError = true;
-					// await applyAction(result);
 					break;
 			}
 			await update();
@@ -83,7 +87,10 @@
 					<!-- Alert for failed login -->
 					{#if form?.message && isLoginError}
 						<AlertError padding="pb-4" message={form?.message} />
+					{:else if isAuthenticating}
+						<AlertLoading padding="pb-4" message="Authenticating..." />
 					{/if}
+					<!-- <AlertLoading padding="pb-4" message="Authenticating..." /> -->
 					<div class="mb-5">
 						<label
 							for="admin_email"
