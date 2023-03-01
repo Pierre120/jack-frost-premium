@@ -6,9 +6,12 @@
 	import AlertLoading from '$lib/components/Alert/Loading.svelte';
 	import AlertWarning from '$lib/components/Alert/Warning.svelte';
 	import AlertError from '$lib/components/Alert/Error.svelte';
-	import LoginAttemptsStore, { incrementLoginAttempts, resetLoginAttempts } from '$lib/stores/login-attempts';
+	import LoginAttemptsStore, {
+		incrementLoginAttempts,
+		resetLoginAttempts
+	} from '$lib/stores/login-attempts';
 	import CountdownStore, { startCountdown } from '$lib/stores/cooldown';
-  import { onMount } from 'svelte';
+	import { onMount } from 'svelte';
 
 	export let form: ActionData;
 
@@ -17,7 +20,7 @@
 	let isLoginError = false;
 	$: isTimout = $CountdownStore.count > 0;
 	$: {
-		if($CountdownStore.count === 0) {
+		if ($CountdownStore.count === 0) {
 			isTimout = false;
 		}
 	}
@@ -57,8 +60,8 @@
 	};
 
 	onMount(() => {
-		if(isTimout) startCountdown();
-	})
+		if (isTimout) startCountdown();
+	});
 </script>
 
 <svelte:head>
