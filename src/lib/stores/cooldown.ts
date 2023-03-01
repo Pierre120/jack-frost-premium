@@ -4,7 +4,7 @@ import { writable } from 'svelte/store';
 
 // Create the store from localStorage or default values
 const CountdownStore = writable<Countdown>(
-	((browser && JSON.parse(localStorage.getItem('countdown') || '')) || {
+	((browser && JSON.parse(localStorage.getItem('countdown') || '{}')) || {
 		count: 0,
 		interval: 1000
 	}) as Countdown
