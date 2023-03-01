@@ -9,22 +9,23 @@
 	import LoginAttemptsStore from '$lib/stores/login-attempts';
 	import CountdownStore from '$lib/stores/cooldown';
 	import { startCountdown } from '$lib/stores/cooldown';
+  import { onMount } from 'svelte';
 
 	export let form: ActionData;
 
 	let isAuthenticating = false;
 	let isSuccess = false;
 	let isLoginError = false;
-	let isTimout = false;
+	$: isTimout = $CountdownStore.count > 0;
 	// let loginAttempts = 0;
 	$: loginAttempts = $LoginAttemptsStore;
 	$: {
-		if ($CountdownStore.count === 0) {
+		if($CountdownStore.count === 0) {
 			isTimout = false;
 			$LoginAttemptsStore = 0;
 		}
 	}
-	$: console.log('loginAttempts: ', loginAttempts);
+	$: console.log('loginAttempts: ', loginAttempts, ' - isTimout: ', isTimout);
 
 	const removeLoginError = () => {
 		if (isLoginError) {
@@ -59,6 +60,11 @@
 			await update();
 		};
 	};
+
+	// onDestroy(unsubscribe);
+	onMount(() => {
+		if(isTimout) startCountdown();
+	})
 </script>
 
 <svelte:head>
@@ -133,7 +139,7 @@
 							name="admin_password"
 							id="admin_password"
 							placeholder="Enter your password"
-							value={form?.data?.admin_password ?? ''}
+							value={undefined ?? ''}
 							on:click={removeLoginError}
 							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
