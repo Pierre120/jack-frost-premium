@@ -115,7 +115,7 @@
 							on:click={removeLoginError}
 							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
-						<label for="admin_email" class="block pt-1">
+						<label for="admin_email" class="block pt-1  text-red-500 text-sm font-semibold italic">
 							{#if form?.errors?.admin_email}
 								<span class="error">{form?.errors?.admin_email[0]}</span>
 							{/if}
@@ -141,7 +141,7 @@
 						/>
 						<label for="admin_password" class="block pt-1">
 							{#if form?.errors?.admin_password}
-								<span class="error">{form?.errors?.admin_password[0]}</span>
+								<span class="error text-red-500 text-sm font-semibold italic">{form?.errors?.admin_password[0]}</span>
 							{/if}
 						</label>
 					</div>
