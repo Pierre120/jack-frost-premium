@@ -4,7 +4,7 @@ import { writable } from 'svelte/store';
 
 
 // Create the store from localStorage or default values
-const CountdownStore = writable<Countdown>((browser && JSON.parse(localStorage.getItem('countdown') || '{"count": 0, "interval": 1000}') || { count: 0, interval: 1000 }) as Countdown);
+const CountdownStore = writable<Countdown>((browser && JSON.parse(localStorage.getItem('countdown') || '') || { count: 0, interval: 1000 }) as Countdown);
 
 // Update count base from timestamp to get the correct countdown timelapse
 CountdownStore.update((countdownState) => {
@@ -44,7 +44,6 @@ export const startCountdown = (start?: number, interval?: number) => {
 		if(interval) {
 			countdownState.interval = interval;
 		}
-		console.log('Interval: ', countdownState.interval);
 		countdownState.timer = setInterval(countdown, countdownState.interval);
 		return countdownState;
 	});
