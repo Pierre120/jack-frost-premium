@@ -6,25 +6,24 @@
 	import AlertLoading from '$lib/components/Alert/Loading.svelte';
 	import AlertWarning from '$lib/components/Alert/Warning.svelte';
 	import AlertError from '$lib/components/Alert/Error.svelte';
-	import LoginAttemptsStore from '$lib/stores/login-attempts';
-	import CountdownStore from '$lib/stores/cooldown';
-	import { startCountdown } from '$lib/stores/cooldown';
+	import LoginAttemptsStore, {
+		incrementLoginAttempts,
+		resetLoginAttempts
+	} from '$lib/stores/login-attempts';
+	import CountdownStore, { startCountdown } from '$lib/stores/cooldown';
+	import { onMount } from 'svelte';
 
 	export let form: ActionData;
 
 	let isAuthenticating = false;
 	let isSuccess = false;
 	let isLoginError = false;
-	let isTimout = false;
-	// let loginAttempts = 0;
-	$: loginAttempts = $LoginAttemptsStore;
+	$: isTimout = $CountdownStore.count > 0;
 	$: {
 		if ($CountdownStore.count === 0) {
 			isTimout = false;
-			$LoginAttemptsStore = 0;
 		}
 	}
-	$: console.log('loginAttempts: ', loginAttempts);
 
 	const removeLoginError = () => {
 		if (isLoginError) {
@@ -37,7 +36,6 @@
 		isAuthenticating = true;
 		return async ({ result, update }) => {
 			form.reset(); // Force reset form
-			console.log('checking result...');
 			isAuthenticating = false;
 			switch (result.type) {
 				case 'redirect':
@@ -48,10 +46,11 @@
 				case 'failure':
 					// Update form message
 					isLoginError = true;
-					$LoginAttemptsStore += 1;
+					incrementLoginAttempts();
 					if ($LoginAttemptsStore > 2) {
 						isTimout = true;
 						result.data = undefined;
+						resetLoginAttempts();
 						startCountdown(30, 1000);
 					}
 					break;
@@ -59,6 +58,10 @@
 			await update();
 		};
 	};
+
+	onMount(() => {
+		if (isTimout) startCountdown();
+	});
 </script>
 
 <svelte:head>
@@ -95,7 +98,6 @@
 							message="You have been timed out. Please try again in {$CountdownStore.count} seconds."
 						/>
 					{/if}
-					<!-- <AlertLoading padding="pb-4" message="Authenticating..." /> -->
 					<div class="mb-5">
 						<label
 							for="admin_email"
@@ -133,7 +135,7 @@
 							name="admin_password"
 							id="admin_password"
 							placeholder="Enter your password"
-							value={form?.data?.admin_password ?? ''}
+							value={undefined ?? ''}
 							on:click={removeLoginError}
 							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
