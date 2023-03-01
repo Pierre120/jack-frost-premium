@@ -32,7 +32,7 @@
 		if (isAuthError) {
 			isAuthError = false;
 		}
-		if (isPasswordError){
+		if (isPasswordError) {
 			isPasswordError = false;
 		}
 	};
@@ -40,7 +40,7 @@
 		if (isAuthError) {
 			isAuthError = false;
 		}
-		if(isEmailError) {
+		if (isEmailError) {
 			isEmailError = false;
 		}
 	};
@@ -130,7 +130,6 @@
 							id="admin_email"
 							value={form?.data?.admin_email ?? ''}
 							on:keypress={removeEmailError}
-
 							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
 						<label for="admin_email" class="block pt-1 text-red-500 text-sm font-semibold italic">
@@ -158,7 +157,10 @@
 							on:keypress={removePasswordError}
 							disabled={isTimout || isAuthenticating || isSuccess}
 						/>
-						<label for="admin_password" class="block pt-1 text-red-500 text-sm font-semibold italic">
+						<label
+							for="admin_password"
+							class="block pt-1 text-red-500 text-sm font-semibold italic"
+						>
 							{#if form?.errors?.admin_password}
 								<span class="error">{form?.errors?.admin_password[0]}</span>
 							{/if}
