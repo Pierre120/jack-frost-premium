@@ -1,7 +1,9 @@
-import { auth } from '$lib/server/lucia';
-import { fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 import type { Actions, PageServerLoad } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
+import { auth } from '$lib/server/lucia';
+import { transporter } from '$lib/server/nodemailer';
+import { z } from 'zod';
+import jwt from 'jsonwebtoken';
 
 // Protect logged in user from accessing login page
 export const load: PageServerLoad = async ({ locals }) => {
@@ -28,6 +30,8 @@ export const actions: Actions = {
 	default: async ({ request }) => {
 		const formData = Object.fromEntries(await request.formData());
 		const admin_email = (formData.admin_email as string) || '';
+		let payload = {};
+		let user_id = '';
 
 		try {
 			// Validate form data
@@ -47,8 +51,10 @@ export const actions: Actions = {
 			// Authenticate user
 			const { admin_email: email } = result.data;
 			console.log(`Authentication: ${email}`);
-			const key = await auth.getKeyUser('email', email);
-			console.log(`Key: ${key}`);
+			const { key, user } = await auth.getKeyUser('email', email);
+			console.log(`Key: ${key} - User ID: ${user.userId}`);
+			payload = user;
+			user_id = user.userId;
 		} catch (err) {
 			console.error(err);
 			console.log(admin_email);
@@ -60,7 +66,23 @@ export const actions: Actions = {
 			});
 		}
 
-		// Redirect to admin home page
-		throw redirect(302, '/admin/login');
+		const token = jwt.sign(payload, 'RSA256', { expiresIn: '10m' });
+		const link = `127.0.0.1:5173/admin/update/?ID=${user_id}&token=${token}`; //Update host/port
+		console.log(`Password reset URL: ${link}`);
+
+		// send mail with defined transport object
+		let mail = await transporter.sendMail({
+			from: '"Jack Frost" <jackfrosttest2023@gmail.com>', // sender address
+			to: admin_email, // list of receivers
+			subject: 'Admin Password Reset', // Subject line
+			text: `${link}`, // plain text body
+			html: `<h1>Please click the link below to reset your password: <h1>
+						 <br>
+						 <b>${link}<b>
+						 <br>
+						 <h6>Note: Link is only valid for 10 minutes.<h6>`,
+		});
+	
+		console.log('Message sent: %s', mail.messageID);
 	}
 };
