@@ -56,43 +56,46 @@ model Product {
   id          String   @id @unique
   name        String
   is_seasonal Boolean  @default(false)
-  tier        Tier
+  category_id String
   img_src     String
   description String
-  offerings   Offering[]
-  orders OrderDetails[]
+  category    Category @relation(references: [id], fields: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  orders      OrderDetails[]
 
+  @@index([category_id])
   @@map("product")
 }
 
-/// Enums for product tiers
-enum Tier {
-  PLT   /// Platinum
-  PRM   /// Premium
-  SPRM  /// Super Premium
-  LSGR  /// Less Sugar
-  NA    /// Not Applicable
+/// Category model
+model Category {
+  id          String   @id @unique
+  name        String
+  products    Product[]
+  offerings   Offering[]
+
+  @@map("category")
 }
 
 /// Offering model
 model Offering {
   id          String   @id @unique
-  product_id  String
-  amount      ProductAmount
-  other_amt   String?
+  category_id String
+  size_id     String
   price       Decimal  @db.Decimal(10, 2)
-  product     Product  @relation(references: [id], fields: [product_id], onDelete: Cascade)
+  category    Category @relation(references: [id], fields: [category_id], onDelete: Cascade, onUpdate: Cascade)
+  size        Size     @relation(references: [id], fields: [size_id], onDelete: Cascade, onUpdate: Cascade)
 
-  @@index([product_id])
+  @@index([category_id, size_id])
   @@map("offering")
 }
 
-/// Enums for product amounts
-enum ProductAmount {
-  PNT   /// Pint
-  HGAL  /// Half Gallon
-  GAL   /// Gallon
-  NA    /// Not Applicable
+/// Size model
+model Size {
+  id          String   @id @unique
+  name        String
+  offerings   Offering[]
+
+  @@map("size")
 }
 
 /// Order model
@@ -111,11 +114,11 @@ model Order {
   estimated_delivery  DateTime?
   payment_status      PaymentStatus
   total_price         Decimal  @db.Decimal(10, 2)
-  // user        User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
+  /// user        User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
   order_details       OrderDetails[]
   payments            Payment[]
 
-  // @@index([user_id])
+  /// @@index([user_id])
   @@map("order")
 }
 
@@ -132,8 +135,8 @@ model OrderDetails {
   order_id    String
   product_id  String
   quantity    Int     @db.SmallInt
-  order       Order   @relation(references: [id], fields: [order_id], onDelete: Cascade)
-  product     Product @relation(references: [id], fields: [product_id], onDelete: Cascade)
+  order       Order   @relation(references: [id], fields: [order_id], onDelete: Cascade, onUpdate: Cascade)
+  product     Product @relation(references: [id], fields: [product_id], onDelete: Cascade, onUpdate: Cascade)
 
   @@index([order_id])
   @@index([product_id])
