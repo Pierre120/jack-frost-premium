@@ -6,7 +6,7 @@ import { deleteCategory } from '$lib/server/categories/delete';
 export const POST = (async ({ params }) => {
 	try {
 		const category = await deleteCategory(params.id ?? '');
-		return json({ success: true });
+		return json({ success: true, category });
 	} catch (err) {
 		console.error(err);
 		return json({ success: false });
