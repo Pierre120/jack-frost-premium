@@ -1,14 +1,14 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getCategory } from '$lib/server/categories/get';
+import { getAllCategories } from '$lib/server/categories/get';
 
-// Get a category from the database
-export const GET = (async ({ params }) => {
+// Get all categories from the database
+export const GET = (async () => {
   try {
-    const category = await getCategory(params.id ?? '');
+    const categories = await getAllCategories();
     return json({
       success: true,
-      category
+      categories
     });
   } catch (err) {
     console.error(err);

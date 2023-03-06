@@ -18,7 +18,7 @@ const getCategory = async (category: string) => {
 }
 
 // For getting all categories, we don't need to pass in anything
-const getCategories = async () => {
+const getAllCategories = async () => {
   const result = await prisma.categories.findMany();
 
   // for debugging purposes
@@ -27,4 +27,4 @@ const getCategories = async () => {
   return result;
 }
 
-export { getCategory, getCategories };
+export { getCategory, getAllCategories };
