@@ -1,10 +1,10 @@
 import { prisma } from '$lib/server/prisma';
 
-// For getting a category, we need to pass in the category name
-const getCategory = async (category: string) => {
-  const result = await prisma.categories.findUnique({
+// For getting a category, we need to pass in the category id
+const getCategory = async (category_id: string) => {
+  const result = await prisma.category.findUnique({
     where: {
-      name: category
+      id: category_id
     },
     include: {
       offerings: true
@@ -19,7 +19,7 @@ const getCategory = async (category: string) => {
 
 // For getting all categories, we don't need to pass in anything
 const getAllCategories = async () => {
-  const result = await prisma.categories.findMany();
+  const result = await prisma.category.findMany();
 
   // for debugging purposes
   console.log(JSON.stringify(result));

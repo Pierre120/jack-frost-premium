@@ -3,7 +3,7 @@ import type { Offering } from '$lib/types/offering';
 
 // For adding a category, we need to pass in the category name and an array of offerings
 const addCategory = async (category: string, offerings: Offering[]) => {
-  const result = await prisma.categories.create({
+  const result = await prisma.category.create({
     data: {
       name: category,
       offerings: {
