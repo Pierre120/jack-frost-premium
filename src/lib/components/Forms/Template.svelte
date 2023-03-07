@@ -36,4 +36,8 @@
 	.close {
 		@apply absolute top-6 right-6 p-0 text-4xl font-bold text-[#A2BCDD] hover:text-[#F6162E] cursor-pointer;
 	}
+
+  .body {
+    @apply flex flex-col items-center justify-center w-full py-2;
+  }
 </style>
