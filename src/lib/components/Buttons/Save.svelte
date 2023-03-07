@@ -16,7 +16,7 @@
 <style lang="postcss">
 	.save-btn {
 		@apply flex items-center justify-center bg-transparent min-w-max max-w-max h-auto 
-    text-gray-800/[.8] hover:text-gray-700 cursor-pointer;
+    text-gray-800/[.8] hover:text-green-700 cursor-pointer;
 	}
 
 	.icon {
