@@ -1,14 +1,15 @@
 <script lang="ts">
   export let name: string;
+  import EditCategory from '$lib/components/Buttons/Edit.svelte';
 </script>
 
 <div class="categ-container">
   <div class="categ-name">
     <h1>{name}</h1>
   </div>
-  <button class="edit-button edit-button-specs">
-    Edit
-  </button>
+  <div class="edit-button-specs">
+    <EditCategory/>
+  </div>
 </div>
 
 
@@ -22,7 +23,7 @@
   }
 
   .edit-button-specs{
-    @apply ml-4 bg-indigo-500 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded;
+    @apply ml-4 bg-white hover:bg-indigo-200 text-white font-bold py-2 px-4 rounded;
   }
 
   .categ-name > h1 {
