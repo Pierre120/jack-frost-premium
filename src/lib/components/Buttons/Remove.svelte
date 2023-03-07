@@ -1,9 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-  export let btnStyle = 'text-gray-800/[.8] hover:text-gray-700';
-	export let iconSize = 'w-8 h-8'
-  export let labelStyle = 'pl-2 text-2xl';
+	export let btnStyle = 'text-gray-800/[.8] hover:text-gray-700';
+	export let iconSize = 'w-8 h-8';
+	export let labelStyle = 'pl-2 text-2xl';
 	export let label = 'Remove';
 
 	let dispatch = createEventDispatcher();

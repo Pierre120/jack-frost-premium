@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let btnStyle = 'text-[#7A8BBB] hover:text-[#352F75]';
-	export let iconSize = 'w-14 h-14'
+	export let iconSize = 'w-14 h-14';
 	export let labelStyle = 'pl-3 text-3xl';
 	export let label = 'Add';
 
