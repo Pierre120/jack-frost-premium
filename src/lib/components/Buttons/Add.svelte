@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let style = '';
+	export let btnStyle = 'text-[#7A8BBB] hover:text-[#352F75]';
+	export let iconSize = 'w-14 h-14'
+	export let labelStyle = 'pl-3 text-3xl';
 	export let label = 'Add';
 
 	const dispatch = createEventDispatcher();
@@ -10,14 +12,14 @@
 	};
 </script>
 
-<button class="add-btn {style}" on:click={add}>
+<button class="add-btn {btnStyle}" on:click={add}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"
 		viewBox="0 0 24 24"
 		stroke-width="1.5"
 		stroke="currentColor"
-		class="icon"
+		class="icon {iconSize}"
 	>
 		<path
 			stroke-linecap="round"
@@ -25,28 +27,20 @@
 			d="M12 9v6m3-3H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
 		/>
 	</svg>
-	<span class="label">{label}</span>
+	<span class="label {labelStyle}">{label}</span>
 </button>
 
 <style lang="postcss">
 	.add-btn {
 		@apply flex items-center justify-center bg-transparent min-w-max max-w-max h-auto 
-      text-[#7A8BBB] hover:text-[#352F75] cursor-pointer;
+			cursor-pointer;
 	}
 
 	.icon {
-		@apply w-14 h-14 stroke-[#7A8BBB] stroke-1;
+		@apply stroke-1;
 	}
 
 	.label {
-		@apply pl-3 text-[#7A8BBB] font-IstokWeb text-3xl align-bottom;
-	}
-
-	.add-btn:hover .label {
-		@apply text-[#352F75];
-	}
-
-	.add-btn:hover .icon {
-		@apply stroke-[#352F75];
+		@apply text-current font-IstokWeb align-bottom;
 	}
 </style>
