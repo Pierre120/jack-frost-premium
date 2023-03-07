@@ -81,7 +81,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Login | Jack Frost Ice Cream Premium</title>
+	<title>Admin Login | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
 <div class="md:container mx-auto">
@@ -172,10 +172,13 @@
 						disabled={isTimout || isAuthenticating || isSuccess}>Submit</button
 					>
 				</form>
-				<a href="/admin/reset">Forgot password?</a>
-			</div>
+				<label
+					for="forgot_password"
+					class="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
+				>
+					<center><a href="/admin/reset">Forgot password?</a></center>
+				</label>
+				</div>
 		</div>
 	</div>
 </div>
-
-<!--<p>{form?.message}</p>-->

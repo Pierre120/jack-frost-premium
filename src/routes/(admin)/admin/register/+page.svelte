@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Admin Register | Jack Frost Ice Cream Premium</title>
+	<title>Admin Register | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
 <div class="md:container mx-auto">

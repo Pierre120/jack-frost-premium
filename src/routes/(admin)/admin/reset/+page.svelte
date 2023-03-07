@@ -70,9 +70,9 @@
 					{#if form?.message && isAuthError}
 						<AlertError padding="pb-4 font-semibold" message={form?.message} />
 					{:else if isAuthenticating}
-						<AlertLoading padding="pb-4 font-semibold" message="Authenticating..." />
+						<AlertLoading padding="pb-4 font-semibold" message="Validating..." />
 					{:else if isSuccess}
-						<AlertSuccess padding="pb-4 font-semibold" message="Success! Redirecting..." />
+						<AlertSuccess padding="pb-4 font-semibold" message="Password reset link has been sent to your email" />
 					{/if}
 					<div class="mb-5">
 						<label
@@ -100,7 +100,7 @@
 					<button
 						class="w-full btn btn-button text-white bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
 						type="submit"
-						disabled={isAuthenticating || isSuccess}>Submit</button
+						disabled={isAuthenticating || isSuccess}>Reset Password</button
 					>
 				</form>
 			</div>

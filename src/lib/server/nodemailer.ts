@@ -2,10 +2,10 @@ import nodemailer from 'nodemailer';
 
 // create reusable transporter object using the default SMTP transport
 export const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  service: 'gmail', //depends on whether or not client would like to use gmail
   auth: {
-    user: "jackfrosttest2023@gmail.com", // generated ethereal user
-    pass: "tubiafywyujmqixz", // generated ethereal password
+    user: "jackfrosttest2023@gmail.com", //should place in .env
+    pass: "lpxiwiyugnjgzdnz", //should place in .env
   }
 });
 

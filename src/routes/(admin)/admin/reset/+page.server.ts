@@ -4,6 +4,10 @@ import { auth } from '$lib/server/lucia';
 import { transporter } from '$lib/server/nodemailer';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import AlertSuccess from '$lib/components/Alert/Success.svelte';
+import AlertLoading from '$lib/components/Alert/Loading.svelte';
+import AlertWarning from '$lib/components/Alert/Warning.svelte';
+import AlertError from '$lib/components/Alert/Error.svelte';
 
 // Protect logged in user from accessing login page
 export const load: PageServerLoad = async ({ locals }) => {
@@ -20,7 +24,7 @@ const resetSchema = z.object({
 	admin_email: z
 		.string({ required_error: 'Email is required' })
 		.min(1, { message: 'Email is required' })
-		.max(64, { message: 'Email must be less than 64 characters' })
+		.max(32, { message: 'Email must be less than 32 characters' })
 		.email({ message: 'Email must be a valid email address' })
 });
 
@@ -72,9 +76,9 @@ export const actions: Actions = {
 
 		// send mail with defined transport object
 		let mail = await transporter.sendMail({
-			from: '"Jack Frost" <jackfrosttest2023@gmail.com>', // sender address
+			from: '"Jack Frost" <jackfrosttest2023@gmail.com>', // Change
 			to: admin_email, // list of receivers
-			subject: 'Admin Password Reset', // Subject line
+			subject: 'Jack Frost Admin Password Reset', // Subject line
 			text: `${link}`, // plain text body
 			html: `<h1>Please click the link below to reset your password: <h1>
 						 <br>
@@ -83,6 +87,8 @@ export const actions: Actions = {
 						 <h6>Note: Link is only valid for 10 minutes.<h6>`,
 		});
 	
-		console.log('Message sent: %s', mail.messageID);
+		console.log('Message sent: %s', mail.messageId);
+
+		throw redirect(302, '/admin/reset');
 	}
 };

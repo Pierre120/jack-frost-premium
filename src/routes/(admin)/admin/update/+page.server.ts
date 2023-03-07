@@ -6,17 +6,23 @@ import jwt from 'jsonwebtoken';
 
 export const load: PageServerLoad = async ({ locals, params, url }) => {
 	const session = await locals.validate();
-	const token = url.searchParams.get('token');
-	console.log(url)
+	const token = url.searchParams.get('token') as string || '';
+	console.log(url);
 	if (session) {
 		throw redirect(302, '/admin'); // "/admin/login"
 	}
 
 	try {
 		if (token === null) {
-			throw Error;
+			return fail(400, {
+				data: {
+					token
+				}, 
+				message: 'Could not update admin password. Please try again.'
+			});
 		}
 		const payload = jwt.verify(token, 'RSA256');
+		console.log(`Payload: ${payload}`);
 	} catch (err) {
 		console.log(err);
 		throw redirect(302, '/');
@@ -26,10 +32,18 @@ export const load: PageServerLoad = async ({ locals, params, url }) => {
 // Schema for validating password update form data
 const updateSchema = z.object({
 	admin_password: z
-		.string({ required_error: 'Password is required' })
-		.min(8, { message: 'Password must be at least 8 characters' })
-		.max(20, { message: 'Password must be less than 20 characters' })
+		.string({ required_error: 'New password is required' })
+		.min(8, { message: 'New password must be at least 8 characters' })
+		.max(20, { message: 'New password must be less than 20 characters' })
+		.trim(),
+	confirm_password: z
+		.string({ required_error: 'New password confirmation is required' })
+		.min(8, { message: 'New password confirmation must be at least 8 characters' })
+		.max(20, { message: 'New password confirmation must be less than 20 characters' })
 		.trim()
+}).refine((data) => data.admin_password === data.confirm_password, {
+	message: "Passwords must match",
+	path: ["confirm_password"]
 });
 
 export const actions: Actions = {
@@ -37,6 +51,7 @@ export const actions: Actions = {
 		const formData = Object.fromEntries(await request.formData());
 		const admin_password = (formData.admin_password as string) || '';
 		const user_id = url.searchParams.get('ID') as string || '';
+		const token = url.searchParams.get('token') as string || '';
 
 		try {
 			// Validate form data
@@ -63,9 +78,11 @@ export const actions: Actions = {
 
 		} catch (err) {
 			console.error(err);
-			return fail(400, { message: 'Could not update admin password. Please try again.' });
+			return fail(400, { 
+				message: 'Could not update admin password. Please try again.' 
+			});
 		}
 		console.log(`${user_id} - ${admin_password}`);
-		throw redirect(302, '/admin/login');
+		throw redirect(302, `/admin/update/?ID=${user_id}&token=${token}`);
 	}
 };
