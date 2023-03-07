@@ -18,7 +18,7 @@
 
 <style lang="postcss">
   .categ-list-container {
-    @apply flex flex-col min-w-min py-6 mt-4;
+    @apply flex flex-col min-w-min py-6 mt-10;
   }
 
   .categ-list{
