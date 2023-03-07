@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
+	export let btnStyle = '';
 	export let label = 'Delete';
 
 	let dispatch = createEventDispatcher();
@@ -9,7 +10,7 @@
 	};
 </script>
 
-<button class="delete-btn" on:click={remove}>
+<button class="delete-btn {btnStyle}" on:click={remove}>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon">
 		<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 		<path
@@ -22,7 +23,7 @@
 <style lang="postcss">
 	.delete-btn {
 		@apply flex items-center justify-center bg-transparent min-w-max max-w-max h-auto 
-    text-gray-800/[.8] hover:text-gray-700 cursor-pointer;
+    text-gray-800/[.8] hover:text-[#F6162E] cursor-pointer;
 	}
 
 	.icon {
