@@ -1,3 +1,4 @@
+import { Category } from "$lib/types/category";
 
 export interface Product {
 	id: string;
@@ -7,7 +8,7 @@ export interface Product {
 	img_path: string;
 	img_src: string;
 	description: string;
-	category?: {id: string; name: string;}; // TODO: update data type to Category
+	category?: Category;
 	orders?: OrderDetails[];
 }
 
