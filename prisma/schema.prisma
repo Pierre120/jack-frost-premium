@@ -57,6 +57,7 @@ model Product {
   name        String
   is_seasonal Boolean  @default(false)
   category_id String
+  img_path    String
   img_src     String
   description String
   category    Category @relation(references: [id], fields: [category_id], onDelete: Cascade, onUpdate: Cascade)

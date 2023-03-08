@@ -1,4 +1,5 @@
 <script lang="ts">
+  import Spinner from '../Spinner.svelte';
   import TemplateForm from '$lib/components/Forms/Template.svelte';
   import SaveButton from '$lib/components/Buttons/Save.svelte';
   import DeleteButton from '$lib/components/Buttons/Delete.svelte';
@@ -7,6 +8,7 @@
   import type { Product } from '$lib/types/product';
   import { enhance } from '$app/forms';
   import { goto } from '$app/navigation';
+  import { supabase } from '$lib/utils/supabase';
 
   export let categories: {id: string; name: string}[];
   export let label: string;
@@ -15,6 +17,8 @@
   export let product: Product | null = null;
   
   let description = product?.description ?? '';
+  let isUploading = false;
+  let imagePath: string;
 
   const dispatch = createEventDispatcher();
   const remove = () => {
@@ -29,6 +33,55 @@
 
   const closeForm = () => {
     goto('/admin/products');
+  };
+
+  const downloadImage = async (path: string) => {
+    try {
+      const { data, error } = await supabase.storage.from('images').download(path);
+
+      if(error) {
+        throw error;
+      }
+
+      
+    } catch (err) {
+      
+    }
+  };
+
+  const uploadImage = async (event) => {
+    try {
+      isUploading = true;
+
+      // Check if file input is empty
+      if(!event.target.files || event.target.files.length === 0) {
+        throw new Error('You must select an image to upload.');
+      }
+
+      const file = event.target.files[0];
+      imagePath = `products/${Date.now()}-${file.name}`;
+
+      const { data, error } = await supabase.storage
+        .from('images')
+        .upload(imagePath, file, {
+          cacheControl: '3600',
+          upsert: false,
+        });
+
+      if(error) {
+        throw error;
+      }
+      if(data) {
+        console.log('File uploaded successfully.');
+      }
+
+    } catch (err) {
+      if(err instanceof Error) {
+        alert(err.message);
+      }
+    } finally {
+      isUploading = false;
+    }
   };
 </script>
 
@@ -54,13 +107,18 @@
         <span class="product-img-label">Product Image:</span>
         <div class="product-image">
           <img src={product?.img_src ? product?.img_src : tmpImg} alt="Ice cream" />
-          <input type="file" name="image" id="image" accept="image/png,image/jpeg,image/jpg" />
-          <label for="image" class="image-upload-btn">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-              <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-              <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"/>
-            </svg>
-            <span>Upload an image</span>
+          <input type="file" name="image" id="image" accept="image/png,image/jpeg,image/jpg" disabled={isUploading} />
+          <label for="image" class="image-upload-btn {isUploading ? 'pointer-events-none' : ''}">
+            {#if isUploading}
+              <Spinner color="white" size="14" />
+              <span>Uploading image...</span>
+            {:else}
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+                <!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+                <path d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"/>
+              </svg>
+              <span>Upload an image</span>
+            {/if}
           </label>
         </div>
       </div>
