@@ -36,6 +36,27 @@
     goto('/admin/products');
   };
 
+  const deleteImage = async (path: string) => {
+    try {
+      const { data, error } = await supabase.storage
+        .from('images')
+        .remove([path]);
+
+      if(error) {
+        throw error;
+      }
+      if(data) {
+        console.log('File deleted successfully.');
+        imageUrl = tmpImg;
+        imagePath = '';
+      }
+    } catch (err) {
+      if(err instanceof Error) {
+        alert(err.message);
+      }
+    }
+  };
+
   const getImage = async (path: string) => {
     try {
       const { data } = await supabase.storage.from('images').getPublicUrl(path);
