@@ -19,6 +19,7 @@
   let description = product?.description ?? '';
   let isUploading = false;
   let imagePath: string;
+  let imageUrl: string;
 
   const dispatch = createEventDispatcher();
   const remove = () => {
@@ -35,17 +36,17 @@
     goto('/admin/products');
   };
 
-  const downloadImage = async (path: string) => {
+  const getImage = async (path: string) => {
     try {
-      const { data, error } = await supabase.storage.from('images').download(path);
+      const { data } = await supabase.storage.from('images').getPublicUrl(path);
 
-      if(error) {
-        throw error;
+      if(data) {
+        imageUrl = data.publicUrl;
       }
-
-      
     } catch (err) {
-      
+      if(err instanceof Error) {
+        alert(err.message);
+      }
     }
   };
 
@@ -73,6 +74,7 @@
       }
       if(data) {
         console.log('File uploaded successfully.');
+        getImage(imagePath);
       }
 
     } catch (err) {
