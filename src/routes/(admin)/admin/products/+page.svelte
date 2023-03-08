@@ -1,9 +1,10 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
   import AddProduct from '$lib/components/Buttons/Add.svelte';
   import { redirect } from '@sveltejs/kit';
 
   const addProduct = () => {
-    throw redirect(303, '/admin/products/add');
+    goto('/admin/products/add');
   };
 </script>
 

@@ -6,6 +6,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { Product } from '$lib/types/product';
   import { enhance } from '$app/forms';
+  import { goto } from '$app/navigation';
 
   export let categories: {id: string; name: string}[];
   export let label: string;
@@ -26,14 +27,17 @@
     event.target.style.height = scrollheight + 'px';
   };
 
+  const closeForm = () => {
+    goto('/admin/products');
+  };
 </script>
 
-<TemplateForm {label}>
+<TemplateForm {label} on:close={closeForm}>
   <SaveButton slot="saveButton" form='product-form' {formaction} />
   {#if hasDeleteButton}
     <DeleteButton slot="deleteButton" on:remove={remove} />
   {/if}
-  <form id="product-form" class="product-form" slot="body" use:enhance>
+  <form id="product-form" class="product-form" slot="body">
     <div class="info-1">
       <div class="product-name">
         <label for="name">Product Name:</label>

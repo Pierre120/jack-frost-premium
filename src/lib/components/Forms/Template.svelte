@@ -1,5 +1,12 @@
 <script lang="ts">
+  import { createEventDispatcher } from "svelte";
+
 	export let label: string;
+
+	const dispatch = createEventDispatcher();
+	const closeForm = () => {
+		dispatch("close");
+	}
 </script>
 
 <div class="form-container">
@@ -9,7 +16,7 @@
 			<slot name="saveButton" />
 			<slot name="deleteButton" />
 		</div>
-		<button class="close">X</button>
+		<button class="close" on:click={closeForm}>X</button>
 	</div>
 	<div class="body">
 		<slot name="body" />
