@@ -4,10 +4,6 @@ import { auth } from '$lib/server/lucia';
 import { transporter } from '$lib/server/nodemailer';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
-import AlertSuccess from '$lib/components/Alert/Success.svelte';
-import AlertLoading from '$lib/components/Alert/Loading.svelte';
-import AlertWarning from '$lib/components/Alert/Warning.svelte';
-import AlertError from '$lib/components/Alert/Error.svelte';
 
 // Protect logged in user from accessing login page
 export const load: PageServerLoad = async ({ locals }) => {
@@ -70,8 +66,8 @@ export const actions: Actions = {
 			});
 		}
 
-		const token = jwt.sign(payload, 'RSA256', { expiresIn: '10m' });
-		const link = `127.0.0.1:5173/admin/update/?ID=${user_id}&token=${token}`; //Update host/port
+		const token = jwt.sign(payload, 'YouDontKnowJack', { expiresIn: '10m' });
+		const link = `localhost:5173/admin/update/?ID=${user_id}&token=${token}`; //Update host/port
 		console.log(`Password reset URL: ${link}`);
 
 		// send mail with defined transport object
@@ -80,13 +76,12 @@ export const actions: Actions = {
 			to: admin_email, // list of receivers
 			subject: 'Jack Frost Admin Password Reset', // Subject line
 			text: `${link}`, // plain text body
-			html: `<h1>Please click the link below to reset your password: <h1>
+			html: `<h1>Please click the link below to reset your password:<h1>
+						 <b><span>${link}</span></b>
 						 <br>
-						 <b>${link}<b>
-						 <br>
-						 <h6>Note: Link is only valid for 10 minutes.<h6>`,
+						 <h3>Note: The link is only valid for 10 minutes.<h6>`
 		});
-	
+
 		console.log('Message sent: %s', mail.messageId);
 
 		throw redirect(302, '/admin/reset');

@@ -72,7 +72,10 @@
 					{:else if isAuthenticating}
 						<AlertLoading padding="pb-4 font-semibold" message="Validating..." />
 					{:else if isSuccess}
-						<AlertSuccess padding="pb-4 font-semibold" message="Password reset link has been sent to your email" />
+						<AlertSuccess
+							padding="pb-4 font-semibold"
+							message="Password reset link has been sent to your email"
+						/>
 					{/if}
 					<div class="mb-5">
 						<label

@@ -13,7 +13,6 @@
 	let isAuthError = false;
 	let isPasswordError = false;
 	let isConfirmError = false;
-	
 
 	const removePasswordError = () => {
 		if (isAuthError) {
