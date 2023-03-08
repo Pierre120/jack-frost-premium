@@ -3,23 +3,28 @@
   import SaveButton from '$lib/components/Buttons/Save.svelte';
   import DeleteButton from '$lib/components/Buttons/Delete.svelte';
   import tmpImg from '$lib/assets/images/tmp.png';
+  import { createEventDispatcher } from 'svelte';
 
-  export let categories: any;
+  export let categories: {id: string; name: string}[];
   export let label: string;
-  export let form: string;
   export let formaction: string;
   export let hasImage = false;
   export let imgSrc = '';
   export let hasDeleteButton = true;
 
+  const dispatch = createEventDispatcher();
+  const remove = () => {
+    dispatch('remove');
+  };
+
 </script>
 
 <TemplateForm {label}>
-  <SaveButton slot="saveButton" {form} {formaction} />
+  <SaveButton slot="saveButton" form='product-form' {formaction} />
   {#if hasDeleteButton}
-    <DeleteButton slot="deleteButton" />
+    <DeleteButton slot="deleteButton" on:remove={remove} />
   {/if}
-  <form class="product-form" slot="body">
+  <form id="product-form" class="product-form" slot="body">
     <div class="info-1">
       <div class="product-name">
         <label for="name">Product Name:</label>
@@ -74,7 +79,7 @@
   }
 
   .product-name > input {
-    @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F6162E] focus:border-transparent;
+    @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F6162E] focus:border-transparent;
   }
 
   .product-desc {
@@ -86,7 +91,7 @@
   }
 
   .product-desc > input {
-    @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F6162E] focus:border-transparent;
+    @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F6162E] focus:border-transparent;
   }
 
   .product-img {
@@ -112,4 +117,8 @@
   .product-category > label {
     @apply font-IstokWeb text-start align-bottom text-3xl text-[#352F75];
   }
+
+  .product-category > select {
+    @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-[#F6162E] focus:border-transparent;
+  } 
 </style>
