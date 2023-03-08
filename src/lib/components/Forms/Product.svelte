@@ -63,7 +63,7 @@
       <div class="product-category">
         <label for="category">Product Category:</label>
         <select name="category" id="category">
-          <option value="" disabled selected={product?.category_id ? false : true}>Choose a category</option>
+          <option value="" class="text-gray-400" disabled selected={product?.category_id ? false : true}>Choose a category</option>
           {#each categories as category}
             <option value={category.id} selected={category.id === product?.category_id}>{category.name}</option>
           {/each}
