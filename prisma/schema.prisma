@@ -80,23 +80,24 @@ model Category {
 model Offering {
   id          String   @id @unique
   category_id String
-  size_id     String
+  // size_id     String
+  size_name   String
   price       Decimal  @db.Decimal(10, 2)
   category    Category @relation(references: [id], fields: [category_id], onDelete: Cascade, onUpdate: Cascade)
-  size        Size     @relation(references: [id], fields: [size_id], onDelete: Cascade, onUpdate: Cascade)
+  // size        Size     @relation(references: [id], fields: [size_id], onDelete: Cascade, onUpdate: Cascade)
 
-  @@index([category_id, size_id])
+  @@index([category_id])
   @@map("offering")
 }
 
 /// Size model
-model Size {
-  id          String   @id @unique
-  name        String
-  offerings   Offering[]
+// model Size {
+//   id          String   @id @unique
+//   name        String
+//   offerings   Offering[]
 
-  @@map("size")
-}
+//   @@map("size")
+// }
 
 /// Order model
 model Order {
