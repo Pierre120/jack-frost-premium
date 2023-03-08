@@ -13,6 +13,7 @@ export interface Product {
 	category_id: string;
 	img_src: string;
 	description: string;
+	category?: string; // TODO: update data type to Category
 	orders?: OrderDetails[];
 }
 
