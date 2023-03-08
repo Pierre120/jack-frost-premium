@@ -1,6 +1,6 @@
 <script lang="ts">
 	import TemplateModal from '$lib/components/Modal/Template.svelte';
-	import Offering from '$lib/components/Product/Offering.svelte';
+	// import Offering from '$lib/components/Product/Offering.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import type { Product } from '$lib/types/product';
 
@@ -28,7 +28,8 @@
 		</div>
 		<div class="product-info-offerings">
 			{#each product.offerings as offering}
-				<Offering amount={offering.amount} other_amt={offering.other_amt} price={offering.price} />
+				<!-- TODO: Fix size/offering select input -->
+				<!-- <Offering amount={offering.amount} other_amt={offering.other_amt} price={offering.price} /> -->
 			{/each}
 		</div>
 	</div>
