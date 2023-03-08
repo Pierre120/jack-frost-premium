@@ -6,7 +6,7 @@ import { getAllCategories } from '$lib/server/categories/get';
 export const GET = (async () => {
 	try {
 		const categories = await getAllCategories();
-		console.log("From API:");
+		console.log('From API:');
 		console.log(categories);
 		return json({
 			success: true,

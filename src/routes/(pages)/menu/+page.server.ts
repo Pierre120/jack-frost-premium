@@ -13,4 +13,3 @@ export const load = (async () => {
 
 	throw error(404, 'Products not found');
 }) satisfies PageServerLoad;
-
