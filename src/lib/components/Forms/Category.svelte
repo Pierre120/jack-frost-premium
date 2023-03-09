@@ -2,7 +2,7 @@
 	import TemplateForm from '$lib/components/Forms/Template.svelte';
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
-	import type {Category} from  '$lib/types/category';
+	import type { Category } from '$lib/types/category';
 	import { afterUpdate, createEventDispatcher, onDestroy } from 'svelte';
 	import { goto } from '$app/navigation';
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
@@ -33,55 +33,54 @@
 			sizes = sizes.slice(0, sizes.length - 1);
 		}
 	};
-
 </script>
 
 <TemplateForm {label} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	{#if hasDeleteButton}
-		<DeleteButton slot="deleteButton" on:remove={remove}/>
+		<DeleteButton slot="deleteButton" on:remove={remove} />
 	{/if}
 	<form id="cagtegory-form" class="category-form" slot="body">
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>
-				<input 
-					type="text" 
-					name="name" 
-					id="name" 
+				<input
+					type="text"
+					name="name"
+					id="name"
 					placeholder="Enter category name"
 					value={category?.name ?? ''}
-					/>
+				/>
 			</div>
-			<div class="button-container">
-
-      </div>
+			<div class="button-container" />
 		</div>
 		<div class="info-2">
-				<div class="size-input-container">
-						<div class="size-input1 category-name">
-							<label for="size-name">Size Name:</label>
-							{#each sizes as size, i}
-							<input 
-								type="text" 
-								name="size-name{i}" 
-								id="size-name{i}" 
-								placeholder="Size name {i+1}" 
-								bind:value={size.sizeName} />
-							{/each}
-						</div>
-						<div class="size-input2 category-name">
-							<label for="size-price">Size Price:</label>
-							{#each sizes as size, i}
-							<input 
-								type="text" 
-								name="size-price{i}" 
-								id="size-price{i}" 
-								placeholder=" &#8369;0"
-								bind:value={size.sizePrice} />
-							{/each}
-						</div>
+			<div class="size-input-container">
+				<div class="size-input1 category-name">
+					<label for="size-name">Size Name:</label>
+					{#each sizes as size, i}
+						<input
+							type="text"
+							name="size-name{i}"
+							id="size-name{i}"
+							placeholder="Size name {i + 1}"
+							bind:value={size.sizeName}
+						/>
+					{/each}
 				</div>
+				<div class="size-input2 category-name">
+					<label for="size-price">Size Price:</label>
+					{#each sizes as size, i}
+						<input
+							type="text"
+							name="size-price{i}"
+							id="size-price{i}"
+							placeholder=" &#8369;0"
+							bind:value={size.sizePrice}
+						/>
+					{/each}
+				</div>
+			</div>
 			<div class="button-container">
 				<AddButton on:add={addSize} />
 				<RemoveButton on:remove={removeSize} />
@@ -90,13 +89,12 @@
 	</form>
 </TemplateForm>
 
-
 <style lang="postcss">
-	.category-form{
+	.category-form {
 		@apply grid grid-cols-2 justify-items-stretch w-full;
 	}
 
-	.info-1{
+	.info-1 {
 		@apply flex flex-col items-center justify-start mr-16;
 	}
 	.info-2 {
@@ -115,16 +113,15 @@
 		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
 	}
 
-	.size-input1{
-		@apply mr-4
+	.size-input1 {
+		@apply mr-4;
 	}
 
-	.button-container{
+	.button-container {
 		@apply flex flex-col items-center justify-center absolute bottom-0 mb-4;
 	}
 
-	.size-input-container{
+	.size-input-container {
 		@apply flex flex-row;
 	}
-
 </style>
