@@ -1,12 +1,12 @@
 <script lang="ts">
-  import { createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from 'svelte';
 
 	export let label: string;
 
 	const dispatch = createEventDispatcher();
 	const closeForm = () => {
-		dispatch("close");
-	}
+		dispatch('close');
+	};
 </script>
 
 <div class="form-container">
@@ -44,7 +44,7 @@
 		@apply absolute top-10 right-6 p-0 text-4xl font-bold text-[#A2BCDD] hover:text-[#F6162E] cursor-pointer;
 	}
 
-  .body {
-    @apply flex flex-col items-center justify-center w-full py-2;
-  }
+	.body {
+		@apply flex flex-col items-center justify-center w-full py-2;
+	}
 </style>

@@ -1,4 +1,4 @@
-import { Category } from "$lib/types/category";
+import { Category } from '$lib/types/category';
 
 export interface Product {
 	id: string;
@@ -11,5 +11,3 @@ export interface Product {
 	category?: Category;
 	orders?: OrderDetails[];
 }
-
-

@@ -8,13 +8,13 @@ export const load = (async ({ locals }) => {
 		throw redirect(303, '/'); // Redirect landing page
 	}
 
-  const categs= [
-    {id: '1', name: 'Platinum'},
-    {id: '2', name: 'Premium'},
-    {id: '3', name: 'Super Premium'},
-  ];
+	const categs = [
+		{ id: '1', name: 'Platinum' },
+		{ id: '2', name: 'Premium' },
+		{ id: '3', name: 'Super Premium' }
+	];
 
-  return {
-    categories: categs,
-  };
+	return {
+		categories: categs
+	};
 }) satisfies PageServerLoad;
