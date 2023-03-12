@@ -160,7 +160,7 @@
 						<Spinner color="white" size="full" />
 					</div>
 					<img src={imageUrl} alt="Ice cream" class="{(isUploading || isRendering) ? 'hidden' : ''}" on:load={() => { isRendering = false; }}/>
-					<input type="hidden" name="img_path" id="img_path" bind:value={imageUrl} />
+					<input type="hidden" name="img_src" id="img_src" bind:value={imageUrl} />
 					<!--! This is a hidden input -->
 					<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
 					<!--! This is a hidden input -->
@@ -193,8 +193,8 @@
 				</div>
 			</div>
 			<div class="product-category">
-				<label for="category">Product Category:</label>
-				<select name="category" id="category">
+				<label for="category_id">Product Category:</label>
+				<select name="category_id" id="category_id">
 					<option
 						value=""
 						class="text-gray-400"
