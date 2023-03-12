@@ -4,9 +4,8 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import tmpImg from '$lib/assets/images/tmp.png';
-	import { afterUpdate, createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher, onDestroy } from 'svelte';
 	import type { Product } from '$lib/types/product';
-	import { enhance } from '$app/forms';
 	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/utils/supabase';
 
@@ -20,6 +19,7 @@
 	let imagePath = product?.img_path ?? '';
 	let imageUrl = product?.img_src ?? tmpImg;
 	let isUploading = false;
+	let isRendering = false;
 
 	const dispatch = createEventDispatcher();
 	const remove = () => {
@@ -68,6 +68,7 @@
 
 			if (data) {
 				imageUrl = data.publicUrl;
+				isRendering = true;
 			}
 		} catch (err) {
 			if (err instanceof Error) {
@@ -102,7 +103,7 @@
 			}
 			if (data) {
 				console.log('File uploaded successfully.');
-				await getImage(imagePath);
+				getImage(imagePath);
 			}
 		} catch (err) {
 			if (err instanceof Error) {
@@ -155,11 +156,10 @@
 			<div class="product-img">
 				<span class="product-img-label">Product Image:</span>
 				<div class="product-image">
-					{#if isUploading}
-						<Spinner color="white" size="2/5" />
-					{:else}
-						<img src={imageUrl} alt="Ice cream" />
-					{/if}
+					<div class="w-2/5 {(isUploading || isRendering) ? '' : 'hidden'}">
+						<Spinner color="white" size="full" />
+					</div>
+					<img src={imageUrl} alt="Ice cream" class="{(isUploading || isRendering) ? 'hidden' : ''}" on:load={() => { isRendering = false; }}/>
 					<input type="hidden" name="img_path" id="img_path" bind:value={imageUrl} />
 					<!--! This is a hidden input -->
 					<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
@@ -172,10 +172,12 @@
 						on:change={uploadImage}
 						disabled={isUploading}
 					/>
-					<label for="image" class="image-upload-btn {isUploading ? 'pointer-events-none' : ''}">
+					<label for="image" class="image-upload-btn {(isUploading || isRendering) ? 'pointer-events-none' : ''}">
 						{#if isUploading}
 							<!-- <Spinner color="white" size="14" /> -->
 							<span>Uploading image...</span>
+						{:else if isRendering}
+							<span>Rendering image...</span>
 						{:else}
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
 								<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -265,7 +267,7 @@
 	}
 
 	.product-image > img {
-		@apply w-2/5 object-cover;
+		@apply /* w-2/5 */ w-80 /* h-full */ h-80 object-cover;
 	}
 
 	.product-image > input {
