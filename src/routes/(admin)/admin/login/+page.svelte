@@ -178,7 +178,7 @@
 				>
 					<center><a href="/admin/reset">Forgot password?</a></center>
 				</label>
-				</div>
+			</div>
 		</div>
 	</div>
 </div>

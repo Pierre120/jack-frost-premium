@@ -71,7 +71,7 @@ export const actions: Actions = {
 		console.log(`Password reset URL: ${link}`);
 
 		// send mail with defined transport object
-		let mail = await transporter.sendMail({
+		const mail = await transporter.sendMail({
 			from: '"Jack Frost" <jackfrosttest2023@gmail.com>', // Change
 			to: admin_email, // list of receivers
 			subject: 'Jack Frost Admin Password Reset', // Subject line
