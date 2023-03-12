@@ -6,7 +6,6 @@
 	const editCategory = () => {
 		goto('/admin/categories/edit');
 	};
-
 </script>
 
 <div class="categ-container">
@@ -14,7 +13,7 @@
 		<h1>{name}</h1>
 	</div>
 	<div class="edit-button-specs">
-		<EditCategory on:edit={editCategory}/>
+		<EditCategory on:edit={editCategory} />
 	</div>
 </div>
 

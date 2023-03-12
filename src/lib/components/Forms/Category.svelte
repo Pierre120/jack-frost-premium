@@ -131,7 +131,7 @@
 		@apply flex flex-row relative;
 	}
 
-	.move-left{
+	.move-left {
 		@apply mr-6;
 	}
 </style>

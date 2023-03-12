@@ -5,4 +5,9 @@
 	export let data: PageData;
 </script>
 
-<EditCategoryForm label="Edit Category" formaction="/api/category/edit" categories={data.categories} hasDeleteButton= {true} />
+<EditCategoryForm
+	label="Edit Category"
+	formaction="/api/category/edit"
+	categories={data.categories}
+	hasDeleteButton={true}
+/>
