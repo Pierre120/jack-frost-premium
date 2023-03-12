@@ -80,10 +80,12 @@
 						/>
 					{/each}
 				</div>
-			</div>
-			<div class="button-container">
-				<AddButton on:add={addSize} />
-				<RemoveButton on:remove={removeSize} />
+				<div class="button-container">
+					<div class="move-left">
+						<AddButton on:add={addSize} />
+					</div>
+					<RemoveButton on:remove={removeSize} />
+				</div>
 			</div>
 		</div>
 	</form>
@@ -114,14 +116,22 @@
 	}
 
 	.size-input1 {
-		@apply mr-4;
+		@apply mr-4 mb-28;
+	}
+
+	.size-input2 {
+		@apply mb-28;
 	}
 
 	.button-container {
-		@apply flex flex-col items-center justify-center absolute bottom-0 mb-4;
+		@apply flex flex-col absolute bottom-0 items-center justify-start;
 	}
 
 	.size-input-container {
-		@apply flex flex-row;
+		@apply flex flex-row relative;
+	}
+
+	.move-left{
+		@apply mr-6;
 	}
 </style>
