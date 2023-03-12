@@ -1,6 +1,11 @@
 <script lang="ts">
 	export let name: string;
 	import EditCategory from '$lib/components/Buttons/Edit.svelte';
+	import { goto } from '$app/navigation';
+
+	const editCategory = () => {
+		goto('/admin/categories/edit');
+	};
 </script>
 
 <div class="categ-container">
@@ -8,7 +13,7 @@
 		<h1>{name}</h1>
 	</div>
 	<div class="edit-button-specs">
-		<EditCategory />
+		<EditCategory on:edit={editCategory} />
 	</div>
 </div>
 
