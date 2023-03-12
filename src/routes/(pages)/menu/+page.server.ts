@@ -5,7 +5,6 @@ import type { Product } from '$lib/types/product';
 
 export const load = (async () => {
 	const products: Product[] = await getProducts();
-
 	if (products) {
 		return {
 			products
