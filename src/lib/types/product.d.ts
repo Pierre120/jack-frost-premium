@@ -1,4 +1,5 @@
 import { Category } from '$lib/types/category';
+import { OrderDetails } from '$lib/types/order';
 
 export interface Product {
 	id: string;
