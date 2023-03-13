@@ -22,4 +22,4 @@ export const POST = (async ({ params, request }) => {
     console.error(err);
     return json({ success: false });
   }
-}) as RequestHandler;
+}) satisfies RequestHandler;
