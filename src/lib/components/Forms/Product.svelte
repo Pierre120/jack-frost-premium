@@ -33,14 +33,8 @@
 	};
 
 	const closeForm = () => {
-		// if(imagePath) {
-		//   deleteImage(imagePath).then(() => {
-		//     goto('/admin/products');
-		//   });
-		// } else {
-		//   goto('/admin/products');
-		// }
-		goto('/admin/products');
+		// goto('/admin/products');
+		dispatch('close');
 	};
 
 	const deleteImage = async (path: string) => {
