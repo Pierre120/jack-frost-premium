@@ -1,8 +1,8 @@
 import { prisma } from '$lib/server/prisma';
-import type { Product } from '$lib/types/product';
+import type { ProductUpdate } from '$lib/types/product';
 
 // For editing a product, we need to pass in the product id
-const editProduct = async (product_id: string, updatedProduct: Product) => {
+const editProduct = async (product_id: string, updatedProduct: ProductUpdate ) => {
   const result = await prisma.product.update({
     where: {
       id: product_id
