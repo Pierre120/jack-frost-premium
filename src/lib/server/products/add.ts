@@ -6,7 +6,7 @@ const addProduct = async (product: Product) => {
   const result = await prisma.product.create({
     data: {
       name: product.name,
-      is_seasonal: product.is_seasonal,
+      // is_seasonal: product.is_seasonal,
       category_id: product.category_id,
       img_path: product.img_path,
       img_src: product.img_src,
