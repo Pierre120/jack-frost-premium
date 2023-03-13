@@ -1,11 +1,20 @@
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { supabase } from '$lib/utils/supabase';
 
-export const load: PageServerLoad = async ({ locals }) => {
+export const load = (async ({ locals }) => {
 	const session = await locals.validate();
 	if (!session) {
 		// throw error(401, 'Unauthorized user.'); // 401 error page
 		throw redirect(303, '/'); // Redirect landing page
 	}
-};
+
+	const res = await fetch('/api/products');
+	const products = await res.json();
+	console.log(products); // for debugging purposes
+	if (products.success) {
+		return {
+			products: products.products
+		};
+	}
+	throw error(404, 'Products not found');
+}) satisfies PageServerLoad;
