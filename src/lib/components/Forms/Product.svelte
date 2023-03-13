@@ -117,9 +117,7 @@
 
 <TemplateForm {label} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="product-form" {formaction} />
-	{#if hasDeleteButton}
-		<DeleteButton slot="deleteButton" on:remove={remove} />
-	{/if}
+	<DeleteButton slot="deleteButton" on:remove={remove} />
 	<form id="product-form" class="product-form" slot="body">
 		<div class="info-1">
 			<div class="product-name">

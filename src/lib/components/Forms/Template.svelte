@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let label: string;
+	export let hasDeleteButton = false;
 
 	const dispatch = createEventDispatcher();
 	const closeForm = () => {
@@ -14,7 +15,9 @@
 		<h2>{label}</h2>
 		<div class="buttons">
 			<slot name="saveButton" />
-			<slot name="deleteButton" />
+			{#if hasDeleteButton}
+				<slot name="deleteButton" />
+			{/if}
 		</div>
 		<button class="close" on:click={closeForm}>X</button>
 	</div>
@@ -37,7 +40,7 @@
 	}
 
 	.header > .buttons {
-		@apply flex items-center justify-end;
+		@apply flex items-center justify-end gap-x-8;
 	}
 
 	.close {
