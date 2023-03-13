@@ -10,7 +10,6 @@
 	export let width: string;
 	export let bgColor: string;
 	export let hasCloseIcon = true;
-	export let productImgSrc = '';
 </script>
 
 <div class="modal-backdrop" on:click={closeModal} on:keypress={closeModal}>
@@ -31,12 +30,7 @@
 			<slot name="header" />
 		</div>
 		<div class="modal-body">
-			<div class="product-info">
-				<div style="background-image:url('{productImgSrc}');" class="product-info-image" />
-				<slot name="productDetails" />
-			</div>
-			<!-- Additional slots for other modal types -->
-			<slot />
+			<slot name="body" />
 		</div>
 	</div>
 </div>
