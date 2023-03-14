@@ -14,6 +14,14 @@
 	let isAboutToLeave = false;
 	let success = false;
 
+	const successAdd = async () => {
+		success = true;
+		await invalidateAll();
+		setTimeout(() => {
+			goto('/admin/products');
+		}, 1500);
+	}
+
 	const discardProduct = () => {
 		isAboutToLeave = true;
 	}
@@ -23,14 +31,11 @@
 	}
 
 	const confirmDiscard = async () => {
+		let timeout = 2000;
 		isAboutToLeave = false;
 		success = true;
 		await invalidateAll();
-		let start = Date.now();
-		while(true) {
-			if (Date.now() - start > 2000) break;
-		}
-		goto('/admin/products', {invalidateAll: true});
+		goto('/admin/products');
 	}
 </script>
 
