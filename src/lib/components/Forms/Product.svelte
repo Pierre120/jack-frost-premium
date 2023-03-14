@@ -115,7 +115,7 @@
 	});
 </script>
 
-<TemplateForm {label} on:close={closeForm}>
+<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="product-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
 	<form id="product-form" class="product-form" slot="body">

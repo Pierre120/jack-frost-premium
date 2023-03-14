@@ -39,7 +39,7 @@
 	}
 </script>
 
-<AddProductForm label="Add Product" formaction="/api/products/add" categories={data.categories} on:close={discardProduct} />
+<AddProductForm label="Add Product" formaction="/api/products/add" categories={data.categories} hasDeleteButton={false} on:close={discardProduct} />
 {#if isAboutToLeave}
 	<LeaveConfirmationModal {confirmationHeader} {confirmationDetails} {cancelLabel} {confirmLabel} on:cancel={cancelDiscard} on:confirm={confirmDiscard} />
 {/if}
