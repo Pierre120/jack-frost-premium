@@ -8,7 +8,7 @@
 	import type { Product } from '$lib/types/product';
 	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/utils/supabase';
-  import { enhance, type SubmitFunction } from '$app/forms';
+	import { enhance, type SubmitFunction } from '$app/forms';
 
 	export let categories: { id: string; name: string }[];
 	export let label: string;
@@ -150,10 +150,17 @@
 			<div class="product-img">
 				<span class="product-img-label">Product Image:</span>
 				<div class="product-image">
-					<div class="w-2/5 {(isUploading || isRendering) ? '' : 'hidden'}">
+					<div class="w-2/5 {isUploading || isRendering ? '' : 'hidden'}">
 						<Spinner color="white" size="full" />
 					</div>
-					<img src={imageUrl} alt="Ice cream" class="{(isUploading || isRendering) ? 'hidden' : ''}" on:load={() => { isRendering = false; }}/>
+					<img
+						src={imageUrl}
+						alt="Ice cream"
+						class={isUploading || isRendering ? 'hidden' : ''}
+						on:load={() => {
+							isRendering = false;
+						}}
+					/>
 					<input type="hidden" name="img_src" id="img_src" bind:value={imageUrl} />
 					<!--! This is a hidden input -->
 					<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
@@ -166,7 +173,10 @@
 						on:change={uploadImage}
 						disabled={isUploading}
 					/>
-					<label for="image" class="image-upload-btn {(isUploading || isRendering) ? 'pointer-events-none' : ''}">
+					<label
+						for="image"
+						class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
+					>
 						{#if isUploading}
 							<!-- <Spinner color="white" size="14" /> -->
 							<span>Uploading image...</span>

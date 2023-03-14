@@ -13,13 +13,9 @@
 	export let product: Product;
 </script>
 
-<TemplateModal
-	width="max-w-7xl"
-	on:closeModal={closeProductInfo}
-	bgColor="bg-sky-blue"
->
+<TemplateModal width="max-w-7xl" on:closeModal={closeProductInfo} bgColor="bg-sky-blue">
 	<div slot="body" class="product-info">
-		<img src={product.img_src} alt={product.name} class="product-info-img">
+		<img src={product.img_src} alt={product.name} class="product-info-img" />
 		<div class="product-info-details">
 			<div class="product-info-name">
 				<h3>{product.name}</h3>
@@ -29,8 +25,8 @@
 			</div>
 			<div class="product-info-offerings">
 				<!-- {#each product.offerings as offering} -->
-					<!-- TODO: Fix size/offering select input -->
-					<!-- <Offering amount={offering.amount} other_amt={offering.other_amt} price={offering.price} /> -->
+				<!-- TODO: Fix size/offering select input -->
+				<!-- <Offering amount={offering.amount} other_amt={offering.other_amt} price={offering.price} /> -->
 				<!-- {/each} -->
 			</div>
 		</div>

@@ -4,16 +4,16 @@ import { getAllProducts } from '$lib/server/products/get';
 
 // Get all products from the database
 export const GET = (async () => {
-  try {
-    const products = await getAllProducts();
-    console.log('From API:');
-    console.log(products);
-    return json({
-      success: true,
-      products
-    });
-  } catch (err) {
-    console.error(err);
-    return json({ success: false });
-  }
+	try {
+		const products = await getAllProducts();
+		console.log('From API:');
+		console.log(products);
+		return json({
+			success: true,
+			products
+		});
+	} catch (err) {
+		console.error(err);
+		return json({ success: false });
+	}
 }) satisfies RequestHandler;

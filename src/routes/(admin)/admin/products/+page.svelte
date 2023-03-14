@@ -2,9 +2,9 @@
 	import { goto } from '$app/navigation';
 	import AddProduct from '$lib/components/Buttons/Add.svelte';
 	import ProductList from '$lib/components/Product/Admin/List.svelte';
-  import type { PageData } from './$types';
+	import type { PageData } from './$types';
 
-	export let data: PageData
+	export let data: PageData;
 
 	const addProduct = () => {
 		goto('/admin/products/add');

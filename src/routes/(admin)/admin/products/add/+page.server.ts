@@ -16,7 +16,7 @@ export const load = (async ({ locals, fetch }) => {
 	const res = await fetch('/api/categories');
 	const categories = await res.json();
 
-	if(categories.success) {
+	if (categories.success) {
 		return {
 			categories: categories.categories
 		};
@@ -35,10 +35,10 @@ export const actions = {
 				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify(product)
-		})
+		});
 		const data = await res.json();
 		console.log(data);
-		if(data.success) {
+		if (data.success) {
 			console.log('added product');
 			throw redirect(303, '/admin/products');
 		}
