@@ -1,4 +1,5 @@
 <script lang="ts">
+  import type { SubmitFunction } from '$app/forms';
   import { goto, invalidateAll } from '$app/navigation';
 	import AddProductForm from '$lib/components/Forms/Product.svelte';
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
@@ -17,9 +18,9 @@
 	const successAdd = async () => {
 		success = true;
 		await invalidateAll();
-		setTimeout(() => {
-			goto('/admin/products');
-		}, 1500);
+		// setTimeout(() => {
+		// 	goto('/admin/products');
+		// }, 1500);
 	}
 
 	const discardProduct = () => {
@@ -31,15 +32,28 @@
 	}
 
 	const confirmDiscard = async () => {
-		let timeout = 2000;
 		isAboutToLeave = false;
-		success = true;
-		await invalidateAll();
+		// success = true;
+		// await invalidateAll();
 		goto('/admin/products');
 	}
+
+	const submitAdd: SubmitFunction = async () => {
+		return async ({ result, update }) => {
+			switch(result.type) {
+				case 'redirect':
+					await successAdd();
+					break;
+				case 'error':
+					console.log(result.error);
+					break;
+			}
+			await update();
+		};
+	};
 </script>
 
-<AddProductForm label="Add Product" formaction="/api/products/add" categories={data.categories} hasDeleteButton={false} on:close={discardProduct} />
+<AddProductForm label="Add Product" formaction="?/add" submitHandle={submitAdd} categories={data.categories} hasDeleteButton={false} on:close={discardProduct} />
 {#if isAboutToLeave}
 	<LeaveConfirmationModal {confirmationHeader} {confirmationDetails} {cancelLabel} {confirmLabel} on:cancel={cancelDiscard} on:confirm={confirmDiscard} />
 {/if}

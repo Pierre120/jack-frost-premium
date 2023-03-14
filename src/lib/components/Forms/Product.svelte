@@ -8,10 +8,12 @@
 	import type { Product } from '$lib/types/product';
 	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/utils/supabase';
+  import { enhance, type SubmitFunction } from '$app/forms';
 
 	export let categories: { id: string; name: string }[];
 	export let label: string;
 	export let formaction: string;
+	export let submitHandle: SubmitFunction;
 	export let hasDeleteButton = true;
 	export let product: Product | null = null;
 
@@ -118,7 +120,7 @@
 <TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="product-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
-	<form id="product-form" class="product-form" slot="body">
+	<form id="product-form" class="product-form" slot="body" method="POST" use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="product-name">
 				<label for="name">Product Name:</label>

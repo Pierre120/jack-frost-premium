@@ -7,7 +7,7 @@ const addProduct = async (product: Product) => {
     data: {
       name: product.name,
       // is_seasonal: product.is_seasonal,
-      category_id: product.category_id,
+      // category_id: product.category_id,
       img_path: product.img_path,
       img_src: product.img_src,
       description: product.description,

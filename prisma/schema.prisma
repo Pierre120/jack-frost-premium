@@ -53,7 +53,7 @@ model Key {
 
 /// Prodct model
 model Product {
-  id          String   @id @unique
+  id          String   @id @unique @default(cuid())
   name        String
   is_seasonal Boolean  @default(false)
   category_id String
@@ -102,7 +102,7 @@ model Offering {
 
 /// Order model
 model Order {
-  id                  String   @id @unique
+  id                  String   @id @unique @default(cuid())
   /// user_id     String
   email               String
   first_name          String
@@ -133,7 +133,7 @@ enum PaymentStatus {
 
 /// OrderDetails model
 model OrderDetails {
-  id          String   @id @unique
+  id          String   @id @unique @default(cuid())
   order_id    String
   product_id  String
   quantity    Int     @db.SmallInt
@@ -147,7 +147,7 @@ model OrderDetails {
 
 /// Payment model
 model Payment {
-  id            String   @id @unique
+  id            String   @id @unique @default(cuid())
   order_id      String
   amount        Decimal  @db.Decimal(10, 2)
   paid_at       DateTime @default(now())
