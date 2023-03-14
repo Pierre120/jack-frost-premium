@@ -75,7 +75,7 @@
 		}
 	};
 
-	const submitEdit: SubmitFunction = async ({ form }) => {
+	const submitEdit: SubmitFunction = async () => {
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':

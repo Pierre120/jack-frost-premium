@@ -6,7 +6,6 @@
 	import tmpImg from '$lib/assets/images/tmp.png';
 	import { createEventDispatcher, onDestroy } from 'svelte';
 	import type { Product } from '$lib/types/product';
-	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/utils/supabase';
 	import { enhance, type SubmitFunction } from '$app/forms';
 
