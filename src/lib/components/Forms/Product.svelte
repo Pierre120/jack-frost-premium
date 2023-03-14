@@ -4,15 +4,15 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import tmpImg from '$lib/assets/images/tmp.png';
-	import { afterUpdate, createEventDispatcher, onDestroy } from 'svelte';
+	import { createEventDispatcher, onDestroy } from 'svelte';
 	import type { Product } from '$lib/types/product';
-	import { enhance } from '$app/forms';
-	import { goto } from '$app/navigation';
 	import { supabase } from '$lib/utils/supabase';
+	import { enhance, type SubmitFunction } from '$app/forms';
 
 	export let categories: { id: string; name: string }[];
 	export let label: string;
 	export let formaction: string;
+	export let submitHandle: SubmitFunction;
 	export let hasDeleteButton = true;
 	export let product: Product | null = null;
 
@@ -20,6 +20,7 @@
 	let imagePath = product?.img_path ?? '';
 	let imageUrl = product?.img_src ?? tmpImg;
 	let isUploading = false;
+	let isRendering = false;
 
 	const dispatch = createEventDispatcher();
 	const remove = () => {
@@ -33,14 +34,8 @@
 	};
 
 	const closeForm = () => {
-		// if(imagePath) {
-		//   deleteImage(imagePath).then(() => {
-		//     goto('/admin/products');
-		//   });
-		// } else {
-		//   goto('/admin/products');
-		// }
-		goto('/admin/products');
+		// goto('/admin/products');
+		dispatch('close');
 	};
 
 	const deleteImage = async (path: string) => {
@@ -68,6 +63,7 @@
 
 			if (data) {
 				imageUrl = data.publicUrl;
+				isRendering = true;
 			}
 		} catch (err) {
 			if (err instanceof Error) {
@@ -85,12 +81,12 @@
 				throw new Error('You must select an image to upload.');
 			}
 
-			if (imagePath) {
+			if (imagePath && imagePath.split('/')[0] !== 'products') {
 				await deleteImage(imagePath);
 			}
 
 			const file = event.target.files[0];
-			imagePath = `products/${Date.now()}-${file.name}`;
+			imagePath = `${Date.now()}-${file.name}`;
 
 			const { data, error } = await supabase.storage.from('images').upload(imagePath, file, {
 				cacheControl: '3600',
@@ -102,7 +98,7 @@
 			}
 			if (data) {
 				console.log('File uploaded successfully.');
-				await getImage(imagePath);
+				getImage(imagePath);
 			}
 		} catch (err) {
 			if (err instanceof Error) {
@@ -114,18 +110,16 @@
 	};
 
 	onDestroy(() => {
-		if (imagePath) {
+		if (imagePath && imagePath.split('/')[0] !== 'products') {
 			deleteImage(imagePath);
 		}
 	});
 </script>
 
-<TemplateForm {label} on:close={closeForm}>
+<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="product-form" {formaction} />
-	{#if hasDeleteButton}
-		<DeleteButton slot="deleteButton" on:remove={remove} />
-	{/if}
-	<form id="product-form" class="product-form" slot="body">
+	<DeleteButton slot="deleteButton" on:remove={remove} />
+	<form id="product-form" class="product-form" slot="body" method="POST" use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="product-name">
 				<label for="name">Product Name:</label>
@@ -155,12 +149,18 @@
 			<div class="product-img">
 				<span class="product-img-label">Product Image:</span>
 				<div class="product-image">
-					{#if isUploading}
-						<Spinner color="white" size="2/5" />
-					{:else}
-						<img src={imageUrl} alt="Ice cream" />
-					{/if}
-					<input type="hidden" name="img_path" id="img_path" bind:value={imageUrl} />
+					<div class="w-2/5 {isUploading || isRendering ? '' : 'hidden'}">
+						<Spinner color="white" size="full" />
+					</div>
+					<img
+						src={imageUrl}
+						alt="Ice cream"
+						class={isUploading || isRendering ? 'hidden' : ''}
+						on:load={() => {
+							isRendering = false;
+						}}
+					/>
+					<input type="hidden" name="img_src" id="img_src" bind:value={imageUrl} />
 					<!--! This is a hidden input -->
 					<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
 					<!--! This is a hidden input -->
@@ -172,10 +172,15 @@
 						on:change={uploadImage}
 						disabled={isUploading}
 					/>
-					<label for="image" class="image-upload-btn {isUploading ? 'pointer-events-none' : ''}">
+					<label
+						for="image"
+						class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
+					>
 						{#if isUploading}
 							<!-- <Spinner color="white" size="14" /> -->
 							<span>Uploading image...</span>
+						{:else if isRendering}
+							<span>Rendering image...</span>
 						{:else}
 							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
 								<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
@@ -191,8 +196,8 @@
 				</div>
 			</div>
 			<div class="product-category">
-				<label for="category">Product Category:</label>
-				<select name="category" id="category">
+				<label for="category_id">Product Category:</label>
+				<select name="category_id" id="category_id">
 					<option
 						value=""
 						class="text-gray-400"
@@ -265,7 +270,7 @@
 	}
 
 	.product-image > img {
-		@apply w-2/5 object-cover;
+		@apply /* w-2/5 */ w-80 /* h-full */ h-80 object-cover;
 	}
 
 	.product-image > input {

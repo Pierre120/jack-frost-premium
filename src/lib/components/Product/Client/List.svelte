@@ -1,5 +1,5 @@
 <script lang="ts">
-	import ProductItem from '$lib/components/Product/Item.svelte';
+	import ProductItem from '$lib/components/Product/Client/Item.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import type { Product } from '$lib/types/product';
 

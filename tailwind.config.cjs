@@ -8,6 +8,7 @@ module.exports = {
 				Itim: ['Itim', 'cursive']
 			},
 			colors: {
+				'dark-blue': '#352F75',
 				'navy-blue': '#383D55',
 				'dark-navy-blue': '#36305E',
 				'primary-red': '#F6162E',
@@ -17,5 +18,5 @@ module.exports = {
 			}
 		}
 	},
-	plugins: [require('daisyui')]
+	plugins: [require('@tailwindcss/line-clamp'), require('daisyui')]
 };

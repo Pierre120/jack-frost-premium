@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { PageData } from './$types';
-	import ProductList from '$lib/components/Product/List.svelte';
+	import ProductList from '$lib/components/Product/Client/List.svelte';
 	import ProductInfo from '$lib/components/Modal/ProductInfo.svelte';
 	import type { Product } from '$lib/types/product';
 
