@@ -18,9 +18,6 @@
 	const successAdd = async () => {
 		success = true;
 		await invalidateAll();
-		// setTimeout(() => {
-		// 	goto('/admin/products');
-		// }, 1500);
 	}
 
 	const discardProduct = () => {
@@ -33,8 +30,6 @@
 
 	const confirmDiscard = async () => {
 		isAboutToLeave = false;
-		// success = true;
-		// await invalidateAll();
 		goto('/admin/products');
 	}
 
