@@ -27,6 +27,6 @@
   }
 
   .product-list {
-    @apply w-full h-full grid grid-cols-3 gap-8;
+    @apply w-full h-full grid grid-cols-3 gap-8 pb-14;
   }
 </style>

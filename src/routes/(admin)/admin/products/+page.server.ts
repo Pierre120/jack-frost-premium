@@ -1,3 +1,4 @@
+import type { Product } from '$lib/types/product';
 import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
@@ -13,7 +14,7 @@ export const load = (async ({ locals, fetch }) => {
 	console.log(products); // for debugging purposes
 	if (products.success) {
 		return {
-			products: products.products
+			products: products.products as Product[]
 		};
 	}
 	throw error(404, 'Products not found');

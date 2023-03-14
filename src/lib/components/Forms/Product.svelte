@@ -82,12 +82,12 @@
 				throw new Error('You must select an image to upload.');
 			}
 
-			if (imagePath) {
+			if (imagePath && imagePath.split('/')[0] !== 'products') {
 				await deleteImage(imagePath);
 			}
 
 			const file = event.target.files[0];
-			imagePath = `products/${Date.now()}-${file.name}`;
+			imagePath = `${Date.now()}-${file.name}`;
 
 			const { data, error } = await supabase.storage.from('images').upload(imagePath, file, {
 				cacheControl: '3600',
@@ -111,7 +111,7 @@
 	};
 
 	onDestroy(() => {
-		if (imagePath) {
+		if (imagePath && imagePath.split('/')[0] !== 'products') {
 			deleteImage(imagePath);
 		}
 	});

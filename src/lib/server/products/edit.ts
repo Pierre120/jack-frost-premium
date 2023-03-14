@@ -10,7 +10,7 @@ const editProduct = async (product_id: string, updatedProduct: ProductUpdate ) =
     data: {
       name: updatedProduct.name,
       is_seasonal: updatedProduct.is_seasonal,
-      category_id: updatedProduct.category_id,
+      // category_id: updatedProduct.category_id,
       img_path: updatedProduct.img_path,
       img_src: updatedProduct.img_src,
       description: updatedProduct.description,
