@@ -9,7 +9,7 @@ export const load = (async ({ locals, params, fetch }) => {
   }
 
   const prodRes = await fetch(`/api/products/${params.id}`);
-  const categRes = await fetch(`/api/categories/`);
+  const categRes = await fetch('/api/categories');
   const product = await prodRes.json();
   const categories = await categRes.json();
   if(product.success && categories.success) {

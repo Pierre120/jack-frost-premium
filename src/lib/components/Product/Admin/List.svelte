@@ -11,7 +11,7 @@
   };
 </script>
 
-<div class="w-screen bg-white flex flex-row items-center justify-center">
+<div class="w-screen bg-[#CDD5EB] flex flex-row items-center justify-center">
   <div class="product-list-container">
     <div class="product-list">
       {#each products as product}
@@ -23,7 +23,7 @@
 
 <style lang="postcss">
   .product-list-container {
-    @apply w-full h-full max-w-[96rem];
+    @apply w-full h-full max-w-[112rem];
   }
 
   .product-list {

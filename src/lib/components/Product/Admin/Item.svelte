@@ -19,18 +19,20 @@
       <EditButton on:edit={edit} />
     </div>
     <div class="desc-container">
-      <p class="description">{product.description}</p>
+      <p class="description">
+        {product.description}
+      </p>
     </div>
   </div>
 </div>
 
 <style lang="postcss">
   .product-card {
-    @apply grid grid-cols-3 w-full h-full min-h-max max-h-64 p-3 gap-3 bg-white rounded shadow-lg;
+    @apply grid grid-cols-3 w-full h-full min-h-max max-h-64 p-3 gap-x-4 gap-y-8 bg-white rounded shadow-lg;
   }
 
   .product-card > figure {
-    @apply col-span-1 h-full rounded overflow-hidden shadow-sm;
+    @apply col-span-1 h-40 rounded overflow-hidden shadow-sm;
   }
 
   .product-card > figure > img {
@@ -54,6 +56,8 @@
   }
 
   .product-card > .info > .desc-container > .description {
-    @apply text-base text-[#666666] truncate;
+    @apply max-h-full text-base text-[#666666] line-clamp-5;
+    /* -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3; */
   }
 </style>
