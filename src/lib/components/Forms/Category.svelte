@@ -19,7 +19,8 @@
 	};
 
 	const closeForm = () => {
-		goto('/admin/categories');
+		//goto('/admin/categories');
+		dispatch('close');
 	};
 
 	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
