@@ -96,7 +96,7 @@
   label="Edit Category"
   submitHandle = {submitEdit}
   formaction="?/edit"
-  categories={data.category}
+  category={data.category}
   on:close={discardChange}
   on:remove={deleteCategory}
 />

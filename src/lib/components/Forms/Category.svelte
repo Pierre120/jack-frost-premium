@@ -7,10 +7,12 @@
 	import { goto } from '$app/navigation';
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms';
 
 	export let label: string;
 	export let formaction: string;
 	export let hasDeleteButton = true;
+	export let submitHandle: SubmitFunction;
 	export let category: Category | null = null;
 
 	const dispatch = createEventDispatcher();
@@ -36,12 +38,12 @@
 	};
 </script>
 
-<TemplateForm {label} on:close={closeForm}>
+<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	{#if hasDeleteButton}
 		<DeleteButton slot="deleteButton" on:remove={remove} />
 	{/if}
-	<form id="cagtegory-form" class="category-form" slot="body">
+	<form id="cagtegory-form" class="category-form" slot="body" method="POST" use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>

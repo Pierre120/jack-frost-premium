@@ -52,8 +52,8 @@
 <AddCategoryForm 
 label="Add Category" 
 formaction="?/add" 
-submitHandle={submitAdd}
-categories={data.categories} 
+submitHandle= {submitAdd}
+category={data.categories} 
 hasDeleteButton ={false}
 on:close={discardCategory}
 />
