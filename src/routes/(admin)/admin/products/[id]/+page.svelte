@@ -71,7 +71,7 @@
 			const result = await fetch(`/api/products/${data.product.id}/delete`, {
 				method: 'POST'
 			});
-			if(( await result.json()).success) {
+			if ((await result.json()).success) {
 				await successDelete();
 			}
 		}
