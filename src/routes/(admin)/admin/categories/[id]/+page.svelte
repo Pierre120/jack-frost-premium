@@ -35,7 +35,7 @@
 		statusInfo = 'The category has been deleted';
 		await invalidateAll();
 		setTimeout(() => {
-			goto('/admin/category');
+			goto('/admin/categories');
 		}, 1500);
 	};
 
@@ -64,7 +64,7 @@
   const confirm = async () => {
 		if (isAboutToLeave) {
 			isAboutToLeave = false;
-			goto('/admin/category');
+			goto('/admin/categories');
 		}
 		if (isAboutToDelete) {
 			// Delete

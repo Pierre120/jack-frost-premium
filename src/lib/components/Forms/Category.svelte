@@ -3,8 +3,7 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import type { Category } from '$lib/types/category';
-	import { afterUpdate, createEventDispatcher, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
+	import {createEventDispatcher} from 'svelte';
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
@@ -21,8 +20,7 @@
 	};
 
 	const closeForm = () => {
-		goto('/admin/categories');
-		//dispatch('close');
+		dispatch('close');
 	};
 
 	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
@@ -40,9 +38,7 @@
 
 <TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
-	{#if hasDeleteButton}
-		<DeleteButton slot="deleteButton" on:remove={remove} />
-	{/if}
+	<DeleteButton slot="deleteButton" on:remove={remove} />
 	<form id="cagtegory-form" class="category-form" slot="body" method="POST" use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="category-name">
