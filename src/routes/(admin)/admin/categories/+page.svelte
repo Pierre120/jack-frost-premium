@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
 	import type { PageData } from './$types';
-	import type { Category } from '$lib/types/category';
 	import AddCategory from '$lib/components/Buttons/Add.svelte';
 	import CategList from '$lib/components/Categories/List.svelte';
 
