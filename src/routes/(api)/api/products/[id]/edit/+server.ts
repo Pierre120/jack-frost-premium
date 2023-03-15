@@ -20,8 +20,8 @@ export const POST = (async ({ params, request }) => {
 				throw error1;
 			}
 			if (data1) {
-				console.log('File moved successfully.');
-				path = `products/${img_path}`;
+				console.log('File removed successfully.');
+				// path = `products/${img_path}`;
 			}
 
 			const { data: data2, error: error2 } = await supabase.storage
@@ -33,6 +33,11 @@ export const POST = (async ({ params, request }) => {
 			if (data2) {
 				console.log('File moved successfully.');
 				path = `products/${img_path}`;
+				img_path = path;
+				const { data } = await supabase.storage.from('images').getPublicUrl(img_path);
+				if (data) {
+					img_src = data.publicUrl;
+				}
 			}
 		}
 
@@ -40,7 +45,7 @@ export const POST = (async ({ params, request }) => {
 			name,
 			is_seasonal,
 			category_id,
-			img_path: path,
+			img_path,
 			img_src,
 			description
 		});
