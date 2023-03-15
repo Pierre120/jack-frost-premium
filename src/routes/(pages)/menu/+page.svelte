@@ -5,9 +5,14 @@
 	import type { Product } from '$lib/types/product';
 
 	const showProductInfo = async (event) => {
-		let res = await fetch(`/api/menu/${event.detail.productId}`);
-		product = await res.json();
-		productInfoModal = true;
+		let res = await fetch(`/api/products/${event.detail.productId}`);
+		const { success, product: prodInfo } = await res.json();
+		product = prodInfo;
+		console.log('in menu page: ', product);
+		console.log(success);
+		if (success) {
+			productInfoModal = true;
+		}
 	};
 
 	const closeProductInfo = () => {

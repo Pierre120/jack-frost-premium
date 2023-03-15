@@ -3,11 +3,14 @@ import type { PageServerLoad } from './$types';
 import { getProducts } from '$lib/samples/products';
 import type { Product } from '$lib/types/product';
 
-export const load = (async () => {
-	const products: Product[] = await getProducts();
-	if (products) {
+export const load = (async ({ fetch }) => {
+	const res = await fetch('/api/products');
+	const { success, products } = await res.json();
+	console.log(products); // for debugging purposes
+	// const products: Product[] = await getProducts();
+	if (success) {
 		return {
-			products
+			products: products as Product[]
 		};
 	}
 
