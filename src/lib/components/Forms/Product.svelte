@@ -116,106 +116,112 @@
 	});
 </script>
 
-<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
-	<SaveButton slot="saveButton" form="product-form" {formaction} />
-	<DeleteButton slot="deleteButton" on:remove={remove} />
-	<form id="product-form" class="product-form" slot="body" method="POST" use:enhance={submitHandle}>
-		<div class="info-1">
-			<div class="product-name">
-				<label for="name">Product Name:</label>
-				<input
-					type="text"
-					name="name"
-					id="name"
-					placeholder="Enter product name"
-					value={product?.name ?? ''}
-				/>
-			</div>
-			<div class="product-desc">
-				<label for="desc">Product Description:</label>
-				<textarea
-					name="description"
-					id="description"
-					placeholder="Enter description"
-					maxlength="256"
-					bind:value={description}
-					on:input={autoExpand}
-					on:change={autoExpand}
-				/>
-				<span class="desc-length">{description.length} / 256</span>
-			</div>
-		</div>
-		<div class="info-2">
-			<div class="product-img">
-				<span class="product-img-label">Product Image:</span>
-				<div class="product-image">
-					<div class="w-2/5 {isUploading || isRendering ? '' : 'hidden'}">
-						<Spinner color="white" size="full" />
-					</div>
-					<img
-						src={imageUrl}
-						alt="Ice cream"
-						class={isUploading || isRendering ? 'hidden' : ''}
-						on:load={() => {
-							isRendering = false;
-						}}
-					/>
-					<input type="hidden" name="img_src" id="img_src" bind:value={imageUrl} />
-					<!--! This is a hidden input -->
-					<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
-					<!--! This is a hidden input -->
+<div class="product-form-container">
+	<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
+		<SaveButton slot="saveButton" form="product-form" {formaction} />
+		<DeleteButton slot="deleteButton" on:remove={remove} />
+		<form id="product-form" class="product-form" slot="body" method="POST" use:enhance={submitHandle}>
+			<div class="info-1">
+				<div class="product-name">
+					<label for="name">Product Name:</label>
 					<input
-						type="file"
-						name="image"
-						id="image"
-						accept="image/png,image/jpeg,image/jpg"
-						on:change={uploadImage}
-						disabled={isUploading}
+						type="text"
+						name="name"
+						id="name"
+						placeholder="Enter product name"
+						value={product?.name ?? ''}
 					/>
-					<label
-						for="image"
-						class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
-					>
-						{#if isUploading}
-							<!-- <Spinner color="white" size="14" /> -->
-							<span>Uploading image...</span>
-						{:else if isRendering}
-							<span>Rendering image...</span>
-						{:else}
-							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
-								<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
-								<path
-									d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
-								/>
-							</svg>
-							<span>Upload an image</span>
-							<!-- <span>{imageUrl}</span>
-              <span>{imagePath}</span> -->
-						{/if}
-					</label>
+				</div>
+				<div class="product-desc">
+					<label for="desc">Product Description:</label>
+					<textarea
+						name="description"
+						id="description"
+						placeholder="Enter description"
+						maxlength="256"
+						bind:value={description}
+						on:input={autoExpand}
+						on:change={autoExpand}
+					/>
+					<span class="desc-length">{description.length} / 256</span>
 				</div>
 			</div>
-			<div class="product-category">
-				<label for="category_id">Product Category:</label>
-				<select name="category_id" id="category_id">
-					<option
-						value=""
-						class="text-gray-400"
-						disabled
-						selected={product?.category_id ? false : true}>Choose a category</option
-					>
-					{#each categories as category}
-						<option value={category.id} selected={category.id === product?.category_id}
-							>{category.name}</option
+			<div class="info-2">
+				<div class="product-img">
+					<span class="product-img-label">Product Image:</span>
+					<div class="product-image">
+						<div class="w-2/5 {isUploading || isRendering ? '' : 'hidden'}">
+							<Spinner color="white" size="full" />
+						</div>
+						<img
+							src={imageUrl}
+							alt="Ice cream"
+							class={isUploading || isRendering ? 'hidden' : ''}
+							on:load={() => {
+								isRendering = false;
+							}}
+						/>
+						<input type="hidden" name="img_src" id="img_src" bind:value={imageUrl} />
+						<!--! This is a hidden input -->
+						<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
+						<!--! This is a hidden input -->
+						<input
+							type="file"
+							name="image"
+							id="image"
+							accept="image/png,image/jpeg,image/jpg"
+							on:change={uploadImage}
+							disabled={isUploading}
+						/>
+						<label
+							for="image"
+							class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
 						>
-					{/each}
-				</select>
+							{#if isUploading}
+								<!-- <Spinner color="white" size="14" /> -->
+								<span>Uploading image...</span>
+							{:else if isRendering}
+								<span>Rendering image...</span>
+							{:else}
+								<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+									<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
+									<path
+										d="M144 480C64.5 480 0 415.5 0 336c0-62.8 40.2-116.2 96.2-135.9c-.1-2.7-.2-5.4-.2-8.1c0-88.4 71.6-160 160-160c59.3 0 111 32.2 138.7 80.2C409.9 102 428.3 96 448 96c53 0 96 43 96 96c0 12.2-2.3 23.8-6.4 34.6C596 238.4 640 290.1 640 352c0 70.7-57.3 128-128 128H144zm79-217c-9.4 9.4-9.4 24.6 0 33.9s24.6 9.4 33.9 0l39-39V392c0 13.3 10.7 24 24 24s24-10.7 24-24V257.9l39 39c9.4 9.4 24.6 9.4 33.9 0s9.4-24.6 0-33.9l-80-80c-9.4-9.4-24.6-9.4-33.9 0l-80 80z"
+									/>
+								</svg>
+								<span>Upload an image</span>
+								<!-- <span>{imageUrl}</span>
+								<span>{imagePath}</span> -->
+							{/if}
+						</label>
+					</div>
+				</div>
+				<div class="product-category">
+					<label for="category_id">Product Category:</label>
+					<select name="category_id" id="category_id">
+						<option
+							value=""
+							class="text-gray-400"
+							disabled
+							selected={product?.category_id ? false : true}>Choose a category</option
+						>
+						{#each categories as category}
+							<option value={category.id} selected={category.id === product?.category_id}
+								>{category.name}</option
+							>
+						{/each}
+					</select>
+				</div>
 			</div>
-		</div>
-	</form>
-</TemplateForm>
+		</form>
+	</TemplateForm>
+</div>
 
 <style lang="postcss">
+	.product-form-container {
+		@apply flex flex-col items-center justify-start w-screen min-h-screen bg-white overflow-hidden overflow-y-auto;
+	}
+
 	.product-form {
 		/* @apply flex items-stretch justify-center w-full; */
 		@apply grid grid-cols-2 gap-14 justify-items-stretch w-full;
