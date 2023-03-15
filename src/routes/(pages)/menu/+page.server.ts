@@ -10,7 +10,7 @@ export const load = (async ({ fetch }) => {
 	// const products: Product[] = await getProducts();
 	if (success) {
 		return {
-			products: products  as Product[]
+			products: products as Product[]
 		};
 	}
 
