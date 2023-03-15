@@ -5,11 +5,14 @@
 	import AddCategory from '$lib/components/Buttons/Add.svelte';
 	import CategList from '$lib/components/Categories/List.svelte';
 
-	let category: Category;
 	export let data: PageData;
 
 	const addCategory = () => {
 		goto('/admin/categories/add');
+	};
+
+	const editCategory = (event: CustomEvent) => {
+		goto(`/admin/categories/${event.detail.category_id}`);
 	};
 </script>
 
@@ -19,9 +22,15 @@
 
 <div class="categ-list-container min-h-screen">
 	<div class="add-categ-button w-5/6 mr-24">
-		<AddCategory label={'Add Category'} on:add={addCategory} />
+		<AddCategory 
+		label={'Add Category'} 
+		on:add={addCategory} 
+		/>
 	</div>
-	<CategList width="w-full md:max-w-[90%]" categories={data.categs} />
+	<CategList 
+	width="w-full md:max-w-[90%]" 
+	categories={data.categs} 
+	on:edit={editCategory}/>
 </div>
 
 <style lang="postcss">

@@ -10,7 +10,7 @@
 
 	export let label: string;
 	export let formaction: string;
-	export let hasDeleteButton = false;
+	export let hasDeleteButton = true;
 	export let category: Category | null = null;
 
 	const dispatch = createEventDispatcher();
@@ -19,8 +19,8 @@
 	};
 
 	const closeForm = () => {
-		//goto('/admin/categories');
-		dispatch('close');
+		goto('/admin/categories');
+		//dispatch('close');
 	};
 
 	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
