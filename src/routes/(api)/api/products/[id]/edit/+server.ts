@@ -35,7 +35,7 @@ export const POST = (async ({ params, request }) => {
 				path = `products/${img_path}`;
 				img_path = path;
 				const { data } = await supabase.storage.from('images').getPublicUrl(img_path);
-				if(data) {
+				if (data) {
 					img_src = data.publicUrl;
 				}
 			}
