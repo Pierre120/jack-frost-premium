@@ -69,7 +69,7 @@ model Product {
 
 /// Category model
 model Category {
-  id          String   @id @unique
+  id          String   @id @unique @default(cuid())
   name        String
   products    Product[]
   offerings   Offering[]
@@ -79,7 +79,7 @@ model Category {
 
 /// Offering model
 model Offering {
-  id          String   @id @unique
+  id          String   @id @unique @default(cuid())
   category_id String
   // size_id     String
   size_name   String
