@@ -120,7 +120,13 @@
 	<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 		<SaveButton slot="saveButton" form="product-form" {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
-		<form id="product-form" class="product-form" slot="body" method="POST" use:enhance={submitHandle}>
+		<form
+			id="product-form"
+			class="product-form"
+			slot="body"
+			method="POST"
+			use:enhance={submitHandle}
+		>
 			<div class="info-1">
 				<div class="product-name">
 					<label for="name">Product Name:</label>
