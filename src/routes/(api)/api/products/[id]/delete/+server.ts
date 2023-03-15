@@ -22,7 +22,7 @@ export const POST = (async ({ params, fetch }) => {
 		}
 
 		product = await deleteProduct(params.id ?? '');
-		return json({ success: true, product });
+		return json({ success: true });
 	} catch (err) {
 		console.error(err);
 		return json({ success: false });

@@ -68,10 +68,12 @@
 		}
 		if (isAboutToDelete) {
 			// Delete
-			await fetch(`/api/products/${data.product.id}/delete`, {
+			const result = await fetch(`/api/products/${data.product.id}/delete`, {
 				method: 'POST'
 			});
-			await successDelete();
+			if ((await result.json()).success) {
+				await successDelete();
+			}
 		}
 	};
 

@@ -15,14 +15,20 @@
 	};
 </script>
 
-<div class="add-product-container">
-	<div class="add-product">
-		<AddProduct label="Add Product" on:add={addProduct} />
+<div class="products-page-container">
+	<div class="add-product-container">
+		<div class="add-product">
+			<AddProduct label="Add Product" on:add={addProduct} />
+		</div>
 	</div>
+	<ProductList products={data.products} on:edit={editProduct} />
 </div>
-<ProductList products={data.products} on:edit={editProduct} />
 
 <style lang="postcss">
+	.products-page-container {
+		@apply w-screen min-h-screen flex flex-col items-center justify-start bg-[#CDD5EB] overflow-hidden overflow-y-auto;
+	}
+
 	.add-product-container {
 		@apply w-screen flex flex-row items-center justify-center bg-[#CDD5EB];
 	}
