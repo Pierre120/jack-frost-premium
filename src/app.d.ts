@@ -24,6 +24,10 @@ declare global {
 			role: string | enum;
 		};
 	}
+
+	declare namespace Nodemailer {
+		type Transporter = import('$lib/server/nodemailer').Transporter;
+	}
 }
 
 export {};
