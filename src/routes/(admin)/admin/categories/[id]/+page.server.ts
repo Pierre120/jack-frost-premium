@@ -41,7 +41,7 @@ export const actions = {
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(updatedCategory)
+			body: JSON.stringify(processedCateg)
 		});
 		const data = await res.json();
 		if (data.success) {
