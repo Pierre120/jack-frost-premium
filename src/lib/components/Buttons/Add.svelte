@@ -5,6 +5,7 @@
 	export let iconSize = 'w-14 h-14';
 	export let labelStyle = 'pl-3 text-3xl';
 	export let label = 'Add';
+	export let type: 'button' | 'reset' | 'submit' | null | undefined = 'button';
 
 	const dispatch = createEventDispatcher();
 	const add = () => {
@@ -12,7 +13,7 @@
 	};
 </script>
 
-<button class="add-btn {btnStyle}" on:click={add}>
+<button class="add-btn {btnStyle}" on:click={add} {type}>
 	<svg
 		xmlns="http://www.w3.org/2000/svg"
 		fill="none"

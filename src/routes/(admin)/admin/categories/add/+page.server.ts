@@ -21,29 +21,30 @@ export const load = (async ({ locals, fetch }) => {
 }) satisfies PageServerLoad;
 
 export const actions = {
-	add: async ({ request, fetch }) => {
-		console.log('adding categories ---');
-		const category = Object.fromEntries(await request.formData());
-		console.log(category);
-		const res = await fetch('/api/categories/add', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify(category)
-		});
-		const data = await res.json();
-		console.log(data);
-		if (data.success) {
-			console.log('added category');
-			throw redirect(303, '/admin/categories');
-		}
-		throw error(500, 'Category not added');
-	},
+	// add: async ({ request, fetch }) => {
+	// 	console.log('adding categories ---');
+	// 	const category = Object.fromEntries(await request.formData());
+	// 	console.log(category);
+	// 	const res = await fetch('/api/categories/add', {
+	// 		method: 'POST',
+	// 		headers: {
+	// 			'Content-Type': 'application/json'
+	// 		},
+	// 		body: JSON.stringify(category)
+	// 	});
+	// 	const data = await res.json();
+	// 	console.log(data);
+	// 	if (data.success) {
+	// 		console.log('added category');
+	// 		throw redirect(303, '/admin/categories');
+	// 	}
+	// 	throw error(500, 'Category not added');
+	// },
 
 	default: async({request}) => {
 		console.log(JSON.stringify(request));
 		console.log("addSize_Error!");
+		console.log('default at /admin/categories/add');
 	}
 
 } satisfies Actions;

@@ -3,6 +3,7 @@
 
 	export let btnStyle = '';
 	export let label = 'Delete';
+	export let type: 'button' | 'reset' | 'submit' | null | undefined = 'button';
 
 	let dispatch = createEventDispatcher();
 	let remove = () => {
@@ -10,7 +11,7 @@
 	};
 </script>
 
-<button class="delete-btn {btnStyle}" on:click={remove}>
+<button class="delete-btn {btnStyle}" on:click={remove} {type}>
 	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" class="icon">
 		<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 		<path
