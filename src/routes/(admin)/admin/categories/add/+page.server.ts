@@ -39,5 +39,11 @@ export const actions = {
 			throw redirect(303, '/admin/categories');
 		}
 		throw error(500, 'Category not added');
+	},
+
+	default: async({request}) => {
+		console.log(JSON.stringify(request));
+		console.log("addSize_Error!");
 	}
+
 } satisfies Actions;

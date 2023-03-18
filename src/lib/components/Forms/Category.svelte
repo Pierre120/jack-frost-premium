@@ -61,7 +61,7 @@
 					{#each sizes as size, i}
 						<input
 							type="text"
-							name="size-name{i}"
+							name="sizename{i}"
 							id="size-name{i}"
 							placeholder="Size name {i + 1}"
 							bind:value={size.sizeName}
@@ -73,7 +73,7 @@
 					{#each sizes as size, i}
 						<input
 							type="text"
-							name="size-price{i}"
+							name="sizeprice{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
 							bind:value={size.sizePrice}
