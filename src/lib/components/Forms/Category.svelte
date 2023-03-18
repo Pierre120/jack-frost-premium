@@ -40,7 +40,7 @@
 <TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
-	<form id="cagtegory-form" class="category-form" slot="body" method="POST" use:enhance={submitHandle}>
+	<form id="category-form" class="category-form" slot="body" method="POST" use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>
@@ -72,7 +72,8 @@
 					<label for="size-price">Size Price:</label>
 					{#each sizes as size, i}
 						<input
-							type="text"
+							type="number"
+							min="0"
 							name="sizeprice{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
