@@ -25,25 +25,25 @@ export const actions = {
 	add: async ({ request, fetch }) => {
 		console.log('adding categories ---');
 		const category = Object.fromEntries(await request.formData());
-		const tempObj = {}
-		tempObj['offerings'] = [
-			{
-				size_name: category.sizeName1,
-				prize: category.sizePrize1
-			},
-			{
-				size_name: category.sizeName2,
-				prize: category.sizePrize2
-			},
-		]
-		
-		console.log(category);
+		console.log(category)
+		const processedCateg = {
+			name: category.name as string,
+			offerings: [] as { size_name: string, price: number }[],
+		}
+		console.log(category[`size_name${0}`] || category[`price${0}`]);
+		for(let i = 0; category[`size_name${i}`] || category[`price${i}`]; i++) {
+			processedCateg.offerings = [...processedCateg.offerings, {
+				size_name: category[`size_name${i}`] as string,
+				price: +category[`price${i}`],
+			}];
+		}
+		console.log(processedCateg);
 		const res = await fetch('/api/categories/add', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(category)
+			body: JSON.stringify(category) // processedCateg
 		});
 		const data = await res.json();
 		console.log(data);

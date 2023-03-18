@@ -24,15 +24,15 @@
 		dispatch('close')
 	};
 
-	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
+	let offerings = [{ size_name: '', price: '' }]; // initial size input
 
 	const addSize = () => {
-		sizes = [...sizes, { sizeName: '', sizePrice: '' }];
+		offerings = [...offerings, { size_name: '', price: '' }];
 	};
 
 	const removeSize = () => {
-		if (sizes.length > 1) {
-			sizes = sizes.slice(0, sizes.length - 1);
+		if (offerings.length > 1) {
+			offerings = offerings.slice(0, offerings.length - 1);
 		}
 	};
 </script>
@@ -58,26 +58,26 @@
 			<div class="size-input-container">
 				<div class="size-input1 category-name">
 					<label for="size-name">Size Name:</label>
-					{#each sizes as size, i}
+					{#each offerings as offering, i}
 						<input
 							type="text"
-							name="sizename{i}"
+							name="size_name{i}"
 							id="size-name{i}"
 							placeholder="Size name {i + 1}"
-							bind:value={size.sizeName}
+							bind:value={offering.size_name}
 						/>
 					{/each}
 				</div>
 				<div class="size-input2 category-name">
 					<label for="size-price">Size Price:</label>
-					{#each sizes as size, i}
+					{#each offerings as offering, i}
 						<input
 							type="number"
 							min="0"
-							name="sizeprice{i}"
+							name="price{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
-							bind:value={size.sizePrice}
+							bind:value={offering.price}
 						/>
 					{/each}
 				</div>

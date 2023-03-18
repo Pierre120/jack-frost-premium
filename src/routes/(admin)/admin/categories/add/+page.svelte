@@ -34,9 +34,7 @@
 		goto('/admin/categories');
 	};
 
-	const submitAdd: SubmitFunction = async ({form}) => {
-		console.log(form);
-		console.log("In submit handle");
+	const submitAdd: SubmitFunction = async () => {
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
