@@ -5,9 +5,8 @@ import addCategory from '$lib/server/categories/add';
 // Add a category to the database
 export const POST = (async ({ request }) => {
 	try {
-		const category = await request.json();
-		console.log('From Category add API: ', category);
-		await addCategory(category);
+		const { category, offerings } = await request.json();
+		await addCategory(category, offerings);
 		return json({ success: true });
 	} catch (err) {
 		console.error(err);

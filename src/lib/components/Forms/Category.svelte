@@ -75,7 +75,7 @@
 							name="size-price{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
-							value={size.sizePrice}
+							bind:value={size.sizePrice}
 						/>
 					{/each}
 				</div>
