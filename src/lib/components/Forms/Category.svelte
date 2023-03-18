@@ -7,7 +7,8 @@
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-
+	import {goto} from '$app/navigation';
+	
 	export let label: string;
 	export let formaction: string;
 	export let hasDeleteButton = true;
@@ -20,7 +21,7 @@
 	};
 
 	const closeForm = () => {
-		dispatch('close');
+		dispatch('close')
 	};
 
 	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
