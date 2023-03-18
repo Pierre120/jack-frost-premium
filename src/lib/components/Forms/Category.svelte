@@ -14,7 +14,7 @@
 	export let hasDeleteButton = true;
 	export let submitHandle: SubmitFunction;
 	export let category: Category | null = null;
-
+	
 	const dispatch = createEventDispatcher();
 	const remove = () => {
 		dispatch('remove');

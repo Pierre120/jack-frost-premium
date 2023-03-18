@@ -68,7 +68,7 @@
 		}
 		if (isAboutToDelete) {
 			// Delete
-			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
+			const result = await fetch(`/api/categories/${data.categories.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
@@ -96,7 +96,7 @@
   label="Edit Category"
   submitHandle = {submitEdit}
   formaction="?/edit"
-  category={data.category}
+  category={data.categories}
   on:close={discardChange}
   on:remove={deleteCategory}
 />

@@ -13,7 +13,7 @@ export const load = (async ({ locals, params, fetch }) => {
 	const category = await categRes.json();
 	if (category.success) {
 		return {
-			category: category.categories as Category
+			categories: category.categories 
 		};
 	}
 	throw error(404, 'Categories not found');
