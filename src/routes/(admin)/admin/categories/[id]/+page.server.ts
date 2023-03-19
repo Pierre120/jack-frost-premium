@@ -23,7 +23,7 @@ export const actions = {
 	edit: async ({ request, fetch, params }) => {
 		console.log('editing categories ---');
 		const updatedCategory = Object.fromEntries(await request.formData());
-		console.log(updatedCategory);
+		console.log("updated category:" + updatedCategory);
 
 		const processedCateg = {
 			name: updatedCategory.name as string,
@@ -37,7 +37,7 @@ export const actions = {
 				price: +updatedCategory[`price${i}`],
 			}];
 		}
-		console.log(processedCateg);
+		console.log("processed categories:" + processedCateg);
 		const res = await fetch(`/api/categories/${params.id}/edit`, {
 			method: 'POST',
 			headers: {

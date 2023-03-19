@@ -14,15 +14,34 @@ const editCategory = async (category_id: string, category_name: string, offering
 					where: {
 						id: offering.id
 					},
-					create: offering,
-					update: offering
+					create: {
+						...offering
+					},
+					update: {
+            ...offering,
+            size_name: offering.size_name,
+            price: offering.price
+          }
 				}))))
+			}
+		},
+		include:{
+			offerings:{
+				select: {
+					id: true,
+					size_name: true,
+					price: true
+				},
+
 			}
 		}
 	});
 
 	// for debugging purposes
-	console.log(JSON.stringify(result));
+	console.log("RESULT:" + JSON.stringify(result));
+	console.log("OFFERINGS:" + JSON.stringify(result.offerings));
+
+	return result;
 };
 
 export { editCategory };
