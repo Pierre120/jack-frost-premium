@@ -10,7 +10,7 @@
 <div class="categ-list-container {width}">
 	<div class="categ-list gap-x-8 gap-y-10 grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
 		{#each categories as category}
-			<CategoryItem name={category.name} />
+			<CategoryItem category={category} />
 		{/each}
 	</div>
 </div>

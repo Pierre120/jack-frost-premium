@@ -1,16 +1,18 @@
 <script lang="ts">
-	export let name: string;
 	import EditCategory from '$lib/components/Buttons/Edit.svelte';
 	import { goto } from '$app/navigation';
+  import type { Category } from '$lib/types/category';
+
+	export let category: Category;
 
 	const editCategory = () => {
-		goto('/admin/categories/edit');
+		goto(`/admin/categories/${category.id}`);
 	};
 </script>
 
 <div class="categ-container">
 	<div class="categ-name">
-		<h1>{name}</h1>
+		<h1>{category.name}</h1>
 	</div>
 	<div class="edit-button-specs">
 		<EditCategory on:edit={editCategory} />
