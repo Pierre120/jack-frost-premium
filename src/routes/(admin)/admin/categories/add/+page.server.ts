@@ -37,7 +37,7 @@ export const actions = {
 				price: +category[`price${i}`],
 			}];
 		}
-		console.log(Categ);
+		//console.log(Categ);
 		const res = await fetch('/api/categories/add', {
 			method: 'POST',
 			headers: {

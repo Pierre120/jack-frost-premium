@@ -10,7 +10,7 @@ const editCategory = async (category_id: string, category_name: string, offering
 		data: {
 			name: category_name,
 			offerings: {
-				upsert: console.log("here" + JSON.stringify(offerings.map((offering) => ({
+				upsert: offerings.map((offering) => ({
 					where: {
 						id: offering.id
 					},
@@ -22,7 +22,7 @@ const editCategory = async (category_id: string, category_name: string, offering
             size_name: offering.size_name,
             price: offering.price
           }
-				}))))
+				}))
 			}
 		},
 		include:{
@@ -32,18 +32,28 @@ const editCategory = async (category_id: string, category_name: string, offering
 					size_name: true,
 					price: true
 				},
-
 			}
 		}
 	});
-
+	
 
 
 	// for debugging purposes
 	console.log("RESULT:" + JSON.stringify(result));
 	console.log("OFFERINGS:" + JSON.stringify(result.offerings));
 
-	return result;
+
+	//return result;
+	return {
+    id: result.id,
+    name: result.name,
+    offerings: result.offerings.map((offering) => ({
+      id: offering.id,
+      size_name: offering.size_name,
+      price: offering.price
+    }))
+  };
 };
 
 export { editCategory };
+
