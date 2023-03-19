@@ -37,6 +37,8 @@ const editCategory = async (category_id: string, category_name: string, offering
 		}
 	});
 
+
+
 	// for debugging purposes
 	console.log("RESULT:" + JSON.stringify(result));
 	console.log("OFFERINGS:" + JSON.stringify(result.offerings));
