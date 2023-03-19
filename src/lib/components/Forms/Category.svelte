@@ -26,7 +26,7 @@
 
 	//let offerings = [{ size_name: '', price: '' }]; // initial size input
 
-	let sizes = category?.offerings ?? [{ id:'', category_id:'', category:'', size_name: '', price: '' }] as Offering[];
+	let sizes = category?.offerings ?? [{ id:'', size_name: '', price: '' }] as Offering[];
 
 	const addSize = () => {
 		sizes = [...sizes, { size_name: '', price: '' }];
