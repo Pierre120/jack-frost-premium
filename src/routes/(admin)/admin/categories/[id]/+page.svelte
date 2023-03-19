@@ -1,14 +1,14 @@
 <script lang="ts">
-  import type { SubmitFunction } from '$app/forms';
+	import type { SubmitFunction } from '$app/forms';
 	import { goto, invalidateAll } from '$app/navigation';
-  import EditCategoryForm from '$lib/components/Forms/Category.svelte';
-  import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
-  import StatusModal from '$lib/components/Modal/Status.svelte';
-  import type { PageData } from './$types';
- 
-  export let data: PageData;
+	import EditCategoryForm from '$lib/components/Forms/Category.svelte';
+	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
+	import StatusModal from '$lib/components/Modal/Status.svelte';
+	import type { PageData } from './$types';
 
-  let confirmationHeader = '';
+	export let data: PageData;
+
+	let confirmationHeader = '';
 	let confirmationDetails = '';
 	let cancelLabel = '';
 	let confirmLabel = '';
@@ -19,7 +19,7 @@
 	let success = false;
 	let deleted = false;
 
-  const successEdit = async () => {
+	const successEdit = async () => {
 		success = true;
 		deleted = false;
 		statusHeader = 'CHANGES SAVED';
@@ -27,7 +27,7 @@
 		await invalidateAll();
 	};
 
-  const successDelete = async () => {
+	const successDelete = async () => {
 		success = false;
 		deleted = true;
 		isAboutToDelete = false;
@@ -39,7 +39,7 @@
 		}, 1500);
 	};
 
-  const discardChange = () => {
+	const discardChange = () => {
 		confirmationHeader = 'DISCARD CHANGES?';
 		confirmationDetails =
 			"The changes you've made will not be saved if you leave this page without saving.";
@@ -48,7 +48,7 @@
 		isAboutToLeave = true;
 	};
 
-  const deleteCategory = () => {
+	const deleteCategory = () => {
 		confirmationHeader = 'DELETE CATEGORY?';
 		confirmationDetails = 'Are you sure you would like to delete this category?';
 		cancelLabel = 'Cancel';
@@ -56,12 +56,12 @@
 		isAboutToDelete = true;
 	};
 
-  const cancel = () => {
+	const cancel = () => {
 		isAboutToLeave = false;
 		isAboutToDelete = false;
 	};
 
-  const confirm = async () => {
+	const confirm = async () => {
 		if (isAboutToLeave) {
 			isAboutToLeave = false;
 			goto('/admin/categories');
@@ -77,7 +77,7 @@
 		}
 	};
 
-  const submitEdit: SubmitFunction = async () => {
+	const submitEdit: SubmitFunction = async () => {
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
@@ -92,13 +92,13 @@
 	};
 </script>
 
-<EditCategoryForm 
-  label="Edit Category"
+<EditCategoryForm
+	label="Edit Category"
 	formaction="?/edit"
-  submitHandle = {submitEdit}
-  category={data.category}
-  on:close={discardChange}
-  on:remove={deleteCategory}
+	submitHandle={submitEdit}
+	category={data.category}
+	on:close={discardChange}
+	on:remove={deleteCategory}
 />
 {#if isAboutToLeave || isAboutToDelete}
 	<ConfirmationModal

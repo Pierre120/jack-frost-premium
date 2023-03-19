@@ -3,31 +3,31 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import type { Category } from '$lib/types/category';
-	import {createEventDispatcher} from 'svelte';
+	import { createEventDispatcher } from 'svelte';
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-	import type {Offering} from '$lib/types/offering';
-  //import Offering from '../Product/Offering.svelte';
-	
+	import type { Offering } from '$lib/types/offering';
+	//import Offering from '../Product/Offering.svelte';
+
 	export let label: string;
 	export let formaction: string;
 	export let hasDeleteButton = true;
 	export let submitHandle: SubmitFunction;
 	export let category: Category | null = null;
-	
+
 	const dispatch = createEventDispatcher();
 	const remove = () => {
 		dispatch('remove');
 	};
 
 	const closeForm = () => {
-		dispatch('close')
+		dispatch('close');
 	};
 
 	//let offerings = [{ size_name: '', price: '' }]; // initial size input
 
-	let sizes = category?.offerings ?? [{ id:'', size_name: '', price: '' }] as Offering[];
+	let sizes = category?.offerings ?? ([{ id: '', size_name: '', price: '' }] as Offering[]);
 
 	const addSize = () => {
 		sizes = [...sizes, { size_name: '', price: '' }];
@@ -43,12 +43,13 @@
 <TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
-	<form 
-		id="category-form" 
-		class="category-form" 
-		slot="body" 
-		method="POST" 
-		use:enhance={submitHandle}>
+	<form
+		id="category-form"
+		class="category-form"
+		slot="body"
+		method="POST"
+		use:enhance={submitHandle}
+	>
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>
@@ -67,12 +68,7 @@
 				<div class="size-input1 category-name">
 					<label for="size-name">Size Name:</label>
 					{#each sizes as size, i}
-							<input 
-							type="hidden"
-							name="offering_id{i}"
-							id="offering-id{i}"
-							bind:value={size.id}
-							/>
+						<input type="hidden" name="offering_id{i}" id="offering-id{i}" bind:value={size.id} />
 						<input
 							type="text"
 							name="size_name{i}"

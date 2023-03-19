@@ -1,7 +1,6 @@
 import { error, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
-
 export const load = (async ({ locals, fetch }) => {
 	const session = await locals.validate();
 	if (!session) {
@@ -25,17 +24,20 @@ export const actions = {
 	add: async ({ request, fetch }) => {
 		console.log('adding categories ---');
 		const category = Object.fromEntries(await request.formData());
-		console.log(category)
+		console.log(category);
 		const processedCateg = {
 			name: category.name as string,
-			offerings: [] as { size_name: string, price: number }[],
-		}
+			offerings: [] as { size_name: string; price: number }[]
+		};
 		console.log(category[`size_name${0}`] || category[`price${0}`]);
-		for(let i = 0; category[`size_name${i}`] || category[`price${i}`]; i++) {
-			processedCateg.offerings = [...processedCateg.offerings, {
-				size_name: category[`size_name${i}`] as string,
-				price: +category[`price${i}`],
-			}];
+		for (let i = 0; category[`size_name${i}`] || category[`price${i}`]; i++) {
+			processedCateg.offerings = [
+				...processedCateg.offerings,
+				{
+					size_name: category[`size_name${i}`] as string,
+					price: +category[`price${i}`]
+				}
+			];
 		}
 		//console.log(Categ);
 		const res = await fetch('/api/categories/add', {
@@ -52,7 +54,5 @@ export const actions = {
 			throw redirect(303, '/admin/categories');
 		}
 		throw error(500, 'Category not added');
-	},
-
-
+	}
 } satisfies Actions;

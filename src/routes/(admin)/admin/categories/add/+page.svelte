@@ -49,13 +49,13 @@
 	};
 </script>
 
-<AddCategoryForm 
-label="Add Category" 
-formaction="?/add" 
-submitHandle= {submitAdd}
-category={data.categories} 
-hasDeleteButton ={false}
-on:close={discardCategory}
+<AddCategoryForm
+	label="Add Category"
+	formaction="?/add"
+	submitHandle={submitAdd}
+	category={data.categories}
+	hasDeleteButton={false}
+	on:close={discardCategory}
 />
 {#if isAboutToLeave}
 	<LeaveConfirmationModal

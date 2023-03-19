@@ -23,21 +23,30 @@ export const actions = {
 	edit: async ({ request, fetch, params }) => {
 		console.log('editing categories ---');
 		const updatedCategory = Object.fromEntries(await request.formData());
-		console.log("updated category:" + updatedCategory);
+		console.log('updated category:' + updatedCategory);
 
 		const processedCateg = {
 			name: updatedCategory.name as string,
-			offerings: [] as {id:string, size_name: string, price: number }[],
-		}
+			offerings: [] as { id: string; size_name: string; price: number }[]
+		};
 		console.log(updatedCategory[`size_name${0}`] || updatedCategory[`price${0}`]);
-		for(let i = 0; updatedCategory[`offering_id${i}`] ||updatedCategory[`size_name${i}`] || updatedCategory[`price${i}`]; i++) {
-			processedCateg.offerings = [...processedCateg.offerings, {
-				id: updatedCategory[`offering_id${i}`] as string,
-				size_name: updatedCategory[`size_name${i}`] as string,
-				price: +updatedCategory[`price${i}`],
-			}];
+		for (
+			let i = 0;
+			updatedCategory[`offering_id${i}`] ||
+			updatedCategory[`size_name${i}`] ||
+			updatedCategory[`price${i}`];
+			i++
+		) {
+			processedCateg.offerings = [
+				...processedCateg.offerings,
+				{
+					id: updatedCategory[`offering_id${i}`] as string,
+					size_name: updatedCategory[`size_name${i}`] as string,
+					price: +updatedCategory[`price${i}`]
+				}
+			];
 		}
-		console.log("processed categories:" + processedCateg);
+		console.log('processed categories:' + processedCateg);
 		const res = await fetch(`/api/categories/${params.id}/edit`, {
 			method: 'POST',
 			headers: {

@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EditCategory from '$lib/components/Buttons/Edit.svelte';
 	import { goto } from '$app/navigation';
-  import type { Category } from '$lib/types/category';
+	import type { Category } from '$lib/types/category';
 
 	export let category: Category;
 

@@ -11,7 +11,6 @@ export const POST = (async ({ params, request }) => {
 			success: true,
 			category
 		});
-
 	} catch (err) {
 		console.error(err);
 		return json({ success: false });

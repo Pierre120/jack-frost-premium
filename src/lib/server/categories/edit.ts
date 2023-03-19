@@ -18,42 +18,38 @@ const editCategory = async (category_id: string, category_name: string, offering
 						...offering
 					},
 					update: {
-            ...offering,
-            size_name: offering.size_name,
-            price: offering.price
-          }
+						...offering,
+						size_name: offering.size_name,
+						price: offering.price
+					}
 				}))
 			}
 		},
-		include:{
-			offerings:{
+		include: {
+			offerings: {
 				select: {
 					id: true,
 					size_name: true,
 					price: true
-				},
+				}
 			}
 		}
 	});
-	
-
 
 	// for debugging purposes
-	console.log("RESULT:" + JSON.stringify(result));
-	console.log("OFFERINGS:" + JSON.stringify(result.offerings));
-
+	console.log('RESULT:' + JSON.stringify(result));
+	console.log('OFFERINGS:' + JSON.stringify(result.offerings));
 
 	//return result;
 	return {
-    id: result.id,
-    name: result.name,
-    offerings: result.offerings.map((offering) => ({
-      id: offering.id,
-      size_name: offering.size_name,
-      price: offering.price
-    }))
-  };
+		id: result.id,
+		name: result.name,
+		offerings: result.offerings.map((offering) => ({
+			id: offering.id,
+			size_name: offering.size_name,
+			price: offering.price
+		}))
+	};
 };
 
 export { editCategory };
-
