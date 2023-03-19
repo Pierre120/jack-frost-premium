@@ -8,6 +8,7 @@
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type {Offering} from '$lib/types/offering';
+  //import Offering from '../Product/Offering.svelte';
 	
 	export let label: string;
 	export let formaction: string;
@@ -66,6 +67,12 @@
 				<div class="size-input1 category-name">
 					<label for="size-name">Size Name:</label>
 					{#each sizes as size, i}
+							<input 
+							type="hidden"
+							name="offering_id{i}"
+							id="offering-id{i}"
+							bind:value={size.id}
+							/>
 						<input
 							type="text"
 							name="size_name{i}"

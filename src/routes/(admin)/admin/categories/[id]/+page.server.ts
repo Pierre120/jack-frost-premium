@@ -27,11 +27,12 @@ export const actions = {
 
 		const processedCateg = {
 			name: updatedCategory.name as string,
-			offerings: [] as { size_name: string, price: number }[],
+			offerings: [] as {id:string, size_name: string, price: number }[],
 		}
 		console.log(updatedCategory[`size_name${0}`] || updatedCategory[`price${0}`]);
-		for(let i = 0; updatedCategory[`size_name${i}`] || updatedCategory[`price${i}`]; i++) {
+		for(let i = 0; updatedCategory[`offering_id${i}`] ||updatedCategory[`size_name${i}`] || updatedCategory[`price${i}`]; i++) {
 			processedCateg.offerings = [...processedCateg.offerings, {
+				id: updatedCategory[`offering_id${i}`] as string,
 				size_name: updatedCategory[`size_name${i}`] as string,
 				price: +updatedCategory[`price${i}`],
 			}];

@@ -10,13 +10,13 @@ const editCategory = async (category_id: string, category_name: string, offering
 		data: {
 			name: category_name,
 			offerings: {
-				upsert: offerings.map((offering) => ({
+				upsert: console.log("here" + JSON.stringify(offerings.map((offering) => ({
 					where: {
 						id: offering.id
 					},
 					create: offering,
 					update: offering
-				}))
+				}))))
 			}
 		}
 	});
