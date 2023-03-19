@@ -13,10 +13,10 @@ export const load = (async ({ locals, params, fetch }) => {
 	const category = await categRes.json();
 	if (category.success) {
 		return {
-			categories: category.category
+			category: category.category
 		};
 	}
-	throw error(404, 'Categories not found');
+	throw error(404, 'Category not found');
 }) satisfies PageServerLoad;
 
 export const actions = {
