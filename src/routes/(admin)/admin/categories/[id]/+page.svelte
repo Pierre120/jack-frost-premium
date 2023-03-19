@@ -68,7 +68,7 @@
 		}
 		if (isAboutToDelete) {
 			// Delete
-			const result = await fetch(`/api/categories/${data.categories.id}/delete`, {
+			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
