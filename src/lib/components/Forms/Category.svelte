@@ -3,14 +3,17 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import type { Category } from '$lib/types/category';
-	import { afterUpdate, createEventDispatcher, onDestroy } from 'svelte';
-	import { goto } from '$app/navigation';
+	import { createEventDispatcher } from 'svelte';
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
+	import { enhance, type SubmitFunction } from '$app/forms';
+	import type { Offering } from '$lib/types/offering';
+	//import Offering from '../Product/Offering.svelte';
 
 	export let label: string;
 	export let formaction: string;
-	export let hasDeleteButton = false;
+	export let hasDeleteButton = true;
+	export let submitHandle: SubmitFunction;
 	export let category: Category | null = null;
 
 	const dispatch = createEventDispatcher();
@@ -19,13 +22,15 @@
 	};
 
 	const closeForm = () => {
-		goto('/admin/categories');
+		dispatch('close');
 	};
 
-	let sizes = [{ sizeName: '', sizePrice: '' }]; // initial size input
+	//let offerings = [{ size_name: '', price: '' }]; // initial size input
+
+	let sizes = category?.offerings ?? ([{ id: '', size_name: '', price: '' }] as Offering[]);
 
 	const addSize = () => {
-		sizes = [...sizes, { sizeName: '', sizePrice: '' }];
+		sizes = [...sizes, { size_name: '', price: '' }];
 	};
 
 	const removeSize = () => {
@@ -35,12 +40,16 @@
 	};
 </script>
 
-<TemplateForm {label} on:close={closeForm}>
+<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
-	{#if hasDeleteButton}
-		<DeleteButton slot="deleteButton" on:remove={remove} />
-	{/if}
-	<form id="cagtegory-form" class="category-form" slot="body">
+	<DeleteButton slot="deleteButton" on:remove={remove} />
+	<form
+		id="category-form"
+		class="category-form"
+		slot="body"
+		method="POST"
+		use:enhance={submitHandle}
+	>
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>
@@ -59,12 +68,13 @@
 				<div class="size-input1 category-name">
 					<label for="size-name">Size Name:</label>
 					{#each sizes as size, i}
+						<input type="hidden" name="offering_id{i}" id="offering-id{i}" bind:value={size.id} />
 						<input
 							type="text"
-							name="size-name{i}"
+							name="size_name{i}"
 							id="size-name{i}"
 							placeholder="Size name {i + 1}"
-							bind:value={size.sizeName}
+							bind:value={size.size_name}
 						/>
 					{/each}
 				</div>
@@ -72,11 +82,12 @@
 					<label for="size-price">Size Price:</label>
 					{#each sizes as size, i}
 						<input
-							type="text"
-							name="size-price{i}"
+							type="number"
+							min="0"
+							name="price{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
-							bind:value={size.sizePrice}
+							bind:value={size.price}
 						/>
 					{/each}
 				</div>
