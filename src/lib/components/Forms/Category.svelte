@@ -7,7 +7,7 @@
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-	import {goto} from '$app/navigation';
+
 	
 	export let label: string;
 	export let formaction: string;
@@ -40,7 +40,12 @@
 <TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
-	<form id="category-form" class="category-form" slot="body" method="POST" use:enhance={submitHandle}>
+	<form 
+		id="category-form" 
+		class="category-form" 
+		slot="body" 
+		method="POST" 
+		use:enhance={submitHandle}>
 		<div class="info-1">
 			<div class="category-name">
 				<label for="name">Category Name:</label>
