@@ -7,7 +7,7 @@
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-
+	import type {Offering} from '$lib/types/offering';
 	
 	export let label: string;
 	export let formaction: string;
@@ -24,15 +24,17 @@
 		dispatch('close')
 	};
 
-	let offerings = [{ size_name: '', price: '' }]; // initial size input
+	//let offerings = [{ size_name: '', price: '' }]; // initial size input
+
+	let sizes = category?.offerings ?? [{ id:'', category_id:'', category:'', size_name: '', price: '' }] as Offering[];
 
 	const addSize = () => {
-		offerings = [...offerings, { size_name: '', price: '' }];
+		sizes = [...sizes, { size_name: '', price: '' }];
 	};
 
 	const removeSize = () => {
-		if (offerings.length > 1) {
-			offerings = offerings.slice(0, offerings.length - 1);
+		if (sizes.length > 1) {
+			sizes = sizes.slice(0, sizes.length - 1);
 		}
 	};
 </script>
@@ -63,26 +65,26 @@
 			<div class="size-input-container">
 				<div class="size-input1 category-name">
 					<label for="size-name">Size Name:</label>
-					{#each offerings as offering, i}
+					{#each sizes as size, i}
 						<input
 							type="text"
 							name="size_name{i}"
 							id="size-name{i}"
 							placeholder="Size name {i + 1}"
-							bind:value={offering.size_name}
+							bind:value={size.size_name}
 						/>
 					{/each}
 				</div>
 				<div class="size-input2 category-name">
 					<label for="size-price">Size Price:</label>
-					{#each offerings as offering, i}
+					{#each sizes as size, i}
 						<input
 							type="number"
 							min="0"
 							name="price{i}"
 							id="size-price{i}"
 							placeholder=" &#8369;0"
-							bind:value={offering.price}
+							bind:value={size.price}
 						/>
 					{/each}
 				</div>

@@ -24,12 +24,25 @@ export const actions = {
 		console.log('editing categories ---');
 		const updatedCategory = Object.fromEntries(await request.formData());
 		console.log(updatedCategory);
+
+		const processedCateg = {
+			name: updatedCategory.name as string,
+			offerings: [] as { size_name: string, price: number }[],
+		}
+		console.log(updatedCategory[`size_name${0}`] || updatedCategory[`price${0}`]);
+		for(let i = 0; updatedCategory[`size_name${i}`] || updatedCategory[`price${i}`]; i++) {
+			processedCateg.offerings = [...processedCateg.offerings, {
+				size_name: updatedCategory[`size_name${i}`] as string,
+				price: +updatedCategory[`price${i}`],
+			}];
+		}
+		console.log(processedCateg);
 		const res = await fetch(`/api/categories/${params.id}/edit`, {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
 			},
-			body: JSON.stringify(updatedCategory)
+			body: JSON.stringify(processedCateg)
 		});
 		const data = await res.json();
 		if (data.success) {
