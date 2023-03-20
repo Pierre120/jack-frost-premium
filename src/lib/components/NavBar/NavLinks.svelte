@@ -10,7 +10,11 @@
 	<ul class="navlinks {isAdmin ? 'expand-y' : 'w-4/5'}">
 		{#each data.pages as nav}
 			<li class={isAdmin ? 'text-2xl' : 'font-bold text-xl'}>
-				<a href={nav.href} class:active={$page.url.pathname === nav.href} class={isAdmin ? 'border-b-4' : 'border-b-2'}>{nav.title}</a>
+				<a
+					href={nav.href}
+					class:active={$page.url.pathname === nav.href}
+					class={isAdmin ? 'border-b-4' : 'border-b-2'}>{nav.title}</a
+				>
 			</li>
 		{/each}
 	</ul>
