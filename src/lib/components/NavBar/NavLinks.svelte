@@ -30,14 +30,14 @@
 	}
 
 	.navlinks > li > a {
-		@apply px-2 uppercase font-IstokWeb align-text-bottom text-navy-blue border-transparent hover:text-primary-red hover:border-primary-red block mt-4 lg:inline-block h-full;
+		@apply px-2 uppercase font-IstokWeb align-text-bottom text-navy-blue border-transparent hover:text-primary-red hover:border-primary-red block mt-4;
 	}
 
 	.navlinks.expand-y {
 		@apply items-stretch w-full;
 	}
 
-	.navelinks.expand-y > li > a {
+	.navlinks.expand-y > li > a {
 		@apply h-full;
 	}
 
