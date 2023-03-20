@@ -70,8 +70,8 @@ export const actions: Actions = {
 			});
 		}
 
-		// Redirect to admin home page
+		// Redirect to admin products page
 		console.log('Redirecting to admin home page');
-		throw redirect(302, '/admin');
+		throw redirect(302, '/admin/products');
 	}
 };
