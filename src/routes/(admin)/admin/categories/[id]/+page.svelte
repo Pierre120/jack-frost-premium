@@ -5,6 +5,7 @@
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import type { PageData } from './$types';
+	import LoadingModal from '$lib/components/Modal/Loading.svelte';
 
 	export let data: PageData;
 
@@ -18,6 +19,7 @@
 	let isAboutToDelete = false;
 	let success = false;
 	let deleted = false;
+	let isLoading = false;
 
 	const successEdit = async () => {
 		success = true;
@@ -68,19 +70,24 @@
 		}
 		if (isAboutToDelete) {
 			// Delete
+			isAboutToDelete = false; 
+			isLoading = true;
 			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
+				isLoading = false;
 				await successDelete();
 			}
 		}
 	};
 
 	const submitEdit: SubmitFunction = async () => {
+		isLoading = true;
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
+					isLoading = false;
 					await successEdit();
 					break;
 				case 'error':
@@ -91,7 +98,9 @@
 		};
 	};
 </script>
-
+{#if isLoading}
+	<LoadingModal {isLoading} statusHeader="For a moment..." message="Updating the category..."/>
+{/if}
 <EditCategoryForm
 	label="Edit Category"
 	formaction="?/edit"
