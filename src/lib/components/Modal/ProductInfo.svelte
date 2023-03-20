@@ -5,6 +5,7 @@
 	import { createEventDispatcher } from 'svelte';
 	import type { Product } from '$lib/types/product';
   import type { Offering } from '$lib/types/offering';
+	import { addProductToCart } from '$lib/stores/cart';
 
 	const dispatch = createEventDispatcher();
 
@@ -20,6 +21,10 @@
 		if (quantity > 1) {
 			quantity--;
 		}
+	}
+
+	const addToCart = () => {
+		addProductToCart(product, selectedOffering, quantity);
 	}
 
 	let quantity = 1;
@@ -53,7 +58,7 @@
 
 				<!-- Offering choices -->
 				<div class="offerings">
-					<button class="offering-input" on:click={() => isSelecting = !isSelecting }>
+					<button class="offering-input" type="button" on:click={() => isSelecting = !isSelecting }>
 						<div>
 							<span>{ selectedOffering.size_name ?? 'Select Size' }</span>
 							<span>
@@ -84,7 +89,7 @@
 					</div>
 				</div>
 
-				<button class="add-to-cart-btn">Add to cart</button>
+				<button class="add-to-cart-btn" type="button" on:click={addToCart}>Add to cart</button>
 			</div>
 		</div>
 	</div>

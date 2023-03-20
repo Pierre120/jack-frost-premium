@@ -45,7 +45,7 @@
 	}
 
 	.modal-header {
-		@apply flex justify-center pb-6;
+		@apply flex flex-col items-stretch justify-center pb-6;
 	}
 
 	.modal-close {
