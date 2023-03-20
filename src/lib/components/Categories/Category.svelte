@@ -29,7 +29,7 @@
 	}
 
 	.edit-button-specs {
-		@apply ml-4 bg-white hover:bg-indigo-200 text-white font-bold py-2 px-4 rounded;
+		@apply ml-4 bg-white text-white font-bold py-2 px-4 rounded;
 	}
 
 	.categ-name > h1 {

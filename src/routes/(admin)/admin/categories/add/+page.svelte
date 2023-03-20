@@ -5,6 +5,7 @@
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import type { PageData } from './$types';
+	import LoadingModal from '$lib/components/Modal/Loading.svelte';
 
 	export let data: PageData;
 
@@ -15,6 +16,7 @@
 	const confirmLabel = 'Leave this Page';
 	let isAboutToLeave = false;
 	let success = false;
+	let isLoading = false;
 
 	const successAdd = async () => {
 		success = true;
@@ -35,9 +37,11 @@
 	};
 
 	const submitAdd: SubmitFunction = async () => {
+		isLoading = true;
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
+					isLoading = false;
 					await successAdd();
 					break;
 				case 'error':
@@ -49,6 +53,13 @@
 	};
 </script>
 
+{#if isLoading}
+	<LoadingModal
+		{isLoading}
+		statusHeader="For a moment..."
+		message="Saving the newly added category..."
+	/>
+{/if}
 <AddCategoryForm
 	label="Add Category"
 	formaction="?/add"
@@ -67,6 +78,7 @@
 		on:confirm={confirmDiscard}
 	/>
 {/if}
+
 {#if success}
 	<StatusModal {success} statusHeader="Category Added" statusInfo="Successfully added category" />
 {/if}
