@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>Product | Jack Frost Premium Ice Cream</title>
+	<title>Products | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
 <div class="products-page-container">
