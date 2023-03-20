@@ -37,7 +37,7 @@
 
 <style lang="postcss">
 	.modal-backdrop {
-		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start z-50;
+		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start z-30;
 	}
 
 	.modal-component {

@@ -41,7 +41,7 @@
   }
 
   .inc-qty {
-    @apply bg-navy-blue hover:bg-dark-blue pt-1 rounded-r-md;
+    @apply bg-navy-blue hover:bg-primary-red pt-1 rounded-r-md;
   }
 
   .dec-qty {

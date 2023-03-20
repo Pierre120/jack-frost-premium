@@ -3,14 +3,18 @@
 	import ProductList from '$lib/components/Product/Client/List.svelte';
 	import ProductInfo from '$lib/components/Modal/ProductInfo.svelte';
 	import type { Product } from '$lib/types/product';
+  import type { Offering } from '$lib/types/offering';
 
 	const showProductInfo = async (event) => {
 		let res = await fetch(`/api/products/${event.detail.productId}`);
-		const { success, product: prodInfo } = await res.json();
-		product = prodInfo;
+		const { success: prodSuccess, product: prodInfo } = await res.json();
+		product = prodInfo as Product;
+		res = await fetch(`/api/categories/${product?.category?.id}`);
+		const { success: catSuccess, category: catInfo } = await res.json();
+		offerings = catInfo.offerings as Offering[];
 		console.log('in menu page: ', product);
-		console.log(success);
-		if (success) {
+		console.log(prodSuccess, catSuccess);
+		if (prodSuccess && catSuccess) {
 			productInfoModal = true;
 		}
 	};
@@ -23,6 +27,7 @@
 	let pId = '';
 	let productInfoModal = false;
 	let product: Product;
+	let offerings: Offering[];
 	export let data: PageData;
 </script>
 
@@ -39,7 +44,7 @@
 </div>
 
 {#if productInfoModal}
-	<ProductInfo {product} on:closeProductInfo={closeProductInfo} />
+	<ProductInfo {product} {offerings} on:closeProductInfo={closeProductInfo} />
 {/if}
 
 <style lang="postcss">
