@@ -108,7 +108,7 @@ model Order {
   first_name          String
   last_name           String
   suffix              String?
-  primary_contact     String?
+  primary_contact     String
   secondary_contact   String?
   delivery_address    String
   created_at          DateTime @default(now())
@@ -116,6 +116,7 @@ model Order {
   estimated_delivery  DateTime?
   payment_status      PaymentStatus
   total_price         Decimal  @db.Decimal(10, 2)
+  amount_paid         Decimal  @db.Decimal(10, 2) @default(0)
   /// user        User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
   order_details       OrderDetails[]
   payments            Payment[]
@@ -126,14 +127,15 @@ model Order {
 
 /// Enums for order payment status
 enum PaymentStatus {
-  FP /// Full Payment
-  DP /// Down Payment
-  NP /// No Payment
+  SS /// Success Payment / Settled Payment
+  FP /// Full Payment / Fully Paid
+  PP /// Down Payment / Partially Paid
+  NP /// No Payment / Unpaid
 }
 
 /// OrderDetails model
 model OrderDetails {
-  id          String   @id @unique @default(cuid())
+  id          String  @id @unique @default(cuid())
   order_id    String
   product_id  String
   quantity    Int     @db.SmallInt
