@@ -52,8 +52,13 @@
 		};
 	};
 </script>
+
 {#if isLoading}
-	<LoadingModal {isLoading} statusHeader="For a moment..." message="Saving the newly added category..."/>
+	<LoadingModal
+		{isLoading}
+		statusHeader="For a moment..."
+		message="Saving the newly added category..."
+	/>
 {/if}
 <AddCategoryForm
 	label="Add Category"

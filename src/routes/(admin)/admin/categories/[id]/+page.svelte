@@ -70,7 +70,7 @@
 		}
 		if (isAboutToDelete) {
 			// Delete
-			isAboutToDelete = false; 
+			isAboutToDelete = false;
 			isLoading = true;
 			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
 				method: 'POST'
@@ -98,8 +98,9 @@
 		};
 	};
 </script>
+
 {#if isLoading}
-	<LoadingModal {isLoading} statusHeader="For a moment..." message="Updating the category..."/>
+	<LoadingModal {isLoading} statusHeader="For a moment..." message="Updating the category..." />
 {/if}
 <EditCategoryForm
 	label="Edit Category"
