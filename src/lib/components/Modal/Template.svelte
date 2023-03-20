@@ -12,7 +12,7 @@
 	export let hasCloseIcon = true;
 </script>
 
-<div class="modal-backdrop" on:click={closeModal} on:keypress={closeModal}>
+<div class="modal-backdrop"> <!-- on:click={closeModal} on:keypress={closeModal} -->
 	<div class="modal-component {width} {bgColor}">
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
