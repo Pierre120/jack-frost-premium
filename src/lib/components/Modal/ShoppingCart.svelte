@@ -3,7 +3,7 @@
   import CartItemList from "$lib/components/Cart/List.svelte";
   import TemplateModal from '$lib/components/Modal/Template.svelte';
   import type { Cart } from "$lib/types/cart";
-  import { fade, slide } from "svelte/transition";
+  import { slide } from "svelte/transition";
 
   const dispatch = createEventDispatcher();
 
