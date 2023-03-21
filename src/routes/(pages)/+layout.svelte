@@ -9,6 +9,7 @@
 
 	const closeCart = () => {
 		isViewingCart = false;
+		console.log('closing cart');
 	}
 
 	let isViewingCart = true;
@@ -21,4 +22,6 @@
 {#if $page.url.pathname !== '/contact'}
 	<Footer {data} />
 {/if}
-<ShoppingCartModal on:close={closeCart} />
+{#if isViewingCart}
+	<ShoppingCartModal on:close={closeCart} />
+{/if}
