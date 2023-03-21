@@ -19,6 +19,8 @@ export const addToast = (toast: Toast) => {
   });
 
   if(toast.duration) setTimeout(() => dismissToast(id), toast.duration);
+
+  return id;
 };
 
 export const dismissToast = (id: number) => {

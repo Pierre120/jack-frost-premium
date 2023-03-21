@@ -22,4 +22,8 @@
   article {
     @apply flex items-center gap-x-4 p-6 rounded-xl text-navy-blue bg-[#DDECFF];
   }
+
+  .text {
+    @apply text-2xl uppercase;
+  }
 </style>
