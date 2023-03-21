@@ -151,6 +151,6 @@
 	}
 
 	.add-to-cart-btn {
-		@apply w-full p-4 mt-4 font-IstokWeb text-xl text-white bg-navy-blue hover:bg-primary-red rounded-md;
+		@apply w-full p-4 mt-4 font-IstokWeb text-xl text-white bg-navy-blue hover:bg-primary-red rounded-md shadow-md;
 	}
 </style>
