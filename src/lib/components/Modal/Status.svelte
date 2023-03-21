@@ -2,11 +2,13 @@
 	import TemplateModal from '$lib/components/Modal/Template.svelte';
 	import SuccessCheck from '$lib/assets/icons/success.svg';
 	import TrashCan from '$lib/assets/icons/trash-can.svg';
+	import Spinner from '$lib/components/Spinner.svelte';
 
 	export let statusHeader: string;
 	export let statusInfo: string;
 	export let success = false;
 	export let deleted = false;
+	export let loading = false;
 	// export let error = false;
 	// export let info = false;
 </script>
@@ -18,6 +20,8 @@
 			<img src={SuccessCheck} alt="Success check" />
 		{:else if deleted}
 			<img src={TrashCan} alt="Trash can" />
+		{:else if loading}
+			<Spinner size="8" color="blue" />
 		{/if}
 		<p>{statusInfo}</p>
 	</div>

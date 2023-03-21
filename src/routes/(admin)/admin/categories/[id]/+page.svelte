@@ -5,7 +5,6 @@
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import type { PageData } from './$types';
-	import LoadingModal from '$lib/components/Modal/Loading.svelte';
 
 	export let data: PageData;
 
@@ -19,14 +18,14 @@
 	let isAboutToDelete = false;
 	let success = false;
 	let deleted = false;
-	let isLoading = false;
+	let loading = false;
 
 	const successEdit = async () => {
 		success = true;
 		deleted = false;
 		statusHeader = 'CHANGES SAVED';
 		statusInfo = 'The changes you made have been saved';
-		await invalidateAll();
+		// await invalidateAll();
 	};
 
 	const successDelete = async () => {
@@ -35,7 +34,7 @@
 		isAboutToDelete = false;
 		statusHeader = 'CATEGORY DELETED';
 		statusInfo = 'The category has been deleted';
-		await invalidateAll();
+		// await invalidateAll();
 		setTimeout(() => {
 			goto('/admin/categories');
 		}, 1500);
@@ -71,23 +70,28 @@
 		if (isAboutToDelete) {
 			// Delete
 			isAboutToDelete = false;
-			isLoading = true;
+			loading = true;
+			statusHeader = 'DELETING CATEGORY';
+			statusInfo = 'Deleting the category...';
 			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
-				isLoading = false;
+				loading = false;
 				await successDelete();
 			}
 		}
 	};
 
 	const submitEdit: SubmitFunction = async () => {
-		isLoading = true;
+		loading = true;
+		statusHeader = 'UPDATING CATEGORY';
+		statusInfo = 'Updating the category...';
+		// await invalidateAll();
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
-					isLoading = false;
+					loading = false;
 					await successEdit();
 					break;
 				case 'error':
@@ -99,9 +103,6 @@
 	};
 </script>
 
-{#if isLoading}
-	<LoadingModal {isLoading} statusHeader="For a moment..." message="Updating the category..." />
-{/if}
 <EditCategoryForm
 	label="Edit Category"
 	formaction="?/edit"
@@ -120,6 +121,6 @@
 		on:confirm={confirm}
 	/>
 {/if}
-{#if success || deleted}
-	<StatusModal {success} {deleted} {statusHeader} {statusInfo} />
+{#if success || deleted || loading}
+	<StatusModal {success} {deleted} {loading} {statusHeader} {statusInfo} />
 {/if}
