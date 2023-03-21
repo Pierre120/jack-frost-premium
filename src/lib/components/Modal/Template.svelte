@@ -17,14 +17,14 @@
 	export let zIndex: 0 | 20 | 10 | 30 | 40 | 50 = 30;
 </script>
 
-<div class="modal-backdrop z-{zIndex}"> <!-- on:click={closeModal} on:keypress={closeModal} -->
+<div class="modal-backdrop z-{zIndex}" transition:fade> <!-- on:click={closeModal} on:keypress={closeModal} -->
 	<!-- {#if isLoading}
 		<Spinner size="16" color="white" />
 	{/if} -->
 	<div
 		class="modal-component {width} {bgColor}"
 		on:load={() => { isLoading = false; } }
-		
+		transition:fly="{{ y: 100, duration: 500 }}"
 	>
 	<!-- transition:fly="{{ y: 100, duration: 1000 }}" -->
 		{#if hasCloseIcon}
@@ -74,7 +74,7 @@
 	}
 
 	.modal-body {
-		@apply flex flex-col justify-center w-full min-w-min;
+		@apply flex flex-col items-center justify-center w-full min-w-min;
 	}
 
 	.product-info {

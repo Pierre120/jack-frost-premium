@@ -6,26 +6,25 @@
   import type { Offering } from '$lib/types/offering';
 
 	const showProductInfo = async (event) => {
+		productInfoModal = true;
 		let res = await fetch(`/api/products/${event.detail.productId}`);
-		const { success: prodSuccess, product: prodInfo } = await res.json();
+		const { product: prodInfo } = await res.json();
 		product = prodInfo as Product;
 		res = await fetch(`/api/categories/${product?.category?.id}`);
-		const { success: catSuccess, category: catInfo } = await res.json();
+		const { category: catInfo } = await res.json();
 		offerings = catInfo.offerings as Offering[];
-		if (prodSuccess && catSuccess) {
-			productInfoModal = true;
-		}
 	};
 
 	const closeProductInfo = () => {
 		productInfoModal = false;
+		product = {} as Product;
 		pId = '';
 	};
 
 	let pId = '';
 	let productInfoModal = false;
-	let product: Product;
-	let offerings: Offering[];
+	let product: Product = {} as Product;
+	let offerings: Offering[] = [] as Offering[];
 	export let data: PageData;
 </script>
 
