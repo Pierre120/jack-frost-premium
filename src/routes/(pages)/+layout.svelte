@@ -4,8 +4,8 @@
 	import NavBar from '$lib/components/NavBar/index.svelte';
 	import Footer from '$lib/components/Footer/index.svelte';
 	import ShoppingCartModal from '$lib/components/Modal/ShoppingCart.svelte';
+	import Toasts from '$lib/components/Toast/List.svelte';
 	import CartStore from '$lib/stores/cart';
-  import { goto } from '$app/navigation';
 
 	const openCart = () => {
 		isViewingCart = true;
@@ -22,11 +22,14 @@
 	export let data: LayoutData;
 </script>
 
+<Toasts />
+
 <NavBar {data} on:open={openCart} hasCartItem={$CartStore.count > 0} />
 <slot />
 {#if $page.url.pathname !== '/contact'}
 	<Footer {data} />
 {/if}
+
 {#if isViewingCart}
 	<ShoppingCartModal cart={$CartStore} on:close={closeCart} />
 {/if}

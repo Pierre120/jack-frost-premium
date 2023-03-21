@@ -20,7 +20,7 @@
 
 <style lang="postcss">
   article {
-    @apply flex items-center gap-x-4 p-6 rounded-xl text-navy-blue bg-[#DDECFF];
+    @apply w-96 flex items-center gap-x-4 p-6 rounded-xl text-navy-blue bg-[#DDECFF];
   }
 
   .text {
