@@ -33,7 +33,7 @@
 	}
 
 	.status-info > img {
-		@apply w-8 h-8;
+		@apply w-8 h-8 object-cover;
 	}
 
 	.status-info > p {
