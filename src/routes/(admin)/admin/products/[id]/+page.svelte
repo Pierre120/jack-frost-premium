@@ -18,13 +18,14 @@
 	let isAboutToDelete = false;
 	let success = false;
 	let deleted = false;
+	let loading = false;
 
 	const successEdit = async () => {
 		success = true;
 		deleted = false;
 		statusHeader = 'CHANGES SAVED';
 		statusInfo = 'The changes you made have been saved';
-		await invalidateAll();
+		// await invalidateAll();
 	};
 
 	const successDelete = async () => {
@@ -33,7 +34,7 @@
 		isAboutToDelete = false;
 		statusHeader = 'PRODUCT DELETED';
 		statusInfo = 'The product has been deleted';
-		await invalidateAll();
+		// await invalidateAll();
 		setTimeout(() => {
 			goto('/admin/products');
 		}, 1500);
@@ -67,20 +68,28 @@
 			goto('/admin/products');
 		}
 		if (isAboutToDelete) {
+			loading = true;
+			statusHeader = 'FOR A MOMENT...';
+			statusInfo = 'Deleting the product...';
 			// Delete
 			const result = await fetch(`/api/products/${data.product.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
+				loading = false;
 				await successDelete();
 			}
 		}
 	};
 
 	const submitEdit: SubmitFunction = async () => {
+		loading = true;
+		statusHeader = 'FOR A MOMENT...';
+		statusInfo = 'Saving the changes...';
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
+					loading = false;
 					await successEdit();
 					break;
 				case 'error':
@@ -111,6 +120,6 @@
 		on:confirm={confirm}
 	/>
 {/if}
-{#if success || deleted}
-	<StatusModal {success} {deleted} {statusHeader} {statusInfo} />
+{#if success || deleted || loading}
+	<StatusModal {success} {deleted} {loading} {statusHeader} {statusInfo} />
 {/if}

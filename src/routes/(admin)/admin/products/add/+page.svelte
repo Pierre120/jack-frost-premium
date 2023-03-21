@@ -13,12 +13,17 @@
 		'The product you’ve made will not be saved if you leave this page without saving.';
 	const cancelLabel = 'Stay on this Page';
 	const confirmLabel = 'Leave this Page';
+	let statusHeader = '';
+	let statusInfo = '';
 	let isAboutToLeave = false;
 	let success = false;
+	let loading = false;
 
 	const successAdd = async () => {
 		success = true;
-		await invalidateAll();
+		statusHeader = 'PRODUCT SAVED';
+		statusInfo = "The product you've made has been saved";
+		// await invalidateAll();
 	};
 
 	const discardProduct = () => {
@@ -35,9 +40,13 @@
 	};
 
 	const submitAdd: SubmitFunction = async () => {
+		loading = true;
+		statusHeader = 'FOR A MOMENT...';
+		statusInfo = 'Adding product...';
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
+					loading = false;
 					await successAdd();
 					break;
 				case 'error':
@@ -67,6 +76,6 @@
 		on:confirm={confirmDiscard}
 	/>
 {/if}
-{#if success}
-	<StatusModal {success} statusHeader="Product Added" statusInfo="Successfully added product" />
+{#if success || loading}
+	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
 {/if}
