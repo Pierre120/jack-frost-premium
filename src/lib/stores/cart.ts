@@ -16,6 +16,8 @@ export const addProductToCart = (product: Product, offering: Offering, qty: numb
 			existingItem.quantity += qty;
 			cartState.total += existingItem.offering.price * qty;
 		} else {
+			// pre-process the offering's price
+			offering.price = Number(offering.price);
 			// If product is not in the cart, add it to cart
 			cartState.items.push({ product, offering, quantity: qty });
 			cartState.total += offering.price * qty;
