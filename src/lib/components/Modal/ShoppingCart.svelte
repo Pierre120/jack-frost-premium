@@ -44,7 +44,7 @@
   }
 
   .cart-items-container {
-    @apply w-full;
+    @apply w-full flex flex-col items-center justify-center;
   }
 
   .total-info {

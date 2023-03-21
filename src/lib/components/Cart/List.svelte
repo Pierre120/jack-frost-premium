@@ -13,6 +13,6 @@
 
 <style lang="postcss">
   .item-list {
-    @apply w-full flex flex-col items-center justify-center;
+    @apply w-full flex flex-col items-center justify-center gap-6;
   }
 </style>

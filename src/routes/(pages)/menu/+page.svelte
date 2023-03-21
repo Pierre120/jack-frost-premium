@@ -12,8 +12,6 @@
 		res = await fetch(`/api/categories/${product?.category?.id}`);
 		const { success: catSuccess, category: catInfo } = await res.json();
 		offerings = catInfo.offerings as Offering[];
-		console.log('in menu page: ', product);
-		console.log(prodSuccess, catSuccess);
 		if (prodSuccess && catSuccess) {
 			productInfoModal = true;
 		}

@@ -22,7 +22,7 @@
   const removeItem = () => {
     removeCartItemFromCart(cartItem.product.id, cartItem.offering.id as string);
   };
-
+  
   export let cartItem: CartItem;
 </script>
 
@@ -44,11 +44,11 @@
 
 <style lang="postcss">
   .cart-item-container {
-    @apply w-full flex items-center justify-center gap-4;
+    @apply w-full flex items-stretch justify-center gap-6;
   }
 
   .cart-item-container > img {
-    @apply w-1/4 h-32 object-cover rounded shadow-sm;
+    @apply w-1/4 h-auto object-cover rounded-md shadow-sm;
   }
 
   .item-info {
@@ -56,18 +56,18 @@
   }
 
   .item-header {
-    @apply w-full flex flex-row items-center justify-between text-3xl;
+    @apply w-full flex flex-row items-center justify-between text-3xl font-bold;
   }
 
   .item-info > h4 {
-    @apply w-full block text-sm text-gray-500 pt-1 pb-2;
+    @apply w-full text-sm text-gray-500 pt-1 pb-2;
   }
 
   .item-info > p {
-    @apply w-full h-full block text-base text-gray-500 py-1 truncate;
+    @apply grow w-full max-w-full h-full text-base text-gray-500 py-1 text-ellipsis;
   }
 
   .item-edits {
-    @apply w-1/4 flex flex-col items-start justify-center;
+    @apply flex flex-col items-center justify-start gap-4;
   }
 </style>
