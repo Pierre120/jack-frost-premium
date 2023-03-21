@@ -13,7 +13,7 @@ export const load = (async ({ locals, params, fetch }) => {
 	const category = await categRes.json();
 	if (category.success) {
 		return {
-			category: category.category
+			category: category.category as Category
 		};
 	}
 	throw error(404, 'Category not found');
@@ -30,22 +30,29 @@ export const actions = {
 			offerings: [] as { id: string; size_name: string; price: number }[]
 		};
 		console.log(updatedCategory[`size_name${0}`] || updatedCategory[`price${0}`]);
-		for (
-			let i = 0;
-			updatedCategory[`offering_id${i}`] ||
-			updatedCategory[`size_name${i}`] ||
-			updatedCategory[`price${i}`];
-			i++
-		) {
-			processedCateg.offerings = [
-				...processedCateg.offerings,
-				{
-					id: updatedCategory[`offering_id${i}`] as string,
-					size_name: updatedCategory[`size_name${i}`] as string,
-					price: +updatedCategory[`price${i}`]
-				}
-			];
+
+		try {
+			for (
+				let i = 0;
+				updatedCategory[`offering_id${i}`] ||
+				updatedCategory[`size_name${i}`] ||
+				updatedCategory[`price${i}`];
+				i++
+			) {
+				processedCateg.offerings = [
+					...processedCateg.offerings,
+					{
+						id: updatedCategory[`offering_id${i}`] as string,
+						size_name: updatedCategory[`size_name${i}`] as string,
+						price: Number(+updatedCategory[`price${i}`])
+					}
+				];
+			}
+		} catch (err) {
+			console.error(err);
+			throw error(500, 'Internal error occured');
 		}
+
 		console.log('processed categories:' + processedCateg);
 		const res = await fetch(`/api/categories/${params.id}/edit`, {
 			method: 'POST',

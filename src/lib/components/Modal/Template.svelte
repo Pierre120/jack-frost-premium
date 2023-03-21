@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
+	import { fade, fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 
@@ -7,13 +8,22 @@
 		dispatch('closeModal');
 	};
 
+	let isLoading = true;
+
 	export let width: string;
 	export let bgColor: string;
 	export let hasCloseIcon = true;
+	export let zIndex: 0 | 20 | 10 | 30 | 40 | 50 = 30;
 </script>
 
-<div class="modal-backdrop" on:click={closeModal} on:keypress={closeModal}>
-	<div class="modal-component {width} {bgColor}">
+<div class="modal-backdrop z-{zIndex}" transition:fade>
+	<div
+		class="modal-component {width} {bgColor}"
+		on:load={() => {
+			isLoading = false;
+		}}
+		transition:fly={{ y: 100, duration: 500 }}
+	>
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24">
@@ -37,7 +47,7 @@
 
 <style lang="postcss">
 	.modal-backdrop {
-		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start z-50;
+		@apply fixed top-0 left-0 right-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start;
 	}
 
 	.modal-component {
@@ -45,7 +55,7 @@
 	}
 
 	.modal-header {
-		@apply flex justify-center pb-6;
+		@apply flex flex-col items-stretch justify-center pb-6;
 	}
 
 	.modal-close {
@@ -61,7 +71,7 @@
 	}
 
 	.modal-body {
-		@apply flex flex-col justify-center w-full min-w-min;
+		@apply flex flex-col items-center justify-center w-full min-w-min;
 	}
 
 	.product-info {

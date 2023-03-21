@@ -4,7 +4,7 @@ import type { Actions, PageServerLoad } from './$types';
 import z from 'zod';
 import jwt from 'jsonwebtoken';
 
-export const load: PageServerLoad = async ({ locals, params, url }) => {
+export const load: PageServerLoad = async ({ locals, url }) => {
 	const session = await locals.validate();
 	const token = (url.searchParams.get('token') as string) || '';
 	console.log(url);

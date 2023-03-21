@@ -1,11 +1,10 @@
 <script lang="ts">
 	import type { SubmitFunction } from '$app/forms';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import AddCategoryForm from '$lib/components/Forms/Category.svelte';
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import type { PageData } from './$types';
-	import LoadingModal from '$lib/components/Modal/Loading.svelte';
 
 	export let data: PageData;
 
@@ -14,13 +13,17 @@
 		'The category you’ve made will not be saved if you leave this page without saving.';
 	const cancelLabel = 'Stay on this Page';
 	const confirmLabel = 'Leave this Page';
+	let statusHeader = '';
+	let statusInfo = '';
 	let isAboutToLeave = false;
 	let success = false;
-	let isLoading = false;
+	let loading = false;
 
 	const successAdd = async () => {
 		success = true;
-		await invalidateAll();
+		statusHeader = 'CATEGORY SAVED';
+		statusInfo = "The category you've made has been saved";
+		// await invalidateAll();
 	};
 
 	const discardCategory = () => {
@@ -37,11 +40,13 @@
 	};
 
 	const submitAdd: SubmitFunction = async () => {
-		isLoading = true;
+		loading = true;
+		statusHeader = 'FOR A MOMENT...';
+		statusInfo = 'Adding category...';
 		return async ({ result, update }) => {
 			switch (result.type) {
 				case 'redirect':
-					isLoading = false;
+					loading = false;
 					await successAdd();
 					break;
 				case 'error':
@@ -53,13 +58,6 @@
 	};
 </script>
 
-{#if isLoading}
-	<LoadingModal
-		{isLoading}
-		statusHeader="For a moment..."
-		message="Saving the newly added category..."
-	/>
-{/if}
 <AddCategoryForm
 	label="Add Category"
 	formaction="?/add"
@@ -79,6 +77,6 @@
 	/>
 {/if}
 
-{#if success}
-	<StatusModal {success} statusHeader="Category Added" statusInfo="Successfully added category" />
+{#if success || loading}
+	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
 {/if}
