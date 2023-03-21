@@ -1,11 +1,15 @@
 <script lang="ts">
+	import Spinner from '$lib/components/Spinner.svelte';
 	import { createEventDispatcher } from 'svelte';
+  import { fade, fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 
 	const closeModal = () => {
 		dispatch('closeModal');
 	};
+
+	let isLoading = true;
 
 	export let width: string;
 	export let bgColor: string;
@@ -14,7 +18,15 @@
 </script>
 
 <div class="modal-backdrop z-{zIndex}"> <!-- on:click={closeModal} on:keypress={closeModal} -->
-	<div class="modal-component {width} {bgColor}">
+	<!-- {#if isLoading}
+		<Spinner size="16" color="white" />
+	{/if} -->
+	<div
+		class="modal-component {width} {bgColor}"
+		on:load={() => { isLoading = false; } }
+		
+	>
+	<!-- transition:fly="{{ y: 100, duration: 1000 }}" -->
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24">
@@ -38,7 +50,7 @@
 
 <style lang="postcss">
 	.modal-backdrop {
-		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start;
+		@apply fixed top-0 left-0 right-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start;
 	}
 
 	.modal-component {

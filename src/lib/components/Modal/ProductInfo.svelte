@@ -6,6 +6,7 @@
 	import type { Product } from '$lib/types/product';
   import type { Offering } from '$lib/types/offering';
 	import { addProductToCart } from '$lib/stores/cart';
+	import { addToast, dismissToast } from '$lib/stores/toast';
 
 	const dispatch = createEventDispatcher();
 
@@ -24,12 +25,27 @@
 	}
 
 	const addToCart = () => {
+		isAddingToCart = true;
+		let id = addToast({
+			type: 'loading',
+			message: 'ADDING ORDER TO CART',
+			duration: 0,
+		});
 		addProductToCart(product, selectedOffering, quantity);
+		dismissToast(id);
+		isAddingToCart = false;
+		addToast({
+			type: 'success',
+			message: 'ORDER ADDED TO CART',
+			duration: 2000,
+		});
+		closeProductInfo();
 	}
 
 	let quantity = 1;
 	let selectedOffering = {} as Offering;
 	let isSelecting = false;
+	let isAddingToCart = false;
 	console.log('product info modal', !selectedOffering.size_name)
 
 	export let product: Product;
@@ -87,8 +103,8 @@
 				</div>
 
 				<button
-					disabled="{!selectedOffering.size_name}"
-					class="add-to-cart-btn {!selectedOffering.size_name ? 'disabled' : ''}"
+					disabled="{!selectedOffering.size_name || isAddingToCart}"
+					class="add-to-cart-btn {!selectedOffering.size_name || isAddingToCart ? 'disabled' : ''}"
 					type="button"
 					on:click={addToCart}>
 					Add to cart

@@ -10,7 +10,7 @@
   {#if type === "success"}
     <SuccessIcon size="9" />
   {:else if type === 'loading'}
-    <Spinner size="9" />
+    <Spinner size="9" color="white" />
   {/if}
 
   <div class="text">
@@ -20,7 +20,8 @@
 
 <style lang="postcss">
   article {
-    @apply w-96 flex items-center gap-x-4 p-6 rounded-xl text-navy-blue bg-[#DDECFF];
+    @apply w-96 flex items-center gap-x-4 p-6 rounded-full shadow-md
+      text-navy-blue bg-[#DDECFF] z-40;
   }
 
   .text {
