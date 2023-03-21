@@ -4,13 +4,15 @@ import type { Product } from '$lib/types/product';
 import { writable } from 'svelte/store';
 
 // This is a store that holds the cart state
-const CartStore = writable<Cart>({ items: [] as CartItem[], count: 0, total: 0, });
+const CartStore = writable<Cart>({ items: [] as CartItem[], count: 0, total: 0 });
 
 // This is a function that adds a product to the cart
 export const addProductToCart = (product: Product, offering: Offering, qty: number) => {
 	CartStore.update((cartState) => {
 		// Check if the product is already in the cart
-		const existingItem = cartState.items.find((item) => item.product.id === product.id  && item.offering.id === offering.id);
+		const existingItem = cartState.items.find(
+			(item) => item.product.id === product.id && item.offering.id === offering.id
+		);
 		if (existingItem) {
 			// If product is already in the cart, just update the quantity
 			existingItem.quantity += qty;
@@ -31,7 +33,9 @@ export const addProductToCart = (product: Product, offering: Offering, qty: numb
 export const incrementCartItemQuantity = (productId: string, offeringId: string) => {
 	CartStore.update((cartState) => {
 		// Check if the product is already in the cart
-		const existingItem = cartState.items.find((item) => item.product.id === productId && item.offering.id === offeringId);
+		const existingItem = cartState.items.find(
+			(item) => item.product.id === productId && item.offering.id === offeringId
+		);
 		if (existingItem) {
 			// If product is already in the cart, just update the quantity
 			existingItem.quantity += 1;
@@ -45,7 +49,9 @@ export const incrementCartItemQuantity = (productId: string, offeringId: string)
 export const decrementCartItemQuantity = (productId: string, offeringId: string) => {
 	CartStore.update((cartState) => {
 		// Check if the product is already in the cart
-		const existingItem = cartState.items.find((item) => item.product.id === productId && item.offering.id === offeringId);
+		const existingItem = cartState.items.find(
+			(item) => item.product.id === productId && item.offering.id === offeringId
+		);
 		if (existingItem) {
 			// If product is already in the cart, just update the quantity
 			existingItem.quantity -= 1;
@@ -59,7 +65,9 @@ export const decrementCartItemQuantity = (productId: string, offeringId: string)
 export const removeCartItemFromCart = (productId: string, offeringId: string) => {
 	CartStore.update((cartState) => {
 		// Check if the product is already in the cart
-		const existingItem = cartState.items.find((item) => item.product.id === productId && item.offering.id === offeringId);
+		const existingItem = cartState.items.find(
+			(item) => item.product.id === productId && item.offering.id === offeringId
+		);
 		if (existingItem) {
 			// If product is already in the cart, remove it from the cart
 			cartState.items.splice(cartState.items.indexOf(existingItem), 1);

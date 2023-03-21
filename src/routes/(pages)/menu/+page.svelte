@@ -3,7 +3,7 @@
 	import ProductList from '$lib/components/Product/Client/List.svelte';
 	import ProductInfo from '$lib/components/Modal/ProductInfo.svelte';
 	import type { Product } from '$lib/types/product';
-  import type { Offering } from '$lib/types/offering';
+	import type { Offering } from '$lib/types/offering';
 
 	const showProductInfo = async (event) => {
 		productInfoModal = true;

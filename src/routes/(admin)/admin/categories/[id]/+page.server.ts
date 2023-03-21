@@ -30,7 +30,7 @@ export const actions = {
 			offerings: [] as { id: string; size_name: string; price: number }[]
 		};
 		console.log(updatedCategory[`size_name${0}`] || updatedCategory[`price${0}`]);
-		
+
 		try {
 			for (
 				let i = 0;
@@ -44,7 +44,7 @@ export const actions = {
 					{
 						id: updatedCategory[`offering_id${i}`] as string,
 						size_name: updatedCategory[`size_name${i}`] as string,
-						price: Number(+updatedCategory[`price${i}`]),
+						price: Number(+updatedCategory[`price${i}`])
 					}
 				];
 			}

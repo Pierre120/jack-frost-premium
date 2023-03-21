@@ -5,20 +5,20 @@
 	import NavLinks from '$lib/components/NavBar/NavLinks.svelte';
 	import LogoutButton from '$lib/components/Buttons/Logout.svelte';
 	import type { LayoutData } from '../../../routes/$types';
-  import { createEventDispatcher } from 'svelte';
-	
+	import { createEventDispatcher } from 'svelte';
+
 	function toggleNavBar() {
 		showMenu = !showMenu;
 	}
 
 	const dispatch = createEventDispatcher();
-	
+
 	const openShoppingCartModal = () => {
-		dispatch("open");
+		dispatch('open');
 	};
 
 	let showMenu = false;
-	
+
 	export let data: LayoutData;
 	export let isAdmin = false;
 	export let hasCartItem = false;
@@ -47,7 +47,12 @@
 				<Logo width="w-2/3" />
 			</div>
 			<div class="flex flex-row-reverse col-span-1 pr-4 md:pr-12">
-				<CartButton placement="self-center" width="w-8" {hasCartItem} on:open={openShoppingCartModal} />
+				<CartButton
+					placement="self-center"
+					width="w-8"
+					{hasCartItem}
+					on:open={openShoppingCartModal}
+				/>
 			</div>
 			<div class="flex md:hidden">
 				<button

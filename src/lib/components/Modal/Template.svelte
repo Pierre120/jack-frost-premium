@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Spinner from '$lib/components/Spinner.svelte';
 	import { createEventDispatcher } from 'svelte';
-  import { fade, fly } from 'svelte/transition';
+	import { fade, fly } from 'svelte/transition';
 
 	const dispatch = createEventDispatcher();
 
@@ -17,16 +17,19 @@
 	export let zIndex: 0 | 20 | 10 | 30 | 40 | 50 = 30;
 </script>
 
-<div class="modal-backdrop z-{zIndex}" transition:fade> <!-- on:click={closeModal} on:keypress={closeModal} -->
+<div class="modal-backdrop z-{zIndex}" transition:fade>
+	<!-- on:click={closeModal} on:keypress={closeModal} -->
 	<!-- {#if isLoading}
 		<Spinner size="16" color="white" />
 	{/if} -->
 	<div
 		class="modal-component {width} {bgColor}"
-		on:load={() => { isLoading = false; } }
-		transition:fly="{{ y: 100, duration: 500 }}"
+		on:load={() => {
+			isLoading = false;
+		}}
+		transition:fly={{ y: 100, duration: 500 }}
 	>
-	<!-- transition:fly="{{ y: 100, duration: 1000 }}" -->
+		<!-- transition:fly="{{ y: 100, duration: 1000 }}" -->
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24">
