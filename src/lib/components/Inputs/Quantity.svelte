@@ -37,7 +37,7 @@
   }
 
   .quantity-input > div {
-    @apply grow w-8 h-8 bg-white text-center;
+    @apply grow w-8 h-8 bg-white text-center text-navy-blue;
   }
 
   .inc-qty {

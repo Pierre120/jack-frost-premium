@@ -48,7 +48,7 @@
   }
 
   .total-info {
-    @apply w-full flex items-center justify-between font-IstokWeb;
+    @apply w-full flex items-center justify-between font-IstokWeb pt-10;
   }
 
   .total-info > p {

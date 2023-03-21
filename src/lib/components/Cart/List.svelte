@@ -13,6 +13,6 @@
 
 <style lang="postcss">
   .item-list {
-    @apply w-full flex flex-col items-center justify-center gap-6;
+    @apply w-full max-h-[400px] py-4 flex flex-col items-center justify-start gap-6 overflow-y-auto;
   }
 </style>
