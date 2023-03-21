@@ -35,7 +35,7 @@
 	export let offerings: Offering[];
 </script>
 
-<TemplateModal width="max-w-7xl" on:closeModal={closeProductInfo} bgColor="bg-sky-blue">
+<TemplateModal width="max-w-7xl" on:closeModal={closeProductInfo} bgColor="bg-white">
 	<div slot="body" class="product-info">
 		<img src={product.img_src} alt={product.name} class="product-info-img" />
 		<div class="product-info-details">
