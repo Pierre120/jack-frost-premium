@@ -7,18 +7,22 @@
 	import CartStore from '$lib/stores/cart';
   import { goto } from '$app/navigation';
 
+	const openCart = () => {
+		isViewingCart = true;
+		console.log('opening cart');
+	};
 
 	const closeCart = () => {
 		isViewingCart = false;
 		console.log('closing cart');
-	}
+	};
 
-	let isViewingCart = true;
+	let isViewingCart = false;
 
 	export let data: LayoutData;
 </script>
 
-<NavBar {data} />
+<NavBar {data} on:open={openCart} />
 <slot />
 {#if $page.url.pathname !== '/contact'}
 	<Footer {data} />

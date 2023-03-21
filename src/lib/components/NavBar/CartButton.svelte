@@ -1,5 +1,12 @@
 <script lang="ts">
 	// import cartIcon from '$lib/assets/icons/shopping-cart.svg';
+	import { createEventDispatcher } from "svelte";
+
+	const dispatch = createEventDispatcher();
+
+	const openShoppingCartModal = () => {
+		dispatch("open");
+	};
 
 	export let placement: string;
 	export let width: string;
@@ -9,6 +16,7 @@
 	<button
 		class="flex items-center justify-center {width} h-auto text-gray-500 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline"
 		aria-label="Cart"
+		on:click={openShoppingCartModal}
 	>
 		<!-- <img src={cartIcon} alt="Cart Icon" class="w-full h-auto opacity-[.6] hover:opacity-75"> -->
 
