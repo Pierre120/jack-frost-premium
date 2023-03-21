@@ -10,9 +10,10 @@
 	export let width: string;
 	export let bgColor: string;
 	export let hasCloseIcon = true;
+	export let zIndex: 0 | 20 | 10 | 30 | 40 | 50 = 30;
 </script>
 
-<div class="modal-backdrop"> <!-- on:click={closeModal} on:keypress={closeModal} -->
+<div class="modal-backdrop z-{zIndex}"> <!-- on:click={closeModal} on:keypress={closeModal} -->
 	<div class="modal-component {width} {bgColor}">
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
@@ -37,7 +38,7 @@
 
 <style lang="postcss">
 	.modal-backdrop {
-		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start z-30;
+		@apply fixed top-0 left-0 w-full h-full px-1 pb-1 pt-[10vh] bg-modal-backdrop bg-opacity-60 flex justify-center items-start;
 	}
 
 	.modal-component {
