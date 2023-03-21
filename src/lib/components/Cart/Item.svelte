@@ -1,7 +1,27 @@
 <script lang="ts">
   import QuantityInput from '$lib/components/Inputs/Quantity.svelte';
   import RemoveButton from '$lib/components/Buttons/Remove.svelte';
+  import {
+    incrementCartItemQuantity,
+    decrementCartItemQuantity,
+    removeCartItemFromCart,
+  } from '$lib/stores/cart';
   import type { CartItem } from "$lib/types/cart";
+  // import { createEventDispatcher } from 'svelte';
+
+  // const dispatch = createEventDispatcher();
+
+  const incQuantity = () => {
+    incrementCartItemQuantity(cartItem.product.id, cartItem.offering.id as string);
+  };
+
+  const decQuantity = () => {
+    decrementCartItemQuantity(cartItem.product.id, cartItem.offering.id as string)
+  };
+
+  const removeItem = () => {
+    removeCartItemFromCart(cartItem.product.id, cartItem.offering.id as string);
+  };
 
   export let cartItem: CartItem;
 </script>
@@ -17,8 +37,8 @@
     <p>{ cartItem.product.description }</p>
   </div>
   <div class="item-edits">
-    <QuantityInput quantity={cartItem.quantity} />
-    <RemoveButton label='' />
+    <QuantityInput quantity={cartItem.quantity} on:increment={incQuantity} on:decrement={decQuantity} />
+    <RemoveButton label='' on:remove={removeItem} />
   </div>
 </div>
 
