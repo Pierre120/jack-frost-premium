@@ -1,5 +1,5 @@
 <script lang="ts">
-  export let size = 9;
+  export let size = '8';
   export let color = 'green';
 </script>
 
