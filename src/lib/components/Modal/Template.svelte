@@ -1,5 +1,4 @@
 <script lang="ts">
-	import Spinner from '$lib/components/Spinner.svelte';
 	import { createEventDispatcher } from 'svelte';
 	import { fade, fly } from 'svelte/transition';
 
@@ -18,10 +17,6 @@
 </script>
 
 <div class="modal-backdrop z-{zIndex}" transition:fade>
-	<!-- on:click={closeModal} on:keypress={closeModal} -->
-	<!-- {#if isLoading}
-		<Spinner size="16" color="white" />
-	{/if} -->
 	<div
 		class="modal-component {width} {bgColor}"
 		on:load={() => {
@@ -29,7 +24,6 @@
 		}}
 		transition:fly={{ y: 100, duration: 500 }}
 	>
-		<!-- transition:fly="{{ y: 100, duration: 1000 }}" -->
 		{#if hasCloseIcon}
 			<button class="modal-close" on:click={closeModal}>
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-9 w-9" fill="none" viewBox="0 0 24 24">

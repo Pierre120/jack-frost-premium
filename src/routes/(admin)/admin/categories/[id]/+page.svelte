@@ -1,6 +1,6 @@
 <script lang="ts">
 	import type { SubmitFunction } from '$app/forms';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import EditCategoryForm from '$lib/components/Forms/Category.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';

@@ -1,6 +1,5 @@
 import { error } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
-import { getProducts } from '$lib/samples/products';
 import type { Product } from '$lib/types/product';
 
 export const load = (async ({ fetch }) => {

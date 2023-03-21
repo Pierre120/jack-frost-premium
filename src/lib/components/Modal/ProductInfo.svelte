@@ -114,7 +114,9 @@
 										selectedOffering = offering;
 										isSelecting = false;
 									}}
-									on:keypress={() => {}}
+									on:keypress={() => {
+										console.log('keypress');
+									}}
 								>
 									<div>
 										<span>{offering.size_name}</span>

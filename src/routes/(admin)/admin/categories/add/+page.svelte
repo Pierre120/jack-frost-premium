@@ -1,11 +1,10 @@
 <script lang="ts">
 	import type { SubmitFunction } from '$app/forms';
-	import { goto, invalidateAll } from '$app/navigation';
+	import { goto } from '$app/navigation';
 	import AddCategoryForm from '$lib/components/Forms/Category.svelte';
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import type { PageData } from './$types';
-	import LoadingModal from '$lib/components/Modal/Loading.svelte';
 
 	export let data: PageData;
 
