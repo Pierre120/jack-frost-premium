@@ -7,6 +7,7 @@
     removeCartItemFromCart,
   } from '$lib/stores/cart';
   import type { CartItem } from "$lib/types/cart";
+  import { fade, slide } from 'svelte/transition';
   // import { createEventDispatcher } from 'svelte';
 
   // const dispatch = createEventDispatcher();
@@ -26,7 +27,7 @@
   export let cartItem: CartItem;
 </script>
 
-<div class="cart-item-container">
+<div class="cart-item-container" transition:slide>
   <img src={cartItem.product.img_src} alt={cartItem.product.name}>
   <div class="item-info">
     <div class="item-header">

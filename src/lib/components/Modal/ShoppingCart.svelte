@@ -3,6 +3,7 @@
   import CartItemList from "$lib/components/Cart/List.svelte";
   import TemplateModal from '$lib/components/Modal/Template.svelte';
   import type { Cart } from "$lib/types/cart";
+  import { fade, slide } from "svelte/transition";
 
   const dispatch = createEventDispatcher();
 
@@ -20,9 +21,9 @@
   </div>
   <div slot="body" class="{ cart.items.length === 0 ? 'empty' : ''}">
     {#if cart.items.length === 0}
-      <p>Your Shopping Cart is empty.</p>
+      <p transition:slide>Your Shopping Cart is empty.</p>
     {:else}
-      <div class="cart-items-container">
+      <div class="cart-items-container" transition:slide>
         <CartItemList items={cart.items} />
       </div>
       <div class="total-info">
