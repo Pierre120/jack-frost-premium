@@ -40,7 +40,7 @@
   }
 
   .item-info > h4 {
-    @apply w-full block text-sm text-gray-500 py-1;
+    @apply w-full block text-sm text-gray-500 pt-1 pb-2;
   }
 
   .item-info > p {
