@@ -71,7 +71,7 @@
 			// Delete
 			isAboutToDelete = false;
 			loading = true;
-			statusHeader = 'DELETING CATEGORY';
+			statusHeader = 'FOR A MOMENT...';
 			statusInfo = 'Deleting the category...';
 			const result = await fetch(`/api/categories/${data.category.id}/delete`, {
 				method: 'POST'
@@ -85,7 +85,7 @@
 
 	const submitEdit: SubmitFunction = async () => {
 		loading = true;
-		statusHeader = 'UPDATING CATEGORY';
+		statusHeader = 'FOR A MOMENT...';
 		statusInfo = 'Updating the category...';
 		// await invalidateAll();
 		return async ({ result, update }) => {
