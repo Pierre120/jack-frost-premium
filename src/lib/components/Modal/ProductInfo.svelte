@@ -30,6 +30,7 @@
 	let quantity = 1;
 	let selectedOffering = {} as Offering;
 	let isSelecting = false;
+	console.log('product info modal', !selectedOffering.size_name)
 
 	export let product: Product;
 	export let offerings: Offering[];
@@ -89,7 +90,13 @@
 					</div>
 				</div>
 
-				<button class="add-to-cart-btn" type="button" on:click={addToCart}>Add to cart</button>
+				<button
+					disabled="{!selectedOffering.size_name}"
+					class="add-to-cart-btn {!selectedOffering.size_name ? 'disabled' : ''}"
+					type="button"
+					on:click={addToCart}>
+					Add to cart
+				</button>
 			</div>
 		</div>
 	</div>
@@ -151,6 +158,11 @@
 	}
 
 	.add-to-cart-btn {
-		@apply w-full p-4 mt-4 font-IstokWeb text-xl text-white bg-navy-blue hover:bg-primary-red rounded-md shadow-md;
+		@apply w-full p-4 mt-4 font-IstokWeb text-xl text-white bg-navy-blue hover:bg-primary-red 
+		rounded-md shadow-md cursor-pointer;
+	}
+
+	.disabled {
+		@apply cursor-not-allowed bg-[#BEBEBE] hover:bg-[#BEBEBE];
 	}
 </style>
