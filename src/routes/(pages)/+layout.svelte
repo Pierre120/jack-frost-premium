@@ -22,7 +22,7 @@
 	export let data: LayoutData;
 </script>
 
-<NavBar {data} on:open={openCart} />
+<NavBar {data} on:open={openCart} hasCartItem={$CartStore.count > 0} />
 <slot />
 {#if $page.url.pathname !== '/contact'}
 	<Footer {data} />

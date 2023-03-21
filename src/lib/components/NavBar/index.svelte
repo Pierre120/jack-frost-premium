@@ -21,6 +21,7 @@
 	
 	export let data: LayoutData;
 	export let isAdmin = false;
+	export let hasCartItem = false;
 </script>
 
 <!-- Navbar.svelte -->
@@ -46,7 +47,7 @@
 				<Logo width="w-2/3" />
 			</div>
 			<div class="flex flex-row-reverse col-span-1 pr-4 md:pr-12">
-				<CartButton placement="self-center" width="w-8" on:open={openShoppingCartModal} />
+				<CartButton placement="self-center" width="w-8" {hasCartItem} on:open={openShoppingCartModal} />
 			</div>
 			<div class="flex md:hidden">
 				<button
