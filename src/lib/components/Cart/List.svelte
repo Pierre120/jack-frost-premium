@@ -1,11 +1,13 @@
 <script lang="ts">
-  import CartItem from '$lib/components/Cart/Item.svelte';
-  import CartStore from '$lib/stores/cart';
+  import CartItemComponent from '$lib/components/Cart/Item.svelte';
+  import type { CartItem } from '$lib/types/cart';
+
+  export let items: CartItem[];
 </script>
 
 <div class="item-list">
-  {#each $CartStore.items as cartItem}
-    <CartItem cartItem={cartItem} />
+  {#each items as item}
+    <CartItemComponent cartItem={item} />
   {/each}
 </div>
 

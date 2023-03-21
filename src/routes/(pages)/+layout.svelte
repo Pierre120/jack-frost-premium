@@ -4,6 +4,7 @@
 	import NavBar from '$lib/components/NavBar/index.svelte';
 	import Footer from '$lib/components/Footer/index.svelte';
 	import ShoppingCartModal from '$lib/components/Modal/ShoppingCart.svelte';
+	import CartStore from '$lib/stores/cart';
   import { goto } from '$app/navigation';
 
 
@@ -23,5 +24,5 @@
 	<Footer {data} />
 {/if}
 {#if isViewingCart}
-	<ShoppingCartModal on:close={closeCart} />
+	<ShoppingCartModal cart={$CartStore} on:close={closeCart} />
 {/if}
