@@ -10,7 +10,7 @@ const CartStore = writable<Cart>({ items: [] as CartItem[], count: 0, total: 0, 
 export const addProductToCart = (product: Product, offering: Offering, qty: number) => {
 	CartStore.update((cartState) => {
 		// Check if the product is already in the cart
-		const existingItem = cartState.items.find((item) => item.product.id === product.id);
+		const existingItem = cartState.items.find((item) => item.product.id === product.id  && item.offering.id === offering.id);
 		if (existingItem) {
 			// If product is already in the cart, just update the quantity
 			existingItem.quantity += qty;

@@ -46,7 +46,7 @@
 	let selectedOffering = {} as Offering;
 	let isSelecting = false;
 	let isAddingToCart = false;
-	console.log('product info modal', !selectedOffering.size_name)
+	$: console.log('product info modal', JSON.stringify(selectedOffering));
 
 	export let product: Product;
 	export let offerings: Offering[];
