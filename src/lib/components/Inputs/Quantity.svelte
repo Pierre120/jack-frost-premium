@@ -28,7 +28,7 @@
 
 <style lang="postcss">
   .quantity-input {
-    @apply flex items-center justify-center w-28 h-auto font-IstokWeb text-2xl rounded-md;
+    @apply flex items-center justify-center w-28 h-auto font-IstokWeb text-2xl rounded-md shadow-md;
   }
 
   .quantity-input > button {
