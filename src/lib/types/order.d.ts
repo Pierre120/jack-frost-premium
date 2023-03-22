@@ -1,4 +1,5 @@
 import { Product } from './product';
+import { Payemnt } from './payment'
 
 export interface Order {
 	id: string;
@@ -15,7 +16,7 @@ export interface Order {
 	payment_status: PaymentStatus;
 	total_price: number;
 	order_details?: OrderDetails[];
-	payments: string[]; // to update
+	payments: Payment[]; // to update
 }
 
 enum PaymentStatus {

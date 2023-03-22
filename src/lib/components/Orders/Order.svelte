@@ -1,21 +1,30 @@
-<script>
+<script lang="ts">
   import EditOrder from '$lib/components/Buttons/Edit.svelte';
   import { goto } from '$app/navigation';
-  import type { Order } from '$lib/types/order';
+  import type { Order, OrderDetails } from '$lib/types/order';
 
-  export let order: Order;
+  export let order: Order 
+  export let number = 0;
 
   const editOrder = () => {  //NOT YET IMPLEMENTED!
-    goto(`/admin/orders/${order.id}`);
+    goto(`/admin/orders/${order?.id}`);
   };
+
+  const totalPayment = () =>{
+    let total = 0;
+    order?.payments.forEach(payment => {
+      total += payment.amount;
+    });
+    return total;
+  }
 </script>
 
 <div class="bg-gray-100 flex flex-col">
   <div class="flex justify-between items-center bg-white p-4">
     <div>
-      <p class="text-gray-700 font-semibold">Order #1234</p>
-      <p class="text-gray-500">Status: Processing</p>
-      <p class="text-gray-500">Estimated Date: 25 March 2023</p>
+      <p class="text-gray-700 font-semibold">Order #{number}</p>
+      <p class="text-gray-500">Status: {order?.payment_status}</p>
+      <p class="text-gray-500">Estimated Date: {order?.estimated_delivery}</p>
     </div>
     <div class="edit-button-specs">
       <EditOrder on:edit={editOrder} />
@@ -25,17 +34,17 @@
     <div class="w-1/3">
       <p class="text-gray-700 font-semibold">Receipt</p>
       <ul class="list-disc pl-4 mt-4">
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
+        {#each order?.order_details as orderDetail}
+          <li>{orderDetail}</li>
+        {/each}
       </ul>
     </div>
     <div class="w-1/3">
       <p class="text-gray-700 font-semibold">Customer Details</p>
       <ul class="list-disc pl-4 mt-4">
-        <li>Name: John Doe</li>
-        <li>Contact Number: (123) 456-7890</li>
-        <li>Payment Method: john.doe@example.com</li>
+        <li>Name: {order?.first_name} {order?.last_name}</li>
+        <li>Contact Number: {order?.primary_contact}</li>
+        <li>Payment Method: {order?.payments[order?.payments.length-1].payment_mode}</li>
       </ul>
     </div>
     <div class="w-1/3">
@@ -45,8 +54,8 @@
   </div>
   <div class="flex justify-between items-center bg-white p-4">
     <div>
-      <p class="text-gray-700 font-semibold">Total Amount: $100.00</p>
-      <p class="text-gray-500">Amount paid: $0.00</p>
+      <p class="text-gray-700 font-semibold">Total Amount: {order?.total_price}</p>
+      <p class="text-gray-500">Amount paid: {totalPayment}</p>
     </div>
   </div>
 </div>
