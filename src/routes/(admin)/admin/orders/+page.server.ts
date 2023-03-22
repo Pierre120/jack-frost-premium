@@ -10,12 +10,12 @@ export const load = (async ({ locals, fetch }) => {
 	const res = await fetch('/');  //('/api/categories');
 	const categs = await res.json();
 	console.log(categs);
-	if (categs.success) {
-		return {
-			categs: categs.categories as Category[]
-		};
-	}
-	throw error(404, 'Categories not found');
+	///if (categs.success) {
+	//	return {
+		//	categs: categs.categories as Category[]
+		//};
+	//})
+	//throw error(404, 'Categories not found');
 }) satisfies PageServerLoad;
 
 

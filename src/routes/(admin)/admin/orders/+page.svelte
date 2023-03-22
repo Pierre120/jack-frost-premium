@@ -4,7 +4,7 @@
   import OrderList from '$lib/components/Orders/List.svelte';
 
   export let data: PageData;
-  
+
   const editCategory = (event: CustomEvent) => {
 		goto(`/admin/categories/${event.detail.category_id}`);
 	};
@@ -21,7 +21,7 @@
     <p class="p-4">Left column</p>
   </div>
   <div class="bg-gray-400 md:w-2/3">
-    <OrderList width="w-full md:max-w-[90%]" categories={datas}/>
+    <OrderList width="w-full md:max-w-[90%]" categories={}/>
   </div>
 </div>
 
