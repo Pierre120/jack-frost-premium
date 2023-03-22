@@ -12,7 +12,7 @@ const getCategory = async (category_id: string) => {
 	});
 
 	// for debugging purposes
-	console.log(JSON.stringify(result));
+	console.log('category from server: ', result);
 
 	return result;
 };
@@ -22,7 +22,7 @@ const getAllCategories = async () => {
 	const result = await prisma.category.findMany();
 
 	// for debugging purposes
-	console.log(JSON.stringify(result));
+	console.log('categories from server: ', result);
 
 	return result;
 };

@@ -1,14 +1,23 @@
 <script lang="ts">
 	// import cartIcon from '$lib/assets/icons/shopping-cart.svg';
+	import { createEventDispatcher } from 'svelte';
+
+	const dispatch = createEventDispatcher();
+
+	const openShoppingCartModal = () => {
+		dispatch('open');
+	};
 
 	export let placement: string;
 	export let width: string;
+	export let hasCartItem = false;
 </script>
 
 <div class="inline-block min-w-min {placement}">
 	<button
-		class="flex items-center justify-center {width} h-auto text-gray-500 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline"
+		class="relative flex items-center justify-center {width} h-auto text-gray-500 transition-colors duration-150 bg-white rounded-lg focus:shadow-outline"
 		aria-label="Cart"
+		on:click={openShoppingCartModal}
 	>
 		<!-- <img src={cartIcon} alt="Cart Icon" class="w-full h-auto opacity-[.6] hover:opacity-75"> -->
 
@@ -17,6 +26,18 @@
 		<!--! Font Awesome Pro 6.3.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
 		<!-- <path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/>
     </svg> -->
+
+		<!-- Ping -->
+		{#if hasCartItem}
+			<span class="absolute -top-1 -right-1 flex h-3 w-3 z-[1]">
+				<span class="relative flex h-3 w-3">
+					<span
+						class="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary-red opacity-75"
+					/>
+					<span class="relative inline-flex rounded-full h-3 w-3 bg-primary-red" />
+				</span>
+			</span>
+		{/if}
 
 		<svg
 			version="1.0"

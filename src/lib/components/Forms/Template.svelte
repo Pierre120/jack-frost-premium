@@ -32,7 +32,7 @@
 	}
 
 	.header {
-		@apply flex items-center justify-between w-full py-10;
+		@apply flex items-center justify-between w-full py-10 relative;
 	}
 
 	.header > h2 {
@@ -44,7 +44,7 @@
 	}
 
 	.close {
-		@apply absolute top-10 right-6 p-0 text-4xl font-bold text-[#A2BCDD] hover:text-[#F6162E] cursor-pointer;
+		@apply absolute top-10 -right-16 p-0 text-4xl font-bold text-[#A2BCDD] hover:text-[#F6162E] cursor-pointer;
 	}
 
 	.body {
