@@ -4,11 +4,17 @@
 	import TemplateModal from '$lib/components/Modal/Template.svelte';
 	import type { Cart } from '$lib/types/cart';
 	import { slide } from 'svelte/transition';
+  import { goto } from '$app/navigation';
 
 	const dispatch = createEventDispatcher();
 
 	const close = () => {
 		dispatch('close');
+	};
+
+	export let submitOrder = () => {
+		close();
+		goto('/order/checkout'); // '/order/checkout'
 	};
 
 	export let cart: Cart;
@@ -28,7 +34,7 @@
 			</div>
 			<div class="total-info">
 				<p>Total: &#8369; {cart.total.toFixed(2)}</p>
-				<button type="button">Submit</button><!-- TODO: add on-click event handler -->
+				<button type="button" on:click={submitOrder}>Submit</button><!-- TODO: add on-click event handler -->
 			</div>
 		{/if}
 	</div>
