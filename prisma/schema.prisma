@@ -103,21 +103,24 @@ model Offering {
 
 /// Order model
 model Order {
-  id                  String   @id @unique @default(cuid())
+  id                  String        @id @unique @default(cuid())
   /// user_id     String
-  email               String
-  first_name          String
-  last_name           String
-  suffix              String?
+  email               String?       @default("")
+  name                String
+  first_name          String?       @default("")
+  last_name           String?       @default("")
+  suffix              String?       @default("")
   primary_contact     String
-  secondary_contact   String?
-  delivery_address    String
-  created_at          DateTime @default(now())
-  updated_at          DateTime @updatedAt
+  secondary_contact   String?       @default("")
+  delivery_address    String?       @default("")
+  created_at          DateTime      @default(now())
+  updated_at          DateTime      @updatedAt
   estimated_delivery  DateTime?
-  payment_status      PaymentStatus
-  total_price         Decimal  @db.Decimal(10, 2)
-  amount_paid         Decimal  @db.Decimal(10, 2) @default(0)
+  payment_status      PaymentStatus @default(NP)
+  payment_mode        PaymentMode
+  total_price         Decimal       @db.Decimal(10, 2)
+  amount_paid         Decimal?      @db.Decimal(10, 2) @default(0)
+  additional_details  String?       @default("")
   /// user        User     @relation(references: [id], fields: [user_id], onDelete: Cascade)
   order_details       OrderDetails[]
   payments            Payment[]
@@ -165,5 +168,6 @@ model Payment {
 /// Enums for payment mode
 enum PaymentMode {
   GCASH /// GCash
-  BPI   /// BPI
+  MAYA  /// Maya
+  BDO   /// BDO
 }
