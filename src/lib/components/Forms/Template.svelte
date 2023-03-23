@@ -28,7 +28,7 @@
 
 <style lang="postcss">
 	.form-container {
-		@apply block w-full px-32 bg-white;
+		@apply block w-full min-h-screen px-32 bg-white;
 	}
 
 	.header {
