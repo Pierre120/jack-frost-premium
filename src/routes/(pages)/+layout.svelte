@@ -26,7 +26,7 @@
 
 <NavBar {data} on:open={openCart} hasCartItem={$CartStore.count > 0} />
 <slot />
-{#if $page.url.pathname !== '/contact'}
+{#if $page.url.pathname !== '/contact' && $page.url.pathname !== '/order/checkout' && $page.url.pathname !== '/order/success'}
 	<Footer {data} />
 {/if}
 

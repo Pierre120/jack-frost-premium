@@ -6,6 +6,7 @@
 	import LogoutButton from '$lib/components/Buttons/Logout.svelte';
 	import type { LayoutData } from '../../../routes/$types';
 	import { createEventDispatcher } from 'svelte';
+  import { page } from '$app/stores';
 
 	function toggleNavBar() {
 		showMenu = !showMenu;
@@ -21,11 +22,20 @@
 
 	export let data: LayoutData;
 	export let hasCartItem = false;
+
+	console.log(JSON.stringify(data));
 </script>
 
 <!-- Navbar.svelte -->
 <nav class="w-screen bg-white px-4 pt-4 pb-2">
-	{#if data.navbar === 'admin'}
+	{#if $page.url.pathname === '/order/checkout' || $page.url.pathname === '/order/success'}
+		<div class="flex items-center justify-start py-2 px-28 gap-8">
+			<Logo width="w-80" />
+			<h2 class="font-IstokWeb font-bold text-6xl text-navy-blue uppercase">
+				{ $page.url.pathname === '/order/checkout' ? 'ORDER CONFIRMATION' : 'ORDER SUCCESS'}
+			</h2>
+		</div>
+	{:else if data.navbar === 'admin'}
 		<div class="grid grid-cols-5 gap-5">
 			<div class="flex justify-center items-center col-span-1">
 				<Logo width="w-2/3" />
@@ -37,7 +47,7 @@
 				<LogoutButton formaction="/api/logout" />
 			</div>
 		</div>
-	{:else if data.navbar === 'website'}
+	{:else if data.navbar === 'default'}
 		<div class="grid grid-cols-3 gap-4">
 			<div class="flex col-span-1 pl-4 md:pl-12">
 				<SearchButton placement="self-center" width="w-8" />
@@ -83,11 +93,6 @@
 								{showMenu ? 'flex' : 'hidden'}"
 		>
 			<NavLinks {data} />
-		</div>
-	{:else if data.navbar === 'order'}
-		<div class="flex items-center justify-start py-2 px-28">
-			<Logo width="w-2/3" />
-			<h2>{ data.phase }</h2>
 		</div>
 	{/if}
 </nav>

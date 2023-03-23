@@ -32,6 +32,7 @@ export const load = (() => {
 				alt: 'Phone icon',
 				label: '+639189354716'
 			}
-		]
+		],
+		navbar: 'default',
 	};
 }) satisfies LayoutLoad;

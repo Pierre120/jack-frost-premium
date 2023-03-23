@@ -7,6 +7,7 @@ export const load = (() => {
 			{ title: 'PRODUCTS', href: '/admin/products' },
 			{ title: 'CATEGORIES', href: '/admin/categories' },
 			{ title: 'ORDERS', href: '/admin/orders' }
-		]
+		],
+		navbar: 'admin',
 	};
 }) satisfies LayoutLoad;

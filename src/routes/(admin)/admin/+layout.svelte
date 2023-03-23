@@ -5,5 +5,5 @@
 	export let data: LayoutData;
 </script>
 
-<NavBar {data} isAdmin={true} />
+<NavBar {data} />
 <slot />
