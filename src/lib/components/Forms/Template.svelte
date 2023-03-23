@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let label: string;
+	export let label = '';
 	export let hasDeleteButton = false;
 
 	const dispatch = createEventDispatcher();
@@ -12,7 +12,9 @@
 
 <div class="form-container">
 	<div class="header">
-		<h2>{label}</h2>
+		<slot name="header">
+			<h2>{label}</h2>
+		</slot>
 		<div class="buttons">
 			<slot name="saveButton" />
 			{#if hasDeleteButton}
@@ -35,7 +37,7 @@
 		@apply flex items-center justify-between w-full py-10 relative;
 	}
 
-	.header > h2 {
+	.header > h2, .header h2  {
 		@apply font-IstokWeb font-bold text-start align-bottom uppercase text-4xl text-[#352F75];
 	}
 

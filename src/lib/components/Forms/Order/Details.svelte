@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { Cart, CartItem } from "$lib/types/cart";
+  import type { OrderDetails } from "$lib/types/order";
 
   const toProduct = (item: CartItem) => {
     switch(item.offering.size_name.toLowerCase()) {
@@ -18,7 +19,8 @@
     }
   };
 
-  export let cart: Cart;
+  export let items: CartItem[] | OrderDetails[];
+  export let totalPrice: number;
   export let listLabel = 'Order Details';
 </script>
 
@@ -32,7 +34,7 @@
       <th>Amount</th>
     </tr>
 
-    {#each cart.items as item}
+    {#each items as item}
       <tr>
         <td>{ toProduct(item) }</td>
         <td>{ item.quantity }</td>
@@ -41,12 +43,12 @@
       </tr>
     {/each}
   </table>
-  <p>Total: &#8369;{cart.total.toFixed(2)}</p>
+  <p>Total: &#8369;{ totalPrice.toFixed(2) }</p>
 </div>
 
 <style lang="postcss">
   .order-details-container {
-    @apply flex flex-col items-stretch justify-center font-IstokWeb w-full pr-10 py-4;
+    @apply flex flex-col items-stretch justify-center font-IstokWeb w-full pr-10 py-4 border-r border-navy-blue;
   }
 
   .order-details-container > h3 {
