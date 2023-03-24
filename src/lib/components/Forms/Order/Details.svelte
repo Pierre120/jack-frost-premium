@@ -48,7 +48,7 @@
 
 <style lang="postcss">
   .order-details-container {
-    @apply flex flex-col items-stretch justify-center font-IstokWeb w-full pr-10 py-4 border-r border-navy-blue;
+    @apply flex flex-col items-stretch justify-start font-IstokWeb w-full pr-10 py-4 border-r border-navy-blue;
   }
 
   .order-details-container > h3 {
@@ -60,6 +60,10 @@
   }
 
   table {
-    @apply grow w-full border-separate border-spacing-3 text-[#8E8E8E] text-2xl;
+    @apply w-full max-h-[450px] border-separate border-spacing-3 text-[#8E8E8E] text-2xl mb-auto overflow-y-auto;
+  }
+
+  table th, table td {
+    @apply text-start;
   }
 </style>

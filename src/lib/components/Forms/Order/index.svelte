@@ -35,8 +35,8 @@
 
 <div class="order-form-container">
   <TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
-    <div slot="header" class="header-order">
-      {#if order?.id}
+    <div slot="header" class="header-order {!order?.id ? 'hidden': ''}">
+      {#if order?.id || true}
         <h3>Order Status</h3>
         <select name="payment_status" id="payment_status" form={formName}>
           <option value="NP" selected={ orderStatus === 'NP'}>Unpaid</option>
@@ -54,7 +54,9 @@
         <input type="date" name="estimated_delivery" id="estimated_delivery" />
       </div>
       <div class="info-container">
-        <OrderDetailsList {items} {totalPrice} />
+        <div class="flex items-stretch justify-start w-full max-w-2xl">
+          <OrderDetailsList {items} {totalPrice} />
+        </div>
         <CustomerInputs {formName} {formData} {order} {isCheckout} on:close={closeForm} />
       </div>
     </form>
@@ -66,8 +68,12 @@
     @apply flex flex-col items-center justify-start w-full;
   }
 
+  form {
+    @apply flex flex-col items-stretch justify-start w-full;
+  }
+
   .header-order {
-    @apply flex items-center justify-start gap-x-10 font-IstokWeb;
+    @apply flex items-center justify-start gap-x-40 font-IstokWeb;
   }
 
   .header-order > h3, .header-order h3 {
@@ -75,7 +81,7 @@
   }
 
   .date-input-container {
-    @apply flex items-center justify-start gap-x-12 font-IstokWeb;
+    @apply flex items-center justify-start gap-x-12 font-IstokWeb pb-10 -mt-5;
   }
 
   .date-input-container > h4, .date-input-container h4 {
@@ -90,10 +96,14 @@
   }
 
   select {
-    @apply w-80;
+    @apply w-72;
   }
 
   input[type='date'] {
     @apply w-64;
+  }
+
+  .info-container {
+    @apply flex items-stretch justify-start w-full;
   }
 </style>
