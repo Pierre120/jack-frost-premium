@@ -43,7 +43,8 @@
 		@apply flex items-center justify-between w-full py-10 relative;
 	}
 
-	.header > h2, .header h2  {
+	.header > h2,
+	.header h2 {
 		@apply font-IstokWeb font-bold text-start align-bottom uppercase text-4xl text-[#352F75];
 	}
 

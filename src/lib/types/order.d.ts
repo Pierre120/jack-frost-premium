@@ -26,16 +26,16 @@ export interface Order {
 }
 
 enum PaymentStatus {
-  SS, // Success Payment / Settled Payment
-  FP, // Full Payment / Fully Paid
-  PP, // Down Payment / Partially Paid
-  NP, // No Payment / Unpaid
+	SS, // Success Payment / Settled Payment
+	FP, // Full Payment / Fully Paid
+	PP, // Down Payment / Partially Paid
+	NP // No Payment / Unpaid
 }
 
 enum PaymentMode {
-  GCASH, // GCash
-  MAYA,  // Maya
-  BDO,   // BDO
+	GCASH, // GCash
+	MAYA, // Maya
+	BDO // BDO
 }
 
 export interface OrderDetails {

@@ -6,7 +6,7 @@
 	import LogoutButton from '$lib/components/Buttons/Logout.svelte';
 	import type { LayoutData } from '../../../routes/$types';
 	import { createEventDispatcher } from 'svelte';
-  import { page } from '$app/stores';
+	import { page } from '$app/stores';
 
 	function toggleNavBar() {
 		showMenu = !showMenu;
@@ -32,7 +32,7 @@
 		<div class="flex items-center justify-start py-2 px-28 gap-8">
 			<Logo width="w-80" />
 			<h2 class="font-IstokWeb font-bold text-6xl text-navy-blue uppercase">
-				{ $page.url.pathname === '/order/confirmation' ? 'ORDER CONFIRMATION' : 'CHECKOUT'}
+				{$page.url.pathname === '/order/confirmation' ? 'ORDER CONFIRMATION' : 'CHECKOUT'}
 			</h2>
 		</div>
 	{:else if data.navbar === 'admin'}

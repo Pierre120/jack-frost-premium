@@ -8,6 +8,6 @@ export const load = (() => {
 			{ title: 'CATEGORIES', href: '/admin/categories' },
 			{ title: 'ORDERS', href: '/admin/orders' }
 		],
-		navbar: 'admin',
+		navbar: 'admin'
 	};
 }) satisfies LayoutLoad;

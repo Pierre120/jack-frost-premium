@@ -33,6 +33,6 @@ export const load = (() => {
 				label: '+639189354716'
 			}
 		],
-		navbar: 'default',
+		navbar: 'default'
 	};
 }) satisfies LayoutLoad;

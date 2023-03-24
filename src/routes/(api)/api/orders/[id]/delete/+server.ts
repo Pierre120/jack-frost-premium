@@ -2,7 +2,6 @@ import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
 import { deleteOrder } from '$lib/server/orders/delete';
 
-
 // Delete an order from the database
 export const POST = (async ({ params, fetch }) => {
 	try {

@@ -7,12 +7,12 @@ const getOrder = async (order_id: string) => {
 		},
 		include: {
 			// payments: true, // NOTE: this might cause an error since the payment system is not implemented
-      order_details: true
+			order_details: true
 		}
 	});
 
-  	// for debugging purposes
-	console.log("ACQUIRED ORDER: ", JSON.stringify(result));
+	// for debugging purposes
+	console.log('ACQUIRED ORDER: ', JSON.stringify(result));
 
 	return result;
 };
@@ -29,7 +29,7 @@ const getOrderNumber = async (order_id: string) => {
 	});
 
 	// for debugging purposes
-	console.log("ACQUIRED ORDER NUMBER: ", JSON.stringify(result));
+	console.log('ACQUIRED ORDER NUMBER: ', JSON.stringify(result));
 
 	return result;
 };
@@ -38,7 +38,7 @@ const getAllOrders = async () => {
 	const result = await prisma.order.findMany();
 
 	// for debugging purposes
-	console.log("ALL ORDERS: ", JSON.stringify(result));
+	console.log('ALL ORDERS: ', JSON.stringify(result));
 
 	return result;
 };

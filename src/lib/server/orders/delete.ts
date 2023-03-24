@@ -6,7 +6,7 @@ const deleteOrder = async (order_id: string) => {
 			id: order_id
 		}
 	});
-  	// for debugging purposes
+	// for debugging purposes
 	console.log(JSON.stringify(result));
 
 	return result;
