@@ -10,7 +10,7 @@
 
 	const confirmationHeader = 'DISCARD PRODUCT?';
 	const confirmationDetails =
-		'The product you’ve made will not be saved if you leave this page without saving.';
+		"The product you've made will not be saved if you leave this page without saving.";
 	const cancelLabel = 'Stay on this Page';
 	const confirmLabel = 'Leave this Page';
 	let statusHeader = '';
@@ -63,7 +63,7 @@
 	formaction="?/add"
 	submitHandle={submitAdd}
 	categories={data.categories}
-	hasDeleteButton={false}
+	hasSaveButton={true}
 	on:close={discardProduct}
 />
 {#if isAboutToLeave}

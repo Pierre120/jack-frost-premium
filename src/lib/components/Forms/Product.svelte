@@ -13,7 +13,8 @@
 	export let label: string;
 	export let formaction: string;
 	export let submitHandle: SubmitFunction;
-	export let hasDeleteButton = true;
+	export let hasSaveButton = false;
+	export let hasDeleteButton = false;
 	export let product: Product | null = null;
 
 	let description = product?.description ?? '';
@@ -117,7 +118,7 @@
 </script>
 
 <div class="product-form-container">
-	<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
+	<TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<SaveButton slot="saveButton" form="product-form" {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
 		<form
