@@ -15,11 +15,15 @@
     dispatch('remove');
   };
 
+  const closeForm = () => {
+    dispatch('close');
+  };
+
   export let formaction: string;
   export let items: OrderDetails[] | CartItem[];
   export let totalPrice: number;
-  export let order: Order | undefined = undefined;
   export let formData: ActionData;
+  export let order: Order | undefined = undefined;
   export let hasSaveButton = false;
   export let hasDeleteButton = false;
   export let label = 'Order Status'
@@ -29,7 +33,7 @@
 </script>
 
 <div class="order-form-container">
-  <TemplateForm {label} {hasSaveButton} {hasDeleteButton}>
+  <TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
     <div slot="header" class="header">
       {#if !order}
         <h3>Order Status</h3>
@@ -41,7 +45,7 @@
         </select>
       {/if}
     </div>
-    <SaveButton slot="saveButton" form="product-form" {formaction} />
+    <SaveButton slot="saveButton" form={formName} {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
     <form id={formName} class={formName} slot="body" method="POST">
       <div class="date-input-container">
@@ -50,7 +54,7 @@
       </div>
       <div class="info-container">
         <OrderDetailsList {items} {totalPrice} />
-        <CustomerInputs {formData} {order} />
+        <CustomerInputs {formName} {formData} {order} on:close={closeForm} />
       </div>
     </form>
   </TemplateForm>

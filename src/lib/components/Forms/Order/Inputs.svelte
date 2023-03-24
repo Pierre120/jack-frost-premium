@@ -1,6 +1,13 @@
 <script lang="ts">
   import type { Order } from "$lib/types/order";
+  import { createEventDispatcher } from "svelte";
   import type { ActionData } from "./$types";
+
+  const dispatch = createEventDispatcher();
+  
+  const closeForm = () => {
+    dispatch("close");
+  };
 
   export let formData: ActionData;
   export let order: Order | undefined;
@@ -16,7 +23,7 @@
       <label for="customer_name">
         Name:
       </label>
-      <input type="text" name="customer_name" id="customer_name" />
+      <input type="text" name="customer_name" id="customer_name" form={formName} />
       <label for="customer_name">
         TODO: Error message here
       </label>
@@ -24,7 +31,7 @@
       <label for="contact_number">
         Contact Number:
       </label>
-      <input type="text" name="contact_number" id="contact_number" />
+      <input type="text" name="contact_number" id="contact_number" form={formName} />
       <label for="contact_number">
         TODO: Error message here
       </label>
@@ -32,7 +39,7 @@
       <label for="payment_method">
         Payment Method:
       </label>
-      <select name="payment_method" id="payment_method">
+      <select name="payment_method" id="payment_method" form={formName}>
         <option value="" selected disabled>Select payment method</option>
         <option value="gcash">GCash</option>
         <option value="maya">Maya</option>
@@ -47,7 +54,7 @@
       <label for="additional_details" class="input-label">
         Additional Details:
       </label>
-      <textarea name="additional_details" id="additional_details" class="grow" maxlength="256" />
+      <textarea name="additional_details" id="additional_details" form={formName} class="grow" maxlength="256" />
       <label for="additional_details" class="length">
         TODO: Error message here
       </label>
@@ -57,7 +64,7 @@
   {#if isCheckout}
     <div class="buttons-container">
       <button class="checkout-btn" type="submit" form={formName}>Checkout</button>
-      <button class="cancel-btn" type="button">Cancel</button>
+      <button class="cancel-btn" type="button" on:click={closeForm}>Cancel</button>
     </div>
   {/if}
 </div>
@@ -77,7 +84,7 @@
   }
 
   .input-label {
-    @apply text-start align-bottom text-3xl text-dark-blue pb-4;
+    @apply text-start align-bottom text-3xl text-dark-blue w-full pb-4;
   }
 
   .input-error {

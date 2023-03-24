@@ -14,7 +14,7 @@
 
 	export let submitOrder = () => {
 		close();
-		goto('/order/checkout'); // '/order/checkout'
+		goto('/order/confirmation'); // '/order/checkout'
 	};
 
 	export let cart: Cart;

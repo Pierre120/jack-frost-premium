@@ -3,7 +3,7 @@
 </script>
 
 <svelte:head>
-	<title>Order Checkout! | Jack Frost Premium Ice Cream</title>
+	<title>Order Checkout | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
 <div class="w-full min-h-screen bg-white flex items-start justify-center py-4">
