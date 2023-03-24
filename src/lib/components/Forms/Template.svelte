@@ -4,6 +4,7 @@
 	export let label = '';
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
+	export let hasHeader = false;
 
 	const dispatch = createEventDispatcher();
 	const closeForm = () => {
@@ -12,20 +13,22 @@
 </script>
 
 <div class="form-container">
-	<div class="header">
-		<slot name="header">
-			<h2>{label}</h2>
-		</slot>
-		<div class="buttons">
-			{#if hasSaveButton}
-				<slot name="saveButton" />
-			{/if}
-			{#if hasDeleteButton}
-				<slot name="deleteButton" />
-			{/if}
+	{#if hasHeader}
+		<div class="header">
+			<slot name="header">
+				<h2>{label}</h2>
+			</slot>
+			<div class="buttons">
+				{#if hasSaveButton}
+					<slot name="saveButton" />
+				{/if}
+				{#if hasDeleteButton}
+					<slot name="deleteButton" />
+				{/if}
+			</div>
+			<button class="close" on:click={closeForm}>X</button>
 		</div>
-		<button class="close" on:click={closeForm}>X</button>
-	</div>
+	{/if}
 	<div class="body">
 		<slot name="body" />
 	</div>

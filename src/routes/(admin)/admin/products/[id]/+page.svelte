@@ -107,6 +107,7 @@
 	formaction="?/edit"
 	categories={data.categories}
 	product={data.product}
+	hasHeader={true}
 	hasSaveButton={true}
 	hasDeleteButton={true}
 	on:close={discardChange}

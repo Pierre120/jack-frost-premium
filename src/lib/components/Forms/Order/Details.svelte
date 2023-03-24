@@ -26,23 +26,24 @@
 
 <div class="order-details-container">
   <h3>{ listLabel }</h3>
-  <table>
-    <tr>
-      <th class="max-w-[30%]">Product</th>
-      <th>Qty</th>
-      <th>Price</th>
-      <th>Amount</th>
-    </tr>
-
-    {#each items as item}
+  <div class="table-container">
+    <table>
       <tr>
-        <td>{ toProduct(item) }</td>
-        <td>{ item.quantity }</td>
-        <td>{ item.offering?.price }</td>
-        <td>{ (item.quantity * (item.offering?.price ?? 0)).toFixed(2) }</td>
+        <th class="th-w">Product</th>
+        <th>Qty</th>
+        <th>Price</th>
+        <th>Amount</th>
       </tr>
-    {/each}
-  </table>
+      {#each items as item}
+        <tr>
+          <td class="min-w-[20%] max-w-[20%]">{ toProduct(item) }</td>
+          <td>{ item.quantity }</td>
+          <td>{ item.offering?.price }</td>
+          <td>{ (item.quantity * (item.offering?.price ?? 0)).toFixed(2) }</td>
+        </tr>
+      {/each}
+    </table>
+  </div>
   <p>Total: &#8369;{ totalPrice.toFixed(2) }</p>
 </div>
 
@@ -60,10 +61,18 @@
   }
 
   table {
-    @apply w-full max-h-[450px] border-separate border-spacing-3 text-[#8E8E8E] text-2xl mb-auto overflow-y-auto;
+    @apply w-full border-separate border-spacing-3 text-[#8E8E8E] text-2xl;
   }
 
   table th, table td {
     @apply text-start;
+  }
+
+  th {
+    @apply sticky top-0 bg-white;
+  }
+
+  .table-container {
+    @apply w-full max-h-[512px] overflow-y-auto mb-auto;
   }
 </style>

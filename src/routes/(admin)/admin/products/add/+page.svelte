@@ -63,6 +63,7 @@
 	formaction="?/add"
 	submitHandle={submitAdd}
 	categories={data.categories}
+	hasHeader={true}
 	hasSaveButton={true}
 	on:close={discardProduct}
 />

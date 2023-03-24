@@ -26,6 +26,7 @@
   export let order: Order;
   export let hasSaveButton = false;
   export let hasDeleteButton = false;
+  export let hasHeader = false;
   export let isCheckout = false;
   export let label = 'Order Status'
 
@@ -34,8 +35,8 @@
 </script>
 
 <div class="order-form-container">
-  <TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
-    <div slot="header" class="header-order {!order?.id ? 'hidden': ''}">
+  <TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
+    <div slot="header" class="header-order">
       {#if order?.id || true}
         <h3>Order Status</h3>
         <select name="payment_status" id="payment_status" form={formName}>
@@ -49,10 +50,12 @@
     <SaveButton slot="saveButton" form={formName} {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
     <form id={formName} class={formName} slot="body" method="POST">
-      <div class="date-input-container">
-        <h4>Estimated Delivery Date</h4>
-        <input type="date" name="estimated_delivery" id="estimated_delivery" />
-      </div>
+      {#if !isCheckout}
+        <div class="date-input-container">
+          <h4>Estimated Delivery Date</h4>
+          <input type="date" name="estimated_delivery" id="estimated_delivery" />
+        </div>
+      {/if}
       <div class="info-container">
         <div class="flex items-stretch justify-start w-full max-w-2xl">
           <OrderDetailsList {items} {totalPrice} />

@@ -15,6 +15,7 @@
 	export let submitHandle: SubmitFunction;
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
+	export let hasHeader = false;
 	export let product: Product | null = null;
 
 	let description = product?.description ?? '';
@@ -118,7 +119,7 @@
 </script>
 
 <div class="product-form-container">
-	<TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
+	<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<SaveButton slot="saveButton" form="product-form" {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
 		<form

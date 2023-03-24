@@ -85,7 +85,7 @@
   }
 
   .input-container {
-    @apply grid grid-cols-9 justify-items-stretch content-center w-full pl-5 py-2;
+    @apply grid grid-cols-9 gap-10 justify-items-stretch content-center w-full pl-5 py-2;
   }
 
   .input-label {
@@ -102,7 +102,7 @@
   }
 
   .important-inputs {
-    @apply flex flex-col items-stretch justify-center w-full col-span-3;
+    @apply flex flex-col items-stretch justify-center w-full col-span-4;
   }
 
   .additional-input {
@@ -129,5 +129,9 @@
     @apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border border-navy-blue rounded-lg
       focus:bg-white focus:outline-none focus:ring-2 
       focus:ring-dark-blue focus:border-transparent placeholder:text-slate-400;
+  }
+
+  textarea {
+    @apply resize-none;
   }
 </style>
