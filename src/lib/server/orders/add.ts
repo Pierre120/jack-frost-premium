@@ -1,6 +1,5 @@
 import { prisma } from '$lib/server/prisma';
 import type { CartItem } from '$lib/types/cart';
-import type { Order } from '$lib/types/order';
 
 // For adding an order, we need to pass in the customer's name, contact number,
 // payment method, total price, additional details and order items

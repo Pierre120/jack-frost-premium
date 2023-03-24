@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EditOrder from '$lib/components/Buttons/Edit.svelte';
 	import { goto } from '$app/navigation';
-	import type { Order, OrderDetails } from '$lib/types/order';
+	import type { Order } from '$lib/types/order';
 
 	export let order: Order;
 	export let number = 0;

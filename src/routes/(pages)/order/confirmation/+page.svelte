@@ -3,18 +3,14 @@
 	import OrderForm from '$lib/components/Forms/Order/index.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import { retrieveCart } from '$lib/stores/cart';
-	import type { Cart } from '$lib/types/cart';
 	import type { Order } from '$lib/types/order';
 	import type { SubmitFunction } from '$app/forms';
-	import { get, writable } from 'svelte/store';
 	import type { ActionData } from './$types';
 
 	export let formData: ActionData;
 	export let order: Order;
 
-	// const CartStore = writable<Cart>(retrieveCart());
 	let formaction = '?/order';
-	// let cart = get(CartStore);
 	let cart = retrieveCart();
 	let items = cart.items;
 	let totalPrice = cart.total;

@@ -1,7 +1,5 @@
 import type { Actions } from './$types';
 import { fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
-import type { Order } from '$lib/types/order';
 import type { CartItem } from '$lib/types/cart';
 
 export const actions = {

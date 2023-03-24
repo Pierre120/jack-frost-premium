@@ -1,6 +1,5 @@
 <script lang="ts">
 	import SuccessIcon from '$lib/components/Icons/Success.svelte';
-	import { set } from 'zod';
 	import type { PageData } from './$types';
 
 	const copyToClipboard = () => {
