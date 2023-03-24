@@ -23,9 +23,10 @@
   export let items: OrderDetails[] | CartItem[];
   export let totalPrice: number;
   export let formData: ActionData;
-  export let order: Order | undefined = undefined;
+  export let order: Order;
   export let hasSaveButton = false;
   export let hasDeleteButton = false;
+  export let isCheckout = false;
   export let label = 'Order Status'
 
   let orderStatus = order?.payment_status ?? '';
@@ -54,7 +55,7 @@
       </div>
       <div class="info-container">
         <OrderDetailsList {items} {totalPrice} />
-        <CustomerInputs {formName} {formData} {order} on:close={closeForm} />
+        <CustomerInputs {formName} {formData} {order} {isCheckout} on:close={closeForm} />
       </div>
     </form>
   </TemplateForm>

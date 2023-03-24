@@ -13,15 +13,15 @@ export interface Order {
 	secondary_contact?: string;
 	delivery_address?: string;
 	estimated_delivery?: Date;
-	created_at: Date;
-	updated_at: Date;
-	payment_status: PaymentStatus;
-	payment_method: PaymentMode;
+	created_at?: Date;
+	updated_at?: Date;
+	payment_status?: string | PaymentStatus;
+	payment_mode: string | PaymentMode;
 	total_price: number;
 	amount_paid?: number;
 	additional_details?: string;
-	order_details: OrderDetails[];
-	payments: Payment[]; // to update
+	order_details?: OrderDetails[];
+	payments?: Payment[]; // to update
 }
 
 enum PaymentStatus {
