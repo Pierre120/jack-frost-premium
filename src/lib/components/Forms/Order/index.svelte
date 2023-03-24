@@ -35,8 +35,8 @@
 
 <div class="order-form-container">
   <TemplateForm {label} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
-    <div slot="header" class="header">
-      {#if !order}
+    <div slot="header" class="header-order">
+      {#if order?.id}
         <h3>Order Status</h3>
         <select name="payment_status" id="payment_status" form={formName}>
           <option value="NP" selected={ orderStatus === 'NP'}>Unpaid</option>
@@ -60,3 +60,40 @@
     </form>
   </TemplateForm>
 </div>
+
+<style lang="postcss">
+  .order-form-container {
+    @apply flex flex-col items-center justify-start w-full;
+  }
+
+  .header-order {
+    @apply flex items-center justify-start gap-x-10 font-IstokWeb;
+  }
+
+  .header-order > h3, .header-order h3 {
+    @apply text-start align-bottom text-5xl text-navy-blue;
+  }
+
+  .date-input-container {
+    @apply flex items-center justify-start gap-x-12 font-IstokWeb;
+  }
+
+  .date-input-container > h4, .date-input-container h4 {
+    @apply text-start align-bottom text-4xl text-navy-blue;
+  }
+
+  select, input[type='date'] {
+    @apply px-4 py-2 text-2xl text-[#666666] bg-[#ECEBFA]
+      border border-navy-blue rounded-md
+      focus:bg-white focus:outline-none focus:ring-2
+      focus:ring-dark-blue focus:border-transparent placeholder:text-slate-400;
+  }
+
+  select {
+    @apply w-80;
+  }
+
+  input[type='date'] {
+    @apply w-64;
+  }
+</style>

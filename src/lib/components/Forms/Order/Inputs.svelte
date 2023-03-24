@@ -27,7 +27,8 @@
       </label>
       <input type="text" name="customer_name" id="customer_name" form={formName} value={formData?.data?.customer_name ?? (order?.name ?? '')} />
       <label for="customer_name" class="input-error">
-        { formData?.errors?.customer_name[0] ?? '' }
+        <!-- { formData?.errors?.customer_name[0] ?? '' } -->
+        Error Message!
       </label>
 
       <label for="contact_number">
@@ -36,6 +37,7 @@
       <input type="text" name="contact_number" id="contact_number" form={formName} value={formData?.data?.contact_number ?? (order?.primary_contact ?? '')} />
       <label for="contact_number" class="input-error">
         { formData?.errors?.contact_number[0] ?? '' }
+        <!-- Error Message! -->
       </label>
 
       <label for="payment_method">
@@ -48,7 +50,8 @@
         <option value="BDO" selected={formData?.data?.payment_method === 'BDO' || order?.payment_mode === 'BDO'}>BDO Bank Transfer</option>
       </select>
       <label for="payment_method" class="input-error">
-        { formData?.errors?.payment_method[0] ?? '' }
+        <!-- { formData?.errors?.payment_method[0] ?? '' } -->
+        Error Message!
       </label>
     </div>
 
@@ -123,7 +126,8 @@
   }
 
   input, textarea, select {
-    @apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border border-[#352F75] rounded-lg
-      focus:outline-none focus:ring-2 focus:ring-navy-blue focus:border-transparent placeholder:text-slate-400;
+    @apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border border-navy-blue rounded-lg
+      focus:bg-white focus:outline-none focus:ring-2 
+      focus:ring-dark-blue focus:border-transparent placeholder:text-slate-400;
   }
 </style>
