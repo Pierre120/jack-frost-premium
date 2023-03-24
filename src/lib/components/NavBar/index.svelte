@@ -28,7 +28,7 @@
 
 <!-- Navbar.svelte -->
 <nav class="w-screen bg-white px-4 pt-4 pb-2">
-	{#if $page.url.pathname === '/order/confirmation' || $page.url.pathname === '/order/checkout'}
+	{#if $page.url.pathname === '/order/confirmation' || $page.url.pathname.search('checkout') > -1}
 		<div class="flex items-center justify-start py-2 px-28 gap-8">
 			<Logo width="w-80" />
 			<h2 class="font-IstokWeb font-bold text-6xl text-navy-blue uppercase">
