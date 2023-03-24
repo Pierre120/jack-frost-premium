@@ -108,6 +108,8 @@
 	formaction="?/edit"
 	submitHandle={submitEdit}
 	category={data.category}
+	hasSaveButton={true}
+	hasDeleteButton={true}
 	on:close={discardChange}
 	on:remove={deleteCategory}
 />

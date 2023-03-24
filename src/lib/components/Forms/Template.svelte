@@ -2,7 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let label = '';
-	export let hasSaveButton = true;
+	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
 
 	const dispatch = createEventDispatcher();
