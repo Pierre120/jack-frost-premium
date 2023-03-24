@@ -1,8 +1,10 @@
 <script lang="ts">
 	import { createEventDispatcher } from 'svelte';
 
-	export let label: string;
+	export let label = '';
+	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
+	export let hasHeader = false;
 
 	const dispatch = createEventDispatcher();
 	const closeForm = () => {
@@ -11,16 +13,22 @@
 </script>
 
 <div class="form-container">
-	<div class="header">
-		<h2>{label}</h2>
-		<div class="buttons">
-			<slot name="saveButton" />
-			{#if hasDeleteButton}
-				<slot name="deleteButton" />
-			{/if}
+	{#if hasHeader}
+		<div class="header">
+			<slot name="header">
+				<h2>{label}</h2>
+			</slot>
+			<div class="buttons">
+				{#if hasSaveButton}
+					<slot name="saveButton" />
+				{/if}
+				{#if hasDeleteButton}
+					<slot name="deleteButton" />
+				{/if}
+			</div>
+			<button class="close" on:click={closeForm}>X</button>
 		</div>
-		<button class="close" on:click={closeForm}>X</button>
-	</div>
+	{/if}
 	<div class="body">
 		<slot name="body" />
 	</div>
@@ -28,14 +36,15 @@
 
 <style lang="postcss">
 	.form-container {
-		@apply block w-full px-32 bg-white;
+		@apply block w-full min-h-screen px-32 bg-white;
 	}
 
 	.header {
 		@apply flex items-center justify-between w-full py-10 relative;
 	}
 
-	.header > h2 {
+	.header > h2,
+	.header h2 {
 		@apply font-IstokWeb font-bold text-start align-bottom uppercase text-4xl text-[#352F75];
 	}
 

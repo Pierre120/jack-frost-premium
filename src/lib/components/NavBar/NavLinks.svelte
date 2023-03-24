@@ -3,17 +3,16 @@
 	import type { LayoutData } from '../../../routes/$types';
 
 	export let data: LayoutData;
-	export let isAdmin = false;
 </script>
 
-<div class="flex justify-center w-2/3 {isAdmin ? 'max-w-xl' : ''}">
-	<ul class="navlinks {isAdmin ? 'expand-y' : 'w-4/5'}">
+<div class="flex justify-center w-2/3 {data.navbar === 'admin' ? 'max-w-xl' : ''}">
+	<ul class="navlinks {data.navbar === 'admin' ? 'expand-y' : 'w-4/5'}">
 		{#each data.pages as nav}
-			<li class={isAdmin ? 'text-2xl' : 'font-bold text-xl'}>
+			<li class={data.navbar === 'admin' ? 'text-2xl' : 'font-bold text-xl'}>
 				<a
 					href={nav.href}
 					class:active={$page.url.pathname === nav.href}
-					class={isAdmin ? 'border-b-4' : 'border-b-2'}>{nav.title}</a
+					class={data.navbar === 'admin' ? 'border-b-4' : 'border-b-2'}>{nav.title}</a
 				>
 			</li>
 		{/each}

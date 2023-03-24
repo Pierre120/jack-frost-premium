@@ -12,7 +12,9 @@
 
 	export let label: string;
 	export let formaction: string;
-	export let hasDeleteButton = true;
+	export let hasSaveButton = false;
+	export let hasDeleteButton = false;
+	export let hasHeader = false;
 	export let submitHandle: SubmitFunction;
 	export let category: Category | null = null;
 
@@ -40,7 +42,7 @@
 	};
 </script>
 
-<TemplateForm {label} {hasDeleteButton} on:close={closeForm}>
+<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 	<SaveButton slot="saveButton" form="category-form" {formaction} />
 	<DeleteButton slot="deleteButton" on:remove={remove} />
 	<form

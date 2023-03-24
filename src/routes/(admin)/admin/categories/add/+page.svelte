@@ -63,7 +63,8 @@
 	formaction="?/add"
 	submitHandle={submitAdd}
 	category={data.categories}
-	hasDeleteButton={false}
+	hasHeader={true}
+	hasSaveButton={true}
 	on:close={discardCategory}
 />
 {#if isAboutToLeave}

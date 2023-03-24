@@ -23,7 +23,7 @@ export const actions = {
 	edit: async ({ request, fetch, params }) => {
 		console.log('editing categories ---');
 		const updatedCategory = Object.fromEntries(await request.formData());
-		console.log('updated category:' + updatedCategory);
+		console.log('updated category:' + JSON.stringify(updatedCategory));
 
 		const processedCateg = {
 			name: updatedCategory.name as string,
@@ -52,8 +52,7 @@ export const actions = {
 			console.error(err);
 			throw error(500, 'Internal error occured');
 		}
-
-		console.log('processed categories:' + processedCateg);
+		console.log('processed categories:' + JSON.stringify(processedCateg));
 		const res = await fetch(`/api/categories/${params.id}/edit`, {
 			method: 'POST',
 			headers: {

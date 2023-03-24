@@ -1,7 +1,7 @@
 import type { Cart, CartItem } from '$lib/types/cart';
 import type { Offering } from '$lib/types/offering';
 import type { Product } from '$lib/types/product';
-import { writable } from 'svelte/store';
+import { get, writable } from 'svelte/store';
 
 // This is a store that holds the cart state
 const CartStore = writable<Cart>({ items: [] as CartItem[], count: 0, total: 0 });
@@ -77,6 +77,10 @@ export const removeCartItemFromCart = (productId: string, offeringId: string) =>
 		}
 		return cartState;
 	});
+};
+
+export const retrieveCart = () => {
+	return get<Cart>(CartStore);
 };
 
 export default CartStore;
