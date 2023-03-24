@@ -73,6 +73,6 @@
   }
 
   .table-container {
-    @apply w-full max-h-[512px] overflow-y-auto mb-auto;
+    @apply w-full max-h-[450px] overflow-y-auto mb-auto;
   }
 </style>

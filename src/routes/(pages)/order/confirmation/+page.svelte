@@ -1,5 +1,7 @@
 <script lang="ts">
+  import { goto } from '$app/navigation';
 	import OrderForm from '$lib/components/Forms/Order/index.svelte';
+	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import { retrieveCart } from '$lib/stores/cart';
   import type { Cart } from '$lib/types/cart';
   import type { Order } from '$lib/types/order';
@@ -9,6 +11,21 @@
 	export let formData: ActionData;
 	export let order: Order;
 
+	const cancelOrderConfirmation = () => {
+		isAboutToCancel = true;
+	};
+
+	const cancel = () => {
+		isAboutToCancel = false;
+	}
+
+	const confirm = () => {
+		if(isAboutToCancel) {
+			isAboutToCancel = false;
+			goto('/');
+		}
+	}
+
 	// const CartStore = writable<Cart>(retrieveCart());
 	let formaction = '?/order'
 	// let cart = get(CartStore);
@@ -17,6 +34,12 @@
 	let totalPrice = cart.total;
 	let isCheckout = true;
 	let label = '';
+
+	let isAboutToCancel = false;
+	let confirmationHeader = 'Cancel Order?';
+	let confirmationDetails = "The order you've made will not be saved if you choose to cancel.";
+	let cancelLabel = 'Stay on this Page';
+	let confirmLabel = 'Cancel Order';
 </script>
 
 <svelte:head>
@@ -34,6 +57,17 @@
 		{label}
 		{formData}
 		{order}
+		on:close={cancelOrderConfirmation}
 	/>
 </div>
 
+{#if isAboutToCancel}
+	<ConfirmationModal
+		{confirmationHeader}
+		{confirmationDetails}
+		{cancelLabel}
+		{confirmLabel}
+		on:cancel={cancel}
+		on:confirm={confirm}
+	/>
+{/if}
