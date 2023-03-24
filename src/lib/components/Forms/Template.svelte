@@ -2,6 +2,7 @@
 	import { createEventDispatcher } from 'svelte';
 
 	export let label = '';
+	export let hasSaveButton = true;
 	export let hasDeleteButton = false;
 
 	const dispatch = createEventDispatcher();
@@ -16,7 +17,9 @@
 			<h2>{label}</h2>
 		</slot>
 		<div class="buttons">
-			<slot name="saveButton" />
+			{#if hasSaveButton}
+				<slot name="saveButton" />
+			{/if}
 			{#if hasDeleteButton}
 				<slot name="deleteButton" />
 			{/if}

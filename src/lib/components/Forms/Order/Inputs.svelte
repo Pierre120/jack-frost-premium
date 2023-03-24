@@ -1,7 +1,9 @@
 <script lang="ts">
+  import type { Order } from "$lib/types/order";
   import type { ActionData } from "./$types";
 
   export let formData: ActionData;
+  export let order: Order | undefined;
   export let isCheckout = false;
   export let formName = "order-form";
 </script>

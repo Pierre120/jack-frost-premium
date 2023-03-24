@@ -1,26 +1,26 @@
 <script lang="ts">
-  import type { Cart, CartItem } from "$lib/types/cart";
+  import type { CartItem } from "$lib/types/cart";
   import type { OrderDetails } from "$lib/types/order";
 
-  const toProduct = (item: CartItem) => {
-    switch(item.offering.size_name.toLowerCase()) {
+  const toProduct = (item: CartItem | OrderDetails) => {
+    switch(item.offering?.size_name.toLowerCase()) {
       case "pint":
-        return item.product.name + "-PNT";
+        return item.product?.name + "-PNT";
       case "half-gallon":
-        return item.product.name + "-HG";
+        return item.product?.name + "-HG";
       case "half gallon":
-        return item.product.name + "-HG";
+        return item.product?.name + "-HG";
       case "gallon":
-        return item.product.name + "-GL";
+        return item.product?.name + "-GL";
       case "less sugar":
-        return item.product.name + "-LS";
+        return item.product?.name + "-LS";
       default:
-        return item.product.name;
+        return item.product?.name;
     }
   };
 
   export let items: CartItem[] | OrderDetails[];
-  export let totalPrice: number;
+  export let totalPrice = 0;
   export let listLabel = 'Order Details';
 </script>
 
@@ -38,8 +38,8 @@
       <tr>
         <td>{ toProduct(item) }</td>
         <td>{ item.quantity }</td>
-        <td>{ item.offering.price }</td>
-        <td>{ (item.quantity * item.offering.price).toFixed(2) }</td>
+        <td>{ item.offering?.price }</td>
+        <td>{ (item.quantity * (item.offering?.price ?? 0)).toFixed(2) }</td>
       </tr>
     {/each}
   </table>
