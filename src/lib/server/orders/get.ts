@@ -6,13 +6,30 @@ const getOrder = async (order_id: string) => {
 			id: order_id
 		},
 		include: {
-			payments: true,
+			// payments: true, // NOTE: this might cause an error since the payment system is not implemented
       order_details: true
 		}
 	});
 
   	// for debugging purposes
 	console.log("ACQUIRED ORDER: ", JSON.stringify(result));
+
+	return result;
+};
+
+// Get order number
+const getOrderNumber = async (order_id: string) => {
+	const result = await prisma.order.findUnique({
+		where: {
+			id: order_id
+		},
+		select: {
+			number: true
+		}
+	});
+
+	// for debugging purposes
+	console.log("ACQUIRED ORDER NUMBER: ", JSON.stringify(result));
 
 	return result;
 };
@@ -26,4 +43,4 @@ const getAllOrders = async () => {
 	return result;
 };
 
-export { getOrder, getAllOrders };
+export { getOrder, getAllOrders, getOrderNumber };
