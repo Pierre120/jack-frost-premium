@@ -4,6 +4,7 @@ import { Offering } from '$lib/types/offering';
 
 export interface Order {
 	id: string;
+	number?: number;
 	email?: string;
 	name: string;
 	first_name?: string;

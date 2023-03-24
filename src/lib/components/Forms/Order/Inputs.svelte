@@ -10,6 +10,7 @@
   };
 
   export let formData: ActionData;
+  export let formaction: string
   export let order: Order;
   export let isCheckout = false;
   export let formName = "order-form";
@@ -25,16 +26,16 @@
       <label for="customer_name" class="input-label">
         Name:
       </label>
-      <input type="text" name="customer_name" id="customer_name" form={formName} value={formData?.data?.customer_name ?? (order?.name ?? '')} />
+      <input type="text" name="customer_name" id="customer_name" form={formName} value={formData?.data?.customer_name ?? (order?.name ?? '')} required />
       <label for="customer_name" class="input-error">
         <!-- { formData?.errors?.customer_name[0] ?? '' } -->
-        Error Message!
+        <!-- Error Message! -->
       </label>
 
       <label for="contact_number" class="input-label">
         Contact Number:
       </label>
-      <input type="text" name="contact_number" id="contact_number" form={formName} value={formData?.data?.contact_number ?? (order?.primary_contact ?? '')} />
+      <input type="text" name="contact_number" id="contact_number" form={formName} value={formData?.data?.contact_number ?? (order?.primary_contact ?? '')} required />
       <label for="contact_number" class="input-error">
         { formData?.errors?.contact_number[0] ?? '' }
         <!-- Error Message! -->
@@ -43,7 +44,7 @@
       <label for="payment_method" class="input-label">
         Payment Method:
       </label>
-      <select name="payment_method" id="payment_method" form={formName}>
+      <select name="payment_method" id="payment_method" form={formName} required>
         <option value="" disabled selected={!(formData?.data?.payment_method || order?.payment_mode)}>Select payment method</option>
         <option value="GCASH" selected={formData?.data?.payment_method === 'GCASH' || order?.payment_mode === 'GCASH'}>GCash</option>
         <option value="MAYA" selected={formData?.data?.payment_method === 'MAYA' || order?.payment_mode === 'MAYA'}>Maya</option>
@@ -51,7 +52,7 @@
       </select>
       <label for="payment_method" class="input-error">
         <!-- { formData?.errors?.payment_method[0] ?? '' } -->
-        Error Message!
+        <!-- Error Message! -->
       </label>
     </div>
 
@@ -68,7 +69,7 @@
 
   {#if isCheckout}
     <div class="buttons-container">
-      <button class="checkout-btn" type="submit" form={formName}>Checkout</button>
+      <button class="checkout-btn" type="submit" form={formName} {formaction}>Checkout</button>
       <button class="cancel-btn" type="button" on:click={closeForm}>Cancel</button>
     </div>
   {/if}
@@ -132,6 +133,6 @@
   }
 
   textarea {
-    @apply resize-none;
+    @apply resize-none overflow-y-scroll;
   }
 </style>

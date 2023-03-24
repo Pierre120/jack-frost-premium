@@ -8,6 +8,7 @@
   import { createEventDispatcher } from 'svelte';
   import type { CartItem } from '$lib/types/cart';
   import type { ActionData } from './$types';
+  import { enhance, type SubmitFunction } from '$app/forms';
 
   const dispatch = createEventDispatcher();
 
@@ -19,6 +20,7 @@
     dispatch('close');
   };
 
+  export let handleSubmit: SubmitFunction;
   export let formaction: string;
   export let items: OrderDetails[] | CartItem[];
   export let totalPrice: number;
@@ -49,7 +51,7 @@
     </div>
     <SaveButton slot="saveButton" form={formName} {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
-    <form id={formName} class={formName} slot="body" method="POST">
+    <form id={formName} class={formName} slot="body" method="POST" use:enhance={handleSubmit}>
       {#if !isCheckout}
         <div class="date-input-container">
           <h4>Estimated Delivery Date</h4>
@@ -60,7 +62,7 @@
         <div class="flex items-stretch justify-start w-full max-w-2xl">
           <OrderDetailsList {items} {totalPrice} />
         </div>
-        <CustomerInputs {formName} {formData} {order} {isCheckout} on:close={closeForm} />
+        <CustomerInputs {formName} {formaction} {formData} {order} {isCheckout} on:close={closeForm} />
       </div>
     </form>
   </TemplateForm>

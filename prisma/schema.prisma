@@ -105,6 +105,7 @@ model Offering {
 model Order {
   id                  String        @id @unique @default(cuid())
   /// user_id     String
+  number              Int           @db.SmallInt @default(autoincrement())
   email               String?       @default("")
   name                String
   first_name          String?       @default("")
