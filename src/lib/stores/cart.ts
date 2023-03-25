@@ -90,7 +90,7 @@ export const clearCart = () => {
 		cartState.items = [] as CartItem[];
 		cartState.count = 0;
 		cartState.total = 0;
-		return cartState;	
+		return cartState;
 	});
 };
 
