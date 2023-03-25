@@ -2,7 +2,7 @@
 	import { goto } from '$app/navigation';
 	import OrderForm from '$lib/components/Forms/Order/index.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
-	import { retrieveCart } from '$lib/stores/cart';
+	import { retrieveCart, clearCart } from '$lib/stores/cart';
 	import type { Order } from '$lib/types/order';
 	import type { SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
@@ -47,6 +47,7 @@
 			form.reset();
 			switch (result.type) {
 				case 'redirect':
+					clearCart();
 					break;
 			}
 			await update();
