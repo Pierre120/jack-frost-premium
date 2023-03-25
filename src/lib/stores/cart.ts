@@ -79,8 +79,19 @@ export const removeCartItemFromCart = (productId: string, offeringId: string) =>
 	});
 };
 
+// This function is for retrieving the cart object
 export const retrieveCart = () => {
 	return get<Cart>(CartStore);
+};
+
+// This function is for clearing the cart
+export const clearCart = () => {
+	CartStore.update((cartState) => {
+		cartState.items = [] as CartItem[];
+		cartState.count = 0;
+		cartState.total = 0;
+		return cartState;
+	});
 };
 
 export default CartStore;
