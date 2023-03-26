@@ -4,21 +4,19 @@
 
 	export let width: string;
 	export let orders: Order[];
-	let number = 0;
 </script>
 
 <div class="order-list-container {width}">
 	<div class="order-list">
 		{#each orders as order}
-			<Orders {number} {order}/>
-			{(number += 1)}
+			<Orders {order}/>
 		{/each}
 	</div>
 </div>
 
 <style lang="postcss">
 	.order-list-container {
-		@apply flex flex-col min-w-min py-6 mt-10;
+		@apply flex flex-col min-w-min py-6 ;
 	}
 
 	.order-list {

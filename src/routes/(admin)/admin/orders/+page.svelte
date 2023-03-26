@@ -36,8 +36,8 @@
 	<title>Orders | Jack Frost Premium Ice Cream</title>
 </svelte:head>
 
-<div class="flex flex-col md:flex-row h-screen">
-	<div class="bg-gray-200 md:w-1/4 option-container">
+<div class="flex flex-col md:flex-row h-screen bg-indigo-200">
+	<div class="bg-gray-200 md:w-1/4 option-container bg-indigo-200">
 		<h2 class="title">Show:</h2>
 		<div class="links">
 			<a href="#" on:click={() => filterOrders('all')}><span class="color-square"></span>All</a>
@@ -57,17 +57,17 @@
 		@apply text-2xl font-bold font-IstokWeb text-indigo-800;
 	}
 	.option-container {
-		@apply flex flex-col items-center justify-start gap-y-4 fixed left-0 h-full w-1/4; 
+		@apply flex flex-col justify-start ml-12 gap-y-4 h-full w-1/4 mt-6; 
 	}
 	.links{
-		@apply text-xl font-IstokWeb flex flex-col items-center justify-start gap-y-4
+		@apply text-xl font-IstokWeb flex flex-col justify-start gap-y-4
 	}
 
 	a{
 		@apply text-indigo-900 hover:underline hover:text-indigo-900;
 	}
 	.right-col{
-		@apply ml-auto pl-6 overflow-auto;
+		@apply ml-auto pl-6 overflow-auto h-full bg-indigo-200;
 	}
 
 	.color-square {
