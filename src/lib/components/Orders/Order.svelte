@@ -18,7 +18,7 @@
 <div class="order-item-container font-IstokWeb">
 	<div class="flex justify-between items-center bg-white p-2">
 		<div class="top-field">
-			<p class="text-indigo-900 font-semibold text-2xl">Order #{order.number}</p>
+			<p class="text-indigo-900 font-semibold text-3xl">Order #{order.number}</p>
 			<p class="text-indigo-900">Status: {order?.payment_status}</p>
 			<p class="text-indigo-900">Estimated Date: {order?.estimated_delivery}</p>
 		</div>
@@ -38,7 +38,7 @@
 		<div class="w-1/3">
 			<p class="heading">Customer Details</p>
 			<ul class="text-indigo-900 mt-4 ">
-				<li>Name: {order?.first_name} {order?.last_name}</li>
+				<li>Name: {order?.name}</li>
 				<li>Contact Number: {order.primary_contact}</li>
 				<li>Payment Method: {order.payment_mode}</li>
 			</ul>
