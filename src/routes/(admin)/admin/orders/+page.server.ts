@@ -1,4 +1,4 @@
-import { redirect } from '@sveltejs/kit';
+import { error, redirect } from '@sveltejs/kit';
 import type { PageServerLoad } from './$types';
 
 export const load = (async ({ locals, fetch }) => {
@@ -6,9 +6,9 @@ export const load = (async ({ locals, fetch }) => {
 	if (!session) {
 		throw redirect(303, '/'); // Redirect landing page
 	}
-	const res = await fetch('/'); //('/api/categories');
-	const categs = await res.json();
-	console.log(categs);
+	//const res = await fetch('/api/categories'); //('/api/categories');
+	//const categs = await res.json();
+	//console.log(categs);
 	///if (categs.success) {
 	//	return {
 	//	categs: categs.categories as Category[]
