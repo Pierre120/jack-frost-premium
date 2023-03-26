@@ -10,7 +10,7 @@
 <div class="order-list-container {width}">
 	<div class="order-list">
 		{#each orders as order}
-			<Orders {number} {order} />
+			<Orders {number} {order}/>
 			{(number += 1)}
 		{/each}
 	</div>

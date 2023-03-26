@@ -6,18 +6,14 @@
 	export let order: Order;
 	export let number = 0;
 
+	let orderdetails = order?.order_details || [];
+
 	const editOrder = () => {
 		//NOT YET IMPLEMENTED!
 		goto(`/admin/orders/${order?.id}`);
 	};
 
-	const totalPayment = () => {
-		let total = 0;
-		order?.payments.forEach((payment) => {
-			total += payment.amount;
-		});
-		return total;
-	};
+
 </script>
 
 <div class="bg-gray-100 flex flex-col">
@@ -35,7 +31,7 @@
 		<div class="w-1/3">
 			<p class="text-gray-700 font-semibold">Receipt</p>
 			<ul class="list-disc pl-4 mt-4">
-				{#each order?.order_details as orderDetail}
+				{#each orderdetails as orderDetail}
 					<li>{orderDetail}</li>
 				{/each}
 			</ul>
@@ -44,22 +40,21 @@
 			<p class="text-gray-700 font-semibold">Customer Details</p>
 			<ul class="list-disc pl-4 mt-4">
 				<li>Name: {order?.first_name} {order?.last_name}</li>
-				<li>Contact Number: {order?.primary_contact}</li>
-				<li>Payment Method: {order?.payments[order?.payments.length - 1].payment_mode}</li>
+				<li>Contact Number: {order.primary_contact}</li>
+				<li>Payment Method: {order.payment_mode}</li>
 			</ul>
 		</div>
 		<div class="w-1/3">
 			<p class="text-gray-700 font-semibold">Customer Instructions</p>
 			<p class="mt-4">
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac fermentum nibh, at lacinia
-				ex. Sed nec diam vel orci sodales maximus.
+				{order.additional_details}
 			</p>
 		</div>
 	</div>
 	<div class="flex justify-between items-center bg-white p-4">
 		<div>
-			<p class="text-gray-700 font-semibold">Total Amount: {order?.total_price}</p>
-			<p class="text-gray-500">Amount paid: {totalPayment}</p>
+			<p class="text-gray-700 font-semibold">Total Amount: {order.total_price}</p>
+			<p class="text-gray-500">Amount paid: {order.amount_paid}</p>
 		</div>
 	</div>
 </div>

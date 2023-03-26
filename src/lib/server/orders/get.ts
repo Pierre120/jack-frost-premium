@@ -4,12 +4,12 @@ const getOrder = async (order_id: string) => {
 	const result = await prisma.product.findUnique({
 		where: {
 			id: order_id
-		},
-		include: {
+		}//,
+		//include: {
 			// payments: true, // NOTE: this might cause an error since the payment system is not implemented
-			order_details: true
+		//	orders: true
 		}
-	});
+	);
 
 	// for debugging purposes
 	console.log('ACQUIRED ORDER: ', JSON.stringify(result));
