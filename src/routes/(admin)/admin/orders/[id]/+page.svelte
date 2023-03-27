@@ -13,7 +13,7 @@ export let data: PageData;
 export let formData: ActionData;
 export let order: Order;
 
-let formaction = '?/order';
+let formaction = '?/edit';
 let items = data.order.order_details as CartItem[]
 let totalPrice = data.order.total_price;
 let isCheckout = false;
