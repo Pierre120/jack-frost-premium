@@ -1,13 +1,23 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import OrderForm from '$lib/components/Forms/Order/index.svelte';
 import type { Order } from '$lib/types/order';
 import type { SubmitFunction } from '$app/forms';
 import type { ActionData } from './$types';
+import EditOrderForm from '$lib/components/Forms/Order/editIndex.svelte';
+import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 import StatusModal from '$lib/components/Modal/Status.svelte';
+import type { PageData } from './$types';
+import type { CartItem } from '$lib/types/cart';
 
 export let data: PageData;
+export let formData: ActionData;
+export let order: Order;
 
+let formaction = '?/order';
+let items = data.order.order_details as CartItem[]
+let totalPrice = data.order.total_price;
+let isCheckout = false;
+let label = '';
 let confirmationHeader = '';
 let confirmationDetails = '';
 let cancelLabel = '';
@@ -32,11 +42,11 @@ const successEdit = async () => {
 		success = false;
 		deleted = true;
 		isAboutToDelete = false;
-		statusHeader = 'PRODUCT DELETED';
-		statusInfo = 'The product has been deleted';
+		statusHeader = 'ORDER DELETED';
+		statusInfo = 'The order has been deleted';
 		// await invalidateAll();
 		setTimeout(() => {
-			goto('/admin/products');
+			goto('/admin/orders');
 		}, 1500);
 	};
 
@@ -49,11 +59,11 @@ const successEdit = async () => {
 		isAboutToLeave = true;
 	};
 
-	const deleteProduct = () => {
-		confirmationHeader = 'DELETE PRODUCT?';
-		confirmationDetails = 'Are you sure you would like to delete this product?';
+	const deleteOrder = () => {
+		confirmationHeader = 'DELETE ORDER?';
+		confirmationDetails = 'Are you sure you would like to delete this order?';
 		cancelLabel = 'Cancel';
-		confirmLabel = 'Delete Product';
+		confirmLabel = 'Delete Order';
 		isAboutToDelete = true;
 	};
 
@@ -65,14 +75,14 @@ const successEdit = async () => {
 	const confirm = async () => {
 		if (isAboutToLeave) {
 			isAboutToLeave = false;
-			goto('/admin/products');
+			goto('/admin/orders');
 		}
 		if (isAboutToDelete) {
 			loading = true;
 			statusHeader = 'FOR A MOMENT...';
 			statusInfo = 'Deleting the product...';
 			// Delete
-			const result = await fetch(`/api/products/${data.product.id}/delete`, {
+			const result = await fetch(`/api/orders/${data.order.id}/delete`, {
 				method: 'POST'
 			});
 			if ((await result.json()).success) {
@@ -108,7 +118,7 @@ const successEdit = async () => {
 <div class="w-full min-h-screen bg-white flex items-start justify-center py-4">
 	<!-- <h1 class="text-teal-600">Jack Frost Premium Ice Cream Order Page</h1>
 	<p><code>// TODO: Implement Order page</code></p> -->
-	<OrderForm
+	<EditOrderForm
 		{formaction}
 		{items}
 		{totalPrice}
@@ -116,7 +126,23 @@ const successEdit = async () => {
 		{label}
 		{formData}
 		{order}
-		handleSubmit={confirmOrder}
-		on:close={cancelOrderConfirmation}
+		handleSubmit={submitEdit}
+		on:close={discardChange}
+		on:remove={deleteOrder}
 	/>
 </div>
+
+
+{#if isAboutToLeave || isAboutToDelete}
+	<ConfirmationModal
+		{confirmationHeader}
+		{confirmationDetails}
+		{cancelLabel}
+		{confirmLabel}
+		on:cancel={cancel}
+		on:confirm={confirm}
+	/>
+{/if}
+{#if success || deleted || loading}
+	<StatusModal {success} {deleted} {loading} {statusHeader} {statusInfo} />
+{/if}

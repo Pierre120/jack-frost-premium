@@ -14,7 +14,7 @@ export const load = (async ({ locals, params, fetch }) => {
 	const order = await orderRes.json();
 	if (order.success) {
 		return {
-			order: order.order as Order,
+			order: order.order as Order
 		};
 	}
 	throw error(404, 'Order not found');

@@ -1,16 +1,12 @@
 import { prisma } from '$lib/server/prisma';
 
 const getOrder = async (order_id: string) => {
-	const result = await prisma.product.findUnique({
+	const result = await prisma.order.findUnique({
 		where: {
 			id: order_id
-		}//,
-		//include: {
-			// payments: true, // NOTE: this might cause an error since the payment system is not implemented
-		//	orders: true
-		}
-	);
-
+		},
+});
+	console.log('ORDER ID:', order_id);
 	// for debugging purposes
 	console.log('ACQUIRED ORDER: ', JSON.stringify(result));
 

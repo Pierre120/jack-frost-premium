@@ -8,7 +8,8 @@ const editOrder = async (order_id: string, updatedOrder: Order) => {
 		},
 		data: {
 			estimated_delivery: updatedOrder.estimated_delivery,
-			payment_status: updatedOrder.payment_status
+			payment_status: updatedOrder.payment_status,
+			amount_paid : updatedOrder.amount_paid
 		},
 		// For debugging purposes, we can include the offerings in the result
 		include: {
