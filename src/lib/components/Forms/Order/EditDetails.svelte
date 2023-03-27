@@ -1,8 +1,7 @@
 <script lang="ts">
-	import type { CartItem } from '$lib/types/cart';
 	import type { OrderDetails } from '$lib/types/order';
 
-	const toProduct = (item: CartItem | OrderDetails) => {
+	const toProduct = (item: OrderDetails) => {
 		switch (item.offering?.size_name.toLowerCase()) {
 			case 'pint':
 				return item.product?.name + '-PNT';
@@ -19,9 +18,16 @@
 		}
 	};
 
-	export let items: CartItem[] | OrderDetails[];
+  const knowOffering = (item: OrderDetails) => {
+    return item.offering?.size_name;
+  }
+
+	export let items:  OrderDetails[];
 	export let totalPrice = 0;
 	export let listLabel = 'Order Details';
+  
+  
+
 </script>
 
 <div class="order-details-container">
@@ -38,14 +44,13 @@
 				<tr>
 					<td class="min-w-[20%] max-w-[20%]">{toProduct(item)}</td>
 					<td>{item.quantity}</td>
-					<td>{item.offering?.price}</td>
+					<td>{knowOffering(item)}</td>
 					<td>{(item.quantity * (item.offering?.price ?? 0)).toFixed(2)}</td>
 				</tr>
 			{/each}
 		</table>
 	</div>
 	<p>Total: &#8369;{totalPrice}</p>
-
 </div>
 
 <style lang="postcss">
@@ -77,5 +82,4 @@
 	.table-container {
 		@apply w-full max-h-[450px] overflow-y-auto mb-auto;
 	}
-
 </style>

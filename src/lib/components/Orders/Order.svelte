@@ -12,6 +12,22 @@
 		goto(`/admin/orders/${order?.id}`);
 	};
 
+	const toProduct = (item: OrderDetails) => {
+		switch (item.offering?.size_name.toLowerCase()) {
+			case 'pint':
+				return item.product?.name + '-PNT';
+			case 'half-gallon':
+				return item.product?.name + '-HG';
+			case 'half gallon':
+				return item.product?.name + '-HG';
+			case 'gallon':
+				return item.product?.name + '-GL';
+			case 'less sugar':
+				return item.product?.name + '-LS';
+			default:
+				return item.product?.name;
+		}
+	};
 
 </script>
 
@@ -27,15 +43,28 @@
 		</div>
 	</div>
 	<div class="flex-1 bg-white p-2 flex">
-		<div class="w-1/3">
+		<div class="w-2/3">
 			<p class="heading">Receipt</p>
-			<ul class="list-disc pl-4 mt-4">
-				{#each orderdetails as orderDetail}
-					<li>{orderDetail}</li>
-				{/each}
-			</ul>
+			<div class="table-container">
+				<table>
+					<tr>
+						<th class="">Product</th>
+						<th>Qty</th>
+						<th>Price</th>
+						<th>Amount</th>
+					</tr>
+					{#each orderdetails as orderDetail}
+						<tr>
+							<td class="min-w-[20%] max-w-[20%]">{toProduct(orderDetail)}</td>
+							<td>{orderDetail.quantity}</td>
+							<td>{orderDetail.offering?.price}</td>
+							<td>{(orderDetail.quantity * (orderDetail.offering?.price ?? 0)).toFixed(2)}</td>
+						</tr>
+					{/each}
+					</table>		
+					</div>	
 		</div>
-		<div class="w-1/3">
+		<div class="w-3/5">
 			<p class="heading">Customer Details</p>
 			<ul class="text-indigo-900 mt-4 ">
 				<li>Name: {order?.name}</li>
@@ -43,7 +72,7 @@
 				<li>Payment Method: {order.payment_mode}</li>
 			</ul>
 		</div>
-		<div class="w-1/3">
+		<div class="w-2/5">
 			<p class="mt-4 italic">
 				{order.additional_details}
 			</p>
@@ -76,4 +105,9 @@
 	.amount{
 		@apply text-indigo-900 
 	}
+
+	.table-container{
+		@apply mr-4;
+	}
+
 </style>
