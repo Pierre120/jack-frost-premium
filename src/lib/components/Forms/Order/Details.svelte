@@ -44,7 +44,7 @@
 			{/each}
 		</table>
 	</div>
-	<p>Total: &#8369;{totalPrice.toFixed(2)}</p>
+	<p>Total: &#8369;{totalPrice}</p>
 </div>
 
 <style lang="postcss">

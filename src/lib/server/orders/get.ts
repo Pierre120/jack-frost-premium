@@ -5,6 +5,9 @@ const getOrder = async (order_id: string) => {
 		where: {
 			id: order_id
 		},
+		include: {
+			order_details: true,
+		}
 });
 	console.log('ORDER ID:', order_id);
 	// for debugging purposes

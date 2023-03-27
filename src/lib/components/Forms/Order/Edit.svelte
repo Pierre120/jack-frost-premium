@@ -6,7 +6,6 @@
 	import TemplateForm from '$lib/components/Forms/Template.svelte';
 	import type { Order, OrderDetails } from '$lib/types/order';
 	import { createEventDispatcher } from 'svelte';
-	import type { CartItem } from '$lib/types/cart';
 	import type { ActionData } from './$types';
 	import { enhance, type SubmitFunction } from '$app/forms';
 
@@ -22,13 +21,13 @@
 
 	export let handleSubmit: SubmitFunction;
 	export let formaction: string;
-	export let items: OrderDetails[] | CartItem[];
+	export let items: OrderDetails[];
 	export let totalPrice: number;
 	export let formData: ActionData;
 	export let order: Order;
-	export let hasSaveButton = false;
-	export let hasDeleteButton = false;
-	export let hasHeader = false;
+	export let hasSaveButton = true;
+	export let hasDeleteButton = true;
+	export let hasHeader = true;
 	export let isCheckout = false;
 	export let label = 'Order Status';
 
@@ -39,7 +38,7 @@
 <div class="order-form-container">
 	<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<div slot="header" class="header-order">
-			{#if order?.id || true}
+			{#if order?.id}
 				<h3>Order Status</h3>
 				<select name="payment_status" id="payment_status" form={formName}>
 					<option value="NP" selected={orderStatus === 'NP'}>Unpaid</option>

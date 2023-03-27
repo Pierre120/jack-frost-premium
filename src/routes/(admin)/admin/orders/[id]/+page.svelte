@@ -1,22 +1,20 @@
 <script lang="ts">
 import { goto } from '$app/navigation';
-import type { Order } from '$lib/types/order';
+import type { Order, OrderDetails } from '$lib/types/order';
 import type { SubmitFunction } from '$app/forms';
 import type { ActionData } from './$types';
-import EditOrderForm from '$lib/components/Forms/Order/editIndex.svelte';
+import EditOrderForm from '$lib/components/Forms/Order/Edit.svelte';
 import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 import StatusModal from '$lib/components/Modal/Status.svelte';
 import type { PageData } from './$types';
-import type { CartItem } from '$lib/types/cart';
 
 export let data: PageData;
 export let formData: ActionData;
 export let order: Order;
 
 let formaction = '?/edit';
-let items = data.order.order_details as CartItem[]
+let items = data.order.order_details as OrderDetails[]
 let totalPrice = data.order.total_price;
-let isCheckout = false;
 let label = '';
 let confirmationHeader = '';
 let confirmationDetails = '';
@@ -38,7 +36,7 @@ const successEdit = async () => {
 		// await invalidateAll();
 	};
 
-	const successDelete = async () => {
+const successDelete = async () => {
 		success = false;
 		deleted = true;
 		isAboutToDelete = false;
@@ -50,7 +48,7 @@ const successEdit = async () => {
 		}, 1500);
 	};
 
-	const discardChange = () => {
+const discardChange = () => {
 		confirmationHeader = 'DISCARD CHANGES?';
 		confirmationDetails =
 			"The changes you've made will not be saved if you leave this page without saving.";
@@ -59,7 +57,7 @@ const successEdit = async () => {
 		isAboutToLeave = true;
 	};
 
-	const deleteOrder = () => {
+const deleteOrder = () => {
 		confirmationHeader = 'DELETE ORDER?';
 		confirmationDetails = 'Are you sure you would like to delete this order?';
 		cancelLabel = 'Cancel';
@@ -67,12 +65,12 @@ const successEdit = async () => {
 		isAboutToDelete = true;
 	};
 
-	const cancel = () => {
+const cancel = () => {
 		isAboutToLeave = false;
 		isAboutToDelete = false;
 	};
 
-	const confirm = async () => {
+const confirm = async () => {
 		if (isAboutToLeave) {
 			isAboutToLeave = false;
 			goto('/admin/orders');
@@ -92,7 +90,7 @@ const successEdit = async () => {
 		}
 	};
 
-	const submitEdit: SubmitFunction = async () => {
+const submitEdit: SubmitFunction = async () => {
 		loading = true;
 		statusHeader = 'FOR A MOMENT...';
 		statusInfo = 'Saving the changes...';
@@ -119,19 +117,17 @@ const successEdit = async () => {
 	<!-- <h1 class="text-teal-600">Jack Frost Premium Ice Cream Order Page</h1>
 	<p><code>// TODO: Implement Order page</code></p> -->
 	<EditOrderForm
+		handleSubmit={submitEdit}
 		{formaction}
 		{items}
 		{totalPrice}
-		{isCheckout}
-		{label}
 		{formData}
 		{order}
-		handleSubmit={submitEdit}
+		{label}
 		on:close={discardChange}
 		on:remove={deleteOrder}
 	/>
 </div>
-
 
 {#if isAboutToLeave || isAboutToDelete}
 	<ConfirmationModal

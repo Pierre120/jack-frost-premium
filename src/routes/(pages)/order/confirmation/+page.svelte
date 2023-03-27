@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import OrderForm from '$lib/components/Forms/Order/index.svelte';
+	import OrderForm from '$lib/components/Forms/Order/Index.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import { retrieveCart, clearCart } from '$lib/stores/cart';
 	import type { Order } from '$lib/types/order';
