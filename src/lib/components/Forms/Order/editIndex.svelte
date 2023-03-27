@@ -2,7 +2,7 @@
 	import SaveButton from '$lib/components/Buttons/Save.svelte';
 	import DeleteButton from '$lib/components/Buttons/Delete.svelte';
 	import OrderDetailsList from '$lib/components/Forms/Order/Details.svelte';
-	import CustomerInputs from '$lib/components/Forms/Order/Inputs.svelte';
+	import CustomerInputs from '$lib/components/Forms/Order/unmodInputs.svelte';
 	import TemplateForm from '$lib/components/Forms/Template.svelte';
 	import type { Order, OrderDetails } from '$lib/types/order';
 	import { createEventDispatcher } from 'svelte';
@@ -26,14 +26,14 @@
 	export let totalPrice: number;
 	export let formData: ActionData;
 	export let order: Order;
-	export let hasSaveButton = false;
-	export let hasDeleteButton = false;
-	export let hasHeader = false;
+	export let hasSaveButton = true;
+	export let hasDeleteButton = true;
+	export let hasHeader = true;
 	export let isCheckout = false;
 	export let label = 'Order Status';
+	export let formName = 'tracker-form';
 
 	let orderStatus = order?.payment_status ?? '';
-	let formName = 'order-form';
 </script>
 
 <div class="order-form-container">
@@ -61,6 +61,15 @@
 			<div class="info-container">
 				<div class="flex items-stretch justify-start w-full max-w-2xl">
 					<OrderDetailsList {items} {totalPrice} />
+					<label for="amount_paid" class="input-label"> Amount Paid: </label>
+					<input
+						type="text"
+						name="amount_paid"
+						id="amount_paid"
+						form={formName}
+						value={order?.amount_paid ?? ''}
+						required
+					/>
 				</div>
 				<CustomerInputs
 					{formName}
@@ -83,9 +92,13 @@
 	form {
 		@apply flex flex-col items-stretch justify-start w-full;
 	}
-
+	
 	.header-order {
 		@apply flex items-center justify-start gap-x-40 font-IstokWeb;
+	}
+
+	.input-label{
+		@apply font-IstokWeb text-lg text-navy-blue;
 	}
 
 	.header-order > h3,
