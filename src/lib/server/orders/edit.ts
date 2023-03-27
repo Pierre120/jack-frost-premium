@@ -1,5 +1,5 @@
 import { prisma } from '$lib/server/prisma';
-import type { OrderUpdate } from '$lib/types/order';
+import type { Order, OrderUpdate } from '$lib/types/order';
 
 const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 	const result = await prisma.order.update({
@@ -7,8 +7,9 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 			id: order_id
 		},
 		data: {
-			estimated_delivery: updatedOrder.estimated_delivery,
-			payment_status: updatedOrder.payment_status
+			estimated_delivery: new Date(updatedOrder.estimated_delivery),
+			payment_status: updatedOrder.payment_status,
+			amount_paid: updatedOrder.amount_paid
 		},
 		// For debugging purposes, we can include the offerings in the result
 		include: {
@@ -17,7 +18,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 		}
 	});
 	// for debugging purposes
-	console.log(JSON.stringify(result));
+	console.log('UPDATED ORDER:', JSON.stringify(result));
 
 	return result;
 };

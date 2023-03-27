@@ -48,3 +48,9 @@ export interface OrderDetails {
 	product?: Product;
 	offering?: Offering;
 }
+
+export interface OrderUpdate {
+	estimated_delivery: Date;
+	payment_status: string | PaymentStatus;
+	amount_paid: number;
+}

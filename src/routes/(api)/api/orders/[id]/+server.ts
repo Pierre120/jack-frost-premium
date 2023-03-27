@@ -1,14 +1,14 @@
 import { json } from '@sveltejs/kit';
 import type { RequestHandler } from './$types';
-import { getAllOrders } from '$lib/server/orders/get';
+import { getOrder } from '$lib/server/orders/get';
 
-// Get an order from the database
+// Get a category from the database
 export const GET = (async ({ params }) => {
 	try {
-		const orders = await getAllOrders();
+		const order = await getOrder(params.id ?? '');
 		return json({
 			success: true,
-			orders
+			order
 		});
 	} catch (err) {
 		console.error(err);
