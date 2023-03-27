@@ -20,7 +20,7 @@
 			</div>
 			<div class="flex items-center flex-col md:w-1/2">
 				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-0">THE STORY</h1>
-				<p class="text-xl text-center text-justify-not mr-0 text-black">
+				<p class="text-xl text-center text-justify-not mr-0 text-black leading-8 tracking-widest px-9">
 					The idea of making homemade ice cream came about only when a new Kitchen Aid mixer was
 					bought and a free ice cream bowl attachment was given. This was back around 2008. <br />
 					<br /><span
@@ -37,7 +37,7 @@
 		<div class="items-center bg-gray-200 py-4 bg-white">
 			<h1 class="text-4xl font-bold text-indigo-900 pb-5 text-center">THE FLAVORS</h1>
 			<p
-				class="text-adjust text-xl text-center text-justify-not px-40 pb-6 text-black"
+				class="text-adjust text-xl text-center text-justify-not px-52 pb-6 text-indigo-900 leading-8 tracking-widest"
 				style="text-align: center; margin: 0 auto;"
 			>
 				The search was on for unique flavors that are not found locally. The first of the flavors we
@@ -50,7 +50,7 @@
 		</div>
 
 		<div class="flex flex-col md:flex-row">
-			<div class="md:w-1/2 bg-blue-200 py-6 px-20 text-xl text-black">
+			<div class="md:w-1/2 bg-blue-200 py-6 px-20 text-xl text-indigo-900 tracking-wider">
 				<ul class="list-disc space-y-4">
 					<li><h3>Almond Spice (Almond w/ ginger)</h3></li>
 					<li><h3>Basil</h3></li>
@@ -65,7 +65,7 @@
 					<li><h3>Butterbrew (root beer, caramel & toffee chips)</h3></li>
 				</ul>
 			</div>
-			<div class="md:w-2/3 bg-indigo-900 text-gray-300 py-6 px-20 text-xl">
+			<div class="md:w-2/3 bg-indigo-900 text-gray-100 py-6 px-20 text-xl tracking-wider">
 				<ul class="list-disc space-y-4">
 					<li><h3>Cheesecake (blueberry, berry, strawberry, oreo or mint oreo)</h3></li>
 					<li><h3>Cherries Jubilee (cherry w/ brandy)</h3></li>
@@ -85,13 +85,13 @@
 		<div class="flex flex-col md:flex-row px-20 py-8 bg-white">
 			<div class="md:w-2/3">
 				<h1 class="text-4xl font-bold text-indigo-900 pb-2 text-center mb-10">THE NAME</h1>
-				<p class="text-center text-justify-not text-2xl text-black">
+				<p class="text-center text-justify-not text-2xl text-indigo-900 leading-8 tracking-widest">
 					<span class="text-red-600 font-semibold">Why the name Jack Frost? </span>Jack Frost was
 					the first character that was thought of when related to something cold.
 				</p>
 			</div>
 			<div class="1/3">
-				<img src={jflogo} alt="jfrost" class="max-w-full shadow-2xl" />
+				<img src={jflogo} alt="jfrost" class="max-w-full shadow-2x0" />
 			</div>
 		</div>
 
@@ -101,11 +101,11 @@
 			</div>
 			<div class="flex flex-col w-full md:w-3/4 px-6">
 				<h1 class="text-2xl md:text-4xl font-bold text-indigo-900 pt-4 mb-4 md:mb-10">ORDERING</h1>
-				<p class=" text-adjust text-xl text-center md:text-justify text-black">
-					The ice cream is on <span class="text-indigo-900 font-semibold">made to order basis</span>
+				<p class=" text-adjust text-xl text-center md:text-justify text-indigo-900 leading-8 tracking-widest">
+					The ice cream is on <span class="text-red-600 font-semibold">made to order basis</span>
 					with a required lead time of at least 2 days depending on the size of the order. We are also
 					willing to deliver to selected areas of the Metro Manila for a minimum amount.
-					<span
+					<span><p class="text-blue-200">.</p
 						>Customer orders are also deliverable via Grab, Lalamove and other similar services</span
 					>
 				</p>
@@ -113,7 +113,7 @@
 		</div>
 
 		<div class="bg-indigo-900 py-4">
-			<h1 class="text-lg text-white font-semibold text-center">
+			<h1 class="text-xl text-white text-center leading-8 tracking-widest">
 				Currently, Jack Frost is registered at the Intellectual Property Office.
 			</h1>
 		</div>
