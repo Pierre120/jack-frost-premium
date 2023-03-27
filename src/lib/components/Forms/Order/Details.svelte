@@ -45,7 +45,6 @@
 		</table>
 	</div>
 	<p>Total: &#8369;{totalPrice}</p>
-
 </div>
 
 <style lang="postcss">
@@ -77,5 +76,4 @@
 	.table-container {
 		@apply w-full max-h-[450px] overflow-y-auto mb-auto;
 	}
-
 </style>

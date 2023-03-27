@@ -1,7 +1,7 @@
 <script lang="ts">
 	import EditOrder from '$lib/components/Buttons/Edit.svelte';
 	import { goto } from '$app/navigation';
-	import type { Order } from '$lib/types/order';
+	import type { Order, OrderDetails } from '$lib/types/order';
 
 	export let order: Order;
 
@@ -28,7 +28,6 @@
 				return item.product?.name;
 		}
 	};
-
 </script>
 
 <div class="order-item-container font-IstokWeb">
@@ -61,8 +60,8 @@
 							<td>{(orderDetail.quantity * (orderDetail.offering?.price ?? 0)).toFixed(2)}</td>
 						</tr>
 					{/each}
-					</table>		
-					</div>	
+				</table>
+			</div>
 		</div>
 		<div class="w-3/5">
 			<p class="heading">Customer Details</p>
@@ -87,27 +86,26 @@
 </div>
 
 <style lang="postcss">
-	.order-item-container{
-		@apply bg-gray-100 flex flex-col mt-10 shadow-xl ;
+	.order-item-container {
+		@apply bg-gray-100 flex flex-col mt-10 shadow-xl;
 	}
 
-	.top-field{
+	.top-field {
 		@apply flex flex-row justify-between items-center gap-x-20 font-IstokWeb text-lg;
 	}
 	.edit-button-specs {
-		@apply ml-4 bg-white text-white font-bold py-2 px-4 rounded ;
+		@apply ml-4 bg-white text-white font-bold py-2 px-4 rounded;
 	}
 
-	.heading{
+	.heading {
 		@apply text-indigo-900 font-semibold text-lg;
 	}
 
-	.amount{
-		@apply text-indigo-900 
+	.amount {
+		@apply text-indigo-900;
 	}
 
-	.table-container{
+	.table-container {
 		@apply mr-4;
 	}
-
 </style>

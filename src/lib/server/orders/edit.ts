@@ -9,7 +9,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 		data: {
 			estimated_delivery: new Date(updatedOrder.estimated_delivery),
 			payment_status: updatedOrder.payment_status,
-			amount_paid : updatedOrder.amount_paid
+			amount_paid: updatedOrder.amount_paid
 		},
 		// For debugging purposes, we can include the offerings in the result
 		include: {
@@ -18,7 +18,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 		}
 	});
 	// for debugging purposes
-	console.log("UPDATED ORDER:", JSON.stringify(result));
+	console.log('UPDATED ORDER:', JSON.stringify(result));
 
 	return result;
 };

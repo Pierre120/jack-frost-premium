@@ -15,14 +15,14 @@
 <div class="order-list-container {width}">
 	<div class="order-list">
 		{#each orders as order}
-			<Orders {order} on:edit={edit}/>
+			<Orders {order} on:edit={edit} />
 		{/each}
 	</div>
 </div>
 
 <style lang="postcss">
 	.order-list-container {
-		@apply flex flex-col min-w-min py-6 ;
+		@apply flex flex-col min-w-min py-6;
 	}
 
 	.order-list {

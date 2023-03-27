@@ -1,34 +1,34 @@
 <script lang="ts">
-import { goto } from '$app/navigation';
-import type { Order, OrderDetails } from '$lib/types/order';
-import type { SubmitFunction } from '$app/forms';
-import type { ActionData } from './$types';
-import EditOrderForm from '$lib/components/Forms/Order/Edit.svelte';
-import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
-import StatusModal from '$lib/components/Modal/Status.svelte';
-import type { PageData } from './$types';
+	import { goto } from '$app/navigation';
+	import type { Order, OrderDetails } from '$lib/types/order';
+	import type { SubmitFunction } from '$app/forms';
+	import type { ActionData } from './$types';
+	import EditOrderForm from '$lib/components/Forms/Order/Edit.svelte';
+	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
+	import StatusModal from '$lib/components/Modal/Status.svelte';
+	import type { PageData } from './$types';
 
-export let data: PageData;
-export let formData: ActionData;
-export let order: Order;
+	export let data: PageData;
+	export let formData: ActionData;
+	export let order: Order;
 
-let formaction = '?/edit';
-let items = data.order.order_details as OrderDetails[]
-let totalPrice = data.order.total_price;
-let label = '';
-let confirmationHeader = '';
-let confirmationDetails = '';
-let cancelLabel = '';
-let confirmLabel = '';
-let statusHeader = '';
-let statusInfo = '';
-let isAboutToLeave = false;
-let isAboutToDelete = false;
-let success = false;
-let deleted = false;
-let loading = false;
+	let formaction = '?/edit';
+	let items = data.order.order_details as OrderDetails[];
+	let totalPrice = data.order.total_price;
+	let label = '';
+	let confirmationHeader = '';
+	let confirmationDetails = '';
+	let cancelLabel = '';
+	let confirmLabel = '';
+	let statusHeader = '';
+	let statusInfo = '';
+	let isAboutToLeave = false;
+	let isAboutToDelete = false;
+	let success = false;
+	let deleted = false;
+	let loading = false;
 
-const successEdit = async () => {
+	const successEdit = async () => {
 		success = true;
 		deleted = false;
 		statusHeader = 'CHANGES SAVED';
@@ -36,7 +36,7 @@ const successEdit = async () => {
 		// await invalidateAll();
 	};
 
-const successDelete = async () => {
+	const successDelete = async () => {
 		success = false;
 		deleted = true;
 		isAboutToDelete = false;
@@ -48,7 +48,7 @@ const successDelete = async () => {
 		}, 1500);
 	};
 
-const discardChange = () => {
+	const discardChange = () => {
 		confirmationHeader = 'DISCARD CHANGES?';
 		confirmationDetails =
 			"The changes you've made will not be saved if you leave this page without saving.";
@@ -57,7 +57,7 @@ const discardChange = () => {
 		isAboutToLeave = true;
 	};
 
-const deleteOrder = () => {
+	const deleteOrder = () => {
 		confirmationHeader = 'DELETE ORDER?';
 		confirmationDetails = 'Are you sure you would like to delete this order?';
 		cancelLabel = 'Cancel';
@@ -65,12 +65,12 @@ const deleteOrder = () => {
 		isAboutToDelete = true;
 	};
 
-const cancel = () => {
+	const cancel = () => {
 		isAboutToLeave = false;
 		isAboutToDelete = false;
 	};
 
-const confirm = async () => {
+	const confirm = async () => {
 		if (isAboutToLeave) {
 			isAboutToLeave = false;
 			goto('/admin/orders');
@@ -90,7 +90,7 @@ const confirm = async () => {
 		}
 	};
 
-const submitEdit: SubmitFunction = async () => {
+	const submitEdit: SubmitFunction = async () => {
 		loading = true;
 		statusHeader = 'FOR A MOMENT...';
 		statusInfo = 'Saving the changes...';

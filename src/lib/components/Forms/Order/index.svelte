@@ -60,7 +60,7 @@
 			{/if}
 			<div class="info-container">
 				<div class="flex items-stretch justify-start w-full max-w-2xl">
-					<OrderDetailsList {items} {totalPrice}/>
+					<OrderDetailsList {items} {totalPrice} />
 				</div>
 				<CustomerInputs
 					{formName}

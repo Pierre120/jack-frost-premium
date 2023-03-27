@@ -2,7 +2,6 @@ import type { Order } from '$lib/types/order';
 import type { Actions, PageServerLoad } from './$types';
 import { error, redirect } from '@sveltejs/kit';
 
-
 export const load = (async ({ locals, params, fetch }) => {
 	const session = await locals.validate();
 	if (!session) {

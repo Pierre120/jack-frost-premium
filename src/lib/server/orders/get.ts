@@ -1,19 +1,19 @@
 import { prisma } from '$lib/server/prisma';
 
 const getOrder = async (order_id: string) => {
-  const result = await prisma.order.findUnique({
-    where: {
-      id: order_id
-    },
-    include: {
-      order_details: {
-        include: {
-          offering: true,
-          product: true
-        }
-      }
-    }
-  });
+	const result = await prisma.order.findUnique({
+		where: {
+			id: order_id
+		},
+		include: {
+			order_details: {
+				include: {
+					offering: true,
+					product: true
+				}
+			}
+		}
+	});
 	console.log('ORDER ID:', order_id);
 	// for debugging purposes
 	console.log('ACQUIRED ORDER: ', JSON.stringify(result));
@@ -42,13 +42,13 @@ const getOrderNumber = async (order_id: string) => {
 const getAllOrders = async () => {
 	const result = await prisma.order.findMany({
 		include: {
-      order_details: {
-        include: {
-          offering: true,
-          product: true
-        }
-      }
-    }
+			order_details: {
+				include: {
+					offering: true,
+					product: true
+				}
+			}
+		}
 	});
 
 	// for debugging purposes

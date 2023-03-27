@@ -30,7 +30,7 @@
 				id="customer_name"
 				form={formName}
 				value={formData?.data?.customer_name ?? order?.name ?? ''}
-        readonly
+				readonly
 			/>
 			<label for="customer_name" class="input-error">
 				<!-- { formData?.errors?.customer_name[0] ?? '' } -->
@@ -44,7 +44,7 @@
 				id="contact_number"
 				form={formName}
 				value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}
-        readonly
+				readonly
 			/>
 			<label for="contact_number" class="input-error">
 				{formData?.errors?.contact_number[0] ?? ''}
@@ -90,7 +90,7 @@
 				class="grow"
 				maxlength="256"
 				bind:value={additional_details}
-        readonly
+				readonly
 			/>
 			<label for="additional_details" class="length">
 				{additional_details.length} / 256

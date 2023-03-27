@@ -12,9 +12,10 @@ export const load = (async ({ locals, fetch }) => {
 	const orders = await res.json();
 	console.log(orders);
 
-	if(orders.success){
+	if (orders.success) {
 		return {
 			orders: orders.orders as Order[]
 		};
-	} throw error(404, 'Orders not found');
+	}
+	throw error(404, 'Orders not found');
 }) satisfies PageServerLoad;

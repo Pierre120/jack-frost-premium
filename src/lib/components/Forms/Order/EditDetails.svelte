@@ -18,16 +18,13 @@
 		}
 	};
 
-  const knowOffering = (item: OrderDetails) => {
-    return item.offering?.size_name;
-  }
+	const knowOffering = (item: OrderDetails) => {
+		return item.offering?.size_name;
+	};
 
-	export let items:  OrderDetails[];
+	export let items: OrderDetails[];
 	export let totalPrice = 0;
 	export let listLabel = 'Order Details';
-  
-  
-
 </script>
 
 <div class="order-details-container">
