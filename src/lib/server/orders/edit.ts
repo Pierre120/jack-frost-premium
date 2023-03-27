@@ -7,7 +7,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 			id: order_id
 		},
 		data: {
-			estimated_delivery: updatedOrder.estimated_delivery,
+			estimated_delivery: new Date(updatedOrder.estimated_delivery),
 			payment_status: updatedOrder.payment_status,
 			amount_paid : updatedOrder.amount_paid
 		},
@@ -18,7 +18,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 		}
 	});
 	// for debugging purposes
-	console.log(JSON.stringify(result));
+	console.log("UPDATED ORDER:", JSON.stringify(result));
 
 	return result;
 };

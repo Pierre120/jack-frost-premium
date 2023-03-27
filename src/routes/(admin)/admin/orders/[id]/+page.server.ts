@@ -34,7 +34,7 @@ export const actions = {
 		});
 		const data = await res.json();
 		if (data.success) {
-			console.log('edited order');
+			console.log('edited order', res);
 			throw redirect(303, '/admin/orders');
 		}
 		throw error(500, 'Order not edited');
