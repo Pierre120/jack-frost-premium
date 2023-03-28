@@ -11,11 +11,20 @@
 
 	const dispatch = createEventDispatcher();
 
+	function getDate(estimatedDelivery) {
+		if (estimatedDelivery) {
+			return new Date(estimatedDelivery).toISOString().substr(0, 10);
+		} else {
+			return '';
+		}
+	}
+
 	const remove = () => {
 		dispatch('remove');
 	};
 
 	const closeForm = () => {
+		console.log('estimated delivery', order.estimated_delivery);
 		dispatch('close');
 	};
 
@@ -52,7 +61,12 @@
 			{#if !isCheckout}
 				<div class="date-input-container">
 					<h4>Estimated Delivery Date</h4>
-					<input type="date" name="estimated_delivery" id="estimated_delivery" />
+					<input
+						type="date"
+						name="estimated_delivery"
+						id="estimated_delivery"
+						value={getDate(order?.estimated_delivery) || ''}
+					/>
 				</div>
 			{/if}
 			<div class="info-container">
@@ -65,7 +79,7 @@
 							name="amount_paid"
 							id="amount_paid"
 							form={formName}
-							value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}
+							value={order?.amount_paid ?? ''}
 						/>
 					</div>
 				</div>
