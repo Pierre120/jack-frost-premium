@@ -10,11 +10,12 @@
 
 	export let data: PageData;
 	export let formData: ActionData;
-	export let order: Order;
+	//export let order: Order;
 
 	let formaction = '?/edit';
 	let items = data.order.order_details as OrderDetails[];
 	let totalPrice = data.order.total_price;
+	let order = data.order;
 	let label = '';
 	let confirmationHeader = '';
 	let confirmationDetails = '';
@@ -78,7 +79,7 @@
 		if (isAboutToDelete) {
 			loading = true;
 			statusHeader = 'FOR A MOMENT...';
-			statusInfo = 'Deleting the product...';
+			statusInfo = 'Deleting the order...';
 			// Delete
 			const result = await fetch(`/api/orders/${data.order.id}/delete`, {
 				method: 'POST'
