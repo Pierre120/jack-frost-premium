@@ -11,11 +11,13 @@
 
 	const dispatch = createEventDispatcher();
 
-	const getDate = (date: String) => {
-		const formattedDate = date.slice(0, 10);
-		console.log(formattedDate);
-		return formattedDate; // Output: "2023-04-08"
-	}
+	function getDate(estimatedDelivery) {
+  if (estimatedDelivery) {
+    return new Date(estimatedDelivery).toISOString().substr(0, 10);
+  } else {
+    return ''; 
+  }
+}
 
 	const remove = () => {
 		dispatch('remove');
@@ -60,7 +62,7 @@
 			{#if !isCheckout}
 				<div class="date-input-container">
 					<h4>Estimated Delivery Date</h4>
-					<input type="date" name="estimated_delivery" id="estimated_delivery" value={getDate(order?.estimated_delivery) ?? ''}/>
+					<input type="date" name="estimated_delivery" id="estimated_delivery" value={getDate(order?.estimated_delivery) || ''}/>
 				</div>
 			{/if}
 			<div class="info-container">
