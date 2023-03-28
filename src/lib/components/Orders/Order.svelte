@@ -35,7 +35,9 @@
 		<div class="top-field">
 			<p class="text-indigo-900 font-semibold text-3xl">Order #{order.number}</p>
 			<p class="text-indigo-900">Status: {order?.payment_status}</p>
-			<p class="text-indigo-900">Estimated Date: {(new Date(order?.estimated_delivery)).toLocaleDateString() ?? ''}</p>
+			<p class="text-indigo-900">
+				Estimated Date: {new Date(order?.estimated_delivery).toLocaleDateString() ?? ''}
+			</p>
 		</div>
 		<div class="edit-button-specs">
 			<EditOrder on:edit={editOrder} />

@@ -16,7 +16,7 @@ export const load = (async ({ locals, params, fetch }) => {
 			order: order.order as Order
 		};
 	}
-	console.log("ORDERS GOING TO edit.svelte:", order);
+	console.log('ORDERS GOING TO edit.svelte:', order);
 	throw error(404, 'Order not found');
 }) satisfies PageServerLoad;
 
