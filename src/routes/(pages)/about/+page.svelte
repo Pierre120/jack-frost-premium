@@ -20,7 +20,9 @@
 			</div>
 			<div class="flex items-center flex-col md:w-1/2">
 				<h1 class="text-4xl font-bold text-indigo-900 mb-5 mt-5 mr-0">THE STORY</h1>
-				<p class="text-xl text-center text-justify-not mr-0 text-black leading-8 tracking-widest px-9">
+				<p
+					class="text-xl text-center text-justify-not mr-0 text-black leading-8 tracking-widest px-9"
+				>
 					The idea of making homemade ice cream came about only when a new Kitchen Aid mixer was
 					bought and a free ice cream bowl attachment was given. This was back around 2008. <br />
 					<br /><span
@@ -101,12 +103,15 @@
 			</div>
 			<div class="flex flex-col w-full md:w-3/4 px-6">
 				<h1 class="text-2xl md:text-4xl font-bold text-indigo-900 pt-4 mb-4 md:mb-10">ORDERING</h1>
-				<p class=" text-adjust text-xl text-center md:text-justify text-indigo-900 leading-8 tracking-widest">
+				<p
+					class=" text-adjust text-xl text-center md:text-justify text-indigo-900 leading-8 tracking-widest"
+				>
 					The ice cream is on <span class="text-red-600 font-semibold">made to order basis</span>
 					with a required lead time of at least 2 days depending on the size of the order. We are also
 					willing to deliver to selected areas of the Metro Manila for a minimum amount.
-					<span><p class="text-blue-200">.</p
-						>Customer orders are also deliverable via Grab, Lalamove and other similar services</span
+					<span
+						><p class="text-blue-200">.</p>
+						Customer orders are also deliverable via Grab, Lalamove and other similar services</span
 					>
 				</p>
 			</div>
