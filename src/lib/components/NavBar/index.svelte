@@ -1,5 +1,5 @@
 <script lang="ts">
-	import SearchButton from '$lib/components/NavBar/SearchButton.svelte';
+	import SearchButton from '$lib/components/NavBar/SearchButton.svelte';	
 	import Logo from '$lib/components/Logo.svelte';
 	import CartButton from '$lib/components/NavBar/CartButton.svelte';
 	import NavLinks from '$lib/components/NavBar/NavLinks.svelte';
@@ -89,7 +89,7 @@
 
 		<div
 			class="flex-col col-span-3 mt-9 space-y-4 md:flex md:space-y-0 
-								md:items-center md:space-x-10 md:mt-0
+								md:items-center md:space-x-10 md:mt-4
 								{showMenu ? 'flex' : 'hidden'}"
 		>
 			<NavLinks {data} />
