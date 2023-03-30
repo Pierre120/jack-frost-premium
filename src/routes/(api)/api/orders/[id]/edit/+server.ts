@@ -11,6 +11,12 @@ export const POST: RequestHandler = async ({ params, request }) => {
 			estimated_delivery,
 			payment_status,
 			amount_paid
+			// additional parameters here since the client wants the customer details to be modifiable 
+			//name,
+			//primary_contact,
+			//payment_mode,
+			//additional_details
+
 		});
 		return json({
 			success: true,

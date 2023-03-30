@@ -53,4 +53,8 @@ export interface OrderUpdate {
 	estimated_delivery: Date;
 	payment_status: string | PaymentStatus;
 	amount_paid: number;
+	//name: string;
+	//primary_contact: string;
+	//payment_mode: string | PaymentMode;
+	//additional_details?: string;
 }
