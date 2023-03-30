@@ -29,7 +29,7 @@
 	}
 
 	.navlinks > li > a {
-		@apply px-2 uppercase font-IstokWeb align-text-bottom text-navy-blue border-transparent hover:text-primary-red hover:border-primary-red block mt-4;
+		@apply uppercase font-bold font-IstokWeb align-text-bottom text-navy-blue hover:text-primary-red hover:border-b-2 hover:border-primary-red block mt-4 ml-4 text-lg lg:inline-block lg:inline;
 	}
 
 	.navlinks.expand-y {

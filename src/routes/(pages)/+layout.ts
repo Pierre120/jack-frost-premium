@@ -9,7 +9,6 @@ export const load = (() => {
 		pages: [
 			{ title: 'HOME', href: '/' },
 			{ title: 'MENU', href: '/menu' },
-			// { title: 'ORDER', href: '/order' },
 			{ title: 'CONTACT', href: '/contact' },
 			{ title: 'ABOUT US', href: '/about' }
 		],
