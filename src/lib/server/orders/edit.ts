@@ -19,7 +19,7 @@ const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 			order_details: true
 		}
 	});
-	console.log("UPDATE ORDER PASSED:", JSON.stringify(updatedOrder));
+	console.log('UPDATE ORDER PASSED:', JSON.stringify(updatedOrder));
 	// for debugging purposes
 	console.log('UPDATED ORDER:', JSON.stringify(result));
 
