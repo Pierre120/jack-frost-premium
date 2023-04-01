@@ -23,30 +23,28 @@
 
 	<div class="input-container">
 		<div class="important-inputs">
-			<label for="customer_name" class="input-label"> Name: </label>
+			<label for="name" class="input-label"> Name: </label>
 			<input
 				type="text"
-				name="customer_name"
-				id="customer_name"
+				name="name"
+				id="name"
 				form={formName}
 				value={formData?.data?.customer_name ?? order?.name ?? ''}
-				readonly
 			/>
-			<label for="customer_name" class="input-error">
+			<label for="name" class="input-error">
 				<!-- { formData?.errors?.customer_name[0] ?? '' } -->
 				<!-- Error Message! -->
 			</label>
 
-			<label for="contact_number" class="input-label"> Contact Number: </label>
+			<label for="primary_contact" class="input-label"> Contact Number: </label>
 			<input
 				type="text"
-				name="contact_number"
-				id="contact_number"
+				name="primary_contact"
+				id="primary_contact"
 				form={formName}
 				value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}
-				readonly
 			/>
-			<label for="contact_number" class="input-error">
+			<label for="primary_contact" class="input-error">
 				{formData?.errors?.contact_number[0] ?? ''}
 				<!-- Error Message! -->
 			</label>

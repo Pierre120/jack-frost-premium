@@ -6,16 +6,15 @@ import { editOrder } from '$lib/server/orders/edit';
 export const POST: RequestHandler = async ({ params, request }) => {
 	try {
 		//TODO :  add variables here
-		const { estimated_delivery, payment_status, amount_paid } = await request.json();
+		const { name, primary_contact, estimated_delivery, payment_status, amount_paid } = await request.json();
 		const order = await editOrder(params.id ?? '', {
+			name,
+			primary_contact,
 			estimated_delivery,
 			payment_status,
 			amount_paid
 			// additional parameters here since the client wants the customer details to be modifiable 
-			//name,
-			//primary_contact,
-			//payment_mode,
-			//additional_details
+
 
 		});
 		return json({
