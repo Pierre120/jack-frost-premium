@@ -1,7 +1,8 @@
 <script lang="ts">
 	import { goto } from '$app/navigation';
-	import OrderForm from '$lib/components/Forms/Order/Index.svelte';
+	import OrderForm from '$lib/components/Forms/Order/index.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
+	import StatusModal from '$lib/components/Modal/Status.svelte';
 	import { retrieveCart, clearCart } from '$lib/stores/cart';
 	import type { Order } from '$lib/types/order';
 	import type { SubmitFunction } from '$app/forms';
@@ -23,6 +24,11 @@
 	let cancelLabel = 'Stay on this Page';
 	let confirmLabel = 'Cancel Order';
 
+	let success = false;
+	let loading = false;
+	let statusHeader = '';
+	let statusInfo = '';
+
 	const cancelOrderConfirmation = () => {
 		isAboutToCancel = true;
 	};
@@ -38,7 +44,20 @@
 		}
 	};
 
+	const submittingOrder = async () => {
+		success = true;
+		statusHeader = 'FOR A MOMENT...';
+		statusInfo = 'Submitting order...';
+	};
+
+	const successOrderSubmission = async () => {
+		success = true;
+		statusHeader = 'ORDER SUBMITTED';
+		statusInfo = "The order you've made has been submitted";
+	};
+
 	const confirmOrder: SubmitFunction = ({ data, form }) => {
+		submittingOrder();
 		console.log(form);
 		console.log(data);
 		data.append('orderitems', JSON.stringify(items));
@@ -47,6 +66,8 @@
 			form.reset();
 			switch (result.type) {
 				case 'redirect':
+					loading = false;
+					successOrderSubmission();
 					clearCart();
 					break;
 			}
@@ -86,4 +107,8 @@
 		on:cancel={cancel}
 		on:confirm={confirm}
 	/>
+{/if}
+
+{#if success || loading}
+	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
 {/if}
