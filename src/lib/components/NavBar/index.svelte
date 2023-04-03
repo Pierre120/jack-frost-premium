@@ -49,10 +49,10 @@
 		</div>
 	{:else if data.navbar === 'default'}
 		<div class="grid grid-cols-3 gap-4">
-			<div class="flex col-span-1 pl-4 md:pl-12">
+			<!-- <div class="flex col-span-1 pl-4 md:pl-12">
 				<SearchButton placement="self-center" width="w-8" />
-			</div>
-			<div class="flex justify-center col-span-1">
+			</div> -->
+			<div class="flex justify-center col-start-2 col-span-1">
 				<Logo width="w-2/3" />
 			</div>
 			<div class="flex flex-row-reverse col-span-1 pr-4 md:pr-12">
