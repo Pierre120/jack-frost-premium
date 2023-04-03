@@ -4,9 +4,10 @@
 	import EditCategoryForm from '$lib/components/Forms/Category.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 
 	let confirmationHeader = '';
 	let confirmationDetails = '';
@@ -94,6 +95,10 @@
 					loading = false;
 					await successEdit();
 					break;
+				case 'failure':
+					loading = false;
+					success = false;
+					break;
 				case 'error':
 					console.log(result.error);
 					break;
@@ -106,6 +111,7 @@
 <EditCategoryForm
 	label="Edit Category"
 	formaction="?/edit"
+	{form}
 	submitHandle={submitEdit}
 	category={data.category}
 	hasHeader={true}

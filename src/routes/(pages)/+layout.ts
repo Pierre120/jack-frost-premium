@@ -14,6 +14,12 @@ export const load = (() => {
 		],
 		contacts: [
 			{
+				href: 'tel:+639189354716',
+				iconSrc: phoneIcon,
+				alt: 'Phone icon',
+				label: '+639189354716'
+			},
+			{
 				href: 'https://www.facebook.com/jackfrostpremium',
 				iconSrc: facebookIcon,
 				alt: 'Facebook icon',
@@ -24,12 +30,6 @@ export const load = (() => {
 				iconSrc: instagramIcon,
 				alt: 'Instagram icon',
 				label: '@jackfrostpremium'
-			},
-			{
-				href: 'tel:+639189354716',
-				iconSrc: phoneIcon,
-				alt: 'Phone icon',
-				label: '+639189354716'
 			}
 		],
 		navbar: 'default'

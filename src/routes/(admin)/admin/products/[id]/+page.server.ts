@@ -1,6 +1,7 @@
+import { productSchema } from '$lib/forms/validations/product';
 import type { Category } from '$lib/types/category';
 import type { Product } from '$lib/types/product';
-import { error, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ locals, params, fetch }) => {
@@ -28,6 +29,27 @@ export const actions = {
 		console.log('editing product ---');
 		const updatedProduct = Object.fromEntries(await request.formData());
 		console.log(updatedProduct);
+		// Validate form data
+		const result = productSchema.safeParse({
+			name: updatedProduct.name,
+			description: updatedProduct.description,
+			img_path: updatedProduct.img_path,
+			category_id: updatedProduct.category_id
+		});
+		if (!result.success) {
+			console.log(result.error.flatten().fieldErrors);
+			return fail(400, {
+				data: {
+					name: updatedProduct.name,
+					description: updatedProduct.description,
+					img_path: updatedProduct.img_path,
+					img_src: updatedProduct.img_src,
+					category_id: updatedProduct.category_id
+				},
+				errors: result.error.flatten().fieldErrors
+			});
+		}
+		// Edit product
 		const res = await fetch(`/api/products/${params.id}/edit`, {
 			method: 'POST',
 			headers: {
