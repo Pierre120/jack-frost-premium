@@ -9,7 +9,7 @@
 		dispatch('close');
 	};
 
-	export let formData: ActionData;
+	export let form: ActionData;
 	export let formaction: string;
 	export let order: Order;
 	export let isCheckout = false;
@@ -28,13 +28,14 @@
 				type="text"
 				name="customer_name"
 				id="customer_name"
+				class={form?.errors?.customer_name ? 'border-primary-red' : 'border-navy-blue'}
 				form={formName}
-				value={formData?.data?.customer_name ?? order?.name ?? ''}
-				required
+				value={order?.name ?? (form?.data?.customer_name ?? '')}
 			/>
 			<label for="customer_name" class="input-error">
-				<!-- { formData?.errors?.customer_name[0] ?? '' } -->
-				<!-- Error Message! -->
+				{#if form?.errors?.customer_name}
+					{ form?.errors?.customer_name[0] ?? '' }
+				{/if}
 			</label>
 
 			<label for="contact_number" class="input-label"> Contact Number: </label>
@@ -42,42 +43,45 @@
 				type="text"
 				name="contact_number"
 				id="contact_number"
+				class={form?.errors?.contact_number ? 'border-primary-red' : 'border-navy-blue'}
 				form={formName}
-				value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}
-				required
+				value={order?.primary_contact ?? (form?.data?.contact_number ?? '')}
+				pattern="(0|\+63)[0-9]{'{10}'}"
 			/>
 			<label for="contact_number" class="input-error">
-				{formData?.errors?.contact_number[0] ?? ''}
-				<!-- Error Message! -->
+				{#if form?.errors?.contact_number}
+					{ form?.errors?.contact_number[0] ?? '' }
+				{/if}
 			</label>
 
 			<label for="payment_method" class="input-label"> Payment Method: </label>
-			<select name="payment_method" id="payment_method" form={formName} required>
+			<select name="payment_method" id="payment_method" class={form?.errors?.payment_method ? 'border-primary-red' : 'border-navy-blue'} form={formName}>
 				<option
 					value=""
 					disabled
-					selected={!(formData?.data?.payment_method || order?.payment_mode)}
+					selected={!(form?.data?.payment_method || order?.payment_mode)}
 					>Select payment method</option
 				>
 				<option
 					value="GCASH"
-					selected={formData?.data?.payment_method === 'GCASH' || order?.payment_mode === 'GCASH'}
+					selected={form?.data?.payment_method === 'GCASH' || order?.payment_mode === 'GCASH'}
 					>GCash</option
 				>
 				<option
 					value="MAYA"
-					selected={formData?.data?.payment_method === 'MAYA' || order?.payment_mode === 'MAYA'}
+					selected={form?.data?.payment_method === 'MAYA' || order?.payment_mode === 'MAYA'}
 					>Maya</option
 				>
 				<option
 					value="BDO"
-					selected={formData?.data?.payment_method === 'BDO' || order?.payment_mode === 'BDO'}
+					selected={form?.data?.payment_method === 'BDO' || order?.payment_mode === 'BDO'}
 					>BDO Bank Transfer</option
 				>
 			</select>
 			<label for="payment_method" class="input-error">
-				<!-- { formData?.errors?.payment_method[0] ?? '' } -->
-				<!-- Error Message! -->
+				{#if form?.errors?.payment_method}
+					{ form?.errors?.payment_method[0] ?? '' }
+				{/if}
 			</label>
 		</div>
 
@@ -159,12 +163,12 @@
 	input,
 	textarea,
 	select {
-		@apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border border-navy-blue rounded-lg
+		@apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border rounded-lg
       focus:bg-white focus:outline-none focus:ring-2 
       focus:ring-dark-blue focus:border-transparent placeholder:text-slate-400;
 	}
 
 	textarea {
-		@apply resize-none overflow-y-scroll;
+		@apply resize-none overflow-y-scroll border-navy-blue;
 	}
 </style>

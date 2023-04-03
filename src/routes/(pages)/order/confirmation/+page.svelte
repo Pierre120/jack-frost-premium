@@ -8,7 +8,7 @@
 	import type { SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
 
-	export let formData: ActionData;
+	export let form: ActionData;
 	export let order: Order;
 
 	let formaction = '?/order';
@@ -45,7 +45,7 @@
 	};
 
 	const submittingOrder = async () => {
-		success = true;
+		loading = true;
 		statusHeader = 'FOR A MOMENT...';
 		statusInfo = 'Submitting order...';
 	};
@@ -63,19 +63,24 @@
 		data.append('orderitems', JSON.stringify(items));
 		data.append('totalprice', totalPrice.toString());
 		return async ({ result, update }) => {
-			form.reset();
+			// form.reset();
 			switch (result.type) {
 				case 'redirect':
 					loading = false;
 					successOrderSubmission();
 					clearCart();
 					break;
+				case 'failure':
+					loading = false;
+					success = false;
+					break;
 			}
 			await update();
 		};
 	};
 
-	$: console.log(formData?.data.id ?? 'No data');
+	$: console.log(form?.data.id ?? 'No data');
+	$: console.log(JSON.stringify(form?.errors));
 </script>
 
 <svelte:head>
@@ -91,7 +96,7 @@
 		{totalPrice}
 		{isCheckout}
 		{label}
-		{formData}
+		{form}
 		{order}
 		handleSubmit={confirmOrder}
 		on:close={cancelOrderConfirmation}

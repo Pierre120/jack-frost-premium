@@ -24,7 +24,7 @@
 	export let formaction: string;
 	export let items: OrderDetails[] | CartItem[];
 	export let totalPrice: number;
-	export let formData: ActionData;
+	export let form: ActionData;
 	export let order: Order;
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
@@ -65,7 +65,7 @@
 				<CustomerInputs
 					{formName}
 					{formaction}
-					{formData}
+					{form}
 					{order}
 					{isCheckout}
 					on:close={closeForm}
