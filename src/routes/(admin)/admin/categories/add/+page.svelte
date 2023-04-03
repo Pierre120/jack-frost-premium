@@ -53,6 +53,7 @@
 				case 'failure':
 					loading = false;
 					success = false;
+					break;
 				case 'error':
 					console.log(result.error);
 					break;

@@ -33,7 +33,7 @@ const validateCategory = async (category) => {
 	if (category?.offerings.length === 0) {
 		errors['offerings'] = ['Offerings are required'];
 	} else {
-		for (const offering of category?.offerings) {
+		for (const offering of category.offerings) {
 			if (offering.size_name === '' || offering.price == 0 || offering.price == '') {
 				errors['offerings'] = ['Offerings is required'];
 				success = false;
