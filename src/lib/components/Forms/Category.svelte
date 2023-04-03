@@ -8,12 +8,12 @@
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { Offering } from '$lib/types/offering';
-  import type { ActionData } from './$types';
+	import type { ActionData } from './$types';
 	//import Offering from '../Product/Offering.svelte';
 
 	export let label: string;
 	export let formaction: string;
-	export let form: ActionData
+	export let form: ActionData;
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
 	export let hasHeader = false;
@@ -31,7 +31,8 @@
 
 	//let offerings = [{ size_name: '', price: '' }]; // initial size input
 
-	let sizes = category?.offerings ?? (form?.data?.offerings ?? [{ id: '', size_name: '', price: '' }]);
+	let sizes = category?.offerings ??
+		form?.data?.offerings ?? [{ id: '', size_name: '', price: '' }];
 
 	const addSize = () => {
 		sizes = [...sizes, { id: '', size_name: '', price: '' }];
@@ -63,11 +64,11 @@
 					id="name"
 					class={form?.errors?.name ? 'border-primary-red' : 'border-[#352F75]'}
 					placeholder="Enter category name"
-					value={category?.name ?? (form?.data?.name ?? '')}
+					value={category?.name ?? form?.data?.name ?? ''}
 				/>
 				<label for="description" class="input-error pl-1">
 					{#if form?.errors?.name}
-						{ form?.errors?.name[0] ?? '' }
+						{form?.errors?.name[0] ?? ''}
 					{/if}
 				</label>
 			</div>
@@ -83,7 +84,9 @@
 							type="text"
 							name="size_name{i}"
 							id="size-name{i}"
-							class={form?.errors?.offerings && size.size_name === '' ? 'border-primary-red' : 'border-[#352F75]'}
+							class={form?.errors?.offerings && size.size_name === ''
+								? 'border-primary-red'
+								: 'border-[#352F75]'}
 							placeholder="Size name {i + 1}"
 							bind:value={size.size_name}
 						/>
@@ -97,7 +100,9 @@
 							min="0"
 							name="price{i}"
 							id="size-price{i}"
-							class={form?.errors?.offerings && (size.price === '' || size.price === 0) ? 'border-primary-red' : 'border-[#352F75]'}
+							class={form?.errors?.offerings && (size.price === '' || size.price === 0)
+								? 'border-primary-red'
+								: 'border-[#352F75]'}
 							placeholder=" &#8369;0"
 							bind:value={size.price}
 						/>
@@ -106,7 +111,7 @@
 			</div>
 			<label for="size-price" class="input-error pl-36">
 				{#if form?.errors?.offerings}
-					{ form?.errors?.offerings[0] ?? '' }
+					{form?.errors?.offerings[0] ?? ''}
 				{/if}
 			</label>
 			<div class="button-container">

@@ -30,7 +30,7 @@ export const load = (() => {
 				iconSrc: instagramIcon,
 				alt: 'Instagram icon',
 				label: '@jackfrostpremium'
-			},
+			}
 		],
 		navbar: 'default'
 	};

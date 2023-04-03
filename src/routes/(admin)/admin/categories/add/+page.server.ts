@@ -21,21 +21,22 @@ export const load = (async ({ locals, fetch }) => {
 	throw error(404, 'Categories not found');
 }) satisfies PageServerLoad;
 
-
 const validateCategory = async (category) => {
-	const errors: { name: string[] | null; offerings: string[] | null} = { name: null, offerings: null};
+	const errors: { name: string[] | null; offerings: string[] | null } = {
+		name: null,
+		offerings: null
+	};
 	let success = true;
 	// Validate category name
-	if(category.name === '') {
+	if (category.name === '') {
 		errors['name'] = ['Category name is required'];
 		success = false;
 	}
-	if(category?.offerings.length === 0) {
+	if (category?.offerings.length === 0) {
 		errors['offerings'] = ['Offerings are required'];
-	}
-	else {
+	} else {
 		for (const offering of category?.offerings) {
-			if(offering.size_name === '' || offering.price == 0 || offering.price == '') {
+			if (offering.size_name === '' || offering.price == 0 || offering.price == '') {
 				errors['offerings'] = ['Offerings is required'];
 				success = false;
 				break;
@@ -44,8 +45,8 @@ const validateCategory = async (category) => {
 	}
 	return {
 		success,
-		errors,
-	}
+		errors
+	};
 };
 
 export const actions = {

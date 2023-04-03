@@ -34,7 +34,7 @@ export const actions = {
 			name: updatedProduct.name,
 			description: updatedProduct.description,
 			img_path: updatedProduct.img_path,
-			category_id: updatedProduct.category_id,
+			category_id: updatedProduct.category_id
 		});
 		if (!result.success) {
 			console.log(result.error.flatten().fieldErrors);
@@ -44,7 +44,7 @@ export const actions = {
 					description: updatedProduct.description,
 					img_path: updatedProduct.img_path,
 					img_src: updatedProduct.img_src,
-					category_id: updatedProduct.category_id,
+					category_id: updatedProduct.category_id
 				},
 				errors: result.error.flatten().fieldErrors
 			});

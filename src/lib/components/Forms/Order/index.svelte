@@ -62,14 +62,7 @@
 				<div class="flex items-stretch justify-start w-full max-w-2xl">
 					<OrderDetailsList {items} {totalPrice} />
 				</div>
-				<CustomerInputs
-					{formName}
-					{formaction}
-					{form}
-					{order}
-					{isCheckout}
-					on:close={closeForm}
-				/>
+				<CustomerInputs {formName} {formaction} {form} {order} {isCheckout} on:close={closeForm} />
 			</div>
 		</form>
 	</TemplateForm>

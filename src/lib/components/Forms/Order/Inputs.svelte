@@ -30,11 +30,11 @@
 				id="customer_name"
 				class={form?.errors?.customer_name ? 'border-primary-red' : 'border-navy-blue'}
 				form={formName}
-				value={order?.name ?? (form?.data?.customer_name ?? '')}
+				value={order?.name ?? form?.data?.customer_name ?? ''}
 			/>
 			<label for="customer_name" class="input-error">
 				{#if form?.errors?.customer_name}
-					{ form?.errors?.customer_name[0] ?? '' }
+					{form?.errors?.customer_name[0] ?? ''}
 				{/if}
 			</label>
 
@@ -45,21 +45,23 @@
 				id="contact_number"
 				class={form?.errors?.contact_number ? 'border-primary-red' : 'border-navy-blue'}
 				form={formName}
-				value={order?.primary_contact ?? (form?.data?.contact_number ?? '')}
+				value={order?.primary_contact ?? form?.data?.contact_number ?? ''}
 				pattern="(0|\+63)[0-9]{'{10}'}"
 			/>
 			<label for="contact_number" class="input-error">
 				{#if form?.errors?.contact_number}
-					{ form?.errors?.contact_number[0] ?? '' }
+					{form?.errors?.contact_number[0] ?? ''}
 				{/if}
 			</label>
 
 			<label for="payment_method" class="input-label"> Payment Method: </label>
-			<select name="payment_method" id="payment_method" class={form?.errors?.payment_method ? 'border-primary-red' : 'border-navy-blue'} form={formName}>
-				<option
-					value=""
-					disabled
-					selected={!(form?.data?.payment_method || order?.payment_mode)}
+			<select
+				name="payment_method"
+				id="payment_method"
+				class={form?.errors?.payment_method ? 'border-primary-red' : 'border-navy-blue'}
+				form={formName}
+			>
+				<option value="" disabled selected={!(form?.data?.payment_method || order?.payment_mode)}
 					>Select payment method</option
 				>
 				<option
@@ -80,7 +82,7 @@
 			</select>
 			<label for="payment_method" class="input-error">
 				{#if form?.errors?.payment_method}
-					{ form?.errors?.payment_method[0] ?? '' }
+					{form?.errors?.payment_method[0] ?? ''}
 				{/if}
 			</label>
 		</div>

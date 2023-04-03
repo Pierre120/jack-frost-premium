@@ -8,21 +8,21 @@
 	import type { Product } from '$lib/types/product';
 	import { supabase } from '$lib/utils/supabase';
 	import { enhance, type SubmitFunction } from '$app/forms';
-  import type { ActionData } from './$types';
+	import type { ActionData } from './$types';
 
 	export let categories: { id: string; name: string }[];
 	export let label: string;
 	export let formaction: string;
-	export let form: ActionData
+	export let form: ActionData;
 	export let submitHandle: SubmitFunction;
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
 	export let hasHeader = false;
 	export let product: Product | null = null;
 
-	let description = product?.description ?? (form?.data?.description ?? '');
-	let imagePath = product?.img_path ?? (form?.data?.img_path ?? '');
-	let imageUrl = product?.img_src ?? (form?.data?.img_src ?? tmpImg);
+	let description = product?.description ?? form?.data?.description ?? '';
+	let imagePath = product?.img_path ?? form?.data?.img_path ?? '';
+	let imageUrl = product?.img_src ?? form?.data?.img_src ?? tmpImg;
 	let isUploading = false;
 	let isRendering = false;
 
@@ -140,11 +140,11 @@
 						id="name"
 						class={form?.errors?.name ? 'border-primary-red' : 'border-[#352F75]'}
 						placeholder="Enter product name"
-						value={product?.name ?? (form?.data?.name ?? '')}
+						value={product?.name ?? form?.data?.name ?? ''}
 					/>
 					<label for="name" class="input-error">
 						{#if form?.errors?.name}
-							{ form?.errors?.name[0] ?? '' }
+							{form?.errors?.name[0] ?? ''}
 						{/if}
 					</label>
 				</div>
@@ -163,7 +163,7 @@
 					<span class="desc-length">{description.length} / 256</span>
 					<label for="description" class="input-error">
 						{#if form?.errors?.description}
-							{ form?.errors?.description[0] ?? '' }
+							{form?.errors?.description[0] ?? ''}
 						{/if}
 					</label>
 				</div>
@@ -178,7 +178,9 @@
 						<img
 							src={imageUrl}
 							alt="Ice cream"
-							class="{isUploading || isRendering ? 'hidden' : ''} {form?.errors?.img_path ? 'border-2 border-primary-red' : 'border-[#352F75]'}"
+							class="{isUploading || isRendering ? 'hidden' : ''} {form?.errors?.img_path
+								? 'border-2 border-primary-red'
+								: 'border-[#352F75]'}"
 							on:load={() => {
 								isRendering = false;
 							}}
@@ -219,28 +221,41 @@
 					</div>
 					<label for="img_path" class="input-error">
 						{#if form?.errors?.img_path}
-							{ form?.errors?.img_path[0] ?? '' }
+							{form?.errors?.img_path[0] ?? ''}
 						{/if}
 					</label>
 				</div>
 				<div class="product-category">
 					<label for="category_id">Product Category:</label>
-					<select name="category_id" id="category_id" class={form?.errors?.category_id ? 'border-primary-red' : 'border-[#352F75]'}>
+					<select
+						name="category_id"
+						id="category_id"
+						class={form?.errors?.category_id ? 'border-primary-red' : 'border-[#352F75]'}
+					>
 						<option
 							value=""
 							class="text-gray-400"
 							disabled
-							selected={product?.category_id && form?.data?.category_id ? false : true}>Choose a category {product?.category_id && form?.data?.category_id ? 'not select' : 'select'}</option
+							selected={product?.category_id && form?.data?.category_id ? false : true}
+							>Choose a category {product?.category_id && form?.data?.category_id
+								? 'not select'
+								: 'select'}</option
 						>
 						{#each categories as category}
-							<option value={category.id} selected={category.id == product?.category_id || category.id == form?.data?.category_id}
-								>{category.name}, {category.id == product?.category_id || category.id == form?.data?.category_id ? 'select': 'not select'}</option
+							<option
+								value={category.id}
+								selected={category.id == product?.category_id ||
+									category.id == form?.data?.category_id}
+								>{category.name}, {category.id == product?.category_id ||
+								category.id == form?.data?.category_id
+									? 'select'
+									: 'not select'}</option
 							>
 						{/each}
 					</select>
 					<label for="category_id" class="input-error">
 						{#if form?.errors?.category_id}
-							{ form?.errors?.category_id[0] ?? '' }
+							{form?.errors?.category_id[0] ?? ''}
 						{/if}
 					</label>
 				</div>
