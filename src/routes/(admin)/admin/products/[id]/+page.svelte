@@ -4,9 +4,10 @@
 	import EditProductForm from '$lib/components/Forms/Product.svelte';
 	import ConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 
 	let confirmationHeader = '';
 	let confirmationDetails = '';
@@ -92,6 +93,9 @@
 					loading = false;
 					await successEdit();
 					break;
+				case 'failure':
+					loading = false;
+					break;
 				case 'error':
 					console.log(result.error);
 					break;
@@ -103,6 +107,7 @@
 
 <EditProductForm
 	label="Edit Product"
+	{form}
 	submitHandle={submitEdit}
 	formaction="?/edit"
 	categories={data.categories}

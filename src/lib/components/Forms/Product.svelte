@@ -8,19 +8,21 @@
 	import type { Product } from '$lib/types/product';
 	import { supabase } from '$lib/utils/supabase';
 	import { enhance, type SubmitFunction } from '$app/forms';
+  import type { ActionData } from './$types';
 
 	export let categories: { id: string; name: string }[];
 	export let label: string;
 	export let formaction: string;
+	export let form: ActionData
 	export let submitHandle: SubmitFunction;
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
 	export let hasHeader = false;
 	export let product: Product | null = null;
 
-	let description = product?.description ?? '';
-	let imagePath = product?.img_path ?? '';
-	let imageUrl = product?.img_src ?? tmpImg;
+	let description = product?.description ?? (form?.data?.description ?? '');
+	let imagePath = product?.img_path ?? (form?.data?.img_path ?? '');
+	let imageUrl = product?.img_src ?? (form?.data?.img_src ?? tmpImg);
 	let isUploading = false;
 	let isRendering = false;
 
@@ -136,15 +138,22 @@
 						type="text"
 						name="name"
 						id="name"
+						class={form?.errors?.name ? 'border-primary-red' : 'border-[#352F75]'}
 						placeholder="Enter product name"
-						value={product?.name ?? ''}
+						value={product?.name ?? (form?.data?.name ?? '')}
 					/>
+					<label for="name" class="input-error">
+						{#if form?.errors?.name}
+							{ form?.errors?.name[0] ?? '' }
+						{/if}
+					</label>
 				</div>
 				<div class="product-desc">
-					<label for="desc">Product Description:</label>
+					<label for="description">Product Description:</label>
 					<textarea
 						name="description"
 						id="description"
+						class={form?.errors?.description ? 'border-primary-red' : 'border-[#352F75]'}
 						placeholder="Enter description"
 						maxlength="256"
 						bind:value={description}
@@ -152,6 +161,12 @@
 						on:change={autoExpand}
 					/>
 					<span class="desc-length">{description.length} / 256</span>
+					<label for="description" class="input-error">
+						{#if form?.errors?.description}
+							{ form?.errors?.description[0] ?? '' }
+						{/if}
+						{ description }
+					</label>
 				</div>
 			</div>
 			<div class="info-2">
@@ -164,7 +179,7 @@
 						<img
 							src={imageUrl}
 							alt="Ice cream"
-							class={isUploading || isRendering ? 'hidden' : ''}
+							class="{isUploading || isRendering ? 'hidden' : ''} {form?.errors?.img_path ? 'border-2 border-primary-red' : 'border-[#352F75]'}"
 							on:load={() => {
 								isRendering = false;
 							}}
@@ -203,22 +218,32 @@
 							{/if}
 						</label>
 					</div>
+					<label for="img_path" class="input-error">
+						{#if form?.errors?.img_path}
+							{ form?.errors?.img_path[0] ?? '' }
+						{/if}
+					</label>
 				</div>
 				<div class="product-category">
 					<label for="category_id">Product Category:</label>
-					<select name="category_id" id="category_id">
+					<select name="category_id" id="category_id" class={form?.errors?.category_id ? 'border-primary-red' : 'border-[#352F75]'}>
 						<option
 							value=""
 							class="text-gray-400"
 							disabled
-							selected={product?.category_id ? false : true}>Choose a category</option
+							selected={product?.category_id && form?.data?.category_id ? false : true}>Choose a category {product?.category_id && form?.data?.category_id ? 'not select' : 'select'}</option
 						>
 						{#each categories as category}
-							<option value={category.id} selected={category.id === product?.category_id}
-								>{category.name}</option
+							<option value={category.id} selected={category.id == product?.category_id || category.id == form?.data?.category_id}
+								>{category.name}, {category.id == product?.category_id || category.id == form?.data?.category_id ? 'select': 'not select'}</option
 							>
 						{/each}
 					</select>
+					<label for="category_id" class="input-error">
+						{#if form?.errors?.category_id}
+							{ form?.errors?.category_id[0] ?? '' }
+						{/if}
+					</label>
 				</div>
 			</div>
 		</form>
@@ -247,24 +272,24 @@
 		@apply flex flex-col items-stretch justify-center w-full font-IstokWeb;
 	}
 
-	.product-name > label {
+	.product-name > label:not(.input-error) {
 		@apply text-start align-bottom text-3xl text-[#352F75];
 	}
 
 	.product-name > input {
-		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
 	}
 
 	.product-desc {
 		@apply flex flex-col items-stretch justify-center w-full pt-10 font-IstokWeb;
 	}
 
-	.product-desc > label {
+	.product-desc > label:not(.input-error) {
 		@apply text-start align-bottom text-3xl text-[#352F75];
 	}
 
 	.product-desc > textarea {
-		@apply resize-none overflow-hidden w-full min-h-[16rem] px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+		@apply resize-none overflow-hidden w-full min-h-[16rem] px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
 	}
 
 	.desc-length {
@@ -308,11 +333,16 @@
 		@apply flex flex-col items-stretch justify-center w-full pt-10 font-IstokWeb;
 	}
 
-	.product-category > label {
+	.product-category > label:not(.input-error) {
 		@apply text-start align-bottom text-3xl text-[#352F75];
 	}
 
 	.product-category > select {
-		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+	}
+
+	.input-error {
+		@apply flex items-start justify-start text-start align-bottom text-sm text-primary-red 
+      w-full h-10 px-1;
 	}
 </style>

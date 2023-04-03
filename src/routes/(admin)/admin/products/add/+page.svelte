@@ -4,9 +4,10 @@
 	import AddProductForm from '$lib/components/Forms/Product.svelte';
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 
 	const confirmationHeader = 'DISCARD PRODUCT?';
 	const confirmationDetails =
@@ -49,6 +50,9 @@
 					loading = false;
 					await successAdd();
 					break;
+				case 'failure':
+					loading = false;
+					break;
 				case 'error':
 					console.log(result.error);
 					break;
@@ -61,6 +65,7 @@
 <AddProductForm
 	label="Add Product"
 	formaction="?/add"
+	{form}
 	submitHandle={submitAdd}
 	categories={data.categories}
 	hasHeader={true}

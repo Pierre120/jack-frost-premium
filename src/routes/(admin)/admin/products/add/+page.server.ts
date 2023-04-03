@@ -1,4 +1,5 @@
-import { error, redirect } from '@sveltejs/kit';
+import { productSchema } from '$lib/forms/validations/product';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 
 export const load = (async ({ locals, fetch }) => {
@@ -29,6 +30,27 @@ export const actions = {
 		console.log('adding product ---');
 		const product = Object.fromEntries(await request.formData());
 		console.log(product);
+		// Validate form data
+		const result = productSchema.safeParse({
+			name: product.name,
+			description: product.description,
+			img_path: product.img_path,
+			category_id: product.category_id,
+		});
+		if (!result.success) {
+			console.log(result.error.flatten().fieldErrors);
+			return fail(400, {
+				data: {
+					name: product.name,
+					description: product.description,
+					img_path: product.img_path,
+					img_src: product.img_src,
+					category_id: product.category_id,
+				},
+				errors: result.error.flatten().fieldErrors
+			});
+		}
+		// Add product
 		const res = await fetch('/api/products/add', {
 			method: 'POST',
 			headers: {
