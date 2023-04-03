@@ -284,7 +284,7 @@
 	}
 
 	.product-image > img {
-		@apply /* w-2/5 */ w-80 /* h-full */ h-80 object-cover;
+		@apply /* w-2/5 */ w-96 /* h-full */ h-80 object-cover;
 	}
 
 	.product-image > input {
