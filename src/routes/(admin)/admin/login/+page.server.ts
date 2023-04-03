@@ -10,7 +10,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	console.log(session);
 	if (session) {
 		// Redirect to admin home page
-		throw redirect(302, '/admin');
+		throw redirect(302, '/admin/products');
 	}
 };
 
