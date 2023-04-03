@@ -165,7 +165,6 @@
 						{#if form?.errors?.description}
 							{ form?.errors?.description[0] ?? '' }
 						{/if}
-						{ description }
 					</label>
 				</div>
 			</div>

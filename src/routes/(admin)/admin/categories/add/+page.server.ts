@@ -1,5 +1,6 @@
-import { error, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
+import type { Category } from '$lib/types/category';
 
 export const load = (async ({ locals, fetch }) => {
 	const session = await locals.validate();
@@ -20,6 +21,33 @@ export const load = (async ({ locals, fetch }) => {
 	throw error(404, 'Categories not found');
 }) satisfies PageServerLoad;
 
+
+const validateCategory = async (category) => {
+	const errors: { name: string[] | null; offerings: string[] | null} = { name: null, offerings: null};
+	let success = true;
+	// Validate category name
+	if(category.name === '') {
+		errors['name'] = ['Category name is required'];
+		success = false;
+	}
+	if(category?.offerings.length === 0) {
+		errors['offerings'] = ['Offerings are required'];
+	}
+	else {
+		for (const offering of category?.offerings) {
+			if(offering.size_name === '' || offering.price == 0 || offering.price == '') {
+				errors['offerings'] = ['Offerings is required'];
+				success = false;
+				break;
+			}
+		}
+	}
+	return {
+		success,
+		errors,
+	}
+};
+
 export const actions = {
 	add: async ({ request, fetch }) => {
 		console.log('adding categories ---');
@@ -38,6 +66,19 @@ export const actions = {
 					price: +category[`price${i}`]
 				}
 			];
+		}
+		console.log(JSON.stringify(processedCateg.offerings));
+		// Validate category
+		const result = await validateCategory(processedCateg);
+		if (!result.success) {
+			console.log(result.errors);
+			return fail(400, {
+				data: {
+					name: processedCateg.name,
+					offerings: processedCateg.offerings
+				},
+				errors: result.errors
+			});
 		}
 		//console.log(Categ);
 		const res = await fetch('/api/categories/add', {

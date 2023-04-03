@@ -8,10 +8,12 @@
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { Offering } from '$lib/types/offering';
+  import type { ActionData } from './$types';
 	//import Offering from '../Product/Offering.svelte';
 
 	export let label: string;
 	export let formaction: string;
+	export let form: ActionData
 	export let hasSaveButton = false;
 	export let hasDeleteButton = false;
 	export let hasHeader = false;
@@ -29,10 +31,10 @@
 
 	//let offerings = [{ size_name: '', price: '' }]; // initial size input
 
-	let sizes = category?.offerings ?? ([{ id: '', size_name: '', price: '' }] as Offering[]);
+	let sizes = category?.offerings ?? (form?.data?.offerings ?? [{ id: '', size_name: '', price: '' }]);
 
 	const addSize = () => {
-		sizes = [...sizes, { size_name: '', price: '' }];
+		sizes = [...sizes, { id: '', size_name: '', price: '' }];
 	};
 
 	const removeSize = () => {
@@ -59,9 +61,15 @@
 					type="text"
 					name="name"
 					id="name"
+					class={form?.errors?.name ? 'border-primary-red' : 'border-[#352F75]'}
 					placeholder="Enter category name"
-					value={category?.name ?? ''}
+					value={category?.name ?? (form?.data?.name ?? '')}
 				/>
+				<label for="description" class="input-error pl-1">
+					{#if form?.errors?.name}
+						{ form?.errors?.name[0] ?? '' }
+					{/if}
+				</label>
 			</div>
 			<div class="button-container" />
 		</div>
@@ -75,6 +83,7 @@
 							type="text"
 							name="size_name{i}"
 							id="size-name{i}"
+							class={form?.errors?.offerings && size.size_name === '' ? 'border-primary-red' : 'border-[#352F75]'}
 							placeholder="Size name {i + 1}"
 							bind:value={size.size_name}
 						/>
@@ -88,17 +97,23 @@
 							min="0"
 							name="price{i}"
 							id="size-price{i}"
+							class={form?.errors?.offerings && (size.price === '' || size.price === 0) ? 'border-primary-red' : 'border-[#352F75]'}
 							placeholder=" &#8369;0"
 							bind:value={size.price}
 						/>
 					{/each}
 				</div>
-				<div class="button-container">
-					<div class="move-left">
-						<AddButton on:add={addSize} />
-					</div>
-					<RemoveButton on:remove={removeSize} />
+			</div>
+			<label for="size-price" class="input-error pl-36">
+				{#if form?.errors?.offerings}
+					{ form?.errors?.offerings[0] ?? '' }
+				{/if}
+			</label>
+			<div class="button-container">
+				<div class="move-left">
+					<AddButton on:add={addSize} />
 				</div>
+				<RemoveButton on:remove={removeSize} />
 			</div>
 		</div>
 	</form>
@@ -120,24 +135,20 @@
 		@apply flex flex-col items-stretch justify-center w-full font-IstokWeb;
 	}
 
-	.category-name > label {
+	.category-name > label:not(.input-error) {
 		@apply text-start align-bottom text-3xl text-[#352F75];
 	}
 
 	.category-name > input {
-		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 border-[#352F75] rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
+		@apply w-full px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
 	}
 
 	.size-input1 {
-		@apply mr-4 mb-28;
-	}
-
-	.size-input2 {
-		@apply mb-28;
+		@apply mr-4;
 	}
 
 	.button-container {
-		@apply flex flex-col absolute bottom-0 items-center justify-start;
+		@apply flex flex-col items-center justify-start self-start pl-32;
 	}
 
 	.size-input-container {
@@ -146,5 +157,10 @@
 
 	.move-left {
 		@apply mr-6;
+	}
+
+	.input-error {
+		@apply flex items-start justify-start text-start align-bottom text-sm text-primary-red 
+      w-full h-10 pr-1 pt-2 pb-6;
 	}
 </style>

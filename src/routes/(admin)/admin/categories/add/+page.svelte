@@ -4,9 +4,10 @@
 	import AddCategoryForm from '$lib/components/Forms/Category.svelte';
 	import LeaveConfirmationModal from '$lib/components/Modal/Confirmation.svelte';
 	import StatusModal from '$lib/components/Modal/Status.svelte';
-	import type { PageData } from './$types';
+	import type { ActionData, PageData } from './$types';
 
 	export let data: PageData;
+	export let form: ActionData;
 
 	const confirmationHeader = 'DISCARD CATEGORY?';
 	const confirmationDetails =
@@ -49,6 +50,9 @@
 					loading = false;
 					await successAdd();
 					break;
+				case 'failure':
+					loading = false;
+					success = false;
 				case 'error':
 					console.log(result.error);
 					break;
@@ -61,6 +65,7 @@
 <AddCategoryForm
 	label="Add Category"
 	formaction="?/add"
+	{form}
 	submitHandle={submitAdd}
 	category={data.categories}
 	hasHeader={true}
