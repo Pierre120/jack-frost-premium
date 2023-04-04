@@ -23,7 +23,7 @@
 
 <style lang="postcss">
 	.item-container {
-		@apply flex flex-col min-w-min w-full;
+		@apply flex flex-col items-center min-w-min w-full;
 	}
 
 	.item-image {
@@ -31,7 +31,7 @@
 	}
 
 	.item-image > img {
-		@apply w-full h-full object-cover rounded-3xl;
+		@apply w-full h-full object-fill rounded-3xl;
 	}
 
 	.item-name {
