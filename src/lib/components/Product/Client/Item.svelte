@@ -27,11 +27,11 @@
 	}
 
 	.item-image {
-		@apply w-full rounded-3xl shadow-md hover:shadow-xl cursor-pointer;
+		@apply w-full h-40 rounded-3xl shadow-md hover:shadow-xl cursor-pointer;
 	}
 
 	.item-image > img {
-		@apply w-full object-cover rounded-3xl;
+		@apply w-full h-full object-cover rounded-3xl;
 	}
 
 	.item-name {
