@@ -153,7 +153,7 @@
 	}
 
 	.product-info-img {
-		@apply w-full h-full object-cover rounded-3xl shadow-xl;
+		@apply w-full h-80 object-fill rounded-3xl shadow-xl;
 	}
 
 	.product-info-name {

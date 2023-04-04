@@ -48,12 +48,30 @@
 	<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<div slot="header" class="header-order">
 			<h3>Order Status</h3>
-			<select name="payment_status" id="payment_status" form={formName}>
+			<select
+				name="payment_status"
+				id="payment_status"
+				form={formName}
+				class={formData?.errors?.payment_status ? 'border-primary-red' : 'border-navy-blue'}
+			>
+				<option
+					value=""
+					disabled
+					selected={!(formData?.data?.payment_status || order?.payment_status)}
+					>Select Order Status</option
+				>
 				<option value="NP" selected={orderStatus === 'NP'}>Unpaid</option>
 				<option value="PP" selected={orderStatus === 'PP'}>Partially Paid</option>
 				<option value="FP" selected={orderStatus === 'FP'}>Fully Paid</option>
 				<option value="SS" selected={orderStatus === 'SS'}>Successful</option>
 			</select>
+			<label for="payment_status" class="input-error">
+				<!-- { formData?.errors?.customer_name[0] ?? '' } -->
+				<!-- Error Message! -->
+				{#if formData?.errors?.payment_status}
+					{formData?.errors?.payment_status[0] ?? ''}
+				{/if}
+			</label>
 		</div>
 		<SaveButton slot="saveButton" form={formName} {formaction} />
 		<DeleteButton slot="deleteButton" on:remove={remove} />
@@ -64,9 +82,17 @@
 					<input
 						type="date"
 						name="estimated_delivery"
+						class={formData?.errors?.estimated_delivery ? 'border-primary-red' : 'border-navy-blue'}
 						id="estimated_delivery"
 						value={getDate(order?.estimated_delivery) || ''}
 					/>
+					<label for="estimated_delivery" class="input-error">
+						<!-- { formData?.errors?.customer_name[0] ?? '' } -->
+						<!-- Error Message! -->
+						{#if formData?.errors?.estimated_delivery}
+							{formData?.errors?.estimated_delivery[0] ?? ''}
+						{/if}
+					</label>
 				</div>
 			{/if}
 			<div class="info-container">
@@ -81,6 +107,14 @@
 							form={formName}
 							value={order?.amount_paid ?? ''}
 						/>
+						{formData}
+						<label for="amount_paid" class="input-error">
+							<!-- { formData?.errors?.customer_name[0] ?? '' } -->
+							<!-- Error Message! -->
+							{#if formData?.errors?.amount_paid}
+								{formData?.errors?.amount_paid[0] ?? ''}
+							{/if}
+						</label>
 					</div>
 				</div>
 				<CustomerInputs
@@ -149,6 +183,11 @@
 
 	.input-label {
 		@apply text-start align-bottom text-3xl text-dark-blue w-full;
+	}
+
+	.input-error {
+		@apply flex items-start justify-start text-start align-bottom text-sm text-primary-red 
+      w-full h-10 px-1;
 	}
 
 	input {
