@@ -27,7 +27,6 @@
 			<input
 				type="text"
 				name="name"
-				class={formData?.errors?.customer_name ? 'border-primary-red' : 'border-navy-blue'}
 				id="name"
 				form={formName}
 				value={formData?.data?.customer_name ?? order?.name ?? ''}
@@ -44,7 +43,6 @@
 			<input
 				type="text"
 				name="primary_contact"
-				class={formData?.errors?.contact_number ? 'border-primary-red' : 'border-navy-blue'}
 				id="primary_contact"
 				form={formName}
 				value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}

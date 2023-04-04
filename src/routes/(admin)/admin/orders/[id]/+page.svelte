@@ -96,15 +96,18 @@
 		statusHeader = 'FOR A MOMENT...';
 		statusInfo = 'Saving the changes...';
 		return async ({ result, update }) => {
+			//console.log("RESULT OF THE SUBMIT EDIT:", result.type);
 			switch (result.type) {
 				case 'redirect':
-					loading = false;
 					await successEdit();
+					loading = false;
 					break;
 				case 'error':
-					loading = false;
-					success = false;
+					//loading = false;
+					//success = false;
+					console.log(result.error);
 					break;
+
 			}
 			await update();
 		};
