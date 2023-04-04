@@ -48,8 +48,16 @@
 	<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<div slot="header" class="header-order">
 			<h3>Order Status</h3>
-			<select name="payment_status" id="payment_status" form={formName} class={formData?.errors?.payment_status ? 'border-primary-red' : 'border-navy-blue'}>
-				<option value="" disabled selected={!(formData?.data?.payment_status|| order?.payment_status)}
+			<select
+				name="payment_status"
+				id="payment_status"
+				form={formName}
+				class={formData?.errors?.payment_status ? 'border-primary-red' : 'border-navy-blue'}
+			>
+				<option
+					value=""
+					disabled
+					selected={!(formData?.data?.payment_status || order?.payment_status)}
 					>Select Order Status</option
 				>
 				<option value="NP" selected={orderStatus === 'NP'}>Unpaid</option>

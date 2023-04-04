@@ -3,7 +3,6 @@ import type { Actions, PageServerLoad } from './$types';
 import { fail, error, redirect } from '@sveltejs/kit';
 import { z } from 'zod';
 
-
 export const load = (async ({ locals, params, fetch }) => {
 	const session = await locals.validate();
 	if (!session) {
@@ -23,18 +22,22 @@ export const load = (async ({ locals, params, fetch }) => {
 }) satisfies PageServerLoad;
 
 const orderSchema = z.object({
-	payment_status: z.string({ required_error: 'Payment Status is required'}).min(1, { message: 'Payment Status is required' }),
-	estimated_delivery: z.string({ required_error: 'Estimated Delivery Date is required'}).min(1, { message: 'Estimated Delivery Date is required' }),
-	amount_paid: z.string({ required_error: 'Amount Paid is required'}).min(1, { message: 'Amount Paid is required' })
-	
+	payment_status: z
+		.string({ required_error: 'Payment Status is required' })
+		.min(1, { message: 'Payment Status is required' }),
+	estimated_delivery: z
+		.string({ required_error: 'Estimated Delivery Date is required' })
+		.min(1, { message: 'Estimated Delivery Date is required' }),
+	amount_paid: z
+		.string({ required_error: 'Amount Paid is required' })
+		.min(1, { message: 'Amount Paid is required' })
 });
-	
 
 export const actions = {
 	edit: async ({ request, fetch, params }) => {
 		console.log('editing order ---');
 		const formData = Object.fromEntries(await request.formData());
-		
+
 		console.log(formData);
 		const res = await fetch(`/api/orders/${params.id}/edit`, {
 			method: 'POST',

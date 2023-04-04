@@ -107,7 +107,6 @@
 					//success = false;
 					console.log(result.error);
 					break;
-
 			}
 			await update();
 		};
