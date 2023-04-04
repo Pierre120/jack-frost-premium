@@ -27,6 +27,7 @@
 			<input
 				type="text"
 				name="name"
+				class={formData?.errors?.customer_name ? 'border-primary-red' : 'border-navy-blue'}
 				id="name"
 				form={formName}
 				value={formData?.data?.customer_name ?? order?.name ?? ''}
@@ -34,18 +35,24 @@
 			<label for="name" class="input-error">
 				<!-- { formData?.errors?.customer_name[0] ?? '' } -->
 				<!-- Error Message! -->
+				{#if formData?.errors?.customer_name}
+					{formData?.errors?.customer_name[0] ?? ''}
+				{/if}
 			</label>
 
 			<label for="primary_contact" class="input-label"> Contact Number: </label>
 			<input
 				type="text"
 				name="primary_contact"
+				class={formData?.errors?.contact_number ? 'border-primary-red' : 'border-navy-blue'}
 				id="primary_contact"
 				form={formName}
 				value={formData?.data?.contact_number ?? order?.primary_contact ?? ''}
 			/>
 			<label for="primary_contact" class="input-error">
-				{formData?.errors?.contact_number[0] ?? ''}
+				{#if formData?.errors?.contact_number}
+					{formData?.errors?.contact_number[0] ?? ''}
+				{/if}
 				<!-- Error Message! -->
 			</label>
 
@@ -158,12 +165,12 @@
 	input,
 	textarea,
 	select {
-		@apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border border-navy-blue rounded-lg
+		@apply w-full px-4 py-2 mt-2 text-xl text-[#666666] bg-[#ECEBFA] border rounded-lg
       focus:bg-white focus:outline-none focus:ring-2 
       focus:ring-dark-blue focus:border-transparent placeholder:text-slate-400;
 	}
 
 	textarea {
-		@apply resize-none overflow-y-scroll;
+		@apply resize-none overflow-y-scroll border-navy-blue;
 	}
 </style>

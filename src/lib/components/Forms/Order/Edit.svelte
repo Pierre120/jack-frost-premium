@@ -48,7 +48,7 @@
 	<TemplateForm {label} {hasHeader} {hasSaveButton} {hasDeleteButton} on:close={closeForm}>
 		<div slot="header" class="header-order">
 			<h3>Order Status</h3>
-			<select name="payment_status" id="payment_status" form={formName}>
+			<select name="payment_status" id="payment_status" form={formName} class={formData?.errors?.payment_status ? 'border-primary-red' : 'border-navy-blue'}>
 				<option value="NP" selected={orderStatus === 'NP'}>Unpaid</option>
 				<option value="PP" selected={orderStatus === 'PP'}>Partially Paid</option>
 				<option value="FP" selected={orderStatus === 'FP'}>Fully Paid</option>
@@ -64,6 +64,7 @@
 					<input
 						type="date"
 						name="estimated_delivery"
+						class={formData?.errors?.estimate_delivery ? 'border-primary-red' : 'border-navy-blue'}
 						id="estimated_delivery"
 						value={getDate(order?.estimated_delivery) || ''}
 					/>
@@ -77,6 +78,7 @@
 						<input
 							type="text"
 							name="amount_paid"
+							class={formData?.errors?.amount_paid ? 'border-primary-red' : 'border-navy-blue'}
 							id="amount_paid"
 							form={formName}
 							value={order?.amount_paid ?? ''}

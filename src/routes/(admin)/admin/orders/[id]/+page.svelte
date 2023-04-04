@@ -102,7 +102,8 @@
 					await successEdit();
 					break;
 				case 'error':
-					console.log(result.error);
+					loading = false;
+					success = false;
 					break;
 			}
 			await update();
