@@ -12,11 +12,13 @@
 		"test:unit": "vitest run --reporter verbose",
 		"test:unit:watch": "vitest --reporter verbose",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
-		"format": "prettier --plugin-search-dir . --write ."
+		"format": "prettier --plugin-search-dir . --write .",
+		"vercel-build": "prisma generate && prisma migrate deploy && vite build"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
+		"@sveltejs/adapter-vercel": "^2.4.1",
 		"@sveltejs/kit": "^1.5.0",
 		"@tailwindcss/line-clamp": "^0.4.2",
 		"@typescript-eslint/eslint-plugin": "^5.45.0",
