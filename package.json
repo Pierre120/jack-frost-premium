@@ -13,7 +13,7 @@
 		"test:unit:watch": "vitest --reporter verbose",
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
-		"vercel-build": "prisma generate && prisma migrate deploy && vite build"
+		"vercel-build": "npx prisma generate && npx prisma migrate deploy && vite build"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
