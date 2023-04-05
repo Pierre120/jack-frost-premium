@@ -23,15 +23,15 @@
 
 <style lang="postcss">
 	.item-container {
-		@apply flex flex-col min-w-min w-full;
+		@apply flex flex-col items-center min-w-min w-full;
 	}
 
 	.item-image {
-		@apply w-full rounded-3xl shadow-md hover:shadow-xl cursor-pointer;
+		@apply w-full h-40 rounded-3xl shadow-md hover:shadow-xl cursor-pointer;
 	}
 
 	.item-image > img {
-		@apply w-full object-cover rounded-3xl;
+		@apply w-full h-full object-fill rounded-3xl;
 	}
 
 	.item-name {

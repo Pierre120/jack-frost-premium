@@ -62,7 +62,7 @@
 	export let price: number;
 </script>
 
-<div class="offering-container {genMaxWidth(amount)}">
+<div class="offering-container {genMaxWidth(amount)} max-w-lg mx-auto px-4 sm:px-6 lg:px-8">
 	<img src={iceCream} alt={interpretAmt(amount)} class="offering-visual" />
 	<div class="offering-info">
 		<div class="product-info-amount">

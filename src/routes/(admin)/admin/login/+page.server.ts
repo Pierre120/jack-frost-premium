@@ -1,7 +1,8 @@
-import { auth } from '$lib/server/lucia';
-import { fail, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
 import type { Actions, PageServerLoad } from './$types';
+import { fail, redirect } from '@sveltejs/kit';
+import { auth } from '$lib/server/lucia';
+// import { loginSchema } from '$lib/forms/validations/login';
+import { z } from 'zod';
 
 // Protect logged in user from accessing login page
 export const load: PageServerLoad = async ({ locals }) => {
@@ -9,7 +10,7 @@ export const load: PageServerLoad = async ({ locals }) => {
 	console.log(session);
 	if (session) {
 		// Redirect to admin home page
-		throw redirect(302, '/admin');
+		throw redirect(302, '/admin/products');
 	}
 };
 
@@ -18,12 +19,12 @@ const loginSchema = z.object({
 	admin_email: z
 		.string({ required_error: 'Email is required' })
 		.min(1, { message: 'Email is required' })
-		.max(64, { message: 'Email must be less than 64 characters' })
+		.max(32, { message: 'Email must be less than 32 characters' })
 		.email({ message: 'Email must be a valid email address' }),
 	admin_password: z
 		.string({ required_error: 'Password is required' })
 		.min(8, { message: 'Password must be at least 8 characters' })
-		.max(32, { message: 'Password must be less than 32 characters' })
+		.max(20, { message: 'Password must be less than 20 characters' })
 		.trim()
 });
 
@@ -54,6 +55,7 @@ export const actions: Actions = {
 			console.log(`Authentication: ${email} - ${password}`);
 			const key = await auth.validateKeyPassword('email', email, password);
 			console.log(`Key: ${key}`);
+			// Create session
 			const session = await auth.createSession(key.userId);
 			console.log(`Session: ${session}`);
 			locals.setSession(session);
@@ -68,7 +70,8 @@ export const actions: Actions = {
 			});
 		}
 
-		// Redirect to admin home page
-		throw redirect(302, '/admin');
+		// Redirect to admin products page
+		console.log('Redirecting to admin home page');
+		throw redirect(302, '/admin/products');
 	}
 };

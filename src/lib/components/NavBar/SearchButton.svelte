@@ -17,7 +17,7 @@
 			fill="none"
 			viewBox="0 0 24 24"
 			stroke-width="1.5"
-			class="stroke-black hover:stroke-primary-red opacity-[.6] hover:opacity-100"
+			class="w-auto h-8 stroke-black hover:stroke-primary-red opacity-[.6] hover:opacity-100 "
 		>
 			<path
 				stroke-linecap="round"
