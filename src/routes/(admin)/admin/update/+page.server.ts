@@ -3,6 +3,7 @@ import { fail, redirect } from '@sveltejs/kit';
 import type { Actions, PageServerLoad } from './$types';
 import z from 'zod';
 import jwt from 'jsonwebtoken';
+import { env } from '$env/dynamic/private';
 
 export const load: PageServerLoad = async ({ locals, url }) => {
 	const session = await locals.validate();
@@ -21,7 +22,7 @@ export const load: PageServerLoad = async ({ locals, url }) => {
 				message: 'Could not update admin password. Please try again.'
 			});
 		}
-		const payload = jwt.verify(token, 'YouDontKnowJack'); //place secret in .env
+		const payload = jwt.verify(token, env.JWT_PRIVATE_KEY); //place secret in .env
 		console.log(`Payload: ${payload}`);
 	} catch (err) {
 		console.log(err);
