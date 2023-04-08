@@ -4,6 +4,7 @@ import { auth } from '$lib/server/lucia';
 import { transporter } from '$lib/server/nodemailer';
 import { z } from 'zod';
 import jwt from 'jsonwebtoken';
+import { env } from '$env/dynamic/private';
 
 // Protect logged in user from accessing login page
 export const load: PageServerLoad = async ({ locals }) => {
@@ -27,9 +28,10 @@ const resetSchema = z.object({
 // Actions for the Reset page
 export const actions: Actions = {
 	// POST /admin/reset
-	default: async ({ request }) => {
+	default: async ({ request, url }) => {
 		const formData = Object.fromEntries(await request.formData());
 		const admin_email = (formData.admin_email as string) || '';
+		const origin = url.origin;
 		let payload = {};
 		let user_id = '';
 
@@ -66,13 +68,13 @@ export const actions: Actions = {
 			});
 		}
 
-		const token = jwt.sign(payload, 'YouDontKnowJack', { expiresIn: '10m' });
-		const link = `localhost:5173/admin/update/?ID=${user_id}&token=${token}`; //Update host/port
+		const token = jwt.sign(payload, env.JWT_PRIVATE_KEY, { expiresIn: '10m' });
+		const link = `${origin}/admin/update/?ID=${user_id}&token=${token}`; //Update host/port
 		console.log(`Password reset URL: ${link}`);
 
 		// send mail with defined transport object
 		const mail = await transporter.sendMail({
-			from: '"Jack Frost" <jackfrosttest2023@gmail.com>', // Change
+			from: `"Jack Frost" <${env.NODEMAILER_USER}>`, // Change
 			to: admin_email, // list of receivers
 			subject: 'Jack Frost Admin Password Reset', // Subject line
 			text: `${link}`, // plain text body
