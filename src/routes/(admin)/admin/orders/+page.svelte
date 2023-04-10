@@ -83,9 +83,9 @@
 		@apply text-xl font-IstokWeb flex flex-col items-start justify-start gap-y-4;
 	}
 
-	.links > a {
+	/* .links > a {
 		@apply text-indigo-900 hover:underline hover:text-indigo-900;
-	}
+	} */
 
 	.links > button {
 		@apply text-start text-indigo-900 hover:underline hover:text-indigo-900;
