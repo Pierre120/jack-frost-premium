@@ -53,7 +53,8 @@
 
 	const deleteCategory = () => {
 		confirmationHeader = 'DELETE CATEGORY?';
-		confirmationDetails = 'All products under this category will also be deleted. Are you sure you would like to delete this category?';
+		confirmationDetails =
+			'All products under this category will also be deleted. Are you sure you would like to delete this category?';
 		cancelLabel = 'Cancel';
 		confirmLabel = 'Delete Category';
 		isAboutToDelete = true;
@@ -101,7 +102,7 @@
 					loading = false;
 					success = false;
 					await update();
-					if(form?.dbFailed) {
+					if (form?.dbFailed) {
 						warning = true;
 						statusHeader = 'CHANGES NOT SAVED';
 						statusInfo = 'Category name already exists!';

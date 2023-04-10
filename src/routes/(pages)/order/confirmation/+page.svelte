@@ -76,7 +76,7 @@
 					loading = false;
 					success = false;
 					await update();
-					if(form?.dbFailed) {
+					if (form?.dbFailed) {
 						warning = true;
 						statusHeader = 'ORDER NOT SUBMITTED';
 						statusInfo = 'Order submission error. Please try again later.';

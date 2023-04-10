@@ -56,7 +56,7 @@
 					loading = false;
 					success = false;
 					await update();
-					if(form?.dbFailed) {
+					if (form?.dbFailed) {
 						warning = true;
 						statusHeader = 'CATEGORY NOT SAVED';
 						statusInfo = 'Category name already exists!';

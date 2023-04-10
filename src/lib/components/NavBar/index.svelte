@@ -1,5 +1,4 @@
 <script lang="ts">
-	import SearchButton from '$lib/components/NavBar/SearchButton.svelte';
 	import Logo from '$lib/components/Logo.svelte';
 	import CartButton from '$lib/components/NavBar/CartButton.svelte';
 	import NavLinks from '$lib/components/NavBar/NavLinks.svelte';

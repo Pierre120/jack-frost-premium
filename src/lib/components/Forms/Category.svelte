@@ -7,7 +7,6 @@
 	import RemoveButton from '$lib/components/Buttons/Remove.svelte';
 	import AddButton from '$lib/components/Buttons/Add.svelte';
 	import { enhance, type SubmitFunction } from '$app/forms';
-	import type { Offering } from '$lib/types/offering';
 	import type { ActionData } from './$types';
 	//import Offering from '../Product/Offering.svelte';
 

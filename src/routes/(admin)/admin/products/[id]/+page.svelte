@@ -98,7 +98,7 @@
 				case 'failure':
 					loading = false;
 					await update();
-					if(form?.dbFailed) {
+					if (form?.dbFailed) {
 						warning = true;
 						statusHeader = 'CHANGES NOT SAVED';
 						statusInfo = 'Product name already exists!';

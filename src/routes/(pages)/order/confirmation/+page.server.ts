@@ -61,7 +61,7 @@ export const actions = {
 		if (data.success) {
 			console.log('added order');
 			throw redirect(303, `/order/checkout/${data.id}`);
-		} else if(!data.success) {
+		} else if (!data.success) {
 			// Fail to add product
 			return fail(400, {
 				data: {
@@ -71,7 +71,7 @@ export const actions = {
 					additional_details: formData.additional_details as string
 				},
 				dbFailed: true
-			})
+			});
 		}
 		throw error(500, { message: 'Order not added' });
 	}

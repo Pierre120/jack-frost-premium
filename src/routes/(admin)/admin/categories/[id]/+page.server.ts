@@ -104,7 +104,7 @@ export const actions = {
 		if (data.success) {
 			console.log('edited category');
 			throw redirect(303, '/admin/categories');
-		} else if(!data.success) {
+		} else if (!data.success) {
 			return fail(400, {
 				data: {
 					name: processedCateg.name,

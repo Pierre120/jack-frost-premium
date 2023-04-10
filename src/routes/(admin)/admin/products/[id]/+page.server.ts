@@ -61,7 +61,7 @@ export const actions = {
 		if (data.success) {
 			console.log('edited product');
 			throw redirect(303, '/admin/products');
-		} else if(!data.success) {
+		} else if (!data.success) {
 			// Fail to add product
 			return fail(400, {
 				data: {
@@ -72,7 +72,7 @@ export const actions = {
 					category_id: updatedProduct.category_id
 				},
 				dbFailed: true
-			})
+			});
 		}
 		throw error(500, 'Product not edited');
 	}

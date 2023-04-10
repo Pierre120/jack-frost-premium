@@ -63,7 +63,7 @@ export const actions = {
 		if (data.success) {
 			console.log('added product');
 			throw redirect(303, '/admin/products');
-		} else if(!data.success) {
+		} else if (!data.success) {
 			// Fail to add product
 			return fail(400, {
 				data: {
@@ -74,7 +74,7 @@ export const actions = {
 					category_id: product.category_id
 				},
 				dbFailed: true
-			})
+			});
 		}
 		throw error(500, 'Product not added');
 	}

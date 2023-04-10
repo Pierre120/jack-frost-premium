@@ -240,7 +240,8 @@
 							class="text-gray-400"
 							disabled
 							selected={product?.category_id && form?.data?.category_id ? false : true}
-							>Choose a category</option>
+							>Choose a category</option
+						>
 						{#each categories as category}
 							<option
 								value={category.id}
