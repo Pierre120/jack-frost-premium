@@ -1,5 +1,4 @@
 <script lang="ts">
-	import SearchButton from '$lib/components/NavBar/SearchButton.svelte';
 	import Logo from '$lib/components/Logo.svelte';
 	import CartButton from '$lib/components/NavBar/CartButton.svelte';
 	import NavLinks from '$lib/components/NavBar/NavLinks.svelte';
@@ -41,10 +40,14 @@
 				<Logo width="w-2/3" />
 			</div>
 			<div class="flex item-stretch h-full col-span-3">
-				<NavLinks {data} />
+				{#if $page.url.pathname.split('/').length < 4}
+					<NavLinks {data} />
+				{/if}
 			</div>
 			<div class="flex justify-center items-stretch col-span-1">
-				<LogoutButton formaction="/api/logout" />
+				{#if $page.url.pathname.split('/').length < 4}
+					<LogoutButton formaction="/api/logout" />
+				{/if}
 			</div>
 		</div>
 	{:else if data.navbar === 'default'}

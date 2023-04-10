@@ -61,6 +61,18 @@ export const actions = {
 		if (data.success) {
 			console.log('edited product');
 			throw redirect(303, '/admin/products');
+		} else if (!data.success) {
+			// Fail to add product
+			return fail(400, {
+				data: {
+					name: updatedProduct.name,
+					description: updatedProduct.description,
+					img_path: updatedProduct.img_path,
+					img_src: updatedProduct.img_src,
+					category_id: updatedProduct.category_id
+				},
+				dbFailed: true
+			});
 		}
 		throw error(500, 'Product not edited');
 	}

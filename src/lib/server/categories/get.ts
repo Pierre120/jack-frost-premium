@@ -7,7 +7,12 @@ const getCategory = async (category_id: string) => {
 			id: category_id
 		},
 		include: {
-			offerings: true
+			// offerings: true
+			offerings: {
+				orderBy: {
+					size_name: 'desc'
+				}
+			}
 		}
 	});
 
@@ -19,7 +24,11 @@ const getCategory = async (category_id: string) => {
 
 // For getting all categories, we don't need to pass in anything
 const getAllCategories = async () => {
-	const result = await prisma.category.findMany();
+	const result = await prisma.category.findMany({
+		orderBy: {
+			name: 'asc'
+		}
+	});
 
 	// for debugging purposes
 	console.log('categories from server: ', result);
