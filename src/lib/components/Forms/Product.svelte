@@ -237,20 +237,14 @@
 							class="text-gray-400"
 							disabled
 							selected={product?.category_id && form?.data?.category_id ? false : true}
-							>Choose a category {product?.category_id && form?.data?.category_id
-								? 'not select'
-								: 'select'}</option
-						>
+							>Choose a category</option>
 						{#each categories as category}
 							<option
 								value={category.id}
 								selected={category.id == product?.category_id ||
 									category.id == form?.data?.category_id}
-								>{category.name}, {category.id == product?.category_id ||
-								category.id == form?.data?.category_id
-									? 'select'
-									: 'not select'}</option
-							>
+								>{category.name}
+							</option>
 						{/each}
 					</select>
 					<label for="category_id" class="input-error">
