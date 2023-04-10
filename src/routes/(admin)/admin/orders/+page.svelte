@@ -52,7 +52,9 @@
 			<a href="#" on:click={() => filterOrders('successful')}
 				><span class="color-square successful" />Successful</a
 			> -->
-			<button type="button" on:click={() => filterOrders('all')}><span class="color-square" />All</button>
+			<button type="button" on:click={() => filterOrders('all')}
+				><span class="color-square" />All</button
+			>
 			<button type="button" on:click={() => filterOrders('unpaid')}
 				><span class="color-square unpaid" />Unpaid</button
 			>
