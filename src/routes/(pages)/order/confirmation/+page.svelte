@@ -26,6 +26,7 @@
 
 	let success = false;
 	let loading = false;
+	let warning = false;
 	let statusHeader = '';
 	let statusInfo = '';
 
@@ -69,18 +70,26 @@
 					loading = false;
 					successOrderSubmission();
 					clearCart();
+					await update();
 					break;
 				case 'failure':
 					loading = false;
 					success = false;
+					await update();
+					if (form?.dbFailed) {
+						warning = true;
+						statusHeader = 'ORDER NOT SUBMITTED';
+						statusInfo = 'Order submission error. Please try again later.';
+						setTimeout(() => {
+							warning = false;
+							statusHeader = '';
+							statusInfo = '';
+						}, 3000);
+					}
 					break;
 			}
-			await update();
 		};
 	};
-
-	$: console.log(form?.data.id ?? 'No data');
-	$: console.log(JSON.stringify(form?.errors));
 </script>
 
 <svelte:head>
@@ -114,6 +123,6 @@
 	/>
 {/if}
 
-{#if success || loading}
-	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
+{#if success || loading || warning}
+	<StatusModal {success} {loading} {warning} {statusHeader} {statusInfo} />
 {/if}
