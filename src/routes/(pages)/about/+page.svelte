@@ -10,7 +10,7 @@
 
 <div class="min-h-screen max-w-screen flex flex-col font-IstokWeb">
 	<div class="flex-1">
-		<div class="mx-auto text-center px-4 pt-4 pb-5 bg-indigo-900">
+		<div class="mx-auto text-center px-4 pt-4 pb-5 bg-blue-900">
 			<h1 class=" text-white font-bold text-5xl">ABOUT US</h1>
 		</div>
 
