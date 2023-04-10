@@ -19,6 +19,7 @@
 	let isAboutToLeave = false;
 	let success = false;
 	let loading = false;
+	let warning = false;
 
 	const successAdd = async () => {
 		success = true;
@@ -49,16 +50,28 @@
 				case 'redirect':
 					loading = false;
 					await successAdd();
+					await update();
 					break;
 				case 'failure':
 					loading = false;
 					success = false;
+					await update();
+					if(form?.dbFailed) {
+						warning = true;
+						statusHeader = 'CATEGORY NOT SAVED';
+						statusInfo = 'Category name already exists!';
+						setTimeout(() => {
+							warning = false;
+							statusHeader = '';
+							statusInfo = '';
+						}, 3000);
+					}
 					break;
 				case 'error':
 					console.log(result.error);
+					await update();
 					break;
 			}
-			await update();
 		};
 	};
 </script>
@@ -84,6 +97,6 @@
 	/>
 {/if}
 
-{#if success || loading}
-	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
+{#if success || loading || warning}
+	<StatusModal {success} {loading} {warning} {statusHeader} {statusInfo} />
 {/if}

@@ -20,6 +20,7 @@
 	let success = false;
 	let deleted = false;
 	let loading = false;
+	let warning = false;
 
 	const successEdit = async () => {
 		success = true;
@@ -94,16 +95,28 @@
 				case 'redirect':
 					loading = false;
 					await successEdit();
+					await update();
 					break;
 				case 'failure':
 					loading = false;
 					success = false;
+					await update();
+					if(form?.dbFailed) {
+						warning = true;
+						statusHeader = 'CHANGES NOT SAVED';
+						statusInfo = 'Category name already exists!';
+						setTimeout(() => {
+							warning = false;
+							statusHeader = '';
+							statusInfo = '';
+						}, 3000);
+					}
 					break;
 				case 'error':
 					console.log(result.error);
+					await update();
 					break;
 			}
-			await update();
 		};
 	};
 </script>
@@ -130,6 +143,6 @@
 		on:confirm={confirm}
 	/>
 {/if}
-{#if success || deleted || loading}
-	<StatusModal {success} {deleted} {loading} {statusHeader} {statusInfo} />
+{#if success || deleted || loading || warning}
+	<StatusModal {success} {deleted} {loading} {warning} {statusHeader} {statusInfo} />
 {/if}
