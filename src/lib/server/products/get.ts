@@ -19,7 +19,11 @@ const getProduct = async (product_id: string) => {
 
 // For getting all products, we don't need to pass in anything
 const getAllProducts = async () => {
-	const result = await prisma.product.findMany();
+	const result = await prisma.product.findMany({
+		orderBy: {
+			name: 'asc'
+		}
+	});
 
 	// for debugging purposes
 	console.log(JSON.stringify(result));
