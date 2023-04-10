@@ -39,7 +39,7 @@
 	<div class="bg-gray-200 md:w-1/4 option-container bg-indigo-200">
 		<h2 class="title">Show:</h2>
 		<div class="links">
-			<a href="#" on:click={() => filterOrders('all')}><span class="color-square" />All</a>
+			<!-- <a href="#" on:click={() => filterOrders('all')}><span class="color-square" />All</a>
 			<a href="#" on:click={() => filterOrders('unpaid')}
 				><span class="color-square unpaid" />Unpaid</a
 			>
@@ -51,6 +51,19 @@
 			>
 			<a href="#" on:click={() => filterOrders('successful')}
 				><span class="color-square successful" />Successful</a
+			> -->
+			<button type="button" on:click={() => filterOrders('all')}><span class="color-square" />All</button>
+			<button type="button" on:click={() => filterOrders('unpaid')}
+				><span class="color-square unpaid" />Unpaid</button
+			>
+			<button type="button" on:click={() => filterOrders('partially_paid')}
+				><span class="color-square partially-paid" />Partially Paid</button
+			>
+			<button type="button" on:click={() => filterOrders('fully_paid')}
+				><span class="color-square fully-paid" />Fully Paid</button
+			>
+			<button type="button" on:click={() => filterOrders('successful')}
+				><span class="color-square successful" />Successful</button
 			>
 		</div>
 	</div>
@@ -67,12 +80,17 @@
 		@apply flex flex-col justify-start ml-12 gap-y-4 h-full w-1/4 mt-6;
 	}
 	.links {
-		@apply text-xl font-IstokWeb flex flex-col justify-start gap-y-4;
+		@apply text-xl font-IstokWeb flex flex-col items-start justify-start gap-y-4;
 	}
 
-	a {
+	.links > a {
 		@apply text-indigo-900 hover:underline hover:text-indigo-900;
 	}
+
+	.links > button {
+		@apply text-start text-indigo-900 hover:underline hover:text-indigo-900;
+	}
+
 	.right-col {
 		@apply ml-auto pl-6 overflow-auto h-full bg-indigo-200;
 	}
