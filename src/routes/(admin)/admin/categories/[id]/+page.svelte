@@ -53,7 +53,7 @@
 
 	const deleteCategory = () => {
 		confirmationHeader = 'DELETE CATEGORY?';
-		confirmationDetails = 'Are you sure you would like to delete this category?';
+		confirmationDetails = 'All products under this category will also be deleted. Are you sure you would like to delete this category?';
 		cancelLabel = 'Cancel';
 		confirmLabel = 'Delete Category';
 		isAboutToDelete = true;
