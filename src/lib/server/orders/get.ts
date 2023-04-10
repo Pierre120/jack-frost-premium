@@ -48,6 +48,9 @@ const getAllOrders = async () => {
 					product: true
 				}
 			}
+		},
+		orderBy: {
+			number: 'asc'
 		}
 	});
 

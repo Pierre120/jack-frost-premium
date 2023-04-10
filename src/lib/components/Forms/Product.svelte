@@ -20,6 +20,7 @@
 	export let hasHeader = false;
 	export let product: Product | null = null;
 
+	let pname = product?.name ?? form?.data?.name ?? '';
 	let description = product?.description ?? form?.data?.description ?? '';
 	let imagePath = product?.img_path ?? form?.data?.img_path ?? '';
 	let imageUrl = product?.img_src ?? form?.data?.img_src ?? tmpImg;
@@ -140,8 +141,10 @@
 						id="name"
 						class={form?.errors?.name ? 'border-primary-red' : 'border-[#352F75]'}
 						placeholder="Enter product name"
-						value={product?.name ?? form?.data?.name ?? ''}
+						maxlength="32"
+						bind:value={pname}
 					/>
+					<span class="length">{pname.length} / 32</span>
 					<label for="name" class="input-error">
 						{#if form?.errors?.name}
 							{form?.errors?.name[0] ?? ''}
@@ -160,7 +163,7 @@
 						on:input={autoExpand}
 						on:change={autoExpand}
 					/>
-					<span class="desc-length">{description.length} / 256</span>
+					<span class="length">{description.length} / 256</span>
 					<label for="description" class="input-error">
 						{#if form?.errors?.description}
 							{form?.errors?.description[0] ?? ''}
@@ -237,20 +240,15 @@
 							class="text-gray-400"
 							disabled
 							selected={product?.category_id && form?.data?.category_id ? false : true}
-							>Choose a category {product?.category_id && form?.data?.category_id
-								? 'not select'
-								: 'select'}</option
+							>Choose a category</option
 						>
 						{#each categories as category}
 							<option
 								value={category.id}
 								selected={category.id == product?.category_id ||
 									category.id == form?.data?.category_id}
-								>{category.name}, {category.id == product?.category_id ||
-								category.id == form?.data?.category_id
-									? 'select'
-									: 'not select'}</option
-							>
+								>{category.name}
+							</option>
 						{/each}
 					</select>
 					<label for="category_id" class="input-error">
@@ -306,7 +304,7 @@
 		@apply resize-none overflow-hidden w-full min-h-[16rem] px-4 py-2 mt-4 text-xl text-[#666666] bg-[#ECEBFA] border-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-sky-400 focus:border-transparent;
 	}
 
-	.desc-length {
+	.length {
 		@apply font-IstokWeb text-end align-bottom text-sm text-modal-backdrop;
 	}
 

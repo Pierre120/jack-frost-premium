@@ -1,5 +1,5 @@
 import { prisma } from '$lib/server/prisma';
-import type { Order, OrderUpdate } from '$lib/types/order';
+import type { OrderUpdate } from '$lib/types/order';
 
 const editOrder = async (order_id: string, updatedOrder: OrderUpdate) => {
 	const result = await prisma.order.update({

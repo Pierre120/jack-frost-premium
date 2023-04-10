@@ -1,7 +1,7 @@
 import type { Order } from '$lib/types/order';
 import type { Actions, PageServerLoad } from './$types';
-import { fail, error, redirect } from '@sveltejs/kit';
-import { z } from 'zod';
+import { error, redirect } from '@sveltejs/kit';
+// import { z } from 'zod';
 
 export const load = (async ({ locals, params, fetch }) => {
 	const session = await locals.validate();
@@ -21,7 +21,7 @@ export const load = (async ({ locals, params, fetch }) => {
 	throw error(404, 'Order not found');
 }) satisfies PageServerLoad;
 
-const orderSchema = z.object({
+/* const orderSchema = z.object({
 	payment_status: z
 		.string({ required_error: 'Payment Status is required' })
 		.min(1, { message: 'Payment Status is required' }),
@@ -31,7 +31,7 @@ const orderSchema = z.object({
 	amount_paid: z
 		.string({ required_error: 'Amount Paid is required' })
 		.min(1, { message: 'Amount Paid is required' })
-});
+}); */
 
 export const actions = {
 	edit: async ({ request, fetch, params }) => {

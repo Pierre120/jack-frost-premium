@@ -19,6 +19,7 @@
 	let isAboutToLeave = false;
 	let success = false;
 	let loading = false;
+	let warning = false;
 
 	const successAdd = async () => {
 		success = true;
@@ -49,15 +50,26 @@
 				case 'redirect':
 					loading = false;
 					await successAdd();
+					await update();
 					break;
 				case 'failure':
 					loading = false;
+					await update();
+					if (form?.dbFailed) {
+						warning = true;
+						statusHeader = 'PRODUCT NOT SAVED';
+						statusInfo = 'Product name already exists!';
+						setTimeout(() => {
+							warning = false;
+							statusHeader = '';
+							statusInfo = '';
+						}, 3000);
+					}
 					break;
 				case 'error':
 					console.log(result.error);
 					break;
 			}
-			await update();
 		};
 	};
 </script>
@@ -82,6 +94,6 @@
 		on:confirm={confirmDiscard}
 	/>
 {/if}
-{#if success || loading}
-	<StatusModal {success} {loading} {statusHeader} {statusInfo} />
+{#if success || loading || warning}
+	<StatusModal {success} {loading} {warning} {statusHeader} {statusInfo} />
 {/if}

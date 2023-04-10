@@ -9,6 +9,7 @@ export const POST = (async ({ params, request }) => {
 	try {
 		const { name, is_seasonal, category_id, img_path, img_src, description } = await request.json();
 		let path = img_path;
+		let src = img_src;
 
 		if (img_path.split('/')[0] !== 'products') {
 			const product = await getProduct(params.id ?? '');
@@ -33,10 +34,10 @@ export const POST = (async ({ params, request }) => {
 			if (data2) {
 				console.log('File moved successfully.');
 				path = `products/${img_path}`;
-				img_path = path;
-				const { data } = await supabase.storage.from('images').getPublicUrl(img_path);
+				// img_path = path;
+				const { data } = await supabase.storage.from('images').getPublicUrl(path);
 				if (data) {
-					img_src = data.publicUrl;
+					src = data.publicUrl;
 				}
 			}
 		}
@@ -45,8 +46,8 @@ export const POST = (async ({ params, request }) => {
 			name,
 			is_seasonal,
 			category_id,
-			img_path,
-			img_src,
+			img_path: path,
+			img_src: src,
 			description
 		});
 		return json({
