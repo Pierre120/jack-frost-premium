@@ -1,5 +1,5 @@
 import type { Actions } from './$types';
-import { fail, redirect } from '@sveltejs/kit';
+import { error, fail, redirect } from '@sveltejs/kit';
 import type { CartItem } from '$lib/types/cart';
 import { z } from 'zod';
 
@@ -18,7 +18,7 @@ const orderSchema = z.object({
 export const actions = {
 	order: async ({ request, fetch }) => {
 		const formData = Object.fromEntries(await request.formData());
-		const orderitems = JSON.parse(formData.orderitems);
+		const orderitems = JSON.parse(formData.orderitems as string);
 		// Validate form data
 		const result = orderSchema.safeParse({
 			customer_name: formData.customer_name as string,
@@ -61,7 +61,18 @@ export const actions = {
 		if (data.success) {
 			console.log('added order');
 			throw redirect(303, `/order/checkout/${data.id}`);
+		} else if(!data.success) {
+			// Fail to add product
+			return fail(400, {
+				data: {
+					customer_name: formData.customer_name as string,
+					contact_number: formData.contact_number as string,
+					payment_method: formData.payment_method as string,
+					additional_details: formData.additional_details as string
+				},
+				dbFailed: true
+			})
 		}
-		throw fail(500, { message: 'Order not added' });
+		throw error(500, { message: 'Order not added' });
 	}
 } satisfies Actions;
