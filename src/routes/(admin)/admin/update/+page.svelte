@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance, type SubmitFunction } from '$app/forms';
 	import type { ActionData } from './$types';
+	import { goto } from '$app/navigation';
 	import Logo from '$lib/components/Logo.svelte';
 	import AlertSuccess from '$lib/components/Alert/Success.svelte';
 	import AlertLoading from '$lib/components/Alert/Loading.svelte';
@@ -43,6 +44,9 @@
 					isSuccess = true;
 					// Reset form
 					form.reset();
+					setTimeout(() => {
+						goto('/admin/login');
+					}, 2000);
 					break;
 				case 'failure':
 					// Update form message
