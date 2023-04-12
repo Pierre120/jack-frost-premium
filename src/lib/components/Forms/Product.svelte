@@ -65,6 +65,7 @@
 	const getImage = async (path: string) => {
 		try {
 			const { data } = await supabase.storage.from('images').getPublicUrl(path);
+			console.log("uploaded image: " + JSON.stringify(data));
 
 			if (data) {
 				imageUrl = data.publicUrl;
