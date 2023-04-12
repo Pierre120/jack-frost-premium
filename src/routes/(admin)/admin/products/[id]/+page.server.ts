@@ -27,7 +27,9 @@ export const load = (async ({ locals, params, fetch }) => {
 export const actions = {
 	edit: async ({ request, fetch, params }) => {
 		console.log('editing product ---');
-		const updatedProduct = Object.fromEntries(await request.formData());
+		const formdata = await request.formData();
+		// console.log(formdata)
+		const updatedProduct = Object.fromEntries(formdata); // await request.formData()
 		console.log(updatedProduct);
 		// Validate form data
 		const result = productSchema.safeParse({

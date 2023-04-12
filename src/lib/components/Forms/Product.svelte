@@ -193,14 +193,6 @@
 						<!--! This is a hidden input -->
 						<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
 						<!--! This is a hidden input -->
-						<input
-							type="file"
-							name="image"
-							id="image"
-							accept="image/png,image/jpeg,image/jpg"
-							on:change={uploadImage}
-							disabled={isUploading}
-						/>
 						<label
 							for="image"
 							class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
@@ -261,6 +253,15 @@
 			</div>
 		</form>
 	</TemplateForm>
+	<input
+	type="file"
+	name="image"
+	id="image"
+	class="hidden"
+	accept="image/png,image/jpeg,image/jpg"
+	on:change={uploadImage}
+	disabled={isUploading}
+	/>
 </div>
 
 <style lang="postcss">
@@ -325,7 +326,7 @@
 		@apply /* w-2/5 */ w-96 /* h-full */ h-80 object-cover;
 	}
 
-	.product-image > input {
+	.product-image> input {
 		@apply hidden;
 	}
 
