@@ -122,6 +122,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{data.category.name} | Jack Frost Premium Ice Cream</title>
+</svelte:head>
+
 <EditCategoryForm
 	label="Edit Category"
 	formaction="?/edit"
