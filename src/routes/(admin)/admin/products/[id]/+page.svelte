@@ -118,6 +118,10 @@
 	};
 </script>
 
+<svelte:head>
+	<title>{data.product.name} | Jack Frost Premium Ice Cream</title>
+</svelte:head>
+
 <EditProductForm
 	label="Edit Product"
 	{form}

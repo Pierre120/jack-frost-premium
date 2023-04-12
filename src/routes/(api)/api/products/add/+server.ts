@@ -7,9 +7,11 @@ import { supabase } from '$lib/utils/supabase';
 export const POST = (async ({ request }) => {
 	try {
 		const product = await request.json();
+		console.log('moving uploaded image to products folder...');
 		const { data, error } = await supabase.storage
 			.from('images')
 			.move(product.img_path, `products/${product.img_path}`);
+		console.log(JSON.stringify(data));
 		if (error) {
 			throw error;
 		}

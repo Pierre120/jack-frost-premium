@@ -28,7 +28,9 @@ export const load = (async ({ locals, fetch }) => {
 export const actions = {
 	add: async ({ request, fetch }) => {
 		console.log('adding product ---');
-		const product = Object.fromEntries(await request.formData());
+		const formdata = await request.formData();
+		// console.log(formdata)
+		const product = Object.fromEntries(formdata);
 		console.log(product);
 		// Validate form data
 		const result = productSchema.safeParse({

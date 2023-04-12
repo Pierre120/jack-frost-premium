@@ -65,6 +65,7 @@
 	const getImage = async (path: string) => {
 		try {
 			const { data } = await supabase.storage.from('images').getPublicUrl(path);
+			console.log('uploaded image: ' + JSON.stringify(data));
 
 			if (data) {
 				imageUrl = data.publicUrl;
@@ -192,14 +193,6 @@
 						<!--! This is a hidden input -->
 						<input type="hidden" name="img_path" id="img_path" bind:value={imagePath} />
 						<!--! This is a hidden input -->
-						<input
-							type="file"
-							name="image"
-							id="image"
-							accept="image/png,image/jpeg,image/jpg"
-							on:change={uploadImage}
-							disabled={isUploading}
-						/>
 						<label
 							for="image"
 							class="image-upload-btn {isUploading || isRendering ? 'pointer-events-none' : ''}"
@@ -260,6 +253,15 @@
 			</div>
 		</form>
 	</TemplateForm>
+	<input
+		type="file"
+		name="image"
+		id="image"
+		class="hidden"
+		accept="image/png,image/jpeg,image/jpg"
+		on:change={uploadImage}
+		disabled={isUploading}
+	/>
 </div>
 
 <style lang="postcss">

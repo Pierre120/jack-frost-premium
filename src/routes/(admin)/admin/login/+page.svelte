@@ -54,6 +54,7 @@
 			switch (result.type) {
 				case 'redirect':
 					isSuccess = true;
+					resetLoginAttempts();
 					// Reset form
 					form.reset();
 					break;
