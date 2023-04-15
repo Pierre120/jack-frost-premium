@@ -14,6 +14,8 @@
 		let filteredOrders;
 		if (paidStatus === 'unpaid') {
 			filteredOrders = data.orders.filter(({ payment_status }) => payment_status === 'NP');
+		} else if (paidStatus === 'current') {
+			filteredOrders = data.orders.filter(({ payment_status }) => payment_status != 'SS');
 		} else if (paidStatus === 'partially_paid') {
 			filteredOrders = data.orders.filter(({ payment_status }) => payment_status === 'PP');
 		} else if (paidStatus === 'fully_paid') {
@@ -39,7 +41,11 @@
 	<div class="bg-gray-200 md:w-1/4 option-container bg-indigo-200">
 		<h2 class="title">Show:</h2>
 		<div class="links">
-			<!-- <a href="#" on:click={() => filterOrders('all')}><span class="color-square" />All</a>
+			<!--
+				<a href="#" on:click={() => filterOrders('all')}><span class="color-square" />All</a>
+			<a href="#" on:click={() => filterOrders('current')}
+				><span class="color-square " />Current</a
+			>
 			<a href="#" on:click={() => filterOrders('unpaid')}
 				><span class="color-square unpaid" />Unpaid</a
 			>
@@ -51,9 +57,13 @@
 			>
 			<a href="#" on:click={() => filterOrders('successful')}
 				><span class="color-square successful" />Successful</a
-			> -->
+			> 
+			-->
 			<button type="button" on:click={() => filterOrders('all')}
 				><span class="color-square" />All</button
+			>
+			<button type="button" on:click={() => filterOrders('current')}
+				><span class="color-square" />Current</button
 			>
 			<button type="button" on:click={() => filterOrders('unpaid')}
 				><span class="color-square unpaid" />Unpaid</button
