@@ -32,13 +32,16 @@ const getAllProducts = async () => {
 };
 
 // For getting all similar products, we need to pass in the product name
-const getSimilarProducts = async (product_name: string, product_id: string | undefined = undefined) => {
+const getSimilarProducts = async (
+	product_name: string,
+	product_id: string | undefined = undefined
+) => {
 	let result;
 
-	if(product_id === undefined) {
+	if (product_id === undefined) {
 		result = await prisma.product.findMany({
 			select: {
-				name: true,
+				name: true
 			},
 			where: {
 				name: {
@@ -47,11 +50,10 @@ const getSimilarProducts = async (product_name: string, product_id: string | und
 				}
 			}
 		});
-	}
-	else {
+	} else {
 		result = await prisma.product.findMany({
 			select: {
-				name: true,
+				name: true
 			},
 			where: {
 				name: {
