@@ -11,7 +11,7 @@ export const POST = (async ({ request }) => {
 
 		// Check if product already exists
 		const simProducts = await getSimilarProducts(product.name);
-		console.log('Simlar products: ' + JSON.stringify(simProducts));
+		// console.log('Simlar products: ' + JSON.stringify(simProducts));
 		if (simProducts.length > 0) return json({ success: false, error: 'Product already exists.' });
 
 		// Move uploaded image to products folder
