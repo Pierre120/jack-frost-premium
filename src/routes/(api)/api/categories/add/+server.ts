@@ -9,8 +9,9 @@ export const POST = (async ({ request }) => {
 		const { name, offerings } = await request.json();
 
 		const simCategories = await getSimilarCategories(name);
-		
-		if(simCategories.length > 0) return json({success: false, error: 'Category already exists.' })
+
+		if (simCategories.length > 0)
+			return json({ success: false, error: 'Category already exists.' });
 		await addCategory(name, offerings);
 		return json({ success: true });
 	} catch (err) {

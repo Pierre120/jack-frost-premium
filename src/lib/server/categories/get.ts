@@ -37,13 +37,16 @@ const getAllCategories = async () => {
 };
 
 // For getting all similar products, we need to pass in the product name
-const getSimilarCategories = async (category_name: string, category_id: string | undefined = undefined) => {
+const getSimilarCategories = async (
+	category_name: string,
+	category_id: string | undefined = undefined
+) => {
 	let result;
 
-	if(category_id === undefined) {
+	if (category_id === undefined) {
 		result = await prisma.category.findMany({
 			select: {
-				name: true,
+				name: true
 			},
 			where: {
 				name: {
@@ -52,11 +55,10 @@ const getSimilarCategories = async (category_name: string, category_id: string |
 				}
 			}
 		});
-	}
-	else {
+	} else {
 		result = await prisma.category.findMany({
 			select: {
-				name: true,
+				name: true
 			},
 			where: {
 				name: {
@@ -75,6 +77,5 @@ const getSimilarCategories = async (category_name: string, category_id: string |
 
 	return result;
 };
-
 
 export { getCategory, getAllCategories, getSimilarCategories };
