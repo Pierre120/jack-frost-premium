@@ -107,7 +107,6 @@
 							form={formName}
 							value={order?.amount_paid ?? ''}
 						/>
-						{formData}
 						<label for="amount_paid" class="input-error">
 							<!-- { formData?.errors?.customer_name[0] ?? '' } -->
 							<!-- Error Message! -->
